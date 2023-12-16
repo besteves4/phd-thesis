@@ -1,0 +1,37 @@
+\chapter{Vocabularies for Personal Datastores}
+\label{chap:vocabularies}
+
+\begin{tcolorbox}[colback=royallavender!40]
+The content of this Chapter has already been partially included in the articles published during this Thesis \citep{esteves_odrl_2021,esteves_using_2023,esteves_fostering_2022}.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=royallavender!10]
+The source code produced during the development of this chapter is stored at:
+\begin{itemize}
+    \item \url{https://w3id.org/oac/repo}
+    \item \url{https://w3id.org/oac/policies}
+    \item \url{https://w3id.org/plasma/repo}
+\end{itemize}
+\end{tcolorbox}
+% repo with rights exercising missing
+
+This Chapter builds upon existing Semantic Web standards and specifications to develop a set of vocabularies that can support data subjects in the expression of their privacy preferences when it comes to accessing their data and exercising their rights, as well as data controllers to deal with their \textit{``[t]ransparent information''} requirements, explicitly set in GDPR's Articles 12--14.
+As previously established in Section \ref{sec:sota_solid}, Solid's access control and interoperability specifications do not contain the terms to satisfy said requirements, and as such, the incorporation of these vocabularies will lead to a GDPR-aligned personal datastore.
+
+Thus, Section \ref{sec:oac} describes the development of an ODRL profile (OAC) with the main goal of defining legally aligned policies that express permissions and/or prohibitions associated with purpose-based access to data stored in decentralised storage environments, such as Solid Pods.
+Such policies will be used to express the data subjects' preferences concerning the access to their \textit{personal} data, to represent requests to access data and to record the agreed access conditions for future inspection.
+
+Section \ref{sec:plasma} describes the development of a metadata language for Solid (PLASMA) to provide consistent taxonomies to describe the entities, infrastructure, policies, notices, registries and logs necessary to understand and establish responsibilities and accountability within the Solid ecosystem.
+PLASMA utilises OAC to express data policies, provides a set of conformance conditions that should be met by Pod, app, and service providers, as well as users and agents, to comply with the established specification, and a description of workflows where PLASMA terms should be used to satisfy such conformance conditions.
+
+Section \ref{sec:rights_exercising} showcases the usage of vocabulary-based, e.g. DPV, DCMI, PROV-O and DCAT, patterns to describe rights exercising metadata with the goal of providing uniform records of data subject rights exercising activities.
+
+Section \ref{sec:evaluation} presents the results of the ontologies quality evaluation, including the detection of common pitfalls with OOPS!, alignment with FAIR principles with FOOPS! and validation of competency questions with SPARQL queries.
+
+The methodology followed to develop and evaluate the vocabularies described in this Chapter is described in Section \ref{sec:ontology_engineering}.
+
+\input{mainmatter/4_vocabularies/4-1_background}
+\input{mainmatter/4_vocabularies/4-2_oac}
+\input{mainmatter/4_vocabularies/4-3_plasma}
+\input{mainmatter/4_vocabularies/4-4_rights_exercising}
+\input{mainmatter/4_vocabularies/4-5_evaluation}

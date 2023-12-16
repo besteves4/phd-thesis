@@ -1,0 +1,126 @@
+% --------------------------
+% Document class
+% --------------------------
+\documentclass[
+A4paper,                % paper size A4
+twoside,                % onesite or twoside printing
+openright,              % doublepage cleaning ends up right side
+chapterprefix=true,     % prefix for chapter marks
+12pt,                   % font size
+headings=normal,        % size of headings
+titlepage=on            % own page for each title page
+]{book}
+
+% **************************************************
+% THESIS details
+% **************************************************
+
+\newcommand{\University}{\protect{Universidad Polit\'ecnica de Madrid}}
+\newcommand{\UNIVERSITY}{\protect{UNIVERSIDAD POLIT\'ECNICA DE MADRID}}
+
+\input{thesisDetails}
+
+% **************************************************
+% Settings
+% **************************************************
+
+\input{settings}
+
+% **************************************************
+% Begin document
+% **************************************************
+\begin{document}
+
+% --------------------------
+% Cover and front matter
+% --------------------------
+\frontmatter
+\pagestyle{empty}				    % no header nor footer
+\input{frontmatter/1_cover}
+\newpage
+
+\input{frontmatter/2_frontpage}
+\newpage
+
+\pagenumbering{roman}			    % roman page numbering 
+\pagestyle{plain}				    % empty header, just page number in footer
+\input{frontmatter/3_teseo}
+\cleardoublepage
+
+\input{frontmatter/4_dedication}   % dedication (optional)
+\cleardoublepage
+
+\input{frontmatter/5_acknowledgement}  % acknowledgement (optional)
+\newpage
+
+\input{frontmatter/6_abstract}		% abstract (in English and Spanish)
+\newpage
+
+\selectlanguage{english}
+
+\setcounter{tocdepth}{2}
+\tableofcontents				% display table of contents
+
+
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+
+
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+\newpage
+
+\addcontentsline{toc}{section}{List of Listings}
+\listoflistings
+\newpage
+
+\input{frontmatter/7_acronyms}
+\cleardoublepage
+
+\input{frontmatter/8_namespaces}
+
+% --------------------------
+% Main matter
+% --------------------------
+\mainmatter
+\pagenumbering{arabic}			% arabic page numbering
+\setcounter{page}{1}			% set page counter
+\pagestyle{fancy} 	            % fancy header and footer
+\parskip=7pt                    % space after each paragraph
+\parindent=0pt                  % suppress indentation of paragraphs
+
+
+% Chapters
+
+\part{INTRODUCTION}
+
+\include{mainmatter/1_introduction/1-0_introduction}
+
+\input{mainmatter/2_stateoftheart/2-0_stateofart}
+
+\input{mainmatter/3_objectives_contributions/3-0_objectives_contributions}
+
+\part{GDPR-ALIGNED VOCABULARIES FOR PERSONAL DATASTORES}
+
+\input{mainmatter/4_vocabularies/4-0_vocabularies_intro}
+
+\part{ALGORITHMS \& USE CASES}
+
+\part{CONCLUSIONS}
+
+\cleardoublepage
+
+% --------------------------
+% Back matter
+% --------------------------
+\backmatter
+% \printbibliography[title=Referencias, heading=bibintoc]
+\bibliography{thesisRefs}
+
+\appendix
+\chapter{Annexes}  
+
+% **************************************************
+% End of document
+% **************************************************
+\end{document}

@@ -1,0 +1,237 @@
+\section{Ontology quality evaluation}
+\label{sec:evaluation}
+
+This Section describes the results of the ontologies quality evaluation, including the detection of common pitfalls with OOPS!\footnote{The OOPS! tool is available at \url{https://oops.linkeddata.es/} (accessed on 14 June 2023).} \citep{poveda-villalon_oops_2014}, alignment with FAIR principles with FOOPS!\footnote{The FOOPS! tool is available at \url{https://w3id.org/foops} (accessed on 30 November 2023).} \citep{garijo_foops_2021} and validation of competency questions with SPARQL queries \citep{harris_sparql_2013}.
+
+In terms of quality evaluation, the OOPS! tool was used to evaluate PLASMA and OAC in order to detect common errors in ontology development, such as missing domain or range properties or missing human readable annotations.
+Both evaluations did not detect any critical (issues affecting the ontology consistency, reasoning, or applicability) or important (issues not critical for ontology functionality but that should be corrected) pitfalls.
+Furthermore, FOOPS! was used to evaluate the alignment of the developed vocabularies with the FAIR (Findable, Accessible, Interoperable and Reusable) principles.
+Additionally, the vocabularies that were reused in this Section, e.g., DPV, ODRL or ActivityStreams, were also evaluated with FOOPS! for comparison.
+Table~\ref{tab:foops_evaluation} presents the results of this evaluation.
+
+\begin{table}[htp]
+    \centering
+    \caption{Evaluation of the alignment of the developed and reused vocabularies with FAIR principles using FOOPS!.}
+    \label{tab:foops_evaluation}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{c|c|c|c|c|c}
+        \textbf{Ontology} & \textbf{FOOPS! score} & \textbf{Findable} & \textbf{Accessible} & \textbf{Interoperable} & \textbf{Reusable} \\
+        \hline\hline
+        PLASMA & 91\% & 8/9 & 2/3 & 3/3 & 8.83/9 \\
+        \hline 
+        OAC & 89\% & 7.5/9 & 2/3 & 3/3 & 8.83/9 \\
+        \hline 
+        DPV & 64\% & 5.33/9 & 2/3 & 3/3 & 4.92/9 \\
+        \hline 
+        ODRL & 64\% & 4.5/9 & 3/3 & 3/3 & 4.75/9 \\
+        \hline
+        DCAT & 64\% & 4.33/9 & 3/3 & 3/3 & 5.14/9 \\
+        \hline
+        ACP & 52\% & 5.33/9 & 2/3 & 2/3 & 3.12/9 \\
+        \hline
+        ActivityStreams & 19\% & 2/9 & 1.5/3 & 0/3 & 1/9 \\
+        \hline 
+        ACL & 2\% & 0/9 & 0.5/3 & 0/3 & 0/9 \\
+        \hline
+        DCMI & 2\% & 0/9 & 0.5/3 & 0/3 & 0/9 \\
+    \end{tabular}}
+\end{table}
+
+Both PLASMA and OAC obtained a good score in all FAIR aspects.
+In terms of improvements, both vocabularies will be submitted to LOV (Linked Open Vocabularies), a public registry of ontologies which includes ontology metadata related to its terms and the creators/developers of the ontologies \citep{dumontier_linked_2017}.
+This will improve both the findability and the accessibility of the vocabularies.
+Using Table~\ref{tab:foops_evaluation}, it can be observed that both PLASMA and OAC rate much higher that other reused ontologies in terms of findability and reusability as the used URIs and version URIs are persistent and resolvable, both include the recommended ontology and ontology terms metadata, a resolvable data usage license and provenance metadata.
+
+Additionally, SPARQL queries are used to assess whether the developed models satisfy the competency questions, presented in Tables~\ref{tab:OAC_ORSD}, \ref{tab:plasma_orsd} and \ref{tab:rights_ORSD}, which were used to guide the development of the vocabularies in order to fulfil the identified requirements.
+
+Table~\ref{tab:oac_cq_sparql} presents the SPARQL queries drafted to fulfil OAC's competency questions presented in Table~\ref{tab:OAC_ORSD}.
+The presented work demonstrates that OAC satisfies the identified requirements of answering competency questions regarding the modelling of policies representing personal preferences, requests of data for particular purposes and agreements of data access, including contextual information.
+
+\begin{table}[htp]
+    \centering
+    \caption{Validation of OAC's competency questions with SPARQL queries.}
+    \label{tab:oac_cq_sparql}
+    \begin{tabular}{c|l}
+        \textbf{CQ*} & \textbf{SPARQL query} \\
+        \hline\hline
+        CQ1 & \begin{lstlisting}[numbers=none]
+SELECT ?policy WHERE {
+    ?policy_uri a ?policy . 
+    ?policy_uri odrl:uid ?policy_id . } \end{lstlisting} \\
+        \hline
+        CQ2 & \begin{lstlisting}[numbers=none]
+SELECT ?action WHERE {
+    ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
+    ?policy_uri odrl:permission|odrl:prohibition ?rule .
+    ?rule odrl:action ?action . } \end{lstlisting} \\
+        \hline
+        CQ3 & \begin{lstlisting}[numbers=none]
+SELECT ?data WHERE {
+    ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
+    ?policy_uri odrl:permission|odrl:prohibition ?rule .
+    ?rule odrl:target ?data . } \end{lstlisting} \\
+        \hline
+        CQ4 & \begin{lstlisting}[numbers=none]
+SELECT ?constraint WHERE {
+    ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
+    ?policy_uri odrl:permission ?rule .
+    ?rule odrl:constraint ?constraint . } \end{lstlisting} \\
+        \hline
+        CQ5 & \begin{lstlisting}[numbers=none]
+SELECT ?assigner ?assignee WHERE {
+    ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
+    ?policy_uri odrl:permission|odrl:prohibition ?rule .
+    OPTIONAL { ?rule odrl:assigner ?assigner } . 
+    OPTIONAL { ?rule odrl:assignee ?assignee } . } \end{lstlisting} \\
+        \hline
+        CQ6 & \begin{lstlisting}[numbers=none]
+SELECT ?conflict_term WHERE {
+    ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
+    ?policy_uri odrl:conflict ?conflict_term . } \end{lstlisting} \\
+        \hline
+        CQ7 & \begin{lstlisting}[numbers=none]
+SELECT ?context WHERE {
+    ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
+    ?policy_uri odrl:permission|odrl:prohibition ?rule .
+    ?rule dpv:hasContext ?context . } \end{lstlisting} \\
+        \hline
+        CQ8 & \begin{lstlisting}[numbers=none]
+SELECT ?legal_basis WHERE {
+    ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
+    ?policy_uri odrl:permission|odrl:prohibition ?rule .
+    ?rule odrl:constraint ?constraint . 
+    ?constraint odrl:leftOperand oac:LegalBasis .
+    ?constraint odrl:rightOperand ?legal_basis . } \end{lstlisting} \\
+        \hline
+        CQ9 & \begin{lstlisting}[numbers=none]
+SELECT ?entity ?address ?contact ?name WHERE {
+    ?entity a oac:Entity . 
+    ?entity dpv:hasAddress ?address . 
+    ?entity dpv:hasContact ?contact .
+    ?entity dpv:hasName ?name . } \end{lstlisting} \\
+    \end{tabular}
+\end{table}
+
+Moreover, Table~\ref{tab:plasma_cq_concepts} lists concepts that can be used to answer the competency questions identified in PLASMA's ORSD, available in Table~\ref{tab:plasma_orsd}.
+Listing~\ref{list:plasma_sparql_cq} illustrates how these concepts can be used in SPARQL queries to fulfil the \textit{``CQ1. Which Pod management data is stored in the Pod?''} and \textit{``CQ4. What policy describes the data access requirements of a certain app or service?''} competency questions.
+A similar exercise can be done for the remaining competency questions.
+The presented work demonstrates that PLASMA satisfies the identified requirements of answering competency questions regarding the representation of information related to entities, infrastructure and processes in Solid, the modelling of information related to legal roles in a jurisdiction-agnostic manner and the definition of patterns to express apps and services policies, data usage logs and registries of data, schemas, apps, services, entities and authorisations for convenient access to information.
+
+\begin{table}[htp]
+    \centering
+    \caption{Concepts in PLASMA and other vocabularies for answering competency questions defined in Table~\ref{tab:plasma_orsd}.}
+    \label{tab:plasma_cq_concepts}
+    \begin{tabular}{c|c}
+        \textbf{CQ*} & \textbf{Concepts} \\
+        \hline\hline
+        CQ1 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{PodManagementData}, \texttt{hasProvider}, \texttt{hasDeveloper}, \\ \texttt{implementedSolidPlatform}, \texttt{implementedSolidSpecification} \end{tabular}} \\
+        \hline
+        CQ2 & \texttt{DataLog}, \texttt{DataProvider}, \texttt{ResourceMetadata}, \texttt{DataAgreement} \\
+        \hline
+        CQ3 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{Policy}, \texttt{Log}, \texttt{UserData}, \texttt{AppData}, \texttt{ServiceData}, \\ \texttt{PodManagementData}, \texttt{SchemaData} \end{tabular}} \\
+        \hline
+        CQ4 & \texttt{DataRequest}, \texttt{AppManifest}, \texttt{ServiceManifest} \\
+        \hline
+        CQ5 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{InfrastructureProvider}, \texttt{PodProvider}, \texttt{PodDeveloper}, \\ \texttt{SolidPlatformProvider}, \texttt{SolidPlatformProvider} \end{tabular}} \\
+        \hline
+        CQ6 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{DataLog}, \texttt{DataProvider}, \texttt{dcat:landingPage},\\ \texttt{dcat:distribution}, \texttt{dcat:accessURL}, \texttt{dcat:mediaType} \end{tabular}} \\
+        \hline
+        CQ7 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{AccessControlRegistry}, \texttt{DataRegistry}, \texttt{DataSchemaRegistry},\\ \texttt{PolicyRegistry}, \texttt{AppRegistry}, \texttt{ServiceRegistry}, \texttt{UserRegistry} \end{tabular}} \\
+        \hline
+        CQ8 & \texttt{dpv:hasName}, \texttt{dpv:hasAddress}, \texttt{dpv:hasContact} \\
+        \hline
+        CQ9 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{InfrastructureProvider}, \texttt{PodProvider}, \texttt{SolidPlatformProvider},\\ \texttt{dpv:Purpose}, \texttt{dpv:LegalBasis}, \texttt{Log}, \texttt{Notice} \end{tabular}} \\
+    \end{tabular}
+\end{table}
+
+\begin{listing}[htp]
+\caption{Example SPARQL queries to validate PLASMA's CQ1 and CQ4.}
+\label{list:plasma_sparql_cq}
+\begin{minted}{sparql}
+SELECT ?provider ?developer ?platform ?spec WHERE {
+    ?pod_data a plasma:PodManagementData . 
+    ?pod_data plasma:hasProvider ?provider . 
+    ?pod_data plasma:hasDeveloper ?developer .
+    ?pod_data plasma:implementedSolidPlatform ?platform .
+    ?pod_data plasma:implementedSolidSpecification ?spec . }
+
+SELECT ?app ?appmanifest ?policy WHERE {
+    ?app a plasma:App . 
+    ?app plasma:hasAppManifest ?appmanifest . 
+    ?appmanifest a plasma:AppManifest .
+    ?appmanifest odrl:hasPolicy ?policy . }
+\end{minted}
+\end{listing}
+
+Finally, Table~\ref{tab:rights_cq_sparql} presents the SPARQL queries drafted to fulfil the competency questions of the proposed model to express rights-related exercising activities presented in Table~\ref{tab:rights_ORSD}.
+The presented work demonstrates that the developed model satisfies the identified requirements of answering competency questions regarding the modelling of the existence of data subject rights, how and where such rights can be exercised and how to keep records of said exercising activities.
+
+\begin{table}[htp]
+    \centering
+    \caption{Validation of the competency questions of the proposed model to express rights-related exercising activities with SPARQL queries.}
+    \label{tab:rights_cq_sparql}
+    \begin{tabular}{c|l}
+        \textbf{CQ*} & \textbf{SPARQL query} \\
+        \hline\hline
+        CQ1 & \begin{lstlisting}[numbers=none]
+SELECT ?pdh ?right WHERE {
+    ?pdh a dpv:PersonalDataHandling . ?pdh dpv:hasRight ?right . } \end{lstlisting} \\
+        \hline
+        CQ2 & \begin{lstlisting}[numbers=none]
+SELECT ?right ?exercise_point WHERE {
+    ?right a dpv:DataSubjectRight . ?right dpv:isExercisedAt ?notice . 
+    ?notice a dpv:RightExerciseNotice . ?notice foaf:page ?exercise_point . } \end{lstlisting} \\
+        \hline
+        CQ3 & \begin{lstlisting}[numbers=none]
+SELECT ?right ?notice WHERE {
+    ?right a dpv:DataSubjectRight . ?right dpv:isExercisedAt ?notice . 
+    ?notice a dpv:RightExerciseNotice . } \end{lstlisting} \\
+        \hline
+        CQ4 & \begin{lstlisting}[numbers=none]
+SELECT ?right ?necessary_data WHERE {
+    ?right a dpv:DataSubjectRight . ?right dpv:isExercisedAt ?notice . 
+    ?notice a dpv:RightExerciseNotice .
+    ?notice dpv:hasPersonalDataHandling ?necessary_data . } \end{lstlisting} \\
+        \hline
+        CQ5 & \begin{lstlisting}[numbers=none]
+SELECT ?right ?implementer WHERE {
+    ?right a dpv:DataSubjectRight . ?right dpv:isExercisedAt ?notice . 
+    ?notice a dpv:RightExerciseNotice .
+    ?notice dpv:isImplementedByEntity ?implementer . } \end{lstlisting} \\
+        \hline
+        CQ6 & \begin{lstlisting}[numbers=none]
+SELECT ?activity ?data_subject WHERE {
+    ?activity a dpv:RightExerciseActivity .
+    ?activity dpv:hasStatus dpv:RequestInitiated . 
+    ?activity dpv:hasDataSubject ?data_subject . } \end{lstlisting} \\
+        \hline
+        CQ7 & \begin{lstlisting}[numbers=none]
+SELECT ?activity ?date WHERE {
+    ?activity a dpv:RightExerciseActivity . 
+    ?activity dcterms:date ?date . } \end{lstlisting} \\
+        \hline
+        CQ8 & \begin{lstlisting}[numbers=none]
+SELECT ?activity ?status WHERE {
+    ?activity a dpv:RightExerciseActivity . 
+    ?activity dpv:hasStatus ?status . } \end{lstlisting} \\
+        \hline
+        CQ9 & \begin{lstlisting}[numbers=none]
+SELECT ?pdh ?legal_basis ?right WHERE {
+    ?pdh a dpv:PersonalDataHandling . 
+    ?pdh dpv:hasRight ?right . ?pdh dpv:hasLegalBasis ?legal_basis . } \end{lstlisting} \\
+        \hline
+        CQ10 & \begin{lstlisting}[numbers=none]
+SELECT ?activity ?data_subject ?status ?date ?controller WHERE {
+    ?activity a dpv:RightExerciseActivity . 
+    ?activity dpv:hasStatus ?status . 
+    ?activity dpv:hasDataSubject ?data_subject . 
+    ?activity dcterms:date ?date . 
+    ?activity prov:wasAssociatedWith ?controller . } \end{lstlisting} \\
+        \hline
+        CQ11 & \begin{lstlisting}[numbers=none]
+SELECT ?activity ?justification WHERE {
+    ?activity a dpv:RightExerciseActivity . 
+    ?activity dpv:hasStatus dpv:RequestRejected . 
+    ?activity dpv:hasJustification ?justification . } \end{lstlisting} \\
+    \end{tabular}
+\end{table}
