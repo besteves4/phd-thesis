@@ -1,0 +1,29 @@
+\section{Policies as a precursor of consent}
+\label{sec:policies_consent}
+
+This Section discusses the usage of OAC policies as a tool to express consent in advance for Solid and how such policies can enable compliance with several GDPR requirements including the transparent information obligations of Articles 13 and 14.
+As such, these policies come has a solution to overcome the shortcomings of Solid's access control mechanism when it comes to dealing with GDPR's information requirements.
+Moreover, by enabling the communication of this information, policies can be used as a tool to fulfil the conditions to obtain valid consent pursuant to Articles 4.11 and 7 of the GDPR.
+
+\subsection{Distinguishing consent from access control}
+\label{sec:distinction}
+
+It is important to make a distinction between the legal notion of giving consent and the technical means used to grant an app, service or user authorised access to a resource stored in a decentralised personal datastore such as a Solid Pod.
+
+As previously discussed in Section~\ref{sec:sota_solid_access_control}, Solid Pods are decentralised, permission-based data storage environments, by default.
+This means that in the absence of a tangible authorisation, resources cannot be accessed by apps or users.
+Authorisations can then be provided in a direct and indirect way by accepting requests from apps as they are being received or by setting the rules of access in advance, respectively.
+
+From GDPR's viewpoint, user authorisation is not always required for the processing of personal data, but it also might not be enough for entities to process personal data in a lawful manner in such decentralised settings.
+In the first case, it might be \textit{unnecessary} as there are other legal bases in GDPR's Article 6.1 which can be used, beyond consent, that do not involve an active choice being made by the data subject, such as the performance of a contract --Article 6.1(b)-- or the legitimate interests of the data controller --Article 6.1(f)-- \citep{kranenborg_article_2014}.
+Taking the former as an example, there is no need to have the consent of the data subjects to access personal data when they have entered into a contract with the data controller and the access to said data is necessary for the performance of said contract \citep{european_data_protection_board_guidelines_2019}.
+Moreover, if indeed the access is based on the consent of the data subject, then the current status quo of access control in Solid --whether being the WAC or the ACP authorisation mechanisms-- is not enough for obtaining valid consent according to the GDPR, as in Article 4.11 valid consent is described as being a \textit{``freely given, specific, informed and unambiguous indication of the data subject’s wishes''} \citeyearpar{noauthor_regulation_2016}. 
+
+By comparing both the legal and the technical requirements, described in the previous paragraphs, it is possible to arrive at two sets of problematic cases:
+\begin{itemize}
+    \item[(i)] instances when app providers have a valid legal basis beyond consent to have access to the data, but do not have access to said data as no permission-based authorisation, granted by the data subject, is stored in the Pod; and
+    \item[(ii)] instances when app providers use consent as a ground for lawfulness, however, the authorisation available on the Pod does not fulfil the conditions for valid consent according to Articles 4.11 and 7.
+\end{itemize}
+
+In this Thesis, the second cluster of cases is explored by discussing whether the introduction of fine-grained access control policies, modelled with OAC, is enough for obtaining valid consent.
+
