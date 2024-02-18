@@ -1,0 +1,26 @@
+\section{Can consent be automated?}
+\label{sec:automation_consent}
+
+To discuss consent automation, first one should look into the rationale of why it is such an important requirement in personal data protection law.
+As per \cite{jarovsky_improving_2018}, the main rationale behind consent is to retain human autonomy and to enable data subjects to have agency regarding the processing of their data.
+To achieve that, data subjects must (i) comprehend the circumstances that surround the processing of their data, (ii) decide which is their optimal choice among a variety of options, and (iii) express their choice, while knowing that they can change it at any point in the future.
+However, if there are no technical and/or organisational measures in place to preserve individual autonomy in this process, meaningful, freely given consent cannot be achieved due to \textit{``issues of cognitive limitations, information overload, information insufficiency, lack of intervenability and lack of free choice''} \citep{jarovsky_improving_2018}.
+\cite{solove_privacy_2012} also outlined a few shortcomings in the self-management of privacy, distinguishing between cognitive limitations related to human decision-making abilities and structural limitations that prevent an adequate cost-benefit analysis of consenting to simultaneous personal data processing activities. 
+As such, presenting Solid users with a consent dialogue with the result of the matching for each access request that comes in will result in similar scalability issues for the users \citep{mcdonald_cost_2008}.
+
+One possible solution to the previously identified consent-related issues is to automate some aspects of giving consent \citep{baarslag_automated_2017}.
+However, this solution has often been criticised due to the complexity surrounding current personal data processing activities on the Web, which might compromise the validity of consent \citep{jarovsky_improving_2018,solove_murky_2023}.
+Consenting is context-dependent and encompasses weighing the risks, likelihood of harms and benefits of several variables involved in a personal data processing activity.
+As such, it is difficult to imagine how an automated system can weigh all the arguments in favour and against the processing of personal data, while maintaining the interests and autonomy of the data subject at the center of the decision making algorithm.
+
+Thus, in this Section, the setting of OAC user policies in advance and the matching of such policies with requests for data access is analysed to check if such a system is sufficient to comply with the legal requirements for expressing valid consent.
+Consenting is usually a binary choice -- the data subject either agrees with the conditions set by the data controller to process their data or they do not.
+Nevertheless, different privacy laws implement this choice in distinct manners: in the United States the `opt-out' choice predominates, i.e., \textit{``organizations post a notice of their privacy practices and people are deemed to consent if they continue to do business with the organization or fail to opt out''}, while in the EU the `opt-in' option prevails, i.e., \textit{``people must voluntarily and affirmatively consent''} \citep{solove_murky_2023}.
+As such, the latter involves (i) the data controller requesting consent and (ii) the data subject accepting or rejecting it.
+If users set their policies in advance, this order is inverted.
+Even though the GDPR does not regulate the interaction between data subjects and software to assist them in expressing consent, as previously mentioned, Recital 32 \citeyearpar{noauthor_regulation_2016} suggests the usage of \textit{``technical settings''} to indicate \textit{``acceptance of the proposed processing of his or her personal data''}.
+
+Moreover, two levels of automation, both triggered by a data request, can be considered: (i) the result of the matching, between user policies and data request, is presented to the user for him/her to consent, or (ii) access to data is given automatically if the data request matches with the user's policies.
+The former -- the consent dialogue, based on the policy matching algorithm -- improves the transparency of the processing activity and helps the data subject to make an informed choice, while the latter assists with the issues related to information overload and scalability.
+
+In the next Sections, the specific character of consent is going to be analysed to understand whether OAC can be used to automate access to data in Solid Pods in a GDPR-aligned manner. 
