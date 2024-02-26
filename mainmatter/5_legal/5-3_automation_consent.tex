@@ -23,8 +23,11 @@ Even though the GDPR does not regulate the interaction between data subjects and
 Moreover, two levels of automation, both triggered by a data request, can be considered: (i) the result of the matching, between user policies and data request, is presented to the user for him/her to consent, or (ii) access to data is given automatically if the data request matches with the user's policies.
 The former -- the consent dialogue, based on the policy matching algorithm -- improves the transparency of the processing activity and helps the data subject to make an informed choice, while the latter assists with the issues related to information overload and scalability.
 
+\subsection{Expressing specific consent}
+\label{sec:specific_consent}
+
 % TODO: explain function creep and right to informational self-determination in the footnotes and add references
-In the next Sections, the specific character of consent is going to be analysed to understand whether OAC can be used to automate access to data in Solid Pods in a GDPR-aligned manner.
+In this Section, the specific character of consent is going to be analysed to understand whether OAC can be used to automate access to data in Solid Pods in a GDPR-aligned manner.
 According to Article 4.11 \citeyearpar{noauthor_regulation_2016}, consent must express a specific \textit{``indication of the data subject’s wishes''} that \textit{``signifies agreement to the processing of personal data relating to him or her''}.
 However, the wording ``indication of wishes'' is rather vague in the sense that such wishes might be related to the categories of personal data, the purpose for processing, the processing operations, the identity of data controller(s) and/or third party recipients, or their interconnection.
 Moreover, the European Court of Justice mentions in Case C-61/19 Orange Romania \citeyearpar{noauthor_orange_2020} states that the data subject’s wishes \textit{``must relate specifically to the processing of the data in question and cannot be inferred from an indication of the data subject’s wishes for other purposes''}.
@@ -35,8 +38,7 @@ According to \cite{kosta_consent_2013}, the specificity of consent is fulfilled 
 Furthermore, consenting should be as specific as needed for safeguarding the data subject's right to informational self-determination\footnote{The right to informational self-determination was first formulated in German law and it has had a profound impact in European data protection law as it asserts that an individual should have the authority \textit{``to decide fundamentally for herself, when and within what limits personal data may be disclosed, [...]''} \citep{vivarelli_crisis_2020}.}.
 As such, the following analysis will be focused on the purpose of processing personal data, as well as on the identity of the data controller, and how they relate to the specific character of consent.
 
-\subsection{Distinguishing the processing operation from the purpose for processing}
-\label{sec:processing_purposes}
+\paragraph{Distinguishing the processing operation from the purpose for processing}
 
 The GDPR explicitly mentions that not only the purpose but also the processing operation needs to be specific to have valid consent.
 Article 6.1(a) \citeyearpar{noauthor_regulation_2016} states that \textit{``Processing shall be lawful only if [...] the data subject has given consent to the processing of his or her personal data for one or more specific purposes''}, while Recital 43 \citeyearpar{noauthor_regulation_2016} pinpoints that \textit{``Consent is presumed not to be freely given if it does not allow separate consent to be given to different personal data processing operations despite it being appropriate in the individual case''}.
@@ -48,10 +50,10 @@ Moreover, the distinction between both is also made explicit in Recital 32, whic
 As such, this provision can be interpreted as follows: (i) if a processing operation is used to reach more than one purpose, then consent must be obtained for each purpose, and (ii) if multiple processing operations are needed to reach a single purpose, then consent must be obtained for each processing operation.
 
 Moreover, WP 29, in its opinion on the definition of consent, affirmed that \textit{``There is a requirement of granularity of the consent with regard to the different elements that constitute the data processing: it can not be held to cover `all the legitimate purposes' followed by the data controller''} \citep{article_29_data_protection_working_party_opinion_2011}, i.e., consent should be specific in relation to a purpose.
-The relation between processing operations and purposes is also further commented on by WP 29 on these guidelines -- \textit{``it should be sufficient in principle for data controllers to obtain consent only once for different operations if they fall within the reasonable expectations of the data subject''} \citep{article_29_data_protection_working_party_opinion_2011}, however no further guidance is given on what constitutes `reasonable expectations of the data subject'.
-These can be identified, for instance through user studies, however the result of such studies would only be statistically relevant to the average data subject and not to the particular data subject who has to give consent.
-Additionaly, the contextual integrity theory of privacy developed by Helen Nissenbaum \citep{nissenbaum_privacy_2004} could also be applied to determine the contextual nature of the processing operation.
-Nissenbaum states that privacy should be considered as a right that the individual has over the appropriate, context-based flow of their personal information according to context-specific social norms.
+The relation between processing operations and purposes is also further commented on by WP 29 on these guidelines -- \textit{``it should be sufficient in principle for data controllers to obtain consent only once for different operations if they fall within the reasonable expectations of the data subject''} \citep{article_29_data_protection_working_party_opinion_2011}, however, no further guidance is given on what constitutes `reasonable expectations of the data subject'.
+These can be identified, for instance through user studies, however, the result of such studies would only be statistically relevant to the average data subject and not to the particular data subject who has to give consent.
+Additionally, the contextual integrity theory of privacy developed by Helen Nissenbaum \citep{nissenbaum_privacy_2004} could also be applied to determine the contextual nature of the processing operation.
+Nissenbaum states that privacy should be considered a right that the individual has over the appropriate, context-based flow of their personal information according to context-specific social norms.
 As such, the context and norms governing the exchange of personal data should be used to calculate whether the data subject's given consent is specific or not.
 % TODO: develop more on the contextual integrity theory of privacy developed by Helen Nissenbaum
 On the other hand, there is no clear guidance on what should be the granularity of the processing operations.
@@ -70,3 +72,21 @@ Thus, by hypothesis, user policies can be broader than data requests, which can 
 However, since OAC policies can also include the usage of prohibitions, these can be used to narrow the scope of the data subject consent, making it more specific.
 
 %FROM THE PAPER: The reasoner that implements the matching transforms a preference, expressed through a positive statement (the purpose)\added{,} and one or more negative ones (the prohibitions) into a choice between the available options as it \replaced{materializes}{materialises} the preferences and produces legal effects towards third parties (the data controller).
+
+\paragraph{Applying the purpose limitation principle to assess the specific character of consent}
+
+GDPR's Article 5.1(b) \citeyearpar{noauthor_regulation_2016} specifies the `purpose limitation' principle which states that personal data should be \textit{``collected for specified, explicit and legitimate purposes and not further processed in a manner that is incompatible with those purposes''}.
+As such, to fulfil this principle, two requirements should be taken into account: (a) the purpose specification requirement and (b) the non-incompatibility requirement \citep{koning_purpose_2020}. 
+Previously, the WP 29, in its opinion on the purpose limitation \citep{article_29_data_protection_working_party_opinion_2013}, stated that all contextual information should be taken into consideration to determine the actual purpose of the personal data handling activity, including the \textit{``common understanding and
+reasonable expectations of the data subjects''}.
+Furthermore, Article 8 on the `Protection of personal data' of the Charter of Fundamental Rights of the European Union \citeyearpar{noauthor_charter_2000} also states that \textit{``[s]uch data must be processed fairly for specified purposes and on the basis of the consent of the person concerned or some other legitimate basis laid down by law''}.
+In essence, with regard to the processing of personal data, the purpose element relates to the `why' the processing is/will be occurring, while the `how' is related to the processing activity operated over the data \citep{koning_purpose_2020}.
+
+The requirement for the purpose for processing to be specific, in the same manner as the requirement for consent to be specific, is connected with control, self-determination, and autonomy \citep{koning_purpose_2020}. 
+Additionally, to comply with other principles, such as the `data minimisation' and `storage limitation' principles, the purpose for processing should also be considered \citep{koning_purpose_2020}.
+Moreover, the motivation for consent -- and by consequence for the purpose -- to be specific is related to avoiding the broadening or fading of the purpose, which can result in the misuse of personal data by data controllers and recipients and loss of control by data subjects \citep{european_data_protection_board_guidelines_2020}.
+Without control, users fail to preserve their autonomy and cannot exercise agency over the processing of their data \citep{jarovsky_improving_2018}.
+As such, purpose specification also serves as a measure to mitigate power and information asymmetries.
+In the absence of such a measure, the power balance leans towards the data controller as it can use the data in its possession according to its interests.
+
+% Furthermore, the EDPB discusses the specific character of consent in connection with function creep. According to Koops\added{ \cite{koops_concept_2021}}, the `creep' element refers to the imperceptibility of the change. This deprives the data subject of the opportunity to contest the change and assess its consequences. Returning to OAC, the risk of function creep is mitigated because the data request specifically instantiates the purpose of processing and this information is available to the data subject in the Pod, enabling her/him to exercise her/his rights, such as the right to withdraw consent.
