@@ -82,11 +82,80 @@ reasonable expectations of the data subjects''}.
 Furthermore, Article 8 on the `Protection of personal data' of the Charter of Fundamental Rights of the European Union \citeyearpar{noauthor_charter_2000} also states that \textit{``[s]uch data must be processed fairly for specified purposes and on the basis of the consent of the person concerned or some other legitimate basis laid down by law''}.
 In essence, with regard to the processing of personal data, the purpose element relates to the `why' the processing is/will be occurring, while the `how' is related to the processing activity operated over the data \citep{koning_purpose_2020}.
 
-The requirement for the purpose for processing to be specific, in the same manner as the requirement for consent to be specific, is connected with control, self-determination, and autonomy \citep{koning_purpose_2020}. 
+The requirement for the purpose of processing to be specific, in the same manner as the requirement for consent to be specific, is connected with control, self-determination, and autonomy \citep{koning_purpose_2020}. 
 Additionally, to comply with other principles, such as the `data minimisation' and `storage limitation' principles, the purpose for processing should also be considered \citep{koning_purpose_2020}.
 Moreover, the motivation for consent -- and by consequence for the purpose -- to be specific is related to avoiding the broadening or fading of the purpose, which can result in the misuse of personal data by data controllers and recipients and loss of control by data subjects \citep{european_data_protection_board_guidelines_2020}.
 Without control, users fail to preserve their autonomy and cannot exercise agency over the processing of their data \citep{jarovsky_improving_2018}.
 As such, purpose specification also serves as a measure to mitigate power and information asymmetries.
 In the absence of such a measure, the power balance leans towards the data controller as it can use the data in its possession according to its interests.
 
-% Furthermore, the EDPB discusses the specific character of consent in connection with function creep. According to Koops\added{ \cite{koops_concept_2021}}, the `creep' element refers to the imperceptibility of the change. This deprives the data subject of the opportunity to contest the change and assess its consequences. Returning to OAC, the risk of function creep is mitigated because the data request specifically instantiates the purpose of processing and this information is available to the data subject in the Pod, enabling her/him to exercise her/his rights, such as the right to withdraw consent.
+Moreover, the EDPB also discusses how the specific character of consent can be used to mitigate the risk of function creep.
+According to \cite{koops_concept_2021}, the `creep' component is related to the imperceptibility of the change, which deprives the data subject of the chance to oppose the change and assess its consequences.
+With the proposed OAC-based system, the risk of function creep is mitigated since the purpose is specifically instantiated in the request for data.
+Furthermore, this information can also be directly consulted by the data subjects as the OAC system proposes to store user policies, data requests, and data agreements in their Pod, enabling them to exercise their rights, e.g., the right to withdraw consent.
+% TODO: connect with the chapter of DUODRL
+Finally, when it comes to the granularity of the purpose for processing, the system proposed in this Thesis can also be easily extended to include a domain-specific taxonomy of purposes, e.g., health, medical, and biomedical research purposes.
+% enabling the interface designer to cluster them in categories with different level\added{s} of specificity, as required by the specific context.
+
+\paragraph{Identifying the data controller}
+
+Using OAC, data subjects can specify explicit policies for specific data controllers that are identified at the time these policies are established. 
+Nevertheless, to grant such authorisation in advance, data subjects need to receive information when initially accessing a Solid application or have access to it elsewhere for review, for instance, through metadata available on an app store.
+Presently, this crucial information is absent from Solid protocol implementations, as depicted in Figure \ref{fig:css}, which displays the current authorisation dialogue presented to Solid users who use the CSS. 
+While the app's name and ID are displayed, no additional information such as contact details, policies, or links to policies, is provided.
+Furthermore, there is no official Solid app store that includes metadata about the providers and/or developers of these applications.
+
+In this scenario, an access control policy can vary in specificity and in the way it is modelled.
+One approach is to mandate that the data subject identifies the data controller by providing their name and contact information, in order to allow them access to personal data.
+This approach does not present issues in terms of specificity, although the drawback is that the data subject would need to consent to each new data controller individually.
+On the other hand, another option could be to authorise controllers based on specific criteria, such as industry, country of incorporation, or sector.
+In this approach, the data subject would establish a set of restrictions for data controllers without specifying concrete entities.
+While this option offers flexibility and allows for automation, it is questionable whether it can be considered valid consent as the specificity criterion is not respected.
+
+As such, the initial challenge is related to the moment when the data subject becomes aware of the data controllers' identity.
+In the first approach, the data controller's identity is disclosed beforehand, while in the second, the data subject establishes the criteria that a requester must meet and the specific identity of the data controller only becomes accessible when the policy matching algorithm determines that the requester meets these criteria.
+This last option allows for automation -- the data subject does not explicitly acknowledge or approve the identity and contact details before granting access, but this information is accessible for review within the data subject's Pod.
+Both options are possible with an OAC-based system, but involve different policy modelling and matching features.
+
+By taking a look at GDPR's Recital 42 \citeyearpar{noauthor_regulation_2016}, it is clear that informed consent requires that the data subject is \textit{``aware at least of the identity of the controller and the purposes of the processing for which the personal data are intended''}.
+What's more, the \cite{european_data_protection_board_guidelines_2020} specified that if consent is relied upon by multiple controllers, including controllers to which the data was transferred, all should be identified.
+Comparably, the \cite{article_29_data_protection_working_party_guidelines_2018} highlights the importance of disclosing the controller's identity by stating that a change of identity should \textbf{always} be communicated to the data subjects, e.g., through a privacy notice, similarly to a change in purpose or how data subjects can exercise their rights.
+As such, it can be clearly noted that the specific nature of consent and its informed character are closely linked.
+Consequently, consent is likely invalid if the data subject is unaware of the identity of the entity processing their personal data at the time of consenting.
+
+As outlined in Section \ref{sec:oac_notice_automation}, data subjects must receive information about the processing of their data at the point of data collection or during the initial interaction between them and the data controller.
+If the decision to grant access is automatically made by the matching algorithm, without the involvement of the data subject, this scenario is unlikely to meet the requirements for valid consent as the data subject is not given the opportunity to make a choice.
+However, if the legal basis is not consent, the result of the matching algorithm could serve as an informational mechanism and automation can be allowed.
+
+Indeed, Recital 39 \citeyearpar{noauthor_regulation_2016}, which discusses the lawfulness, fairness, and transparency principle, emphasises that transparency in particular should be reflected in the \textit{``information to the data subjects on the identity of the controller and the purposes of the processing and further information to ensure fair and transparent processing''}.
+Transparency is also highlighted in Recital 58 \citeyearpar{noauthor_regulation_2016}, which emphasises its significance in contexts where the involvement of multiple actors and technological complexity makes it challenging for data subjects to understand who is processing their personal data and under which conditions.
+As such, both Recitals indicate that disclosing the identity of data controllers is a crucial aspect of fulfilling information and transparency requirements.
+
+\paragraph{Distinguishing the data controller from the recipients of personal data}
+
+GDPR's Articles 13 and 14 \citeyearpar{noauthor_regulation_2016} outline a set of information items that must be shared with the data subject.
+Among them, \textit{``the identity and the contact details of the controller and, where applicable, of the controller's representative''} and \textit{``the recipients or categories of recipients of the personal data''} are clearly separated in Articles 13.1(a) and 14.1(a), and Article 13.1(e) and 14.1(e), respectively.
+This differentiation implies that, under specific circumstances, recipients may be identified by category rather than by specific identity details.
+As such, in this Section, the following legal questions are debated: (i) what distinguishes data controllers from recipients, particularly in a decentralized environment, (ii) are requesters considered data controllers or recipients, and (iii) what is the significance of this distinction.
+
+According to the GDPR (Article 4.9 \citeyearpar{noauthor_regulation_2016}), a recipient is \textit{``a natural or legal person [...] to which the personal data are disclosed, whether a third party or not''}, while a third party is, according to Article 4.10 \citeyearpar{noauthor_regulation_2016}, \textit{``a natural or legal person, [...] other than the data subject, controller, processor and persons who, under the direct authority of the controller or processor, are authorised to process personal data''}.
+Moreover, the EDPB's guidelines related to the concepts of controller and processor \citep{european_data_protection_board_guidelines_cp_2020} state that, unlike the defined roles of controller and processor, the GDPR does not establish distinct obligations or responsibilities for recipients and third parties.
+These roles are considered relative concepts, describing a relationship with a controller or processor from a particular standpoint.
+For instance, when a controller or processor shares data with another entity, regardless of the recipient's role as a controller or processor, they are classified as a recipient.
+Previously, the WP 29 guidance on transparency \citep{article_29_data_protection_working_party_guidelines_2018} stipulated that controllers must provide information about the recipients or categories of recipients of personal data.
+Additionally, to uphold the principle of fairness, controllers are obligated to furnish data subjects with information on recipients that is most relevant and meaningful to them, which \textit{``in practice, [...] will generally be the named recipients, so that data subjects know exactly who has their personal data''}.
+However, WP 29 also acknowledges the option of disclosing the categories of recipients to data subjects.
+This would require these categories to be identified as specifically as possible, delineating the type of recipient by referencing their activities, industry, sector, sub-sector, and location.
+
+As for the data controllers, due to their crucial role in the provision of data subject rights, should \textbf{always} be explicitly identified.
+Recital 39 \citeyearpar{noauthor_regulation_2016} underlines the importance of transparent communication by stating that individuals should be informed about the risks, rules, safeguards, and rights associated with the processing of their personal data.
+Hence, the alignment of user policies with actual data requests empowers individuals to assert their rights despite data subjects not expressly acknowledging or agreeing to the identity and contact details of requesters, since this information is accessible in their Pod, enabling them to exercise their data subject rights of access, rectification, erasure, or consent withdrawal as outlined in Articles 15, 16, 17, and 7(3) of the GDPR \citeyearpar{noauthor_regulation_2016}, respectively.
+
+Thus, the stringent information criteria in GDPR's Articles 13 and 14 \citeyearpar{noauthor_regulation_2016}, requiring the identification of data controllers by name and contact details, appear to be tailored to the current web landscape, where only a handful of entities collect data and subsequently share it with other parties.
+Despite that, within the ecosystem facilitated by Solid, data exchange occurs directly between the data subject (via the Solid Pod) and an unspecified number of app providers, developers, and/or other users.
+This poses significant challenges in identifying all these entities by name and contact details, in particular for access automation.
+In addition, \cite{vogel_stretching_2022} examines this issue within the context of the Data Governance Act and contends that it presents a barrier to offering intermediary services as well.
+
+In summary of this Section, it is probable that consenting to the processing of personal data without explicitly identifying the providers of Solid services, particularly in terms of their identity and contact information, will not meet the criteria for valid consent under the GDPR.
+Nevertheless, according to certain interpretations and referencing the WP 29 guidance, Pod-stored policies might function as an informational mechanism that facilitate compliance with Articles 13 and 14 \citeyearpar{noauthor_regulation_2016}.
+Furthermore, through registries of entities, e.g., documented in Solid Pods through the PLASMA vocabulary developed in Section \ref{sec:plasma}, information regarding the identity and contact information of both controllers and recipients, as well as other parties, can be kept and consulted by the data subject at any time.
