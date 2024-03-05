@@ -352,10 +352,10 @@ Furthermore, similarly to WAC and ACP, OAC policies can also be defined for part
 Such information can be stored in a data registry, stored in a e.g. Solid Pod, where resources can be associated with the type of data they contain by using DPV's \texttt{hasPersonalData} property and DPV-PD's taxonomy of personal data categories, e.g., \texttt{<https://solidweb.me/besteves4/private/health/file1> dpv:hasPersonalData dpv-pd:HealthHistory .}
 
 Ultimately, since these policies are stored in the personal datastore for purposes of accountability and transparency, apps and services, based on the stored preferences, requests and agreements, can be built, e.g., using SPARQL queries, to inquire who is using what data and for what purposes.
-Listing~\ref{list:sparql_agreement} presents a SPARQL query to retrieve permitted data accesses by user, data and purpose from ODRL agreements stored in a decentralised datastore.
+Listing~\ref{list:sparql_agreement} presents a SPARQL query to retrieve permitted data accesses by user, data, and purpose from ODRL agreements stored in a decentralised datastore.
 
 \begin{listing}[ht]
-\caption{SPARQL query to retrieve authorised data accesses by user, data and purpose.}
+\caption{SPARQL query to retrieve authorised data accesses by user, data, and purpose.}
 \label{list:sparql_agreement}
 \begin{minted}{sparql}
 SELECT DISTINCT ?User ?Data ?Purpose WHERE {

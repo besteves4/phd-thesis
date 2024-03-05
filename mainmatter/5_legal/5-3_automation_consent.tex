@@ -157,5 +157,59 @@ This poses significant challenges in identifying all these entities by name and 
 In addition, \cite{vogel_stretching_2022} examines this issue within the context of the Data Governance Act and contends that it presents a barrier to offering intermediary services as well.
 
 In summary of this Section, it is probable that consenting to the processing of personal data without explicitly identifying the providers of Solid services, particularly in terms of their identity and contact information, will not meet the criteria for valid consent under the GDPR.
-Nevertheless, according to certain interpretations and referencing the WP 29 guidance, Pod-stored policies might function as an informational mechanism that facilitate compliance with Articles 13 and 14 \citeyearpar{noauthor_regulation_2016}.
+Nevertheless, according to certain interpretations and referencing the WP 29 guidance, Pod-stored policies might function as an informational mechanism that facilitates compliance with Articles 13 and 14 \citeyearpar{noauthor_regulation_2016}.
 Furthermore, through registries of entities, e.g., documented in Solid Pods through the PLASMA vocabulary developed in Section \ref{sec:plasma}, information regarding the identity and contact information of both controllers and recipients, as well as other parties, can be kept and consulted by the data subject at any time.
+
+\subsection{Is already-given consent valid for compatible purposes?}
+\label{sec:consent_compatibility}
+
+In this Section, the validity of consent is discussed concerning the compatibility of purposes.
+To give an example, if a research participant indicates a preference to have their data processed for research on Alzheimer's disease, a type of degenerative disease, can this consent also be applied to a request for utilising their data for research on dementia, also a type of degenerative disease?
+
+As previously outlined in this Section, the proposed matching algorithm running over OAC policies currently relies on subsumption.
+This means that if a user policy grants access for purpose A, and a data request for purpose B (a subclass of A) is made, then access should be allowed.
+The same principle applies to other matching operations, such as matching on processing operations or categories of personal data.
+To illustrate it with the example introduced above, if a participant's user policy permits their data to be used for research on Alzheimer's disease but a request is made for research on degenerative diseases, access is denied since the user policy's purpose is more specific than the request. Conversely, if the user policy allows data usage for research on degenerative diseases and a request specifically for Alzheimer's research is made, access is granted as the request's purpose is more specific.
+Another benefit of using OAC is its capability to express prohibitions, enhancing the specificity of consent.
+Users can authorise data access for medical research while prohibiting it for specific areas within medical research, such as genetic engineering research.
+
+Nevertheless, OAC currently lacks consideration for the matching of ``compatible purposes''.
+For instance, if a participant's user policy permits data usage for Alzheimer's research, and a request is made to utilise the data for dementia research, should access be granted based on compatible purposes?
+Since dementia, like Alzheimer's, falls under the category of degenerative diseases, it can be argued that access should indeed be permitted.
+As such, introducing a ``compatibility matching'' algorithm to Solid would enhance the model, and in particular the automation of access to data, however, it is crucial to assess the legal implications of this addition.
+
+Firstly, it must be discussed how one can determine the compatibility of purposes and whether users desire such a model to complement the policy matching algorithm that governs access to their data.
+To facilitate this matching, particularly in the context of biomedical research, \beatriz{the example use case developed in Chapter XX on policies for health data-sharing can be leveraged}.
+This development specifies a taxonomy of health-related research purposes, links to other ontologies containing disease taxonomies, and utilises OAC's matching algorithm.
+Nonetheless, for the algorithm to assess compatibility, this information must be integrated into the used taxonomies of purposes.
+This could be achieved, for example, by incorporating a triple statement in the purpose taxonomy indicating that \texttt{:purposeX :isCompatible :purposeY}.
+
+Within GDPR, the concept of purpose compatibility, or the \textit{``further processing [...] shall [...] not be considered to be incompatible with the initial purposes''} non-incompatibility principle, is addressed in the second aspect of the purpose limitation principle outlined in Article 5.1(b).
+The criteria for evaluating compatibility are further detailed in Article 6.4 \citeyearpar{noauthor_regulation_2016} and quoted below:
+
+\begin{enumerate}
+    \item [(a)] \textit{``any link between the purposes for which the personal data have been collected and the purposes of the intended further processing;''}
+    \item [(b)] \textit{``the context in which the personal data have been collected, in particular regarding the relationship between data subjects and the controller;''}
+    \item [(c)] \textit{``the nature of the personal data, in particular, whether special categories of personal data are processed [...];''}
+    \item [(d)] \textit{``the possible consequences of the intended further processing for data subjects;''}
+    \item [(e)] \textit{``the existence of appropriate safeguards, which may include encryption or pseudonymisation.''}
+\end{enumerate}
+
+From a technical viewpoint, the initial two criteria, namely (a) the association between purposes for use and secondary reuse of data and (b) the processing context, could potentially be evaluated through automated methods, as previously discussed.
+However, the evaluation required for the third and fourth criteria entails linking the nature of the data with the potential ramifications of its usage for the data subjects.
+Regarding the final criterion, automated verification of such safeguards can be partially conducted through certifications.
+Nonetheless, determining the adequacy of such measures presents a challenge for automation, as it requires a risk assessment related to data subjects' rights and interests.
+
+Secondly, regarding the legal hurdles associated with employing these criteria to match user policies with data requests from third parties, the non-compatibility requirement stands as a form of usage limitation.
+This requirement prohibits the processing of personal data for purposes that are incompatible with the purpose specified at the time of data collection.
+Moreover, the requirements for compatibility and usage of an appropriate legal basis are conditions that must be met together, i.e., while purpose compatibility is important, it cannot compensate for a lack of legal ground for processing.
+Therefore, if the purposes are found to be compatible but there is no lawful basis for processing, either renewed consent must be obtained or an alternative legal basis must be identified.
+In the example used throughout this Section, even if the data subject previously consented to the use of their data for Alzheimer's disease research purposes and the matching algorithm confirmed the compatibility of purposes, this alone would not be sufficient to grant access to the resources in the Pod.
+Thus, expressing consent for the specific compatible purpose (such as research for dementia) would also be required.
+Additionally, as it will be discussed in the next Section, if special categories of data are being processed, an exception under Article 9 of the GDPR \citeyearpar{noauthor_regulation_2016} must also be identified and recorded in consent notices.
+
+Finally, while it cannot substitute the lack of consent, the assessment of purpose compatibility is still beneficial since it serves as a prerequisite for reusing data for new purposes under different legal bases.
+
+\subsection{The intricate boundary between expressing and delegating consent}
+\label{sec:consent_delegating}
+
