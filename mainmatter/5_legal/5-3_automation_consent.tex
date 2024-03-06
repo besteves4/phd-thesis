@@ -205,11 +205,57 @@ This requirement prohibits the processing of personal data for purposes that are
 Moreover, the requirements for compatibility and usage of an appropriate legal basis are conditions that must be met together, i.e., while purpose compatibility is important, it cannot compensate for a lack of legal ground for processing.
 Therefore, if the purposes are found to be compatible but there is no lawful basis for processing, either renewed consent must be obtained or an alternative legal basis must be identified.
 In the example used throughout this Section, even if the data subject previously consented to the use of their data for Alzheimer's disease research purposes and the matching algorithm confirmed the compatibility of purposes, this alone would not be sufficient to grant access to the resources in the Pod.
-Thus, expressing consent for the specific compatible purpose (such as research for dementia) would also be required.
-Additionally, as it will be discussed in the next Section, if special categories of data are being processed, an exception under Article 9 of the GDPR \citeyearpar{noauthor_regulation_2016} must also be identified and recorded in consent notices.
+Thus, expressing consent for a specific compatible purpose (such as research for dementia) would also be required.
+Additionally, as will be discussed in the next Section, if special categories of data are being processed, an exception under Article 9 of the GDPR \citeyearpar{noauthor_regulation_2016} must also be identified and recorded in consent notices.
 
-Finally, while it cannot substitute the lack of consent, the assessment of purpose compatibility is still beneficial since it serves as a prerequisite for reusing data for new purposes under different legal bases.
+Finally, while it cannot substitute for the lack of consent, the assessment of purpose compatibility is still beneficial since it serves as a prerequisite for reusing data for new purposes under different legal bases.
 
 \subsection{The intricate boundary between expressing and delegating consent}
 \label{sec:consent_delegating}
+
+This Section examines whether an OAC-based system enables data subjects to either express or delegate consent.
+Moreover, the question of who is liable in the event of errors in such decentralised data-sharing environments is also debated.
+
+The proposed OAC-based matching algorithm converts a preference regarding personal data processing -- \textit{``An individual’s preferred outcome for a specific privacy-related situation''} -- into a decision -- \textit{``What an individual chooses to do in a specific privacy-related situation among available options''} \citep{colnago_is_2022}.
+This aligns with the work of \cite{colnago_is_2022} which primarily focuses on employing these concepts in empirical studies concerning attitudes toward privacy.
+However, this differentiation could also be valuable in discussing the proposed matching of users policies with data requests within the framework of Solid.
+
+When establishing their preferences through the OAC profile, data subjects delineate specific conditions under which their personal data may be accessed.
+This also implies that they understand that the practical outcome of the matching is determined through a series of actions adhering to those conditions, including subsumption and exclusion.
+Thus, consent is extended not only to the categories of data, purposes, and entities acting as data controllers but also to the mechanism that facilitates the transformation of these preferences into choices.
+
+Distinct authors have also explored the delegation of consent from individuals to other entities.
+\cite{boers_broad_2015} coined the term \textit{``consent for governance''} by arguing that consent, in particular within the realm of biobanking, should be centered on the governance structure of a biobank rather than on the specific details of individual studies.
+\cite{le_metayer_automated_2009} examined the concept of automated consent from the perspective of shifting from consenting to the use of personal data to consenting to the use of a privacy agent, \textit{``a dedicated software that would work as a surrogate and automatically manage consent on behalf of the data subject''}.
+\cite{sheehan_can_2011} explores the notion of ethical consent and distinguishes between first-order and second-order decisions.
+Second-order decisions are intrinsically different from first-order decisions in that the decision-maker's focus lies on the decision-making process rather than the content of the choice.
+Sheehan illustrates this with an example involving ordering food in a restaurant.
+He describes a scenario where a group of friends dine together, and before the waiter takes their orders, one of them briefly steps away and asks another person at the table to place an order on their behalf.
+When making decisions about delegating decision-making, the individual selects based on factors such as trust in their companions, their knowledge of their taste in food, and the information they possess about the approximate amount they wish to spend.
+
+When applying the differentiation between first- and second-order decisions to OAC, the key inquiry revolves around whether consenting to access conditions and the matching algorithm constitutes a first- or second-order decision.
+For instance, if a data subject consents to research for the public interest, this concept is further interpreted by the matching algorithm and the ultimate decision to approve a request becomes detailed and specific.
+However, this decision is not directly made by the data subject but rather indirectly, by delegating it to an OAC-based system.
+An enhancement suggestion for OAC involves not merely augmenting the ontology with more information, but rather enabling the algorithm to `learn' to make such inferences.
+However, in this scenario, consideration has to be given to GDPR's  Article 22 \citeyearpar{noauthor_regulation_2016} concerning automated decision-making.
+
+In cases where consent is delegated rather than directly given by the data subject, it becomes essential to examine the impact of this consent arrangement among the data subject, the agent, and the app provider.
+It can be argued that the app provider cannot solely rely on the results of the matching algorithm to demonstrate the obtaining of valid consent.
+From the standpoint of private law, this matter is addressed within the framework of mandate agreements.
+% TODO: add more information on mandate agreements
+According to the `appearance principle', under specific conditions, the intentions expressed by the agent are legally binding over the ones of the data subject.
+If the choices made by the agent do not accurately represent the data subject's intentions, any discrepancies are resolved between the data subject and the agent \citep{le_metayer_automated_2009}.
+This approach offers legal certainty within contract law.
+However, the data subject has more protection under European data protection law.
+According to the GDPR, the app provider, acting as the data controller, is responsible for ensuring and demonstrating that consent was validly obtained (Article 6.1(a) and 7.1 \citeyearpar{noauthor_regulation_2016}).
+In the context of decentralised systems as Solid, this entails the app provider understanding and documenting the matching process, not just its outcome.
+Therefore, the matching algorithm must be transparent and demonstrate how the matching was conducted, allowing the app provider to assess the validity of consent.
+However, recording the privacy preferences of the data subject may infringe their privacy as with knowledge of these preferences, the controller can submit targeted requests aligned with those preferences, even though they intend to use it for different purposes.
+
+The liability in case of personal data misuse takes on a distinct framework if the Pod provider is regarded as a separate data controller.
+In this scenario, the data subject gives consent to the Pod provider (Controller 1) for the storage and provision of personal data to third parties, under specific conditions.
+Following the data subject's instructions, the Pod provider subsequently makes the data available to the app provider (Controller 2).
+Each data controller must then ensure that the processing activities (storage, transfer, and further utilisation) are grounded in a valid legal basis \citep{european_data_protection_board_guidelines_2020}.
+Thus, the responsibility for errors in the matching process and for invalid consent could be jointly held by both controllers as per their mutual agreement.
+While the GDPR does not stipulate a specific legal form for such arrangements, the EDPB recommends documenting this agreement in a binding document, such as a contract accessible to the data subject \citep{european_data_protection_board_guidelines_2020}.
 
