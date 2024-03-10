@@ -1,0 +1,90 @@
+\section{Special categories of data and research exceptions}
+\label{sec:biomedical_exception}
+
+As discussed in preceding Sections, the stringent requirements for obtaining consent under the GDPR place significant burdens on data subjects.
+Requiring separate agreements for each app provider and for each specific purpose leads to repetitive consent requests.
+In the biomedical field, individuals may have less involvement in decision-making regarding their data compared to other sectors -- the benefits from participation in biomedical research are often not immediate and may not directly impact the individual's personal circumstances.
+Consequently, individuals may be less inclined to make the effort of checking their Pod for new requests, reading information notices, and accepting/rejecting access requests, compared to sectors like information society services which include social media and streaming services.
+As such, in the context of research, various provisions indicate a more flexible approach to consent requirements or even suggest moving away entirely from reliance on consent.
+
+Recital 33 \citeyearpar{noauthor_regulation_2016} states that broad consent is permissible for research purposes under specific conditions -- \textit{``data subjects should be allowed to give their consent to certain areas of scientific research when in keeping with recognised ethical standards for scientific research''} and while having the \textit{``opportunity to give their consent only to certain areas of research or parts of research projects''}.
+However, the terms `areas of research' or `parts of research projects' are domain-specific concepts that are not further defined in the GDPR.
+The Global Alliance for Genomics and Health\footnote{\url{https://www.ga4gh.org/} (accessed on 9 March 2024)} develops distinct components and processes for health data sharing, including the Data Use Ontology (DUO)\footnote{\url{http://purl.obolibrary.org/obo/duo} (accessed on 9 March 2024)}, a vocabulary that can be used to describe data use conditions and limitations for research data generated in the health, clinical and biomedical domain \citep{lawson_data_2021,rehm_ga4gh_2021}.
+While such vocabulary contains concepts of health-related research purposes, links to other ontologies with disease taxonomies, and incorporates concepts for modeling projects and obligations related to data usage, e.g., need for ethical approval, collaboration with the study's investigator, or the obligation to return the study's results, it does not take into consideration data protection-related requirements, e.g., legal grounds for processing.
+% TODO: connect with the DUODRL chapter
+
+However, this provision outlined in Recital 33 \citeyearpar{noauthor_regulation_2016} is not legally binding, is not mirrored in the actual text of the GDPR and it was strictly interpreted by the EDPS in its opinion on data protection and scientific research \citep{european_data_protection_supervisor_preliminary_2020}.
+Furthermore, while the EDPS asserts that Recital 33 does not supersede the provisions mandating specific consent, it also suggests an assessment based on the data subject's rights, the sensitivity of the data, the nature and objective of the research, and relevant ethical safeguards. Concurrently, the EDPS also notes that if purposes cannot be precisely specified, data controllers could compensate by enhancing transparency and implementing safeguards.
+Outside of the EU, the UK government advocated for an influential role for broad consent in medical research within its proposal to amend the UK's Data Protection Act \citep{uk_government_consultation_2022}.
+This proposal was generally well-received, though some concerns were expressed regarding its potential for ambiguity and possible misuse.
+
+Furthermore, the European Commission has proposed a regulation instrument for the health data domain, the European Health Data Space \citeyearpar{noauthor_proposal_2022}, which aims to depart from relying on consent for the secondary use of personal data in biomedical research.
+According to this proposal, a `data holder', or a \textit{``any natural or legal person, which is an entity or a body in the health or care sector, or performing research in relation to these sectors [...] who has the right or obligation [...] to make available, including to register, provide, restrict access or exchange certain data''} \citeyearpar{noauthor_proposal_2022}, is mandated to disclose both personal and non-personal data under specific conditions and for a limited set of purposes, including scientific research (Article 34.1(e) \citeyearpar{noauthor_proposal_2022}), without requiring the consent of the data subject.
+Additionally, Article 33.5 of the EHDS proposal \citeyearpar{noauthor_proposal_2022} appears to override national laws mandating consent by stipulating that \textit{``where the consent of the natural person is required by national law, health data access bodies shall rely on the obligations laid down in this Chapter to provide access to electronic health data''}.
+The final version of this proposal, including the role of consent and its scope (broad or specific), is yet to be determined.
+However, this proposal has drawn criticism from both the EDPB and EDPS in a joint opinion document, which calls for further clarification on how national laws requiring consent will interact with the proposed European legislation \citeyearpar{noauthor_edpbedps_2022}.
+
+Biomedical research presents challenges within the GDPR due to its unique combination of a stringent regulatory framework, as it involves processing health data, which falls under the GDPR's special categories of data, alongside a set of exemptions designed to facilitate research due to its societal significance.
+
+\subsection{A stricter regime for health data processing}
+\label{sec:stricter_regime}
+
+GDPR's Article 9.1 \citeyearpar{noauthor_regulation_2016} prohibits the processing of special categories of data, including health data.
+However, there are ten exceptions to this rule, one of which is explicit consent from the data subject.
+Nevertheless, the term `explicit' lacks clarity, as it's unclear what distinguishes it from `regular' consent, which requires a clear affirmative action or statement by the data subject.
+Further clarification is needed in the GDPR regarding the additional steps a controller should take to obtain explicit consent from a data subject \citep{european_data_protection_board_guidelines_2020}.
+The EDPB offers various examples of how explicit consent can be expressed.
+These include providing a written statement, or in the digital context, actions such as filling out an electronic form, sending an email, uploading a scanned document bearing the data subject's signature, or using an electronic signature.
+Another method mentioned is two-stage verification, where the data subject may receive an email from the controller requesting consent to process specific medical data.
+Upon agreement, the data subject is asked to respond via email with the phrase `I agree', followed by receiving a verification link or an SMS message for confirmation \citep{european_data_protection_board_guidelines_2020}.
+
+Within decentralised frameworks such as Solid, various approaches can be employed for the purpose of expressing explicit consent.
+Depending on the Solid server chosen by users to host their Pod, an inbox container, akin to email inboxes found in other systems, may be automatically created when the user sets up the Pod.
+This container can serve as a platform to receive such requests as it is equipped with a specialised access control authorisation, allowing only the data subject to read its contents while permitting other users to write to it. 
+However, due to the lack of standardisation across the Solid ecosystem, the presence of this container cannot always be guaranteed, or it may be named differently, leading to interoperability issues.
+A more sophisticated solution involves adopting a graph-centric interpretation of a Pod, wherein each Solid Pod functions as a hybrid, contextualised knowledge graph \citep{dedecker_whats_2022}.
+In this context, `hybrid' denotes support for both documents and RDF statements, while `contextualised' signifies the ability to associate each document and statement with metadata such as policies or provenance data.
+By accurately recording metadata, including context and provenance, multiple interfaces of the Pod can be generated as needed by various applications chosen by the data subject.
+In this scenario, requests can be seamlessly integrated into the graph without requiring hardcoded specifications in the application for where the requests should be written.
+These requests can then be visualised by the data subject using a Solid application or service compatible with this graph-centric approach.
+Additionally, the research conducted by \cite{braun_selfverifying_2022} can be utilised to sign and validate resources carrying the `I agree' statement of the data subject.
+
+In summary, expressing explicit consent through pre-set polices poses challenges.
+Matching user policies, predefined in advance, with data requests is unlikely to meet the explicit nature of consent. 
+Although matching can enhance transparency and assist individuals in decision-making, a separate action of explicitly approving the use of personal data is required to meet the explicit requirement of consent.
+
+\subsection{A series of derogations for research purposes}
+\label{sec:derogations}
+
+In this Section, three distinct aspects, relevant to the domain of health research, are discussed: (i) the compatibility between data collection purposes and secondary reuse for research, (ii) exceptions from the right to information, and (iii) alternative exceptions, aside from consent, for processing special categories of data.
+
+\paragraph{Secondary use for research}
+As previously discussed in Section \ref{sec:consent_compatibility}, related to the `purpose limitation' principle and the assessment of compatibility, the GDPR states that \textit{``data shall be collected for specific, explicit and legitimate purposes and not further processed in a manner that is incompatible with those purposes''} (Article 5.1(b) \citeyearpar{noauthor_regulation_2016}).
+As such, there is an assumption of compatibility between the purpose of collection and subsequent reuse, provided that the personal data processing for scientific research purposes appropriately implements safeguards to protect the rights and freedoms of the data subject (as outlined in Article 89.1 \citeyearpar{noauthor_regulation_2016}).
+It is crucial to highlight that the prohibition against processing personal data for incompatible purposes differs from the requirement of purpose specificity, and an exception does not alleviate the need for a specific purpose.
+Moreover, regardless of compatibility, the data controller must rely on consent or another legal ground to process personal (health) data.
+However, there is one provision in the GDPR preamble that questions the distinction between these two requirements -- \textit{``The processing of personal data for purposes other than those for which the personal data were initially collected should be allowed only where the processing is compatible with the purposes for which the personal data were initially collected. In such a case, no legal basis separate from that which allows the collection of the personal data is required''} (Recital 50 \citeyearpar{noauthor_regulation_2016}).
+This appears to challenge the separation between the `purpose limitation' and the `lawfulness' principles.
+This intersection, and its implications for decentralised data-sharing ecosystems such as Solid, needs to be further investigated.
+
+\paragraph{Exceptions to the information obligations}
+In Section \ref{sec:specific_consent}, particularly in the ``Identifying the data controller'' paragraph, the information obligations outlined in Articles 13 and 14 of the GDPR \citeyearpar{noauthor_regulation_2016} are explored, with a focus on the timing of when information must be provided to the data subject.
+In particular, Article 14 provides an exception for cases where personal data are processed for research purposes and have not been obtained directly from the data subject.
+This exception may be relevant to Solid, considering that not all personal data stored in Solid Pods originates directly from the data subject -- it may be generated by app providers, Pod providers, other users, or agents.
+Furthermore, according to Article 14.5, if (i) providing information is impossible or would require disproportionate effort, or if doing so is likely to render impossible or seriously impair the achievement of the processing objectives, and (ii) the conditions and safeguards specified in Article 89 \citeyearpar{noauthor_regulation_2016} are met, the information requirements outlined in Article 14 are inapplicable.
+The compliance of Solid-based data exchanges with these conditions and safeguards in place will need to be evaluated on a case-by-case basis, depending on the context and the data access request.
+However, it is probable that these conditions will be fulfilled only in exceptional cases rather than as a standard practice, and if they are met, the data controller \textit{``shall take appropriate measures to protect the data subject's rights and freedoms and legitimate interests, including making the information publicly available''}. 
+As such, further research is needed to explore the role of Solid's notification system, as well as other mechanisms, to act as appropriate measures to safeguard the rights of the data subject.
+
+\paragraph{Alternative legal bases beyond consent}
+In addition to explicit consent, GDPR's Article 9.2 \citeyearpar{noauthor_regulation_2016} outlines other exceptions to the prohibition on processing special categories of data.
+Article 9.2(j) is particularly pertinent to this discussion because it pertains to the processing of personal data for health research.
+This point permits the processing of health-related data when it is necessary for scientific research in accordance with Article 89.1 \citeyearpar{noauthor_regulation_2016}, as long as it is based on European or national law.
+Such processing must be proportionate to the intended purpose, uphold the essence of the right to data protection, and include appropriate and specific measures to safeguard the fundamental rights and interests of the data subject.
+Consequently, the applicability of this exception hinges on the identification of a European or national law that can justify the processing of personal data.
+If the processing falls within the scope of such legislation, explicit consent from the data subject is not required.
+
+As such, from this Section is possible to conclude that the exemptions for processing personal data for scientific research hinge on the adoption and use of suitable safeguards.
+According to GDPR's Article 89.1, these safeguards center around upholding the `data minimisation' principle and include practices like pseudonymisation and methods that prevent the identification of data subjects.
+Subsequent research could explore whether PIMS, such as the Solid with an OAC-based matching system, could serve as a safeguard in this context.
+
