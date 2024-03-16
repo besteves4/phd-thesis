@@ -110,14 +110,11 @@ Listing \ref{list:p3p_example} presents a P3P policy which highlights the above-
         p3p:business.name [ rdf:value "CatalogExample" ] ;
         p3p:business.contact-info.postal.street [
             rdf:value "4000 Lincoln Ave." ] ;
-        p3p:business.contact-info.postal.city [ 
+        p3p:business.contact-info.postal.city [
             rdf:value "Birmingham" ] ;
-        p3p:business.contact-info.postal.stateprov [ 
-            rdf:value "MI" ] ;
-        p3p:business.contact-info.postal.country [ 
-            rdf:value "USA" ] ;
-        p3p:contact.online.email [ 
-            rdf:value "catalog@example.com" ] ;
+        p3p:business.contact-info.postal.stateprov [ rdf:value "MI" ] ;
+        p3p:business.contact-info.postal.country [ rdf:value "USA" ] ;
+        p3p:contact.online.email [ rdf:value "catalog@example.com" ] ;
         p3p:contact.telephonenum.intcode [ rdf:value "1" ] ;
         p3p:contact.telephonenum.loccode [ rdf:value "248" ] ;
         p3p:contact.telephonnum.number [ rdf:value "3926753" ] ] ;
@@ -226,10 +223,10 @@ Also, the rules graph format allows for the nesting of rules within the same rul
 \label{sec:s4p}
 
 S4P (SecPAL for Privacy), developed by \cite{becker_framework_2009, becker_s4p_2010}, is a language framework to express users' privacy preferences and Web services data handling policies.
-This language was developed by Microsoft Research\footnote{\url{https://www.microsoft.com/en-us/research/}} and it is an extension of the company's previous work, SecPAL, to define the handling of PII.
+This language was developed by Microsoft Research\footnote{\url{https://www.microsoft.com/en-us/research/} (accessed on 16 March 2024)} and it is an extension of the company's previous work, SecPAL, to define the handling of PII.
 
-SecPAL \citep{becker_design_2007} is an extensible and decentralized authorization language, developed to express policies and better disclose expressiveness features such as delegation, domain-specific constraints, and negation.
-An authorization policy is composed of a group of assertions that have an issuer, that vouches for the assertion, the collection of conditional facts and constraints related to times, dates or addresses.
+SecPAL \citep{becker_design_2007} is an extensible and decentralised authorisation language, developed to express policies and better disclose expressiveness features such as delegation, domain-specific constraints, and negation.
+An authorisation policy is composed of a group of assertions that have an issuer, that vouches for the assertion, the collection of conditional facts and constraints related to times, dates or addresses.
 Then, when requesting access to the service, this request is transformed into a series of queries, which are checked against the clauses defined to represent the system's policy, so that the decision is made.
 S4P extends SecPAL to treat granted rights and required obligations as assertions and queries and, based on these, a satisfaction checking algorithm is defined for the disclosure of PII between users and data-collecting services.
 Therefore, services express data-handling policies as SecPAL queries, defining what is going to be their behaviour in relation to the users' PII, and the users express their preferences as SecPAL assertions, making precise what the services are permitted to do and what their obligations are towards the users' PII.
@@ -244,18 +241,17 @@ Listing \ref{list:s4p_example} presents S4P syntax through an example where the 
 \begin{listing}
 \caption{S4P example adapted from \cite{becker_framework_2009}, which specifies the privacy preferences of Alice regarding the collection of her email address by eBooking services.}
 \label{list:s4p_example}
-\begin{minted}{turtle}
+\begin{minted}[escapeinside=||]{python}
 Alice says x may use Email for p if
     x is a eBookingService,
-    where p $\in$ {Confirmation, Newsletter, Stats}
+    where p |$\in$| {Confirmation, Newsletter, Stats}
 Alice says x may send Email to y if
     x is a eBookingService,
     y is a TrustedPartner
 Alice says x can say y is a TrustedPartner if
     x is a eBookingService
-Alice says $\langle Service \rangle$ is a RegisteredService? $\wedge$
-    $\exists t$ $(\langle Service \rangle$ says $\langle Service \rangle$ will delete Email 
-        within t? $\wedge$ t $\leq$ 30 days?)
+Alice says |$\langle$|Service|$\rangle$| is a RegisteredService|$?$| |$\wedge$|
+    |$\exists$|t (|$\langle$|Service|$\rangle$| says |$\langle$|Service|$\rangle$| will delete Email within t|$?$| |$\wedge$| t |$\leq$| 30 days|$?$|)
 \end{minted}
 \end{listing}
 
@@ -280,11 +276,11 @@ Listing \ref{list:pol_example} presents a list of POL contract examples: (1) con
 \begin{listing}
 \caption{POL contract examples adapted from \cite{berthold_towards_2011}.}
 \label{list:pol_example}
-\begin{minted}{turtle}
-(1) $c_{company}$ = data $a_1$ $p_1$
-(2) $c_{user}$ = give $c_{company}$
-(3) $c_A$ = when (at $t_A$) (data $a_A$ $p_A$ $\textquoteleft$or$\textquoteleft$ zero)
-(4) $c_B$ = until (at $t_B$) (data $a_B$ $p_B$ $\textquoteleft$or$\textquoteleft$ zero) 
+\begin{minted}[escapeinside=||]{text}
+(1) |$c_{company}$| = data |$a_1$| |$p_1$|
+(2) |$c_{user}$| = give |$c_{company}$|
+(3) |$c_A$| = when (at |$t_A$|) (data |$a_A$| |$p_A$| |`or'| zero)
+(4) |$c_B$| = until (at |$t_B$|) (data |$a_B$| |$p_B$| |`or'| zero) 
 \end{minted}
 \end{listing}
 
@@ -475,20 +471,16 @@ Listing \ref{list:p2u_example} presents an example of a P2U policy for secondary
 \caption{P2U example extracted from \cite{iyilade_p2u_2014}.}
 \label{list:p2u_example}
 \begin{minted}{xml}
-<POLICY discuri=http://mydatawebsite.com/privacy.html 
-    name="ShoppingPolicy">
+<POLICY discuri=http://mydatawebsite.com/privacy.html name="ShoppingPolicy">
     <PROVIDER name="FoodIntakeApp" provid="p6528m2" />
     <USER name="Jerry" userid="u1030050503050" />
     <PURPOSE name="Shopping Recommendations" puid="102">
         <CONSUMER name="MyShopApp" consid="c10023" />
         <RETENTION period="180" />
         <DATA-GROUP groupid="g090353" negotiable="TRUE">
-            <DATA ref="#dailyfoodintake.food" 
-                sell="FALSE" />
-            <DATA ref="#dailyfoodintake.quantity" 
-                sell="FALSE" />
-            <DATA ref="#dailyfoodintake.hungerscale" 
-                sell="FALSE" />
+            <DATA ref="#dailyfoodintake.food" sell="FALSE" />
+            <DATA ref="#dailyfoodintake.quantity" sell="FALSE" />
+            <DATA ref="#dailyfoodintake.hungerscale" sell="FALSE" />
         </DATA-GROUP>
     </PURPOSE>
 </POLICY>
@@ -517,22 +509,19 @@ Listing \ref{list:spl_example} presents an example where the auxiliary vocabular
 \begin{listing}
 \caption{SPL general usage policy extracted from \cite{bonatti_special_2019}.}
 \label{list:spl_example}
-\begin{minted}{turtle}
+\begin{minted}{text}
 ObjectIntersectionOf(
     ObjectSomeValueFrom( spl:hasData
-        ObjectUnionOf(
-            ex:HeartRate svd:Location ))
+        ObjectUnionOf( ex:HeartRate svd:Location ))
     ObjectSomeValueFrom( spl:hasProcessing ex:Profiling )
     ObjectSomeValueFrom( spl:hasPurpose ex:Recommendation )
     ObjectSomeValueFrom( spl:hasStorage
         ObjectIntersectionOf(
             ObjectSomeValuesFrom( spl:hasLocation
-                ObjectIntersectionOf( 
-                    svl:OurServers svl:EU ))
-            DataSomeValuesFrom(
-                spl:durationInDays
-                    DatatypeRestriction( xsd:integer
-                        xsd:mininclusive "0"^^xsd:integer ))))
+                ObjectIntersectionOf( svl:OurServers svl:EU ))
+            DataSomeValuesFrom( spl:durationInDays
+                DatatypeRestriction( xsd:integer
+                    xsd:mininclusive "0"^^xsd:integer ))))
     ObjectSomeValueFrom( spl:hasRecipient spl:AnyRecipient ))
 \end{minted}
 \end{listing}
@@ -574,27 +563,24 @@ Listing \ref{list:dpf_example} presents an example DPF policy rule based on this
 \begin{listing}
 \caption{DPF constrained policy rule extracted from \cite{martiny_protecting_2018}.}
 \label{list:dpf_example}
-\begin{minted}{turtle}
+\begin{minted}[escapeinside=||]{text}
 @!{NationsAllowConstrainedDiseaseStatesToRCs}
-?pa [ allow_sa(?requester, ?reqData, ?time, ?constr, 
-        ?id, ?descr, 0) ] :-
+?pa [allow_sa(?requester, ?reqData, ?time, ?constr, ?id, ?descr, 0)] :-
     ?id = "NationsAllowConstrainedDiseaseStatesToRCs"^^\string,
-    ?descr = "Nations share disease states w Response 
-        Coordinators"^^\string,
+    ?descr = "Nations share disease states w Response Coordinators"^^\string,
     ?pa : NationPolicyAuthority,
     ?requester : ResponseCoordinator,
-    ?polData = $\textdollar${ ?pa [ nation -> ?Nation ],
-        ?Nation : Nation [ community -> ?Community, 
-            name -> ?NationName ],
-        ?Community : Community [ resident -> ?Resident ],
-        ?Resident : Person [ medicalInformation -> ?MedInfo ],
-        ?MedInfo : DiseaseStatus [ state -> ?MedState ],
-        ?Resident [ constraints -> ?constr ] },
-    ?thirteenYears \is 13*365*24*60*60, 
-    ?time [ subtractTime(?thirteenYears) -> ?latestTime ],
-    ?constr = [ $\textdollar${ 
-        ?Resident : Person [ birthDate -> ?Birthdate ],
-        timeBefore(?Birthdate, ?latestTime) } ],
+    ?polData = |$\textdollar$|{ ?pa [nation -> ?Nation],
+        ?Nation : Nation [community -> ?Community, name -> ?NationName],
+        ?Community : Community [resident -> ?Resident],
+        ?Resident : Person [medicalInformation -> ?MedInfo],
+        ?MedInfo : DiseaseStatus [state -> ?MedState],
+        ?Resident [constraints -> ?constr] },
+    ?thirteenYears is 13*365*24*60*60, 
+    ?time [subtractTime(?thirteenYears) -> ?latestTime],
+    ?constr = [|$\textdollar$|{ 
+        ?Resident : Person [birthDate -> ?Birthdate],
+        timeBefore(?Birthdate, ?latestTime) }],
     implies_sharing(?polData, ?reqData, ?constr).
 \end{minted}
 \end{listing}
@@ -614,28 +600,22 @@ Listing \ref{list:lpl_example} presents an example LPL policy. Company $dr_{C1}$
 \begin{listing}
 \caption{LPL policy adapted from \cite{gerl_lpl_2018}.}
 \label{list:lpl_example}
-\begin{minted}{turtle}
-$ds_{U1}$=('U1','Person',$publicKey_{U1}$,'DataSource')
-$dr_{C1}$=('C1','Legal Entity',$publicKey_{C1}$,'DataRecipient')
-$ds_{C1}$=('C1','Legal Entity',$publicKey_{C1}$,'DataSource')
-$dr_{C2}$=('C2','Legal Entity',$publicKey_{C2}$,'DataRecipient')
-$lpp_{ds_{U1}-dr_{C1}}$=('1','LPP1','en',
-    'https://company.com/privacy.html',$\emptyset$,$ds_{U1}$,{$p_{U1}$})
-$p_{U1}$=('Marketing','false','true',
-    'Marketing purposes, including newsletters.',
-    {$dr_{C1}$,$dr_{C2}$},$r_1$,pm,$\hat{D}_1$)
-$r_1$=('AfterPurpose','180 days')
-$\hat{D}_1$={$d_{postal}$,$d_{salary}$}
-$d_{postal}$=('postal-code', dGroup, 'Number', 'true',
-    'Postal code of the user','QID',am1)
-$am_1$=('Suppression',{$ama_1$,$ama_2$,$ama_3$,$ama_4$},$\emptyset$)
-$ama_1$=('Suppression Replacement','*')
-$ama_2$=('Suppression Direction','backward')
-$ama_3$=('Minimum Level','2')
-$ama_4$=('Maximum Level','4')
-$d_{salary}$=('salary', dGroup, 'Number', 'true', 
-    'Monthly salary amount received by the user',
-    'Sensitive',$\emptyset$)
+\begin{minted}[escapeinside=||]{text}
+|$ds_{U1}$|=('U1','Person',|$publicKey_{U1}$|,'DataSource')
+|$dr_{C1}$|=('C1','Legal Entity',|$publicKey_{C1}$|,'DataRecipient')
+|$ds_{C1}$|=('C1','Legal Entity',|$publicKey_{C1}$|,'DataSource')
+|$dr_{C2}$|=('C2','Legal Entity',|$publicKey_{C2}$|,'DataRecipient')
+|$lpp_{ds_{U1}-dr_{C1}}$|=('1','LPP1','en','https://company.com/privacy.html',|$\emptyset$|,|$ds_{U1}$|,{|$p_{U1}$|})
+|$p_{U1}$|=('Marketing','false','true','Marketing purposes, including newsletters.',{|$dr_{C1}$|,|$dr_{C2}$|},|$r_1$|,pm,|$\hat{D}_1$|)
+|$r_1$|=('AfterPurpose','180 days')
+|$\hat{D}_1$|={|$d_{postal}$|,|$d_{salary}$|}
+|$d_{postal}$|=('postal-code',dGroup,'Number','true','Postal code of the user','QID',am1)
+|$am_1$|=('Suppression',{|$ama_1$|,|$ama_2$|,|$ama_3$|,|$ama_4$|},|$\emptyset$|)
+|$ama_1$|=('Suppression Replacement','*')
+|$ama_2$|=('Suppression Direction','backward')
+|$ama_3$|=('Minimum Level','2')
+|$ama_4$|=('Maximum Level','4')
+|$d_{salary}$|=('salary',dGroup,'Number','true','Monthly salary amount received by the user','Sensitive',|$\emptyset$|)
 \end{minted}
 \end{listing}
 
