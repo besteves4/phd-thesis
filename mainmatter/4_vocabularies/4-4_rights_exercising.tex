@@ -14,13 +14,28 @@ This work was developed (and is already integrated) within the context of the DP
 As previously mentioned in Section~\ref{sec:def_gdpr} and represented in Figure~\ref{fig:gdpr_information_flows}, the focus of this Thesis is on the representation of information related to legislation on data protection in the European Union, in particular regarding the GDPR and related data subject rights, listed on Chapter III.
 Moreover, in Section~\ref{sec:sota_vocabularies_criteria}, and in particular in Table~\ref{tab:GDPR_privacy_terms}, the privacy terms that need to be represented for such rights to be exercised by data subjects and fulfilled by data controllers.
 
-From this analysis, a set of high-level concepts was proposed and adopted by the DPVCG (general concepts on Rights are modelled in the main DPV specification at \url{https://w3id.org/dpv#vocab-rights} and GDPR-specific ones in the DPV-GDPR extension at \url{https://w3id.org/dpv/dpv-gdpr#vocab-rights}).
+Figure~\ref{fig:gdpr-rights} illustrates the flows of information between a data subject and a data controller for the exercising of a right request.
+After sending a notice to the data subject confirming that the request was received, the controller must be able to identify the data subject in order to proceed with the request.
+If the controller cannot identify the data subject, then the data subject must provide additional information to enable the controller to identify them.
+If the controller disregards the request or has a justification to not fulfil the right, then the data subject does not receive any information related to their right request.
+In case the controller has a justification to delay the request due to its complexity or a high number of requests, then the controller has a 2-month extension to fulfil its duty.
+Moreover, in case the request is unfounded or excessive, the controller can charge a fee and the data subject will get the information once this fee is paid.
+As it is visible by the diagram, at any point if the data controller does not fulfil its duty then a GDPR breach occurs and the data subject does not receive their requested information.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=0.78\linewidth]{figures/chapter-4/GDPR-DSR.png}
+    \caption{Flow diagram of GDPR data subject rights exercising, according to Article 12.}
+    \label{fig:gdpr-rights}
+\end{figure}
+
+From the analysis of these flows of information, a set of high-level concepts was proposed and adopted by the DPVCG (general concepts on Rights are modelled in the main DPV specification at \url{https://w3id.org/dpv#vocab-rights} and GDPR-specific ones in the DPV-GDPR extension at \url{https://w3id.org/dpv/legal/eu/gdpr#vocab-rights}).
 Figure~\ref{fig:rights_dpv}, adapted from \cite{pandit_primer_2022}, provides an overview of these concepts.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{figures/chapter-4/DPV-rights.png}
-    \caption{Core concepts of DPV's rights taxonomy, adapted from \cite{pandit_primer_2022} .}
+    \includegraphics[width=0.8\linewidth]{figures/chapter-4/DPV-rights.png}
+    \caption{Core concepts of DPV's rights taxonomy, adapted from \cite{pandit_primer_2022}.}
     \label{fig:rights_dpv}
 \end{figure}
 
@@ -32,68 +47,23 @@ Specialised notice concepts for rights that can be fulfilled and those that cann
 
 Moreover, to represent concrete records of rights being exercised, the \texttt{RightExerciseRecord} concept, specified as a subclass of DPV's \texttt{Record}, can be used to associate a particular request, or even distinct requests from the same data subject, with corresponding rights exercising activities, modelled as \texttt{RightExerciseActivity}, using the DCMI Metadata Terms \texttt{hasPart} property.
 Such activity instances should include metadata, e.g., timestamps, duration, or involved entities, to track the provenance of a particular right exercising process, from the request itself to its acknowledgement by the data controller and to the fulfilment or non-fulfilment of the right.
+In order to justify a certain right exercise activity, a collection of justifications for the non-fulfilment, \texttt{RightNonFulfilmentJustification}, delay of fulfilment, \texttt{RightFulfilmentDelayJustification}, and exercise of rights, \texttt{RightExerciseJustification}, were modelled as subclasses of the \texttt{NonPerformanceJustification}, \texttt{DelayJustification}, and \texttt{ExerciseJustification} concepts, which were modelled to have generic justification concepts that can be used beyond the rights domain.
+\texttt{NotRequiredJustification}s are also modelled for when a certain request is not required as it does not apply. 
+Figure~\ref{fig:justifications} contains the modelled justifications -- they are modelled as generic justifications to be included in DPV, which are then extended in DPV-GDPR by referencing specific GDPR clauses.
+These concepts have already approved to be integrated into DPV and DPV-GDPR's outputs\footnote{Meeting notes of the DPVCG call where the concepts were accepted: \url{https://w3id.org/dpv/meetings/meeting-2024-03-13}.}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{figures/chapter-4/justifications.png}
+    \caption{Justification concepts for the non-fulfilment, delay of fulfilment and exercise of rights.}
+    \label{fig:justifications}
+\end{figure}
+
 Additionally, to track the status of rights exercising activities, a set of request statuses are modelled in DPV, including \texttt{RequestAccepted} for a request being accepted towards fulfilment, \texttt{RequestRejected} for a request being rejected towards non-fulfilment or \texttt{RequestRequiresAction} for a request requiring an action to be performed from another party, and the \texttt{isBefore} and \texttt{isAfter} concepts can be used to specify that a specific activity occurs before or after another activity.
 
 While this modelling was inspired by the GDPR, the concepts are described in a jurisdiction-agnostic manner so that they can be used to tackle data protection regulations in different jurisdictions.
 For GDPR-specific rights, the \texttt{DataSubjectRight} concept is extended in DPV-GDPR with the data subject rights described in GDPR's Articles 13 to 22, as well as the rights to withdraw consent and to lodge a complaint with a supervisory authority, described in Articles 7.3 and 77.
-A collection of justifications for non-fulfilment of data subject rights, extracted from the GDPR and illustrated in Table~\ref{tab:justifications}, was also modelled (as subclasses of a high-level \texttt{RightNonFulfilmentJustification} concept) and is already approved to be integrated into DPV-GDPR's outputs.
 Moreover, notices for direct and indirect data collection, to fulfil the information requirements in Articles 13 and 14, for Subject Access Requests (SARs), described in Article 15, and for notifying recipients, necessary to fulfil the communication requirements of Articles 16, 17 and 18, are provided as GDPR-specific subclasses of \texttt{RightFulfilmentNotice}s.
-
-% rights non-fulfilment justifications issue: https://github.com/w3c/dpv/issues/63 & meeting minutes:https://www.w3.org/2022/10/19-dpvcg-minutes.html
-\begin{table}
-    \centering
-    \caption{Justifications for non-fulfilment of GDPR's data subject rights.}
-    \label{tab:justifications}
-    \resizebox{\textwidth}{!}{%
-    \begin{tabular}{c|p{8.5cm}|c}
-        \textbf{Term} & \textbf{Label} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \textbf{GDPR} \\ \textbf{Article(s)} \end{tabular}} \\
-        \hline\hline
-        \texttt{RightNonFulfilmentJustification} & Justifications for non-fulfilment of a right & \\
-        \hline\hline
-        \texttt{IdentityVerificationFailure} & Identity of the data subject could not be verified & 12.2 \\
-         \hline
-        \texttt{ExcessiveRequest} & Request was excessive in scope & 12.5 \\
-         \hline\hline
-        \texttt{DataSubjectAlreadyInformed} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Data subject already has been provided with this\\ information \end{tabular}} & 13.4, 14.5(a) \\
-         \hline
-        \texttt{ImpairProcessing} & Fulfilment would cause impairment to processing & 14.5(b) \\
-        \hline     
-        \texttt{ExtraordinaryEffort} & Fulfilment would require extraordinary effort & 14.5(b), 19 \\
-         \hline
-        \texttt{RenderImpossible} & Fulfilment would be impossible & 14.5(b), 19 \\
-         \hline
-        \texttt{AlreadyDisclosed} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Information to be provided is already disclosed in\\ a Member State or Union law \end{tabular}} & 14.5(c) \\
-         \hline
-        \texttt{ConfidentialityObligation} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would compromise existing confidentiality\\ obligations \end{tabular}} & 14.5(d) \\
-         \hline\hline
-        \texttt{SafeguardPublicInterest} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with necessary tasks\\ carried out for public interest \end{tabular}} & 21.6 \\
-         \hline\hline
-        \texttt{FulfilContract} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Task is necessary for entering into, or performance\\ of a contract between data subject and controller \end{tabular}} & 22.2(a) \\
-         \hline
-        \texttt{AuthorisedByMemberStateLaw} & Task is authorised by Member State or Union Law & 22.2(b) \\
-        \hline\hline
-        \texttt{ConfidentialityBreach} & Fulfilment would result in a confidentiality breach & 23.1 \\
-         \hline
-        \texttt{SafeguardThirdPartyRights} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would adversely affect the rights of other\\ data subjects or third parties \end{tabular}} & 23.1 \\
-         \hline
-        \texttt{ConfidentialityOfOpinion} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would compromise existing confidentiality\\ regarding the expression of opinion \end{tabular}} & 23.1 \\
-         \hline
-        \texttt{PreventInvestigation} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would compromise or hinder an existing\\ investigation \end{tabular}} & 23.1 \\
-         \hline
-        \texttt{ImpairArchivingPurposes} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would compromise or hinder archiving\\ purposes \end{tabular}} & 23.1 \\
-         \hline
-        \texttt{ExemptFromDisclosure} & Information is legally exempt from disclosure & 23.1 \\
-         \hline
-        \texttt{SafeguardNationalSecurity} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would pose a threat to safeguard\\ national security \end{tabular}} & 23.1 \\
-         \hline
-        \texttt{SafeguardDefence} & Fulfilment would pose a threat to safeguard defence & 23.1 \\
-         \hline
-        \texttt{SafeguardPublicSecurity} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would pose a threat to safeguard public\\ security \end{tabular}} & 23.1 \\
-         \hline
-        \texttt{SafeguardJudicialIndependence} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would pose a threat to safeguard judicial\\ independence or proceedings \end{tabular}} & 23.1 \\
-    \end{tabular}}
-\end{table}
-% Information is legally exempt from disclosure	- Documents that have personal data of the data subject exempt from disclosure in court proceedings apply in relation to a Subject Access Request, this applies to both legal advice and litigation privilege
 
 An overview of the aforementioned requirements and the intended purpose for modelling these concepts is presented in the ORSD illustrated in Table~\ref{tab:rights_ORSD}.
 
@@ -138,18 +108,11 @@ CQ8. What is the status of the right request? } &
 \multicolumn{3}{ m{5cm} |}{
 CQ9. Which data subject rights are applicable according to the legal basis used by the data controller? \newline
 CQ10. Which provenance metadata must controllers provide when replying to data subject rights requests? \newline 
-CQ11. Which justification can be provided to not fulfil a request?
+CQ11. Which justification can be provided to not fulfil. delay or exercise a request?
 }\\ \hline
 \end{tabular}
 \vspace{-0.1in}
 \end{table}
-
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=\linewidth]{figures/chapter-4/GDPR-DSR.png}
-%     \caption{jkhkjhk}
-%     \label{fig:gdpr-rights}
-% \end{figure}
 
 \subsection{Vocabulary-based patterns for rights exercising activities}
 \label{sec:rights_patterns}
@@ -160,7 +123,7 @@ Consequently, in this Thesis, personal data processing-related vocabularies such
 Additionally, by storing such information in decentralised personal datastores, the accessibility requirement can also be satisfied.
 
 Listing~\ref{list:applicable_rights} provides an example of a personal data handling activity, which can be used to express information regarding the what, how, where, who, and why personal data is being processed, as well as what rights exist.
-The example provides information regarding the type of personal data, \texttt{dpv-pd:EmailAddress}, being processed by the \texttt{ex:DataController}, the purpose and legal basis used for the processing to occur, \texttt{dpv:ServiceProvision} and \texttt{dpv-gdpr:A6-1-a}, and the applicable GDPR data subject rights.
+The example provides information regarding the type of personal data, \texttt{pd:EmailAddress}, being processed by the \texttt{ex:DataController}, the purpose and legal basis used for the processing to occur, \texttt{dpv:ServiceProvision} and \texttt{eu-gdpr:A6-1-a}, and the applicable GDPR data subject rights.
 This pattern can be followed by data controllers to express which rights are applicable, including rights beyond the ones in the GDPR, e.g., EU's fundamental rights and the rights depicted in other EU regulations or in other jurisdictions.
 
 \begin{listing}[htp]
@@ -169,11 +132,11 @@ This pattern can be followed by data controllers to express which rights are app
 \begin{minted}{turtle}
 ex:ProcessEmailForServiceProvision a dpv:PersonalDataHandling ;
     dpv:hasDataController ex:DataController ;
-    dpv:hasPersonalData dpv-pd:EmailAddress ;
+    dpv:hasPersonalData pd:EmailAddress ;
     dpv:hasProcessing dpv:Collect, dpv:Use ;
     dpv:hasPurpose dpv:ServiceProvision ;
-    dpv:hasLegalBasis dpv-gdpr:A6-1-a ;
-    dpv:hasRight dpv-gdpr:A7-3, dpv-gdpr:A13, dpv-gdpr:A14, dpv-gdpr:A15, dpv-gdpr:A16, dpv-gdpr:A17, dpv-gdpr:A18, dpv-gdpr:A20, dpv-gdpr:A22, dpv-gdpr:A77 .
+    dpv:hasLegalBasis eu-gdpr:A6-1-a ;
+    dpv:hasRight eu-gdpr:A7-3, eu-gdpr:A13, eu-gdpr:A14, eu-gdpr:A15, eu-gdpr:A16, eu-gdpr:A17, eu-gdpr:A18, eu-gdpr:A20, eu-gdpr:A22, eu-gdpr:A77 .
 ex:DataController a dpv:DataController .
 \end{minted}
 \end{listing}
@@ -196,25 +159,25 @@ Such information can also be expressed in personal data handling instances inclu
 \caption{Article 15's right of access exercise notice, including information on where to exercise the right and on necessary data to fulfil the right.}
 \label{list:exercise_point}
 \begin{minted}{turtle}
-ex:RightToAccess a dpv-gdpr:A15 ;
+ex:RightToAccess a eu-gdpr:A15 ;
     dpv:isExercisedAt ex:RightExercisePoint .
 
 ex:RightExercisePoint a dpv:RightExerciseNotice ;
-    dpv:hasRight dpv-gdpr:A7-3, dpv-gdpr:A15, dpv-gdpr:A16, dpv-gdpr:A17, dpv-gdpr:A20 ;
+    dpv:hasRight eu-gdpr:A7-3, eu-gdpr:A15, eu-gdpr:A16, eu-gdpr:A17, eu-gdpr:A20 ;
     dpv:hasDataController ex:DataController ;
     dpv:isImplementedByEntity ex:DataController ;
     foaf:page <https://example.com/DataController/RightExercisePoint> ;
     dpv:hasPersonalDataHandling [ 
         a dpv:PersonalDataHandling ;
         dpv:hasPurpose dpv:IdentityVerification ;
-        dpv:hasPersonalData dpv-pd:AccountIdentifier ;
+        dpv:hasPersonalData pd:AccountIdentifier ;
         dpv:hasProcessing dpv:Collect, dpv:Store ;
         dpv:hasRecipientDataController ex:DataController ] .
 \end{minted}
 \end{listing}
 
 In addition to notices expressing what rights are applicable and where they can be exercised, provenance metadata must be kept when actual instances of the rights are exercised, throughout the whole process, from initiating a request to rejecting or fulfilling it.
-As such, DPV's \texttt{RightExerciseActivity} can be used in conjunction with the W3C's PROV-O recommendation \citep{lebo_prov-o_2013} to track the provenance of a right exercising activity instance.
+As such, DPV's \texttt{RightExerciseActivity} can be used in conjunction with the W3C's PROV-O recommendation~\citep{lebo_prov-o_2013} to track the provenance of a right exercising activity instance.
 Using this standard, provenance information, regarding the entities whom the request is associated with, i.e., \texttt{prov:wasAssociatedWith}, or what data/notice was generated, i.e., \texttt{prov:generated}, by the right exercise activity, can be represented.
 \texttt{prov:actedOnBehalfOf} can also be used to represent delegation or representation, for instance when a parent exercises a right on behalf of its child.
 Temporal information, descriptions and identifiers of the activities and their creators/publishers can be recorded using DCMI Metadata Terms.
@@ -242,12 +205,12 @@ Following the start of the request, the controller acknowledges the request, a r
 \label{list:request_acknowledgment}
 \begin{minted}{turtle}
 ex:DataSubject a dpv:DataSubject .
-ex:DataSubjectUsername a dpv-pd:AccountIdentifier ;
+ex:DataSubjectUsername a pd:AccountIdentifier ;
     dpv:hasDataSubject ex:DataSubject .
 
 ex:SARequest a dpv:RightExerciseActivity, prov:Activity ;
     dcterms:description "Data Subject makes a GDPR right of access request" ;
-    dpv:hasRight dpv-gdpr:A15 ;
+    dpv:hasRight eu-gdpr:A15 ;
     dpv:isExercisedAt ex:RightExercisePoint ;
     prov:wasAssociatedWith ex:DataSubject ;
     dpv:hasDataSubject ex:DataSubject ;
@@ -275,7 +238,9 @@ ex:SARAcknowledged a dpv:RightExerciseActivity, prov:Activity ;
 \end{minted}
 \end{listing}
 
-Listing~\ref{list:further_action} illustrates the follow-up to Listing~\ref{list:request_acknowledgment} -- the request was rejected due to an \texttt{IdentityVerificationFailure} and as such the data controller requires further information from the data subject to be able to proceed with the request.
+Listing~\ref{list:further_action} illustrates the follow-up to Listing~\ref{list:request_acknowledgment} -- the request was rejected due to the data controller not being able to identify the data subject, \texttt{JNonFulf-IdentityVerificationFailure}.
+Table~\ref{tab:justifications} contains the list of modelled right non-fulfilment justifications and their labels, which can be used by controllers for the purpose of justifying such requests.
+As such the data controller requires further information from the data subject to be able to proceed with the request.
 Such right exercise activity is identified with the \texttt{dpv:RequestRequiresAction} status and contains a personal data handling activity instance expressing the information that the data subject needs to provide for the right exercise to continue.
 Afterwards, a right exercise activity associated with the data subject and with a \texttt{dpv:RequestRequiredActionPerformed} status is recorded with the information that the data subject provided.
 
@@ -289,7 +254,7 @@ ex:SARRejected a dpv:RightExerciseActivity, prov:Activity;
     prov:wasAssociatedWith ex:DataController ;
     dpv:hasRecipient ex:DataSubjectUsername ;
     dpv:hasStatus dpv:RequestRejected ;
-    dpv:hasJustification rights:IdentityVerificationFailure ;
+    dpv:hasJustification justif:JNonFulf-IdentityVerificationFailure ;
     dpv:isAfter ex:SARAcknowledged .
 
 ex:SARRequiresAction a dpv:RightExerciseActivity, prov:Activity ;
@@ -298,16 +263,16 @@ ex:SARRequiresAction a dpv:RightExerciseActivity, prov:Activity ;
     prov:wasAssociatedWith ex:DataController ;
     dpv:hasRecipient ex:DataSubjectUsername ;
     dpv:hasStatus dpv:RequestRequiresAction ;
-    dpv:hasJustification rights:IdentityVerificationFailure ;
+    dpv:hasJustification justif:JNonFulf-IdentityVerificationFailure ;
     dpv:hasPersonalDataHandling [
-        dpv:hasPersonalData dpv-pd:OfficialID ;
+        dpv:hasPersonalData pd:OfficialID ;
         dpv:hasProcessing dpv:MakeAvailable ;
         dpv:hasPurpose dpv:IdentityVerification ;
         dpv:hasRecipientDataController ex:DataController ;
         dpv:isImplementedByEntity ex:DataSubjectUsername ] ;
     dpv:isAfter ex:SARRejected .
 
-ex:DataSubjectOfficialID a dpv-pd:OfficialID ;
+ex:DataSubjectOfficialID a pd:OfficialID ;
     dpv:hasDataSubject ex:DataSubject .
 
 ex:SARActionPerformed a dpv:RightExerciseActivity, prov:Activity ;
@@ -325,7 +290,103 @@ ex:SARActionPerformed a dpv:RightExerciseActivity, prov:Activity ;
 \end{minted}
 \end{listing}
 
-Listing~\ref{list:sar_notice} illustrates the follow-up to Listing~\ref{list:further_action} -- the request was accepted and fulfilled by the data controller and as such the data controller provides the data subject with a notice of the fulfilment of GDPR's Art.15, modelled as a \texttt{dpv-gdpr:SARNotice}, and a copy of the data whose access was requested, modelled as a \texttt{dcat:Dataset}.
+% rights non-fulfilment justifications issue: https://github.com/w3c/dpv/issues/63 & meeting minutes:https://www.w3.org/2022/10/19-dpvcg-minutes.html
+\begin{landscape}
+\begin{table}
+    \centering
+    \caption{Justifications for non-fulfilment of GDPR's data subject rights.}
+    \label{tab:justifications}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{c|l|c}
+        \textbf{Term} & \textbf{Label} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \textbf{GDPR} \\ \textbf{Article(s)} \end{tabular}} \\
+        \hline\hline
+        \texttt{JNonFulf-IdentityVerificationFailure} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Justification that the process could not be fulfilled or was not successful\\ because identity verification failed \end{tabular}} & 12.2 \\
+        \hline
+        \texttt{JNonFulf-ProcessExcessive} & Request was excessive in scope & 12.5 \\
+        \hline
+        \texttt{JNonFulf-ProcessFrivolous} & Request was frivolous in scope & 12.5 \\
+        \hline
+        \texttt{JNonFulf-ProcessMalicious} & Request was malicious in scope & 12.5 \\
+        \hline
+        \texttt{JNonFulf-ProcessUnfounded} & Request was unfounded in scope & 12.5 \\
+         \hline
+        \texttt{JNonFulf-EntityAlreadyInformed} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Data subject already has been provided with this information \end{tabular}} & 13.4, 14.5(a) \\
+         \hline
+        \texttt{JNonFulf-ImpairObjectives} & Fulfilment would cause impairment to processing & 14.5(b) \\
+        \hline     
+        \texttt{JNonFulf-DisproportionateEffortRequired} & Fulfilment would require extraordinary effort & 14.5(b), 19 \\
+         \hline
+        \texttt{JNonFulf-ImpossibleToFulfil} & Fulfilment would be impossible & 14.5(b), 19 \\
+         \hline
+        \texttt{JNonFulf-LegallyExempted} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment not needed as it falls under legal exemption \end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[l]{@{}l@{}} 14.5(c), 17.3(b),\\ 22.2(b) \end{tabular}} \\
+         \hline
+        \texttt{JNonFulf-ConfidentialityObligation} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would compromise existing confidentiality obligations \end{tabular}} & 14.5(d) \\
+        \hline
+        \texttt{JNonFulf-FreedomOfExpression} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the right of freedom of expression\\ and information of others \end{tabular}} & 17.3(a) \\
+         \hline
+        \texttt{JNonFulf-SafeguardPublicInterest} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with necessary tasks carried out for public\\ interest \end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[l]{@{}l@{}} 17.3(b), 21.6,\\ 23.1(e) \end{tabular}} \\
+         \hline
+         \texttt{JNonFulf-ExerciseOfficialAuthority} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the exercise of official authorities \end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[l]{@{}l@{}} 17.3(b), 20.3,\\ 23.1(h) \end{tabular}} \\
+         \hline
+         \texttt{JNonFulf-SafeguardPublicHealth} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with necessary tasks carried out for public\\ health reasons \end{tabular}} & 17.3(c) \\
+         \hline
+        \texttt{JNonFulf-ImpairArchiving} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would compromise or hinder archiving purposes \end{tabular}} & 17.3(d) \\
+        \hline
+        \texttt{JNonFulf-ImpairScientificOrHistoricalResearch} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would impair scientific or historical research \end{tabular}} & 17.3(d) \\
+        \hline
+        \texttt{JNonFulf-ImpairStatistics} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with official statistics \end{tabular}} & 17.3(d) \\
+        \hline
+        \texttt{JNonFulf-EstablishLegalClaim} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the establishment of legal claims \end{tabular}} & 17.3(e), 21.1 \\
+        \hline
+        \texttt{JNonFulf-ExerciseLegalClaim} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the exercise of legal claims \end{tabular}} & 17.3(e), 21.1 \\
+        \hline
+        \texttt{JNonFulf-DefendLegalClaim} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the defence of legal claims \end{tabular}} & 17.3(e), 21.1 \\
+        \hline
+        \texttt{JNonFulf-SafeguardThirdPartyRights} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would adversely affect the rights of other data subjects or third\\ parties \end{tabular}} & 20.4, 23.1(i) \\
+         \hline
+         \texttt{JNonFulf-LegitimateInterest} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the legitimate interest of the controller\\ which overrides the interests or rights of the data subject \end{tabular}} & 21.1 \\
+         \hline
+        \texttt{JNonFulf-NecessityContractPerformance} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the performance of a contract \end{tabular}} & 22.2(a) \\
+         \hline
+        \texttt{JNonFulf-NecessityEnterContract} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the necessity of entering into a contract \end{tabular}} & 22.2(a) \\
+         \hline
+        \texttt{JNonFulf-ConsentBased} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment not necessary as processing is based on explicit consent \end{tabular}} & 22.2(c) \\
+        \hline
+        \texttt{JNonFulf-SafeguardNationalSecurity} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would pose a threat to safeguard national security \end{tabular}} & 23.1(a) \\
+         \hline
+        \texttt{JNonFulf-SafeguardDefence} & Fulfilment would pose a threat to safeguard defence & 23.1(b) \\
+         \hline
+        \texttt{JNonFulf-SafeguardPublicSecurity} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would pose a threat to safeguard public security \end{tabular}} & 23.1(c) \\
+         \hline
+        \texttt{JNonFulf-PreventCriminalOffences} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the prevention of criminal offences \end{tabular}} & 23.1(d) \\
+        \hline
+        \texttt{JNonFulf-InvestigateCriminalOffences} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the investigation of criminal offences \end{tabular}} & 23.1(d) \\
+        \hline
+        \texttt{JNonFulf-DetectCriminalOffences} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the detection of criminal offences \end{tabular}} & 23.1(d) \\
+        \hline
+        \texttt{JNonFulf-ProsecuteCriminalOffences} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the prosecution of criminal offences \end{tabular}} & 23.1(d) \\
+        \hline
+        \texttt{JNonFulf-ExecuteCriminalPenalties} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the execution of criminal penalties \end{tabular}} & 23.1(d) \\
+        \hline
+        \texttt{JNonFulf-SafeguardJudicialIndependence} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would pose a threat to safeguard judicial independence or\\ proceedings \end{tabular}} & 23.1(f) \\
+        \hline
+        \texttt{JNonFulf-PreventEthicsBreach} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the prevention of breaches of ethics for\\ regulated professions \end{tabular}} & 23.1(g) \\
+        \hline
+        \texttt{JNonFulf-InvestigateEthicsBreach} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the investigation of breaches of ethics for\\ regulated professions \end{tabular}} & 23.1(g) \\
+        \hline
+        \texttt{JNonFulf-DetectEthicsBreach} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the detection of breaches of ethics for\\ regulated professions \end{tabular}} & 23.1(g) \\
+        \hline
+        \texttt{JNonFulf-ProsecuteEthicsBreach} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the prosecution of breaches of ethics for\\ regulated professions \end{tabular}} & 23.1(g) \\
+        \hline
+        \texttt{JNonFulf-SafeguardDataSubject} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Fulfilment would interfere with the protection of the data subject \end{tabular}} & 23.1(i) \\
+         \hline
+        \texttt{JNonFulf-EnforceCivilLawClaim} & Fulfilment would interfere with the enforcement of civil law claims & 23.1(j) \\
+    \end{tabular}}
+\end{table}
+\end{landscape}
+% Information is legally exempt from disclosure	- Documents that have personal data of the data subject exempt from disclosure in court proceedings apply in relation to a Subject Access Request, this applies to both legal advice and litigation privilege
+
+Listing~\ref{list:sar_notice} illustrates the follow-up to Listing~\ref{list:further_action} -- the request was accepted and fulfilled by the data controller and as such the data controller provides the data subject with a notice of the fulfilment of GDPR's Art.15, modelled as a \texttt{eu-gdpr:SARNotice}, and a copy of the data whose access was requested, modelled as a \texttt{dcat:Dataset}.
 Beyond temporal information and providing the location of the notice, a personal data handling instance can be used to provide additional information to the data subject -- in the case of this SAR notice, the data subject is also notified of the type of personal data being processed, the purpose for the processing, the time period when the data was processed and the additional data subject rights that can be exercised.
 
 \begin{listing}[htp]
@@ -349,16 +410,16 @@ ex:SARFulfilled a dpv:RightExerciseActivity, prov:Activity ;
     prov:generated ex:DataCopy, ex:SARNotice_Username ;
     dpv:isAfter ex:SARAccepted .
 
-ex:SARNotice_Username a dpv-gdpr:SARNotice ;
+ex:SARNotice_Username a eu-gdpr:SARNotice ;
     dcterms:date "2023-11-03T08:31:51"^^xsd:dateTime ;
     foaf:page <https://example.com/DataController/SARNotice_Username> ;
     dpv:hasPersonalDataHandling [
-        dpv:hasPersonalData dpv-pd:EmailAddress ;
+        dpv:hasPersonalData pd:EmailAddress ;
         dpv:hasPurpose dpv:ServiceProvision ;
         dpv:hasDuration [
             time:hasBeginning "2022-01-01T00:00:00"^^xsd:dateTime ;
             time:hasEnd "2022-12-31T23:59:59"^^xsd:dateTime ] ;
-        dpv:hasRight dpv-gdpr:A16, dpv-gdpr:A17, dpv-gdpr:A18, dpv-gdpr:A21, dpv-gdpr:A77 ] .
+        dpv:hasRight eu-gdpr:A16, eu-gdpr:A17, eu-gdpr:A18, eu-gdpr:A21, eu-gdpr:A77 ] .
 
 ex:DataCopy a dcat:Dataset ;
     dcterms:format <https://www.iana.org/assignments/media-types/text/csv> ;
@@ -371,40 +432,48 @@ ex:DataCopy a dcat:Dataset ;
 
 Moreover, DCAT \citep{albertoni_data_2020} can be used to model resources beyond notices, for instance, a copy of the personal data, in the case of a right of access request according to the GDPR, as in Listing~\ref{list:sar_notice}.
 Information regarding the format, validity and dataset provision/download location can be attached to the dataset representation using the \texttt{dcterms:format}, \texttt{dcterms:valid} and \texttt{dcat:landingPage} properties, respectively.
-Additionally, DCAT -- and also the Data on the Web Best Practices Recommendation \citep{loscio_data_2017} -- promotes the usage of ODRL to express license and rights statements, by linking the dataset with an ODRL policy using the \texttt{odrl:hasPolicy} property, or the usage of DCMI Metadata Terms' \texttt{license}, \texttt{accessRights} or \texttt{rights} properties to link datasets with licenses, access rights statements or other types of rights statements, e.g., copyrights, respectively.
-In the case of using the latter, controlled vocabularies such as COAR's Access Rights vocabulary \citep{apollaro_controlled_2022}, used in Listing~\ref{list:sar_notice} to restrict access only to the data subject, or the Named Authority List of Access rights from the \cite{publications_office_of_the_european_union_named_2023} can be used to express `high-level' access control statements, e.g., embargoed, restricted or open access.
+Additionally, DCAT -- and also the Data on the Web Best Practices Recommendation~\citep{loscio_data_2017} -- promotes the usage of ODRL to express license and rights statements, by linking the dataset with an ODRL policy using the \texttt{odrl:hasPolicy} property, or the usage of DCMI Metadata Terms' \texttt{license}, \texttt{accessRights} or \texttt{rights} properties to link datasets with licenses, access rights statements or other types of rights statements, e.g., copyrights, respectively.
+In the case of using the latter, controlled vocabularies such as COAR's Access Rights vocabulary~\citep{apollaro_controlled_2022}, used in Listing~\ref{list:sar_notice} to restrict access only to the data subject, or the Named Authority List of Access rights from the \cite{publications_office_of_the_european_union_named_2023} can be used to express `high-level' access control statements, e.g., embargoed, restricted or open access.
 
 In this Section, the GDPR's Right of Access is used as an example to showcase how to model notices and right exercising activities using DPV, DCMI Metadata Terms, PROV-O and DCAT.
-However, a similar pattern can be followed by data controllers to fulfil the other rights as in most cases the only substantial change would be the notice concept that needs to be used for a particular right instance, e.g., \texttt{dpv-gdpr:DirectDataCollectionNotice} for the right fulfilment notice related to GDPR's Article 13, \texttt{dpv-gdpr:IndirectDataCollectionNotice} for the right fulfilment notice related to GDPR's Article 14 or \texttt{dpv-gdpr:RightsRecipientsNotice} for the right fulfilment notice related to GDPR's Article 19.
+However, a similar pattern can be followed by data controllers to fulfil the other rights as in most cases the only substantial change would be the notice concept that needs to be used for a particular right instance, e.g., \texttt{eu-gdpr:DirectDataCollectionNotice} for the right fulfilment notice related to GDPR's Article 13, \texttt{eu-gdpr:IndirectDataCollectionNotice} for the right fulfilment notice related to GDPR's Article 14 or \texttt{eu-gdpr:RightsRecipientsNotice} for the right fulfilment notice related to GDPR's Article 19.
 Moreover, some GDPR rights, such as the right to erasure in Article 17 and the right to restriction of processing in Article 18, also require the data subject to provide a justification for their request to be fulfilled by the data controller.
-A collection of justifications for the fulfilment of data subject rights, extracted from the GDPR and illustrated in Table~\ref{tab:fulfil_justifications}, was also modelled (as subclasses of a high-level \texttt{RightFulfilmentJustification} concept). % and is already approved to be integrated into DPV-GDPR's outputs.
+As such, a collection of justifications for the exercise of data subject rights, extracted from the GDPR and illustrated in Table~\ref{tab:fulfil_justifications}, was also modelled (as subclasses of a high-level \texttt{RightExerciseJustification} concept). % and is already approved to be integrated into DPV-GDPR's outputs.
+
 
 \begin{table}
     \centering
-    \caption[Justifications for the fulfilment of GDPR's data subject rights]{Justifications for the fulfilment of GDPR's data subject rights. PD is used in the terms to shorten `Personal Data'.}
+    \caption[Justifications for the exercise of GDPR's data subject rights]{Justifications for the exercise of GDPR's data subject rights.}
     \label{tab:fulfil_justifications}
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{c|p{8.5cm}|c}
         \textbf{Term} & \textbf{Label} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \textbf{GDPR} \\ \textbf{Article(s)} \end{tabular}} \\
         \hline\hline
-        \texttt{RightFulfilmentJustification} & Justifications for the fulfilment of a right & \\
-        \hline\hline
-        \texttt{ProcessingNotNecessary} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Processing no longer necessary for the \\specified purposes \end{tabular}} & 17.1(a) \\
+        \texttt{JExercise-NonNecessity} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Processing no longer necessary for the \\specified purposes \end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[l]{@{}l@{}} 17.1(a),\\ 18.1(c) \end{tabular}} \\
         \hline
-        \texttt{DataSubjectWithdrewConsent} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Data subject withdrew consent and there is \\no other legal ground for the processing \end{tabular}} & 17.1(b) \\
+        \texttt{JExercise-LackOfFurtherLegality} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Processing no longer necessary due to a lack of further\\ legality of the legal basis of specified context \end{tabular}} & 17.1(b) \\
         \hline
-        \texttt{DataSubjectObjectedToProcessing} & Data subject objected to the processing & 17.1(c), 18.1(d) \\
+        \texttt{JExercise-Objection} & Data subject objected to the processing & \multicolumn{1}{l}{\begin{tabular}[l]{@{}l@{}} 17.1(c),\\ 18.1(d) \end{tabular}} \\
         \hline
-        \texttt{PDUnlawfullyProcessed} & Personal data unlawfully processed & 17.1(d), 18.1(b) \\
+        \texttt{JExercise-UnlawfulActivity} & Personal data unlawfully processed & \multicolumn{1}{l}{\begin{tabular}[l]{@{}l@{}} 17.1(d),\\ 18.1(b) \end{tabular}} \\
         \hline
-        \texttt{ComplianceWithLegalObligation} & Compliance with a legal obligation & 17.1(e) \\
+        \texttt{JExercise-LegalObligation} & Compliance with a legal obligation & 17.1(e) \\
         \hline
-        \texttt{PDForInformationSocietyServices} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Personal data collected in relation to the offer \\of information society services \end{tabular}} & 17.1(f) \\
+        \texttt{JExercise-InformationSocietyServicesOffer} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Personal data collected in relation to the offer \\of information society services \end{tabular}} & 17.1(f) \\
         \hline
-        \texttt{AccuracyOfPDContested} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Accuracy of personal data contested by the \\data subject \end{tabular}} & 18.1(a) \\
-        \hline
-        \texttt{LegalClaims} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Data subject requires the personal data for the \\establishment, exercise or defence of legal claims \end{tabular}} & 18.1(c) \\
+        \texttt{JExercise-ContestAccuracy} & \multicolumn{1}{l|}{\begin{tabular}[l]{@{}l@{}} Accuracy of personal data contested by the \\data subject \end{tabular}} & 18.1(a) \\
     \end{tabular}}
 \end{table}
 
-% TODO: add \subsection{Vocabulary publication and maintenance}\label{sec:plasma_publication} later on
+\subsection{Justifications publication and maintenance}
+\label{sec:justifications_publication}
+
+As discussed in the previous sections, most rights-related concepts were already proposed and are integrated into DPV and DPV-GDPR.
+The justifications concepts have already been approved to be accepted, but are still to be published in DPVCG's outputs.
+As such, the justifications vocabulary human-readable documentation and machine-readable file are available at \url{https://w3id.org/people/besteves/justifications} using content negotiation.
+Once the justification terms are fully integrated into DPV, this documentation will be archived as the maintenance of the terms will be performed as part of the DPVCG's activities.
+
+The HTML documentation includes a description of the defined terms, which was conducted and validated with domain experts, diagrams with graphical representations of the several taxonomies used in the vocabulary patterns specific in this section, and RDF examples that use the defined terms to express rights-related activities.
+The vocabulary documentation also includes metadata, such as the identity of the creators and publishers of the ontology, the dates of creation and last modification or the version number.
+The source code is hosted at \url{https://w3id.org/people/besteves/justifications/repo}, under the CC-BY-4.0 license.
+The repository can also be used by implementers to suggest new inclusions to the vocabulary and to report bugs through GitHub Issues.

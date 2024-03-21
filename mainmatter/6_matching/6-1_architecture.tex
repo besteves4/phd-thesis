@@ -1,8 +1,21 @@
 \section{Architecture for the deployment of a policy matching algorithm for access control}
 \label{sec:architecture}
 
-Design and implementation of a policy matching algorithm and data-sharing agreement generator prototype for access to data stored in Solid Pods.
+In this Section, a detailed decomposition of the architectural building blocks for a legally-aligned, decentralised personal datastores ecosystem is modelled and documented using the C4 graphical notation model \citep{brown_c4_2015}.
+The C4 model is a formalisation used to visualise software architecture, based on the 4+1 View Model of software architecture \citep{kruchten_41_1995}, which has evolved over the years to showcase different views of software components, each of which addresses a specific set of issues, inspired by the Unified Modelling Language (UML).
+The main objectives of this model are (i) to simplify the description and understandability of software systems for software developers and (ii) to decrease the gap between source code and software architecture modelling.
+The four visualisations of the C4 model have the subsequent goals:
 
-High level architecture with Pods and data requests from o ther users and so on
-Low level architecture with components of policy matching algorithm
-UML diagram flow
+\begin{itemize}
+    \item The \textit{System Context} diagram serves as an initial framework for illustrating and documenting a software system, providing an overview that allows for a comprehensive understanding of the system's environment. It typically features the system to be decomposed as a central entity, surrounded by its users and other interconnected systems. The emphasis lies in presenting a broad perspective of the system landscape for non-technical audiences, with less emphasis on intricate details. The primary focus is on identifying people, e.g. users or roles, and software systems, rather than delving into technical specificities such as technologies or protocols.
+    \item The \textit{Container} diagram offers an overview of the software architecture's structure at a high level, delineating the allocation of responsibilities within it. Furthermore, it illustrates the primary technological selections and elucidates the communication channels between components, e.g., server-side web applications, mobile apps, or file systems.
+    \item The \textit{Component} diagram illustrates the decomposition of a container into various components, elucidating the purpose of each component, and the technological or implementation details involved.
+    \item The \textit{Code} diagram is an optional visualisation, recommended only for critical components, that zooms in on each component to illustrate its implementation as code, employing UML class diagrams, entity relationship diagrams, or comparable methods.
+\end{itemize}
+
+In the following Sections, the architectural model for a legally-aligned, decentralised personal datastore will be discussed in detail through context, container and component diagrams.
+A special focus will be given to the proposed personal datastore server implementation, and the agreement generator and datastore containers and their components. 
+
+% High level architecture with Pods and data requests from o ther users and so on
+% Low level architecture with components of policy matching algorithm
+% UML diagram flow
