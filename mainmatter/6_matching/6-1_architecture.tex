@@ -21,7 +21,7 @@ A special focus will be given to the proposed personal datastore server implemen
 
 The \textit{System Context} diagram in Figure~\ref{fig:c4-context} illustrates how decentralised personal datastores interact with legal entities and/or natural people and with internal and external software systems at a very high level.
 This diagram depicts the decentralised personal datastore server at the centre with no details of its containers, surrounded by all its interacting systems and actors.
-The depicted server architecture is aligned with the existing Solid protocol specification and existing CSS and ESS server implementations.
+The depicted server architecture is aligned with the existing Solid protocol specification \citep{capadisli_solid_2022} and existing CSS and ESS server implementations.
 
 \begin{figure}[ht]
     \centering
@@ -30,15 +30,24 @@ The depicted server architecture is aligned with the existing Solid protocol spe
     \label{fig:c4-context}
 \end{figure}
 
-In this diagram, the infrastructure provider and the knowledge engineer develop and provide services and semantic models for the main software system described in this Section, the \textit{Personal Datastores Server}.
+In this diagram, the \textit{Infrastructure provider} and the \textit{Knowledge engineer} develop and provide services and semantic models for the main software system described in this Section, the \textit{Personal Datastores Server}.
 Datastores hosted in this server are populated by internal and external data sources, such as temporal and spatial data sources, respectively.
 The server also provides the access control layer of the ecosystem, allowing data requests and the return of permissioned data to be consumed by Web APIs.
 Such APIs can be used by \textit{Data requesters} to consume and generate data, and also to feed Web applications that are used by individuals to request and use data.
-Moreover, data subjects can also use applications to manage data and data access.
+Moreover, data subjects can also use applications to manage their data and who/what can have access to it under which conditions.
 
+The \textit{Personal Datastores Server} depicted in this Figure will be further decomposed into containers in the next Section.
 
 \subsection{Container modelling of a decentralised personal datastore server}
 \label{sec:c4_container}
+
+The \textit{Container} diagram in Figure~\ref{fig:c4-container} illustrates current and proposed containers within a decentralised personal datastores server.
+In a completely decentralised scenario, each container could be developed and/or provided by a distinct \textit{Infrastructure provider}.
+The \textit{Notifications}, \textit{Authentication} and \textit{Authorisation} containers are already part of the Solid protocol specification \citep{capadisli_solid_2022} and are not further updated in this Thesis.
+To ensure compatibility with the current access control mechanisms, the \textit{Offer Instantiation} and \textit{Agreement Generator} containers are treated separately from the \textit{Authorisation} container.
+In this way, systems that currently rely on WAC or ACP to provide access to data can continue to work efficiently, while use cases that involve personal data can use OAC policies to have data-sharing agreements aligned with European data protection law.
+ACL and ACP authorisations can be generated, when an agreement for data access has already been reached, for automated access to data when a legally-aligned agreement for access is already in place.
+The \textit{Notifications} container can also be updated to support the new access control system proposed in this Thesis, however, this is out of the scope of this contribution.
 
 \begin{figure}[ht]
     \centering
@@ -47,8 +56,22 @@ Moreover, data subjects can also use applications to manage data and data access
     \label{fig:c4-container}
 \end{figure}
 
+Furthermore, while an intricate part of the Solid protocol already, the \textit{Datastore} container is further expanded in this Thesis with additional components related to policies and provenance metadata.
+The vocabularies developed in Chapter~\ref{chap:vocabularies} should be further developed and maintained by a \textit{Knowledge engineer} and are used to specify data, provenance, and policies, as well as to feed the \textit{Offer Instantiation} and \textit{Agreement Generator} containers.
+The \textit{Offer Instantiation} container gathers and instantiates ODRL offers, such as the one in Listing~\ref{list:oac_offer}, which are fed to the \textit{Agreement Generator} container.
+This instantiation process takes the user's preferences and requirements to create a context-appropriate offer policy, i.e., directly applicable to the data request.
+While the instantiation of offers for specific data requests is not conducted in this Thesis, in Section~\ref{sec:poc_health}, there is a description and implementation of the construction of odrl:Offer instances for a particular use case related to health data-sharing.
+The \textit{Agreement Generator} depicted in Figure~\ref{fig:c4-container} will be further decomposed into components in the next Section.
+
 \subsection{Component modelling of a datastore and an agreement generator}
 \label{sec:c4_component}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.1\linewidth]{figures//chapter-6/component.png}
+    \caption{Component diagram of a datastore and an agreement generator.}
+    \label{fig:c4-component}
+\end{figure}
 
 % The proposed Pod architecture, visualised in \cref{fig:architecture}, is an extension to the existing Solid Pod specification and implementations.
 % We propose to add a Consent datastore component to keep a record of the consent actions already given, associated with a copy of the accepted app requests, as well as an Audit Log component to store metadata related to logins, access requests, changes in policies and consent authorisations and so on.
@@ -56,8 +79,6 @@ Moreover, data subjects can also use applications to manage data and data access
 % Moreover, the recording of informed consent is performed as followed: (i) the controller requests for consent through an access policy request; (ii) the Pod matches the request with the stored user policies; (iii) in the case where a match is found, the application UI presents the user with a message such as \textit{`\textbf{Application X} wants to access \textbf{data Y} for \textbf{purpose Z}. This request matches your preferences to allow access to \textbf{data Y} for \textbf{purpose Z}. Grant or refuse access?'}, and otherwise a similar message will be displayed without the matching user preference; and (iv) the user's choice in consent is stored and used in further access control requests solicited by the application in question.
 % Automatic authorisations can also be performed over the matching of user preferences and apps policies, however this cannot be considered as informed consent.
 % For instance, taking into consideration the requests in \cref{lst:request-registration} and \cref{lst:request-research}, the application should specify that \cref{lst:request-research} requires explicit consent from the user since it is directly related to sensitive categories of data, while \cref{lst:request-registration} is related to email and social networks information and therefore automated authorisation can be permitted.
-
-% The existing Notification Mechanism should also be updated to allow for update or revoke requests regarding consent and the Reasoner component should be extended to be able to reason over ODRL policies stored on the ACL files.
 
 % The User Interface, along with the Authentication and Inbox features already provided by the existing Solid specification, proposes the addition of two components: Metadata and Policies Editors.
 % These components will assist users to craft granular policies for the management of access to their Pod, without burdening them with technicalities of writing ODRL policies.

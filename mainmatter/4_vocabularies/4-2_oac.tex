@@ -53,7 +53,7 @@ Moreover, taking into consideration the previously described motivation points, 
 \end{itemize}
 
 As such, following the LOT methodology, these requirements are consolidated in the profile's ORSD available in Table \ref{tab:OAC_ORSD}.
-As Solid's current access control mechanisms only partially implement R1, R3 and R5, OAC allows its users to declare not only granular permissive policies but also prohibitive policies, both aligned with legal requirements, which can be stored in their decentralised datastores for future inspection and can be used with additional constraints and contextual information.
+As Solid's current access control mechanisms only partially implement R1, R3, and R5, OAC allows its users to declare not only granular permissive policies but also prohibitive policies, both aligned with legal requirements, which can be stored in their decentralised datastores for future inspection and can be used with additional constraints and contextual information.
 
 \begin{table}[htbp]
 \centering
@@ -109,7 +109,7 @@ Nevertheless, throughout this Thesis, the use of OAC is demonstrated through the
 
 This ODRL profile relies on DPV, for the invocation of legal concepts related to data protection and privacy, and ACL, for the expression of access mode operations, to specify complex permissions, prohibitions or duties over the access to personal data resources.
 
-Moreover, OAC policies can be used to add a new layer to decentralised data systems -- a layer which is currently missing from the Solid ecosystem for instance -- that will come between the data and the access authorisation, e.g., ACL or ACP authorisations, layers in order to provide a richer access control mechanism to such systems.
+Moreover, OAC policies can be used to add a new layer to decentralised data systems -- a layer that is currently missing from the Solid ecosystem for instance -- that will come between the data and the access authorisation, e.g., ACL or ACP authorisations, layers in order to provide a richer access control mechanism to such systems.
 As an access control mechanism's main goal is to determine access by users or software agents to digital resources, the entities generating and/or providing the data must able to express policies that satisfy their preferences, while users or software agents who wish to access said data must be able to define policies that describe their data handling activities. 
 By using these policies in an algorithm to match incoming access requests for data, an agreement over the access to a certain resource or type of data can be defined and the decentralised data system can provide a fine-grained access control mechanism to its users.
 As such, OAC reuses ODRL's \texttt{Offer} policies to express the conditions for access to personal data stored in decentralised data systems, e.g. Solid Pods, \texttt{Request} policies to express users or software agents' access requests and \texttt{Agreement} policies to describe the agreed conditions for access to the data. 
@@ -121,7 +121,7 @@ The three types of policies are defined below, according to their definition pro
     \item \textbf{Agreement} -- Policy issued by an assigned that grants privileges to the assignee over an asset.
 \end{itemize}
 
-OAC's core concepts are illustrated in Figure~\ref{fig:oac_diagram} and Tables \ref{tab:profile_classes} and \ref{tab:profile_properties} specify the alignment between the ODRL, DPV and ACL terms to ensure that their semantics are correctly interpreted by OAC implementers.
+OAC's core concepts are illustrated in Figure~\ref{fig:oac_diagram} and Tables \ref{tab:profile_classes} and \ref{tab:profile_properties} specify the alignment between the ODRL, DPV, and ACL terms to ensure that their semantics are correctly interpreted by OAC implementers.
 
 %Its core concepts are the Preference and Requirement policies, a new set of operators to constraint the defined Purposes, Recipients, Legal Basis, Technical and Organisational Measures, Technology and Identity Provider constraints (which will require the usage of DPV's taxonomies), new properties to specify policies for applications and services, Processing and Access actions, as well as Personal Data Categories, and Legal Entities.
 
@@ -351,7 +351,7 @@ This Thesis focuses on \textit{Purpose, Personal Data, Processing, Recipients, L
 Furthermore, similarly to WAC and ACP, OAC policies can also be defined for particular resources identified by URIs -- in such cases when an access request for a particular data type comes in, the authorisation mechanism must have information about what type of data those particular resources contain or else they will not be returned if they match the data type of the request.
 Such information can be stored in a data registry, stored in a e.g. Solid Pod, where resources can be associated with the type of data they contain by using DPV's \texttt{hasPersonalData} property and DPV-PD's taxonomy of personal data categories, e.g., \texttt{<https://solidweb.me/besteves4/private/health/file1> dpv:hasPersonalData dpv-pd:HealthHistory .}
 
-Ultimately, since these policies are stored in the personal datastore for purposes of accountability and transparency, apps and services, based on the stored preferences, requests and agreements, can be built, e.g., using SPARQL queries, to inquire who is using what data and for what purposes.
+Ultimately, since these policies are stored in the personal datastore for purposes of accountability and transparency, apps and services, based on the stored preferences, requests, and agreements, can be built, e.g., using SPARQL queries, to inquire who is using what data and for what purposes.
 Listing~\ref{list:sparql_agreement} presents a SPARQL query to retrieve permitted data accesses by user, data, and purpose from ODRL agreements stored in a decentralised datastore.
 
 \begin{listing}[ht]
@@ -375,8 +375,8 @@ SELECT DISTINCT ?User ?Data ?Purpose WHERE {
 \label{sec:oac_publication}
 
 The ontology human-readable documentation and machine-readable file are available at \url{https://w3id.org/oac} using content negotiation.
-The HTML documentation includes a description of the classes and properties of the ontology, that was done in collaboration with domain experts, a diagram with the graphical representation of the ontology, examples of policies defined with the OAC profile and information related to the policy matching algorithm.
-The ontology documentation also includes metadata, such as the identity of the creators and publishers of the ontology, the dates of creation and last modification or the version number.
+The HTML documentation includes a description of the classes and properties of the ontology, that was done in collaboration with domain experts, a diagram with the graphical representation of the ontology, examples of policies defined with the OAC profile, and information related to the policy matching algorithm.
+The ontology documentation also includes metadata, such as the identity of the creators and publishers of the ontology, the dates of creation and last modification, or the version number.
 
 The source code is hosted at \url{https://w3id.org/oac/repo}, under the CC-BY-4.0 license.
 The repository can also be used by OAC users to suggest new inclusions to the ontology and to report bugs through GitHub Issues.
