@@ -66,20 +66,24 @@ The \textit{Agreement Generator} depicted in Figure~\ref{fig:c4-container} will 
 \subsection{Component modelling of a datastore and an agreement generator}
 \label{sec:c4_component}
 
-\begin{figure}[ht]
+The \textit{Component} diagram in Figure~\ref{fig:c4-component} further decomposes the \textit{Datastore} and \textit{Agreement Generator} containers within a decentralised personal datastores server.
+As previously discussed in Sections~\ref{sec:oac} and~\ref{sec:plasma}, for a legally-aligned decentralised ecosystem where personal data is exchanged according to the requirements of the GDPR, information regarding the entities (e.g., providers, developers), infrastructure, legal roles, policies, notices, registries, and logs is necessary to understand and establish responsibilities and accountability within the whole ecosystem.
+As such, beyond keeping \textit{Data} in distinct formats, \textit{Datastores} are expected to keep (i) \textit{Policies}, including user requirements and preferences, copies of data requests and records of data access agreements, (ii) \textit{Notices}, e.g., to declare the providers/developers of apps, service, or other infrastructures, as well as to describe their data processing practices, (iii) \textit{Logs}, related to actions on data, policies, or security issues, which can be used by external auditors to perform their duties, (iv) \textit{Registries}, for collective and convenient access to data, and (iv) other \textit{Provenance} metadata, all needed to have a trustful and sustainable decentralised data sharing ecosystem.
+As such, the semantic models produced in Chapter~\ref{chap:vocabularies} play an important role in having interoperable datastores where data can be consumed by multiple parties in a lawful manner, even if said parties resort to the use of different providers.
+
+\begin{figure}[t]
     \centering
     \includegraphics[width=1.1\linewidth]{figures//chapter-6/component.png}
     \caption{Component diagram of a datastore and an agreement generator.}
     \label{fig:c4-component}
 \end{figure}
 
-% The proposed Pod architecture, visualised in \cref{fig:architecture}, is an extension to the existing Solid Pod specification and implementations.
-% We propose to add a Consent datastore component to keep a record of the consent actions already given, associated with a copy of the accepted app requests, as well as an Audit Log component to store metadata related to logins, access requests, changes in policies and consent authorisations and so on.
-% In this context, the permissions and prohibitions specified by the users or the contents of the policy matching, described above by the algorithm in \cref{fig:implementation}, can be considered as the consent of the user.
-% Moreover, the recording of informed consent is performed as followed: (i) the controller requests for consent through an access policy request; (ii) the Pod matches the request with the stored user policies; (iii) in the case where a match is found, the application UI presents the user with a message such as \textit{`\textbf{Application X} wants to access \textbf{data Y} for \textbf{purpose Z}. This request matches your preferences to allow access to \textbf{data Y} for \textbf{purpose Z}. Grant or refuse access?'}, and otherwise a similar message will be displayed without the matching user preference; and (iv) the user's choice in consent is stored and used in further access control requests solicited by the application in question.
-% Automatic authorisations can also be performed over the matching of user preferences and apps policies, however this cannot be considered as informed consent.
-% For instance, taking into consideration the requests in \cref{lst:request-registration} and \cref{lst:request-research}, the application should specify that \cref{lst:request-research} requires explicit consent from the user since it is directly related to sensitive categories of data, while \cref{lst:request-registration} is related to email and social networks information and therefore automated authorisation can be permitted.
+When it comes to the architecture of the \textit{Agreement Generator}, the following components were identified:
 
-% The User Interface, along with the Authentication and Inbox features already provided by the existing Solid specification, proposes the addition of two components: Metadata and Policies Editors.
-% These components will assist users to craft granular policies for the management of access to their Pod, without burdening them with technicalities of writing ODRL policies.
-% The proposed Service client should also implement an Inbox feature for the notification mechanism already discussed and additionally a Policies Editor for the crafting of access permission requests based on the proposed ODRL profile.
+% TODO: https://github.com/RDFLib/pySHACL
+\begin{itemize}
+    \item The \textit{Request Validator} component has the main goal of validating RDF-based data requests against the conformance conditions established in Section~\ref{sec:plasma_conformance}, using technologies such as SHACL~\citep{knublauch_shapes_2017} or ShEx~\citep{prudhommeaux_shape_2019}. This component is of fundamental importance to ensure that all legally required data is present in the data request and to guarantee that the data request can be fed to the policy matcher in the expected format.
+    \item The \textit{Metadata Generator} and \textit{Registry Maintainer} components have the main goal of generating and storing logs and other metadata related to entities, apps, services, or Pods and maintaining updated registries of access control authorisations, availability of data categories, supported schemas for data, and relevant policies, apps, services, users, or agents.
+    \item The \textit{Data Discover} component's main task is to provide the server with data discovery capabilities in order to more easily find where certain types of data, policies, or provenance metadata are stored, including storage locations outside the server.
+    \item The \textit{Policy Matcher} component, further specified in Section~\ref{sec:algorithm}, has the main goal of matching the existing user offers with incoming data requests and generate data-sharing agreements. These agreements are then fed to the \textit{ACL/ACP Generator} component for seamless integration into the current Solid ecosystem.
+\end{itemize}
