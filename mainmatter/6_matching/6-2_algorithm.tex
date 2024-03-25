@@ -1,4 +1,33 @@
 \section{Design of a policy matching algorithm for generating data-sharing agreements}
 \label{sec:algorithm}
 
-Formalisation of the algorithm + figure
+% Formalisation of the algorithm + figure
+
+% Table comparing features of OAC with existing Solid solutions + solutions in SotA ?
+% Offer, Request, Agreement
+% Data, Access, Purpose, Legal Basis
+
+\subsection{Data subject policies as \texttt{odrl:Offer}}
+\label{sec:algorithm-offer}
+
+Data subjects can express policies for specific resources, containers of resources, specific personal data types, or even for data they have not produced yet.
+As such, at the time of instantiation, the incoming data request should be used to filter the data subject's policies that apply to that particular request.
+Therefore, the resulting \texttt{odrl:Offer} instance contains the union of all pertinent user policies, which can be used to match against incoming data requests in order to generate data access agreements for certain resources or data.
+Furthermore, this policy can be used as metadata that accompanies the data being shared, so that data controllers can keep a copy of the conditions under which they can use the data.
+In essence, such a system improves trust and accountability in decentralised data-sharing ecosystems as the policy can travel with the data, with provenance information on who generated the data, who generated the policy, and who attached it to the data.
+Even though malicious agents can perform prohibited actions, such as making copies of data when only read-access to data was allowed, with the documentation of access conditions on the datastore of the data subject, he, she, or they can use these policies and metadata to file a complaint in the court of law for data misuse.
+Moreover, when formulating offers, each distinct rule merged into the policy is preserved as an individual rule to facilitate the matching with data requests.
+This preservation of individual rules also enables their individual annotation with provenance metadata, e.g., their origin or whether they are negotiable or non-negotiable rules.
+
+Taking this into consideration, the instantiation of the \texttt{odrl:Offer} should follow the subsequent algorithm:
+\begin{enumerate}
+    \item For a given personal datastore, retrieve all user preferences and requirements recorded in a datastore policy registry.
+    \item Filter out duplicated policies.
+    \item Filter out policies that do not match with any terms of the data request.
+    \item For each retrieved policy, fetch relevant \texttt{odrl:Permission} and \texttt{odrl:Prohibition} rules and merge them in a single \texttt{odrl:Offer}.
+    \item Permissions and/or prohibitions associated with an OAC requirement or an OAC preference should be associated with the term \texttt{dpv:Required}, in case said rule is a requirement, or the term \texttt{dpv:Optional}, in case it is a preference, using the \texttt{dpv:hasContext} property.
+    \item A link to each `original' policy is maintained in the final \texttt{odrl:Offer} by using the \texttt{dcterms:source} property.
+    \item Add provenance information to the \texttt{odrl:Offer}, e.g. \texttt{dcterms:issued} for when the offer was instantiated and \texttt{dcterms:creator} for the issuer of the policy.
+\end{enumerate}
+
+The previously represented Listing~\ref{list:oac_offer} presents an example of a result of the offer instantiation algorithm, generated from two existing, relevant policies, as indicated by the \texttt{dcterms:source} property, based on an OAC requirement and OAC preference policies, as expressed by the \texttt{dpv:hasContext} property.
