@@ -7,6 +7,7 @@ The research work for this Thesis involves two distinct knowledge domains: law a
     \item To analyse knowledge sources (Section \ref{sec:law_review})
     \item To review state of the art solutions to represent privacy terms in decentralised settings (Section \ref{sec:technical_review})
     \item To create and validate vocabularies (Section \ref{sec:ontology_engineering})
+    \item To publish and archive research software (Section \ref{sec:code_preservation})
 \end{itemize}
 
 \subsection{Literature review}
@@ -75,4 +76,26 @@ The source code is hosted on GitHub\footnote{\url{https://github.com/} (accessed
 
 % TODO: mention SHACL validation + SPARQL for CQs}
 
-% TODO: publication/preservation of code -- Zenodo, DOI, w3id
+\subsection{Publication and archival of research software}
+\label{sec:code_preservation}
+
+Recently, the scientific community has also been discussing extending FAIR data practices to research software  \citep{martinez_top_2019,gruenpeter_d44_2024}.
+Extending such practices to software implies the inclusion of rich metadata, in machine and human-readable format, and unique persistent identifiers for software to be findable and accessible.
+In terms of interoperability and reusability, software must include clear documentation and reuse instructions, as well as use common standards and platforms.
+As such, the following best practices, adopted from the aforementioned guidelines, are followed to ensure the FAIR publication and preservation of research software in this Thesis:
+
+\begin{enumerate}
+    \item Description of the software is included in the README.md file of the software repository. 
+    \item Software is archived in a software registry, i.e., Zenodo.
+    \item Software has an persistent identifier such as Digital Object Identifier (DOI) and/or a \url{w3id.org}.
+    \item Software is downloadable.
+    \item Software follows a semantic versioning scheme.
+    \item Software requirements are listed in the software repository.
+    \item Software installation instructions are included in the README.md file of the software repository.
+    \item Software usage instructions are included in the README.md file of the software repository.
+    \item The software repository has a license.
+    \item The software repository provides instructions on how to cite it.
+    \item The software repository includes metadata including programming language, creation date, keywords and releases.
+\end{enumerate}
+
+Moreover, the source code is hosted on GitHub and version control is done using Git.
