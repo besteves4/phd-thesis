@@ -45,7 +45,7 @@ The \textit{Container} diagram in Figure~\ref{fig:c4-container} illustrates curr
 In a completely decentralised scenario, each container could be developed and/or provided by a distinct \textit{Infrastructure provider}.
 The \textit{Notifications}, \textit{Authentication} and \textit{Authorisation} containers are already part of the Solid protocol specification \citep{capadisli_solid_2022} and are not further updated in this Thesis.
 To ensure compatibility with the current access control mechanisms, the \textit{Offer Instantiation} and \textit{Agreement Generator} containers are treated separately from the \textit{Authorisation} container.
-In this way, systems that currently rely on WAC or ACP to provide access to data can continue to work efficiently, while use cases that involve personal data can use OAC policies to have data-sharing agreements aligned with European data protection law.
+In this way, systems that currently rely on WAC or ACP to provide access to data can continue to work efficiently, while use cases that involve personal data can use OAC policies to have data access agreements aligned with European data protection law.
 ACL and ACP authorisations can be generated, when an agreement for data access has already been reached, for automated access to data when a legally-aligned agreement for access is already in place.
 The \textit{Notifications} container can also be updated to support the new access control system proposed in this Thesis, however, this is out of the scope of this contribution.
 
@@ -85,7 +85,7 @@ When it comes to the architecture of the \textit{Agreement Generator}, the follo
     \item The \textit{Request Validator} component has the main goal of validating RDF-based data requests against the conformance conditions established in Section~\ref{sec:plasma_conformance}, using technologies such as SHACL~\citep{knublauch_shapes_2017} or ShEx~\citep{prudhommeaux_shape_2019}. This component is of fundamental importance to ensure that all legally required data is present in the data request and to guarantee that the data request can be fed to the policy matcher in the expected format.
     \item The \textit{Metadata Generator} and \textit{Registry Maintainer} components have the main goal of generating and storing logs and other metadata related to entities, apps, services, or Pods and maintaining updated registries of access control authorisations, availability of data categories, supported schemas for data, and relevant policies, apps, services, users, or agents.
     \item The \textit{Data Discover} component's main task is to provide the server with data discovery capabilities in order to more easily find where certain types of data, policies, or provenance metadata are stored, including storage locations outside the server.
-    \item The \textit{Policy Matcher} component, further specified in Section~\ref{sec:algorithm}, has the main goal of matching the existing user offers with incoming data requests and generate data-sharing agreements. These agreements are then fed to the \textit{ACL/ACP Generator} component for seamless integration into the current Solid ecosystem.
+    \item The \textit{Policy Matcher} component, further specified in Section~\ref{sec:algorithm}, has the main goal of matching the existing user offers with incoming data requests and generate data access agreements. These agreements are then fed to the \textit{ACL/ACP Generator} component for seamless integration into the current Solid ecosystem.
 \end{itemize}
 
 Indeed, to understand the detailed functionality of the proposed personal datastores server, Figure~\ref{fig:c4-sequence} presents a sequence diagram to demonstrate how its containers, and more specifically its components, interact with each other when a data requester uses an app to petition a certain type of data to be used for a particular purpose.
@@ -113,4 +113,4 @@ On the other hand, if the result is positive, access to data is permitted, under
 Afterwards, an access control log is recorded and the new authorisation is kept in the access control log for future usage.
 Finally, the data discover mechanism is used to find the data being requested and this data is returned to the Web API and next to the app for the data requester to have access to it.
 
-In the next Section, the algorithms for offer instantiation and for policy matching are further explored, with the goal of generating data-sharing agreements that are aligned with legal requirements.
+In the next Section, the algorithms for offer instantiation and for policy matching are further explored, with the goal of generating data access agreements that are aligned with legal requirements.
