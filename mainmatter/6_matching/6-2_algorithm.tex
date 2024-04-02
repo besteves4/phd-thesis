@@ -30,6 +30,7 @@ All generated information, e.g., policies, logs, and registry, is stored in a pr
 \paragraph{SOPE coverage, maintenance, and future work}
 SOPE is published and archived according to the methodology described in Section~\ref{sec:code_preservation}.
 Furthermore, SOPE's source code is hosted at \url{https://w3id.org/people/besteves/sope/repo}, under the CC-BY-4.0 license.
+A live demonstration of the app's features is also available at \url{https://w3id.org/people/besteves/demo/eswc22}.
 The repository can also be used by SOPE users to suggest new features to be added to the app and to report bugs through GitHub Issues.
 \beatriz{Table XX } illustrates the current coverage of SOPE concerning the terms implemented in the app from DPV's taxonomies of purposes, personal data categories, processing operations, and recipients.
 As future work, SOPE can be extended to include all terms present in the previously mentioned DPV's taxonomies, as well as to cover all constraints defined in the OAC profile, e.g., restrict legal bases or specify the technical and organisational measures used by data controllers to ensure the secure processing of personal data.
@@ -64,3 +65,182 @@ The previously described Listing~\ref{list:oac_offer} presents an example of a r
 
 \subsection{Policy matching outcomes as \texttt{odrl:Agreement}s}
 \label{sec:algorithm-agreement}
+
+As mentioned in the previous Sections, the instantiated user policies are one of the few bits, representing the will of the data subject, that must be fed to the policy matching algorithm to generate the data access conditions to certain data or resources.
+In addition to those, data request policies, expressing the needs and purposes of the data requesters, as well as other contextual information, e.g., date or time of the day, must also be passed on to the algorithm in order to reach a data access agreement that benefits and satisfies both parties.
+
+The recorded outcomes, resulting from the matching process where access to data needs to be either permitted or prohibited, are instances of \texttt{odrl:Agreement}.
+Within these agreements, specific ODRL terms play a crucial role in specifying who has granted or denied access (\texttt{odrl:assigner}), to whom (\texttt{odrl:assignee}), for what resources (\texttt{odrl:Asset}), and the associated conditions for access (\texttt{odrl:Rule}).
+Moreover, the rules referenced within an agreement mirror the specific rules outlined for a dataset, i.e., through an \texttt{odrl:Offer}, and within a request, i.e., through an \texttt{odrl:Request}).
+As such, by being derived from these rules, an agreement should explicitly reference them to assist in the explainability of the algorithm, e.g., in case the data subject wants to know why a certain data access-related decision was made.
+An example representation of a data access agreement, depicted as an \texttt{odrl:Agreement} between two parties to read the Pod's data subject age data for academic research, is provided in Listing \ref{list:oac_agreement}.
+
+Taking this into consideration, the generation of the \texttt{odrl:Agreement} should follow the subsequent algorithm:
+\begin{enumerate}
+    \item Retrieve the data requester's \texttt{odrl:Request} and the user policy's \texttt{odrl:Offer}.
+    \item Match the \texttt{odrl:Offer} with the \texttt{odrl:Request}.
+    \item Record the outcome of the matching algorithm, where the \texttt{odrl:target} property specifies the data to be accessed, and the \texttt{odrl:assignee} and \texttt{odrl:assigner} properties identify the data subject and the requester, respectively.
+    \item If the matching result is positive, i.e., the request and the offer are compatible, then access is permitted by employing a permission with constraints on the requested purpose for access, along with any additional constraints such as legal bases, identity providers or recipients. If access is denied, similar information is included in the policy as a prohibition.
+    \item Utilise the \texttt{dcterms:references} property to associate the agreement with the \texttt{odrl:Offer} and \texttt{odrl:Request} that were used to generate it.
+    \item Include provenance and other relevant information, such as the \texttt{dcterms:issued} property, to document the creation and acceptance of the agreement among the parties.
+\end{enumerate}
+
+The matching process described in step 2 of agreement generation algorithm operates by comparing and assessing the compatibility between the conditions described in user policies and in data access requests.
+In the ODRL-based system proposed in this Thesis, this process involves comparing the data subjects' \textit{odrl:Offer}, stored in their Pods, with an \textit{odrl:Request} of a data requester, app, service or agent.
+As such, when considering two sets of concepts representing an offer and a request, the matching algorithm may employ two distinct and incompatible approaches to determining access to data.
+The first approach, the one proposed in this Thesis to cater to the specific requirements of GDPR consent described in Chapter~\ref{chap:legal}, which is also the more commonly used semantically, involves treating classes as sets and determining access based on set membership.
+In this approach, if a class $P$ is a superclass of $C$, a request for accessing $P$ would also allow access to $C$ because every member of $C$ is inherently a member of $P$.
+However, a request for accessing $C$ would not grant access to $P$ since not all members of $P$ are necessarily members of $C$.
+This method has also been previously utilised in matching policies for GDPR compliance by \cite{bonatti_realtime_2020}.
+
+The second approach is based on determining the applicability of a concept according to its specificity.
+In this method, when considering a class $P$ and its subclass $C$, a request for accessing $P$ would not extend access to $C$ since $C$ is more specific.
+Conversely, a request for accessing $C$ would grant access to $P$ as $C$ is less specific.
+Employing subsumption as a criterion, in the first approach, access is granted when the user offer subsumes the data request, whereas in the second approach, access is granted when the data request subsumes the user offer.
+Hence, both mentioned approaches can be adapted in a decentralised data access ecosystem by reversing the direction of the subsumption in the policy matching algorithm.
+
+Another factor to consider for the matching algorithm involves resolving permissions and prohibitions in terms of their evaluation order and potential conflicts.
+Policies can be interpreted in various incompatible ways, such as prioritising permissions and granting access upon the first one that is fulfilled -- a permissive model.
+Contrarily, prioritising prohibitions and denying access upon the first fulfilled prohibition is considered a prohibitive model.
+In cases where both a permission and a prohibition apply to the same data or resource, conflict resolution is based on the prevalence of one over the other.
+In decentralised data systems such as Solid, the matching algorithm follows a prohibitive model, where prohibitions outweigh permissions.
+This means that if a request either fails to satisfy a permission or satisfies a prohibition, data access is not granted.
+As such, compatibility between offers and requests is only achieved when all permissions are satisfied and all prohibitions remain unsatisfied.
+
+In light of these considerations, the policy matching algorithm described in this Thesis involves examining subsumption or satisfiability between instances of \texttt{odrl:Offer} and \texttt{odrl:Request}.
+The algorithm essentially verifies whether the conditions outlined in the user offer are met by the data request policy in the case of permissions, or breached in the case of prohibitions.
+If any prohibitions are identified, it indicates that certain conditions of the proposed data request are incompatible with the policies set by the user to govern the access to their personal data.
+Conversely, if no prohibitions are found and all permissions are met, the conditions are deemed compatible and access to data can be provided.
+In this context, Algorithm~\ref{alg:matching} offers pseudo-code outlining the steps of the proposed policy matching process.
+
+\begin{algorithm}
+\caption{Pseudo-code of the proposed OAC-based matching algorithm.}\label{alg:matching}
+\begin{algorithmic}
+\For{$prohibition \gets odrl{:}Offer$}
+    \If{$offer{:}target \cap request{:}target \neq\emptyset$}
+        $decision \gets DENY$
+    \EndIf
+    \If{$odrl{:}assignee \in offer{:}prohibition$}
+        \If{$offer{:}assignee \equiv request{:}assignee$}
+            $decision \gets DENY$
+        \EndIf
+    \EndIf
+    \If{$odrl{:}action \in offer{:}prohibition$}
+        \If{$offer{:}action \cap request{:}action \neq\emptyset$}
+            $decision \gets DENY$
+        \EndIf
+    \EndIf
+    \For{$constraint \gets prohibition$}
+        \If{$oac{:}Purpose \gets constraint$}
+            \If{$offer{:}Purpose \cap request{:}Purpose \neq\emptyset$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}Recipient \gets constraint$}
+            \If{$offer{:}Recipient \cap request{:}Recipient \neq\emptyset$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}LegalBasis \gets constraint$}
+            \If{$offer{:}LegalBasis \cap request{:}LegalBasis \neq\emptyset$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}TOM \gets constraint$}
+            \If{$offer{:}TOM \cap request{:}TOM \neq\emptyset$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}Technology \gets constraint$}
+            \If{$offer{:}Technology \cap request{:}Technology \neq\emptyset$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}IdP \gets constraint$}
+            \If{$offer{:}IdP \cap request{:}IdP \neq\emptyset$}
+                $decision \gets DENY$
+            \EndIf
+        \EndIf
+    \EndFor
+\EndFor
+
+\For{$permission \gets odrl{:}Offer$}
+    \If{$offer{:}target \cap request{:}target =\emptyset$}
+        $decision \gets DENY$
+    \EndIf
+    \If{$odrl{:}assignee \in offer{:}permission$}
+        \If{$offer{:}assignee \not\equiv request{:}assignee$}
+            $decision \gets DENY$
+        \EndIf
+    \EndIf
+    \If{$odrl{:}action \in offer{:}permission$}
+        \If{$offer{:}action \cap request{:}action =\emptyset$}
+            $decision \gets DENY$
+        \EndIf
+    \EndIf
+    \For{$constraint \gets permission$}
+        \If{$oac{:}Purpose \gets constraint$}
+            \If{$request{:}Purpose \not\subseteq offer{:}Purpose$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}Recipient \gets constraint$}
+            \If{$request{:}Recipient \not\subseteq offer{:}Recipient$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}LegalBasis \gets constraint$}
+            \If{$request{:}LegalBasis \not\equiv offer{:}LegalBasis$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}TOM \gets constraint$}
+            \If{$request{:}TOM \not\subseteq offer{:}TOM$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}Technology \gets constraint$}
+            \If{$request{:}Technology \not\subseteq offer{:}Technology$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$oac{:}IdP \gets constraint$}
+            \If{$request{:}IdP \not\subseteq offer{:}IdP$}
+                $decision \gets DENY$
+            \EndIf
+        \EndIf 
+    \EndFor 
+\EndFor
+
+\If{$ \nexists DENY$}
+    $decision \gets GRANT$
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+The proposed algorithm mirrors the previously described prohibitive approach to matching, where the prohibitions outlined in the user offer are examined and ensured to be met before any permissions are considered.
+The denial of the access request occurs during prohibition checking if any of the following constraints in the user offer are found to be incompatible with the data request:
+
+\begin{enumerate}
+    \item offer target has a data type matching ($\cap\neq\emptyset$) the target in the data request;
+    \item offer assignee matches\footnote{Representing permissions and prohibitions of intricate legal entities such as subsidiaries or company groups accurately is not feasible using equality ($=$) or subset ($\subseteq$) relations. Hence, in this Thesis, the equivalence relation ($\equiv$) is used to signify that the data requester must adhere to the legal interpretation of equality -- defining this equality is beyond the scope of this Thesis.} ($\equiv$) the assignee of the data request; 
+    \item offer action has an access mode matching ($\cap\neq\emptyset$) the action in the data request;
+    \item offer has a purpose matching ($\cap\neq\emptyset$) the purpose in the data request;
+    \item offer has a recipient matching ($\cap\neq\emptyset$) the recipient in the data request;
+    \item offer has a legal basis matching ($\cap\neq\emptyset$) the legal basis in the data request;
+    \item offer has a technical and organisational measure matching ($\cap\neq\emptyset$) the technical and organisational measure in the data request;
+    \item offer has a technology matching ($\cap\neq\emptyset$) the technology in the data request; and
+    \item offer has an identity provider matching ($\cap\neq\emptyset$) the identity provider in the data request.
+\end{enumerate}
+
+If no prohibitions are identified, the next step is to verify the permissions.
+The access request will be denied during permission checking if any of the following constraints in the offer are incompatible with the data request:
+
+\begin{enumerate}
+    \item request target does not have a data type matching ($\cap=\emptyset$) the target in the offer;
+    \item offer assignee does not match ($\not\equiv$) the assignee of the data request; 
+    \item request action does not have an access mode matching ($\cap=\emptyset$) the action in the offer;
+    \item request purpose is not compatible or a subset ($\not\subseteq$) of the offer purpose, e.g., DPV's \texttt{ResearchAndDevelopment} in a data request does not match DPV's \texttt{AcademicResearch} purpose in an offer as \texttt{ResearchAndDevelopment} is a superclass of \texttt{AcademicResearch} and, as such, less specific;
+    \item request recipient is not compatible or a subset ($\not\subseteq$) of the offer recipient;
+    \item offer legal basis does not match ($\not\equiv$) the legal basis of the data request;
+    \item request technical and organisational measure is not compatible or a subset ($\not\subseteq$) of the offer technical and organisational measure;
+    \item request technology is not compatible or a subset ($\not\subseteq$) of the offer technology; and
+    \item request identity provider is not compatible or a subset ($\not\subseteq$) of the offer identity provider.
+\end{enumerate}
+
+The described procedures are applied to all permissions and prohibitions outlined in the data subject's offer.
+If all permissions and prohibitions are met without any violations, access to the data can be authorised.
+
+
+
+% Future work -- supported by the formal semantics work -- explain how the algorithm took certain decisions, e.g. why the prohibitions were prioritised over the permissions
