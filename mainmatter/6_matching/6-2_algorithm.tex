@@ -240,7 +240,19 @@ The access request will be denied during permission checking if any of the follo
 
 The described procedures are applied to all permissions and prohibitions outlined in the data subject's offer.
 If all permissions and prohibitions are met without any violations, access to the data can be authorised.
+Table~\ref{tab:oac-matching-examples} showcases a set of data access agreement's outcomes illustrating the functioning of the matching algorithm concerning permissions and prohibitions with data type and purpose constraints.
+In a semantic-based architectural design, evaluating equivalence ($\equiv$), intersection ($\cap$), and subset ($\subseteq$) necessitates additional considerations beyond the mere interpretation of \texttt{owl:sameAs} or \texttt{rdfs:subClassOf} properties. 
+For instance, comparing \textit{Academic Research} as a purpose with a data request for \textit{Research and Development} purpose, using subset ($\subseteq$) for permissions or intersection ($\cap$) for prohibition, mandates both purposes to be articulated in a manner enabling such `hierarchical' or `set-based' interpretations.
+In such a case, the matching algorithm entails interpreting \textit{Academic Research} as a \textit{narrower concept} or a \textit{subset} of \textit{Research and Development}, a relationship that can be denoted through various semantic properties, from distinct vocabularies, such as \texttt{rdfs:subClassOf}, \texttt{skos:broader}, \texttt{dcterms:isPartOf}, or even an ad-hoc property such as \texttt{ex:specialisationOf}.
+Further complexity emerges when considering the compability of purposes, as such relationship cannot be specified in a hierarchical manner.
 
-
+\begin{table}[]
+\begin{tabular}{ccccccc}
+\multicolumn{3}{c}{Offer}                                                           & \multicolumn{2}{c}{Request}                                              &          &                                 \\
+Rule       & Purpose                                                     & Assignee & Purpose                                                       & Assignee & Decision & Reason                          \\
+Permission & \begin{tabular}[c]{@{}c@{}}Academic\\ research\end{tabular} & $\emptyset$ & \begin{tabular}[c]{@{}c@{}}Commercial\\ research\end{tabular} & User B   & DENY     & request purpose $\not\subseteq$0 offer purpose \\
+           &                                                             &          &                                                               &          &          &                                
+\end{tabular}
+\end{table}
 
 % Future work -- supported by the formal semantics work -- explain how the algorithm took certain decisions, e.g. why the prohibitions were prioritised over the permissions
