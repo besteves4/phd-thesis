@@ -1,7 +1,6 @@
 \section{Design of a policy matching algorithm for generating data access agreements}
 \label{sec:algorithm}
 
-% TODO: add introduction
 In this Section, a detailed overview is given of the proposed algorithms for offer instantiation and policy matching towards the generation of a common data access agreement.
 Moreover, a policy editor to define and store OAC policies in Solid Pods is described, as well as a REST API service that uses the results of the policy matching algorithm to facilitate the exercising of data subject rights.
 
@@ -96,14 +95,14 @@ This method has also been previously utilised in matching policies for GDPR comp
 The second approach is based on determining the applicability of a concept according to its specificity.
 In this method, when considering a class $P$ and its subclass $C$, a request for accessing $P$ would not extend access to $C$ since $C$ is more specific.
 Conversely, a request for accessing $C$ would grant access to $P$ as $C$ is less specific.
-Employing subsumption as a criterion, in the first approach, access is granted when the user offer subsumes the data request, whereas in the second approach, access is granted when the data request subsumes the user offer.
+Employing subsumption as a criterion, in the first approach, access is granted when the user offer subsumes the data request, whereas, in the second approach, access is granted when the data request subsumes the user offer.
 Hence, both mentioned approaches can be adapted in a decentralised data access ecosystem by reversing the direction of the subsumption in the policy matching algorithm.
 
 Another factor to consider for the matching algorithm involves resolving permissions and prohibitions in terms of their evaluation order and potential conflicts.
 Policies can be interpreted in various incompatible ways, such as prioritising permissions and granting access upon the first one that is fulfilled -- a permissive model.
 Contrarily, prioritising prohibitions and denying access upon the first fulfilled prohibition is considered a prohibitive model.
 In cases where both a permission and a prohibition apply to the same data or resource, conflict resolution is based on the prevalence of one over the other.
-In decentralised data systems such as Solid, the matching algorithm follows a prohibitive model, where prohibitions outweigh permissions.
+In decentralised data environments such as Solid, the matching algorithm follows a prohibitive model, where prohibitions outweigh permissions.
 This means that if a request either fails to satisfy a permission or satisfies a prohibition, data access is not granted.
 As such, compatibility between offers and requests is only achieved when all permissions are satisfied and all prohibitions remain unsatisfied.
 
@@ -240,19 +239,40 @@ The access request will be denied during permission checking if any of the follo
 
 The described procedures are applied to all permissions and prohibitions outlined in the data subject's offer.
 If all permissions and prohibitions are met without any violations, access to the data can be authorised.
-Table~\ref{tab:oac-matching-examples} showcases a set of data access agreement's outcomes illustrating the functioning of the matching algorithm concerning permissions and prohibitions with data type and purpose constraints.
+
+Table~\ref{tab:oac-matching-examples} showcases a set of data access agreement's outcomes illustrating the functioning of the matching algorithm concerning permissions and prohibitions, focusing on data type and purpose constraints.
 In a semantic-based architectural design, evaluating equivalence ($\equiv$), intersection ($\cap$), and subset ($\subseteq$) necessitates additional considerations beyond the mere interpretation of \texttt{owl:sameAs} or \texttt{rdfs:subClassOf} properties. 
 For instance, comparing \textit{Academic Research} as a purpose with a data request for \textit{Research and Development} purpose, using subset ($\subseteq$) for permissions or intersection ($\cap$) for prohibition, mandates both purposes to be articulated in a manner enabling such `hierarchical' or `set-based' interpretations.
 In such a case, the matching algorithm entails interpreting \textit{Academic Research} as a \textit{narrower concept} or a \textit{subset} of \textit{Research and Development}, a relationship that can be denoted through various semantic properties, from distinct vocabularies, such as \texttt{rdfs:subClassOf}, \texttt{skos:broader}, \texttt{dcterms:isPartOf}, or even an ad-hoc property such as \texttt{ex:specialisationOf}.
-Further complexity emerges when considering the compability of purposes, as such relationship cannot be specified in a hierarchical manner.
+Further complexity emerges when considering the compatibility of purposes, as such relationships cannot be specified in a hierarchical manner.
 
-\begin{table}[]
-\begin{tabular}{ccccccc}
-\multicolumn{3}{c}{Offer}                                                           & \multicolumn{2}{c}{Request}                                              &          &                                 \\
-Rule       & Purpose                                                     & Assignee & Purpose                                                       & Assignee & Decision & Reason                          \\
-Permission & \begin{tabular}[c]{@{}c@{}}Academic\\ research\end{tabular} & $\emptyset$ & \begin{tabular}[c]{@{}c@{}}Commercial\\ research\end{tabular} & User B   & DENY     & request purpose $\not\subseteq$0 offer purpose \\
-           &                                                             &          &                                                               &          &          &                                
-\end{tabular}
+\begin{table}[ht]
+\centering
+\caption{Examples of outcomes of the policy matching algorithm.}
+\label{tab:oac-matching-examples}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|c|c||c|c||c|c}
+\multicolumn{3}{c||}{Offer} & \multicolumn{2}{c||}{Request} & \multicolumn{2}{c}{Outcome} \\
+\hline
+Rule & Purpose & Data & Purpose & Data & Decision & Reason \\
+\hline\hline
+Prohibition & \begin{tabular}[c]{@{}c@{}}Academic\\research\end{tabular} & Contact & \begin{tabular}[c]{@{}c@{}}Research and\\development\end{tabular} & Age & DENY & request purpose $\cap$ offer purpose $\neq\emptyset$ \\
+\hline
+Prohibition & \begin{tabular}[c]{@{}c@{}}Academic\\research\end{tabular} & \begin{tabular}[c]{@{}c@{}}Age\\range\end{tabular} & Payment & Age & DENY & request data $\cap$ offer data $\neq\emptyset$ \\
+\hline
+Prohibition & \begin{tabular}[c]{@{}c@{}}Academic\\research\end{tabular} & Contact & Payment & Age & GRANT & \begin{tabular}[c]{@{}c@{}}request purpose $\cap$ offer purpose $=\emptyset$\\request data $\cap$ offer data $=\emptyset$\end{tabular} \\
+\hline
+Permission & \begin{tabular}[c]{@{}c@{}}Academic\\research\end{tabular} & Age & \begin{tabular}[c]{@{}c@{}}Commercial\\research\end{tabular} & Age & DENY & request purpose $\not\subseteq$ offer purpose \\
+\hline
+Permission & \begin{tabular}[c]{@{}c@{}}Research and\\development\end{tabular} & Age & \begin{tabular}[c]{@{}c@{}}Academic\\research\end{tabular} & Age range & GRANT & \begin{tabular}[c]{@{}c@{}}request purpose $\subseteq$ offer purpose\\request data $\cap$ offer data $\neq\emptyset$\end{tabular} \\
+\end{tabular}}
 \end{table}
+
+Hence, any implementation of an OAC-based, policy matching algorithm must be aware of such relationships and carefully consider when is makes sense to employ equivalence, intersection, and subset methodologies using established semantic web interpretations such as the \texttt{rdf:type} and \texttt{rdfs:subClassOf} properties.
+As such, to facilitate the consistent application and interpretation of the algorithm, a standardised specification of vocabulary terms is essential.
+This specification should clarify how concepts are expressed and how they are to be interpreted within the policy matching process.
+For instance, it should specify that any purpose term in an offer or request policy \textit{MUST} be an instance of \texttt{Purpose} and \textit{MUST} be associated with at least one concept in the purpose taxonomy using \texttt{rdf:type} or \texttt{rdfs:subClassOf} properties.
+By adhering to such a standardised specification, the matching algorithm can rely on these assertions to accurately interpret the constraints included in both offer and request policies.
+To achieve this, in this Thesis, the adoption of DPV's taxonomies is strongly encouraged when defining both offer and request terms to ensure accuracy and explainability of the desired outcomes in the policy matching algorithm.
 
 % Future work -- supported by the formal semantics work -- explain how the algorithm took certain decisions, e.g. why the prohibitions were prioritised over the permissions
