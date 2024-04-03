@@ -39,6 +39,13 @@ This algorithm entails matching the dataset's access conditions with the data re
 The results of this matching algorithm are then reviewed by a `Data Access Committee' to finalise the conditions of the access agreement and provide the data requested with access to the relevant datasets, comparable with the decision-making processes of human data access committees \citep{cabili_empirical_2021}.
 The NHGRI Genomic Data Science Analysis, Visualization, and Informatics Lab-space project\footnote{\url{https://anvilproject.org} (accessed on 3 April 2024)} implemented a large-scale pilot using the DUOS platform implementation \citep{schatz_inverting_2022}.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\linewidth]{figures//chapter-6/DUO-matching-with-license.png}
+    \caption{DUO-based matching algorithm, adapted from \url{https://github.com/EBISPOT/DUO}.}
+    \label{fig:duo-matching}
+\end{figure}
+
 Beyond DUOS, the DUO specification has been integrated into various other works, including a specification of informed consent for health and genomics research in Africa \citep{nembaware_framework_2019}, a blockchain-based consent model for health data sharing \citep{jaiman_consent_2020}, and an online platform that offers dynamic consent interfaces and tools for large-scale genomics research programs \citep{haas_ctrl_2021}.
 Furthermore, DUO is mentioned in the Data Tags Suite (DATS), where it is considered a candidate vocabulary within its framework for discovering metadata-based data access conditions \citep{alter_data_2020}.
 Additionally, it plays a role in the roadmap of European infrastructures for accessing a large number of human genomes  \citep{saunders_leveraging_2019}.
@@ -86,12 +93,19 @@ The choice of using ODRL, beyond being a W3C Recommendation for the expression o
 
 As such, based on the algorithms described in Section~\ref{sec:algorithm}, in this Section, (i) DUO concepts are modelled as ODRL policies, (ii) such policies are instantiated as ODRL offers for the access to health-related datasets, (iii) offers are matched with incoming data requests to generate permissive or prohibitive data agreements, and (iv) work on OAC is recycled to deal with GDPR obligations for the processing of health data.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=1\linewidth]{figures//chapter-6/DUO-matching-with-license.png}
-    \caption{DUO-based matching algorithm, adapted from \url{https://github.com/EBISPOT/DUO}.}
-    \label{fig:duo-matching}
-\end{figure}
+\subsection{Re-modelling DUO concepts with ODRL}
+\label{sec:poc_duodrl}
+
+As outlined in the previous Section, DUO concepts are organised into three taxonomies with textual annotations representing the access conditions.
+This Section's main goal is to examine this implicit information and articulate it explicitly as ODRL policies.
+
+Additionally, it aims to ensure compatibility with current and future GA4GH activities, minimising significant disruptions to existing workflows that already use DUO.
+% FROM THE PAPER: We consider DUO's primary attractiveness to be the ease with which its concepts can be easily constructed from input mechanisms (such as a form) and simply `tagged' onto a dataset as an annotation. In this, the textual clauses used to describe the concepts are based on well-defined clauses from consent forms\textsuperscript{18}.
+Therefore, the role of ODRL is not to supplant DUO but rather to supplement it by providing extra machine-readable information for each DUO concept.
+This additional information makes explicit the conditions currently embedded in DUO's textual annotations, enabling them to be validated, matched, and used for data access in an automated fashion.
+An ODRL-improved DUO specification can also be used for additional information duties, such as record-keeping by institutions or other legal tasks.
+Following the algorithm proposed in Section~\ref{sec:algorithm}, DUO's taxonomies are modelled as ODRL offers and requests and used as inputs of the policy matching algorithm to generate data access agreements.
+
 
 % modelling of DUODRL
 % extension of the policy matching algorithm to deal with DUODRL requirements
