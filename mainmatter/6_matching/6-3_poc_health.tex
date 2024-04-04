@@ -106,6 +106,81 @@ This additional information makes explicit the conditions currently embedded in 
 An ODRL-improved DUO specification can also be used for additional information duties, such as record-keeping by institutions or other legal tasks.
 Following the algorithm proposed in Section~\ref{sec:algorithm}, DUO's taxonomies are modelled as ODRL offers and requests and used as inputs of the policy matching algorithm to generate data access agreements.
 
+\paragraph{Identifying ODRL equivalents for DUO concepts}
+For each DUO term, the initial task involved discerning the rules and constraints it encompasses, through the analysis of its textual description, to determine whether it should be modelled as a permission, prohibition, or obligation, as well as understanding the specific context in which they should be applied.
+With this analysis, the redundancy and overlap between DUO's data use permissions and modifiers is noticeable, as both include purpose-based policies without a clear differentiation in their semantics.
+For instance, \texttt{DUO\_0000011} denotes permission, while \texttt{DUO\_0000044} signifies prohibition, both for `population origins or ancestry research' purposes, with the former categorised as a data use permission and the latter a modifier.
+
+Hence, in this Thesis, the restructuring of the DUO taxonomies is proposed by introducing a unique purpose-based taxonomy that models research concepts as ODRL policies, with variants for permissions and prohibitions, and duties applied over permissions with specific research purposes.
+% FROM THE PAPER: This is based on DUOS's data collection input forms and ADA-M's concepts where each research purpose can be individually consented (or restricted) to, with possible implications arising from lack of any permission or prohibition.
+For instance, the DUO concept for code \texttt{HMB}, which states that ``[t]his data use permission indicates that use is allowed for health / medical / biomedical purposes (HMB); [and] does not include the study of population origins or ancestry'' in its textual definition, should be articulated as being a permission for a purpose of type \texttt{HMB} and not a purpose of type \texttt{POA}.
+This approach allows for a more precise expression and application of DUO's \texttt{HMB} concept by revealing its underlying concepts (purpose) and the rules governing it (permission).
+
+Furthermore, upon analysing DUO's concepts and their inherent access conditions, ODRL rules were modelled to represent the conditions of each DUO concept.
+In cases where ODRL lacked the necessary concepts, an extension to its existing concepts is proposed to cover the missing ones.
+In this context, for each concept, an \texttt{odrl:Set} instance was modelled to represent the DUO concept's intrinsic rules.
+These policies are then amalgamated into an \texttt{odrl:Offer}, to serve as a unified policy for a dataset, as detailed in Section \ref{sec:algorithm-offer} regarding the instantiation of offer policies.
+A comprehensive compilation of the performed interpretations for each DUO concept is provided in Table \ref{table:DUO_ODRL_overview}.
+
+\begin{table}[ht]
+\caption{Interpretation of DUO concepts' textual descriptions as ODRL policies.}
+\label{table:DUO_ODRL_overview}
+\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{1.7cm}||p{1.2cm}|p{1.45cm}|p{8.6cm}|p{3.1cm}}
+Concept & Code & Rule Type & Constraint & Placeholder \\ \hline\hline
+DUO0000001 & \multicolumn{4}{l|}{\textbf{Data Use Permission}} \\ \hline\hline
+DUO0000042 & GRU & Permission & Purpose is :GRU & ~ \\ \hline
+DUO0000006 & HMB & Permission & Purpose is :HMB and not :POA & ~ \\ \hline
+DUO0000007 & DS & Permission & Purpose is :DS and mondo:0000001 & :TemplateDisease \\ \hline
+DUO0000004 & NRES & Permission & Purpose is odrl:Purpose & ~ \\ \hline
+DUO0000011 & POA & Permission & Purpose is :POA & ~ \\ \hline
+DUO0000011 & POA & Prohibition & Purpose is not :POA & ~ \\ \hline\hline
+DUO0000017 & \multicolumn{4}{l|}{\textbf{Data Use Modifier}} \\ \hline\hline
+DUO0000043 & CC & Permission & Purpose is :CC & ~ \\ \hline
+DUO0000020 & COL & Duty & Action is :CollaborateWithStudyPI & ~ \\ \hline
+DUO0000021 & IRB & Duty & Action is :ProvideEthicalApproval & ~ \\ \hline
+DUO0000016 & GSO & Permission & Purpose is :GS or :GSG & ~ \\ \hline
+DUO0000016 & GSO & Prohibition & Purpose is :GS and not :GSG & ~ \\ \hline
+DUO0000022 & GS & Permission & Spatial is equal to specified :Location & :TemplateLocation \\ \hline
+DUO0000022 & GS & Prohibition & Spatial is not equal to specified :Location & :TemplateLocation \\ \hline
+DUO0000028 & IS & Permission & Assignee is :ApprovedInstitution & :TemplateInstitution \\ \hline
+DUO0000028 & IS & Prohibition & Assignee is not :ApprovedInstitution & :TemplateInstitution \\ \hline
+DUO0000015 & NMDS & Prohibition & Purpose is :MDS & ~ \\ \hline
+DUO0000018 & NPUNCU & Permission & Assignee is :NonProfitOrganisation and Purpose is :NCU & ~ \\ \hline
+DUO0000018 & NPUNCU & Prohibition & Assignee is :ForProfitOrganisation and Purpose is :NCU & ~ \\ \hline
+DUO0000018 & NPUNCU & Prohibition & Assignee is :NonProfitOrganisation and Purpose is not :NCU & ~ \\ \hline
+DUO0000046 & NCU & Permission & Purpose is :NCU & ~ \\ \hline
+DUO0000046 & NCU & Prohibition & Purpose is not :NCU & ~ \\ \hline
+DUO0000045 & NPU & Permission & Assignee is :NonProfitOrganisation & ~ \\ \hline
+DUO0000045 & NPU & Prohibition & Assignee is :ForProfitOrganisation & ~ \\ \hline
+DUO0000044 & NPOA & Prohibition & Purpose is :POA & ~ \\ \hline
+DUO0000027 & PS & Permission & Project is :ApprovedProject & :TemplateProject \\ \hline
+DUO0000027 & PS & Prohibition & Project is not :ApprovedProject & :TemplateProject \\ \hline
+DUO0000024 & MOR & Duty & Action is odrl:distribute :ResultsOfStudies with odrl:dateTime & :TemplateDateTime \\ \hline
+DUO0000019 & PUB & Duty & Action is odrl:distribute :ResultsOfStudies & ~ \\ \hline
+DUO0000012 & RS & Permission & Purpose is specified :Research & :TemplateResearch \\ \hline
+DUO0000012 & RS & Prohibition & Purpose is not specified :Research & :TemplateResearch \\ \hline
+DUO0000029 & RTN & Duty & Action is :ReturnDerivedOrEnrichedData & ~ \\ \hline
+DUO0000025 & TS & Permission & Time is less than specified :TemplateDateTime & :TemplateDateTime \\ \hline
+DUO0000026 & US & Permission & Assignee is :ApprovedUser & :TemplateUser \\ \hline
+DUO0000026 & US & Prohibition & Assignee is not :ApprovedUser & :TemplateUser \\ \hline\hline
+OBI0000066 & \multicolumn{4}{l|}{\textbf{Investigation}} \\ \hline\hline
+DUO0000034 & & Permission & Purpose is :AgeCategoryResearch & \\ \hline
+DUO0000034 & & Permission & Age is specified :Age & :TemplateAgeCategory \\ \hline
+DUO0000033 & ~ & Permission & Purpose is :POA & \\ \hline
+DUO0000037 & ~ & Permission & Purpose is :HMB & \\ \hline
+DUO0000040 & ~ & Permission & Purpose is :DS and mondo:0000001 & :TemplateDisease \\ \hline
+DUO0000039 & ~ & Permission & Purpose is :DrugDevelopment & \\ \hline
+DUO0000038 & ~ & Permission & Purpose is :GS & \\ \hline
+DUO0000035 & ~ & Permission & Purpose is :GenderCategoryResearch & \\ \hline
+DUO0000035 & & Permission & Gender is specified :Gender & :TemplateGender \\ \hline
+DUO0000031 & ~ & Permission & Purpose is :MDS & \\ \hline
+DUO0000032 & ~ & Permission & Purpose is :PopulationGroupResearch & \\ \hline
+DUO0000032 & & Permission & Population is specified :Population & :TemplatePopulation \\ \hline
+DUO0000036 & ~ & Permission & Purpose is :ResearchControl & \\
+\end{tabular}}
+\end{table}
 
 % modelling of DUODRL
 % extension of the policy matching algorithm to deal with DUODRL requirements
