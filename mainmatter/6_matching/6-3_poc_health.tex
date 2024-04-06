@@ -299,14 +299,14 @@ ex:offer_for_GRU_TS_COL a odrl:Offer ;
     odrl:target ex:EHR ;
     odrl:action odrl:use ;
     dcterms:source duodrl:DUO_0000042, duodrl:DUO_0000025, duodrl:DUO_0000020 ;
-    dcterms:issued "2022-04-30"^^xsd:date ;
+    dcterms:issued "2024-04-06"^^xsd:date ;
     odrl:permission [
         odrl:duty [ odrl:action duodrl:CollaborateWithStudyPI ] ] ;
     odrl:permission [
         odrl:constraint [ 
             odrl:leftOperand odrl:elapsedTime ;
             odrl:operator odrl:lteq ;
-            odrl:rightOperand "2022-12-31"^^xsd:date ] ] ;
+            odrl:rightOperand "2024-12-31"^^xsd:date ] ] ;
     odrl:permission [
         odrl:constraint [ 
             odrl:leftOperand oac:Purpose ;
@@ -314,6 +314,34 @@ ex:offer_for_GRU_TS_COL a odrl:Offer ;
             odrl:rightOperand duodrl:GRU ] ] .
 \end{minted}
 \end{listing}
+
+\paragraph{Data access outcomes as \texttt{odrl:Agreement}s}
+To provide access to a dataset, data-handling environments must be able to match dataset policies with a specific request being made e.g. for research with health data.
+For this, DUO's requests must be instantiated as \texttt{odrl:Request}s to be matched with the datasets \texttt{odrl:Offer}s.
+A request for health, medical, or biomedical research studies (\texttt{DUO\_0000037}) is presented in Listing \ref{list:duodrl_request}.
+
+\begin{listing}[htp]
+\caption{An \texttt{odrl:Request} containing a request for health, medical, or biomedical research created from \texttt{DUO\_0000037}.}
+\label{list:duodrl_request}
+\begin{minted}{turtle}
+ex:request_for_HMB a odrl:Request ;
+    odrl:uid ex:request_for_HMB ;
+    odrl:profile oac: ;
+    rdfs:comment "Request for health, medical, or biomedical research" ;
+    dcterms:source duodrl:DUO_0000037 ;
+    dcterms:issued "2024-05-01"^^xsd:date ;
+    odrl:permission [
+        odrl:action odrl:use ;
+        odrl:target duodrl:TemplateDataset ;
+        odrl:assignee ex:requester ;
+        odrl:constraint [
+            odrl:leftOperand oac:Purpose ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand duodrl:HMB ] ] .
+\end{minted}
+\end{listing}
+
+Section~\ref{sec:algorithm-agreement}
 
 % extension of the policy matching algorithm to deal with DUODRL requirements
 % templates -- query the data registry in a Pod to find the location of the :TemplateDataset
