@@ -273,6 +273,48 @@ duodrl:DUO_0000024 a odrl:Set ;
 \end{listing}
 
 \paragraph{Dataset policies as \texttt{odrl:Offer}s}
+Datasets can be annotated with several DUO concepts.
+In this context, an instantiation algorithm must be used to collect the \texttt{odrl:Set}s that should be applied to the dataset to be instantiated into an \texttt{odrl:Offer}.
+For this, the algorithm for offer instantiation presented in Section~\ref{sec:algorithm-offer} can be recycled for the particular use case of DUO.
+As such the following steps were taken to instantiate dataset policies as \texttt{odrl:Offer}s:
+\begin{enumerate}
+    \item For a given dataset, retrieve all data use permissions and data use modifiers that the dataset was tagged with.
+    \item Filter out duplicated policies.
+    \item If a retrieved policy contains instances of \texttt{TemplateQuery}, e.g., \texttt{TemplateDataset}, execute their SPARQL queries to replace the template with the retrieved values.
+    \item For each retrieved policy, fetch relevant \texttt{odrl:Permission} and \texttt{odrl:Prohibition} rules and merge them in a single \texttt{odrl:Offer}.
+    \item A link to each `original' policy is maintained in the final \texttt{odrl:Offer} by using the \texttt{dcterms:source} property.
+    \item Add provenance information to the \texttt{odrl:Offer}, e.g. \texttt{dcterms:issued} for when the offer was instantiated and \texttt{dcterms:creator} for the issuer of the policy.
+\end{enumerate}
+
+An example \texttt{odrl:Offer}, which merges the \texttt{DUO\_0000042}, \texttt{DUO\_0000025} and \texttt{DUO\_0000020} policies as conditions to access the \texttt{ex:EHR} dataset, is presented in Listing \ref{list:duodrl_offer}.
+
+\begin{listing}[htp]
+\caption{An example \texttt{odrl:Offer} containing a permission for general research use, from \texttt{DUO\_0000042}, a time limit on the use, from \texttt{DUO\_0000025}, and a duty to collaborate with the studies' primary investigator, defined from \texttt{DUO\_0000020}.}
+\label{list:duodrl_offer}
+\begin{minted}{turtle}
+ex:offer_for_GRU_TS_COL a odrl:Offer ;
+    odrl:uid ex:offer_for_GRU_TS_COL ;
+    odrl:profile oac: ;
+    rdfs:label "Offer to use dataset for GRU within time limits while collaborating with the primary study investigator" ;
+    odrl:target ex:EHR ;
+    odrl:action odrl:use ;
+    dcterms:source duodrl:DUO_0000042, duodrl:DUO_0000025, duodrl:DUO_0000020 ;
+    dcterms:issued "2022-04-30"^^xsd:date ;
+    odrl:permission [
+        odrl:duty [ odrl:action duodrl:CollaborateWithStudyPI ] ] ;
+    odrl:permission [
+        odrl:constraint [ 
+            odrl:leftOperand odrl:elapsedTime ;
+            odrl:operator odrl:lteq ;
+            odrl:rightOperand "2022-12-31"^^xsd:date ] ] ;
+    odrl:permission [
+        odrl:constraint [ 
+            odrl:leftOperand oac:Purpose ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand duodrl:GRU ] ] .
+\end{minted}
+\end{listing}
+
 % extension of the policy matching algorithm to deal with DUODRL requirements
 % templates -- query the data registry in a Pod to find the location of the :TemplateDataset
 % poc implementation
