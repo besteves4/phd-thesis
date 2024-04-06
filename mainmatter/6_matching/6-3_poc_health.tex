@@ -81,17 +81,17 @@ More significantly, in order to automate the generation of data access/usage agr
 \end{enumerate}
 % FROM THE PAPER: Such solutions have existed for a while now -- for example, Answer Set Programming (ASP) and logic-based semantic reasoners have been utilised in a variety of domains -- including for representing information and using it for checking legal compliance for GDPR (see Section.\ref{sec:sota-legal}).
 
-With the aforementioned motivation in mind, this Thesis proposes an approach to explicitly represent DUO concepts using RDF, leveraging ODRL and the efforts declared in previous Sections related with an OAC-based architecture for decentralised access to data.
+With the aforementioned motivation in mind, this Thesis proposes an approach to explicitly represent DUO concepts using RDF, leveraging ODRL and the efforts declared in previous Sections related to an OAC-based architecture for decentralised access to data.
 The choice of using ODRL, beyond being a W3C Recommendation for the expression of policies, is supported by the following motives:
 \begin{enumerate}
     \item[(i)] it is RDF-based, ensuring machine-readability;
     \item[(ii)] it encompasses concepts that model domain-specific and legally relevant terms to depict constraints, such as spatial and temporal operators, as well as support various types of policies like offers, requests, and agreements; % Additionally, it offers flexibility in utilizing these concepts in a manner analogous to the conventional contents and structures of legal agreements;
     \item[(iii)] its usage can be validated, and efforts are underway within the W3C ODRL CG to actively develop a formal semantics specification~\citep{fornara_odrl_2023};
     \item[(iv)] it facilitates the development of extensions through ODRL profiles, offering the flexibility to tailor ODRL to specific requirements -- as proved by this Thesis' work on OAC (Section~\ref{sec:oac}), which connects ODRL with legal requirements using DPV and can be extended to cater for legal requirements of health data sharing; and
-    \item[(v)] backwards compatibility can be ensured -- existing DUO-based systems can adopt the practices suggested in this Section and continue being compatible with the DUO specification. Also, DUO users can select which aspects of this solution they want to incorporate in their system.
+    \item[(v)] backward compatibility can be ensured -- existing DUO-based systems can adopt the practices suggested in this Section and continue being compatible with the DUO specification. Also, DUO users can select which aspects of this solution they want to incorporate into their system.
 \end{enumerate}
 
-As such, based on the algorithms described in Section~\ref{sec:algorithm}, in this Section, (i) DUO concepts are modelled as ODRL policies, (ii) such policies are instantiated as ODRL offers for the access to health-related datasets, (iii) offers are matched with incoming data requests to generate permissive or prohibitive data agreements, and (iv) work on OAC is recycled to deal with GDPR obligations for the processing of health data.
+As such, based on the algorithms described in Section~\ref{sec:algorithm}, in this Section, (i) DUO concepts are modelled as ODRL policies, (ii) such policies are instantiated as ODRL offers for access to health-related datasets, (iii) offers are matched with incoming data requests to generate permissive or prohibitive data agreements, and (iv) work on OAC is recycled to deal with GDPR obligations for the processing of health data.
 
 \subsection{Re-modelling DUO concepts with ODRL}
 \label{sec:poc_duodrl}
@@ -117,26 +117,29 @@ For instance, the DUO concept for code \texttt{HMB}, which states that ``[t]his 
 This approach allows for a more precise expression and application of DUO's \texttt{HMB} concept by revealing its underlying concepts (purpose) and the rules governing it (permission).
 
 Furthermore, upon analysing DUO's concepts and their inherent access conditions, ODRL rules were modelled to represent the conditions of each DUO concept.
-In cases where ODRL lacked the necessary concepts, an extension to its existing concepts is proposed to cover the missing ones.
+In cases where ODRL lacks the necessary concepts, an extension to its existing concepts is proposed to cover the missing ones.
 In this context, for each concept, an \texttt{odrl:Set} instance was modelled to represent the DUO concept's intrinsic rules.
 These policies are then amalgamated into an \texttt{odrl:Offer}, to serve as a unified policy for a dataset, as detailed in Section \ref{sec:algorithm-offer} regarding the instantiation of offer policies.
 A comprehensive compilation of the performed interpretations for each DUO concept is provided in Table \ref{table:DUO_ODRL_overview}.
+During this interpretive analysis, difficulties were found in interpreting specific expressions such as `is limited to', a term that suggests that usage is restricted solely within a particular scope.
+If this interpretation holds true, DUO developers should clarify how potential conflicts arising from rules expressing exclusive limitations versus other permissive expressions, such as `is allowed for', should be resolved.
+Hence, in this Thesis, ODRL's capabilities are used to articulate these requirements as permissions, prohibitions, and obligations, and, subsequently, existing works on ODRL \citep{pellegrini_automated_2018,de_vos_odrl_2019} and OWL \citep{bonatti_realtime_2020} reasoners can be employed to aid solving conflict resolution issues.
 
-\begin{table}[ht]
+\begin{table}[htp]
 \caption{Interpretation of DUO concepts' textual descriptions as ODRL policies.}
 \label{table:DUO_ODRL_overview}
 \footnotesize
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{p{1.7cm}||p{1.2cm}|p{1.45cm}|p{8.6cm}|p{3.1cm}}
 Concept & Code & Rule Type & Constraint & Placeholder \\ \hline\hline
-DUO0000001 & \multicolumn{4}{l|}{\textbf{Data Use Permission}} \\ \hline\hline
+DUO0000001 & \multicolumn{4}{l}{\textbf{Data Use Permission}} \\ \hline\hline
 DUO0000042 & GRU & Permission & Purpose is :GRU & ~ \\ \hline
 DUO0000006 & HMB & Permission & Purpose is :HMB and not :POA & ~ \\ \hline
 DUO0000007 & DS & Permission & Purpose is :DS and mondo:0000001 & :TemplateDisease \\ \hline
 DUO0000004 & NRES & Permission & Purpose is odrl:Purpose & ~ \\ \hline
 DUO0000011 & POA & Permission & Purpose is :POA & ~ \\ \hline
 DUO0000011 & POA & Prohibition & Purpose is not :POA & ~ \\ \hline\hline
-DUO0000017 & \multicolumn{4}{l|}{\textbf{Data Use Modifier}} \\ \hline\hline
+DUO0000017 & \multicolumn{4}{l}{\textbf{Data Use Modifier}} \\ \hline\hline
 DUO0000043 & CC & Permission & Purpose is :CC & ~ \\ \hline
 DUO0000020 & COL & Duty & Action is :CollaborateWithStudyPI & ~ \\ \hline
 DUO0000021 & IRB & Duty & Action is :ProvideEthicalApproval & ~ \\ \hline
@@ -165,7 +168,7 @@ DUO0000029 & RTN & Duty & Action is :ReturnDerivedOrEnrichedData & ~ \\ \hline
 DUO0000025 & TS & Permission & Time is less than specified :TemplateDateTime & :TemplateDateTime \\ \hline
 DUO0000026 & US & Permission & Assignee is :ApprovedUser & :TemplateUser \\ \hline
 DUO0000026 & US & Prohibition & Assignee is not :ApprovedUser & :TemplateUser \\ \hline\hline
-OBI0000066 & \multicolumn{4}{l|}{\textbf{Investigation}} \\ \hline\hline
+OBI0000066 & \multicolumn{4}{l}{\textbf{Investigation}} \\ \hline\hline
 DUO0000034 & & Permission & Purpose is :AgeCategoryResearch & \\ \hline
 DUO0000034 & & Permission & Age is specified :Age & :TemplateAgeCategory \\ \hline
 DUO0000033 & ~ & Permission & Purpose is :POA & \\ \hline
@@ -182,6 +185,94 @@ DUO0000036 & ~ & Permission & Purpose is :ResearchControl & \\
 \end{tabular}}
 \end{table}
 
-% modelling of DUODRL
+Presently, DUO concepts are confined to delineating conditions for data use, suggesting the usage of external ontologies to incorporate additional concepts needed for refining the scope of the term, e.g., \texttt{DUO\_0000007} denotes permission for disease-specific research and recommends the usage of the Mondo Disease Ontology ontology\footnote{\url{https://obofoundry.org/ontology/mondo} (accessed on 4 April 2024)} for specifying the diseases to which the permission applies. 
+Other specific concepts mentioned in DUO's textual annotations, which are not explicitly modelled, include codes inherited from previous iterations of DUO, such as purpose terms like \textit{CC} for Clinical Care Use, or \textit{GRU} for General Research Use.
+To express ODRL policies, these concepts need an explicit, individual semantic specification, so that they can be used to constrain permissions or prohibitions.
+Thus, in this Thesis' implementation, missing terms were identified and compiled into an ad-hoc vocabulary (DUODRL) to enable the correct expression of ODRL policies for each DUO concept.
+\beatriz{generate documentation for DUODRL and update w3id. }
+% FROM THE PAPER: We recommend DUO to adopt these or to create a similar vocabulary for explicitly providing the concepts and their descriptions separate from the data use conditions in which they are used. 
+This approach also offers the benefit of delivering more comprehensive documentation related to the information represented within DUO concepts.
+For instance, by modelling \textit{IRB} as an ODRL policy representing the duty to get an Ethics Review Board approval, instead of just using the DUO concept, it becomes feasible to include details about the processes and requirements necessary for such reviews.
+It also allows additional constraints related to ethics approvals to be semantically linked with this foundational concept, such as indicating that it must be conducted before data access is provided, periodically, or before any outcomes of the research are published.
+
+In the case of data requests, the so-called DUO `Investigations', redundant concepts were found in relation to both the data use permissions and modifiers concepts, e.g., \texttt{DUO\_0000040} denotes a data request for research on a specific disease, while \texttt{DUO\_0000007} signifies permission for research on a specific disease.
+In essence, both concepts convey the same idea concerning `research on a specific disease', albeit with one indicating a data request and the other representing the dataset's permissive conditions.
+As such, as previously suggested in relation to the reorganisation of DUO's `Data Use Permission' and `Data Use Modifier' taxonomies to be research purpose-based, a similar approach should be adopted for data requests to ensure consistency in the concepts used for requesting data.
+This alignment promotes clarity, reduces ambiguity, and facilitates the matching process, as the same rules can be associated to a dataset through an \texttt{odrl:Offer} and to a data request through an \texttt{odrl:Request}.
+
+Besides specifying requirements for data access and requests to access said data, DUO concepts should also be utilised to document the result of the matching algorithm, and whether access is to be granted or not.
+This aspect represents an important yet unexplored domain in the current identified applications of DUO, particularly because any data sharing typically entails accompanying information about the involved parties, the provenance linked with the granting process, and details regarding how the data access conditions were satisfied at the time or what are future duties for the access to be granted.
+Hence, the work on this Thesis related to the generation of data access agreements, described in detail in Section~\ref{sec:algorithm-agreement}, will be beneficial in portraying this information, not to mention the work on OAC and PLASMA, which can encompass all the aforementioned policy and metadata-related details.
+Furthermore, these agreements can be employed in automated processes that periodically verify if the pending duties on an agreement still have to be or are already fulfilled, e.g., the publication of the research results.
+
+\paragraph{DUO concepts as \texttt{odrl:Set}s}
+Considering the points raised above, every DUO restriction should be portrayed as a \texttt{odrl:Set} instance, which, according to its definition, should include at least one permission, prohibition, or obligation, along with one associated data asset, to be deemed a semantically correct ODRL policy.
+Its utilisation does not confer any access privileges but solely denotes a set of rules that are applicable to the resource.
+Considering the human-readable labels linked with each DUO concept, \texttt{odrl:permission} was used when the condition permitted access to data, \texttt{odrl:prohibition} when it prohibited access, and \texttt{odrl:duty} when it outlined obligations to allow data access. 
+DUO's textual descriptions are still kept in the policies via the \texttt{rdfs:comment} property and the connection with the original DUO concept using \texttt{skos:exactMatch}.
+
+Constructing a valid ODRL policy proved challenging due to the necessity of specifying \textit{``any form of identifiable resource''} \citep{iannella_odrl_vocab_2018}.
+This challenge arises because DUO concepts solely represent specific access and usage requirements unrelated to a specific dataset.
+Additionally, DUO does not indicate how to express values associated with requirements such as research in specific diseases or temporal duration of access.
+To ensure the validity of ODRL policies and provide clarity on how to later apply or instantiate them as an \texttt{odrl:Offer} for a particular dataset, the base class \texttt{TemplateQuery} was introduced in DUODRL.
+Instances of this class serve as a placeholder to be substituted with the actual value(s) obtained by executing a SPARQL query which is linked with the placeholder through the \texttt{sparqlExpression} property.
+In Table~\ref{table:DUO_ODRL_overview}, these instances are denoted in the `Placeholder' column.
+\beatriz{Examples of this approach are illustrated in Listing \ref{list:request} for an \texttt{odrl:Set} representing a DUO permission, subsequently used in a data request. The placeholders are employed to indicate datasets and assignees whose identities are not predetermined, and these placeholders are replaced with actual instances in real policies by utilising the SPARQL queries linked with each placeholder.}
+% FROM THE PAPER: Examples of this can be seen in Listing \ref{list:request} for a \texttt{odrl:Set} representing a DUO permission which is then used in a request. The placeholders are used to indicate datasets and assignees which are not known ahead of time, and which are substituted with actual instances in real policies by using the SPARQL queries associated with each placeholder.
+
+The indication of scoped restrictions, such as specifying the geographic location when use is confined to a particular region, was also not void of issues.
+Within DUO, the \texttt{obo:DUO\_0000010} property is used to describe a `is restricted to' relationship, which is intended to specify the specific values or instances of variables such as diseases or locations.
+However, the descriptions of DUO concepts only mention that \textit{``this should be coupled with an ontology term describing the (concept) the restriction applies to''}, without providing an example illustrating how it should be utilised.
+
+Hence, to address this challenge, four possible approaches were identified:
+\begin{enumerate}
+    \item [(i)] utilising OWL class expressions\footnote{\url{https://protegeproject.github.io/protege/class-expression-syntax/} (accessed on 6 April 2024)};
+    \item [(ii)] employing SHACL shapes to specify a constraint;
+    \item [(iii)] developing a new ODRL \texttt{Operator} that accepts property paths; or
+    \item [(iv)] directly stating the term as an instance of the scoping concept, e.g., for disease-specific restrictions, the concept would be instantiated as both the appropriate DUO concept and the disease concept).
+\end{enumerate}
+Each of these approaches influences how a condition is articulated and impacts the performance and functionality of the policy matching algorithm, e.g., leveraging approach (i) would necessitate the execution of an OWL2 reasoner before the matching process, while approach (ii) would require a SHACL validator.
+In this Thesis, the fourth approach was taken by declaring the concept as an instance of both the DUO and the scoping classes.
+This method was chosen for its simplicity, absence of the need for additional tools or modifications to ODRL, ease of replacement with a different method in the future, and alignment with the algorithms specified in Section~\ref{sec:algorithm}.
+
+The \texttt{odrl:Set} formulated to represent DUO's concept of \textit{``general research use''} and the one to represent DUO's concept of \textit{``publication moratorium''} are detailed in Listing~\ref{list:duodrl_set}.
+When instantiated, beyond additional provenance metadata such as the \texttt{dcterms:creator} and \texttt{dcterms:issued} properties to indicate the creator and date of issuance of the offer, the \texttt{duodrl:TemplateDataset} must be replaced by the dataset's identifier and, in the case of the moratorium, a date must be instantiated to express until when the distribution of the outcomes of the research study is prohibited. 
+
+\begin{listing}[htp]
+\caption{\texttt{odrl:Set}s representing \texttt{DUO\_0000042}, a data use permission for general research purposes (GRU), and \texttt{DUO\_0000024}, a data use modifier to indicate that the results of the research should be published only after a moratorium period (MOR).}
+\label{list:duodrl_set}
+\begin{minted}{turtle}
+duodrl:DUO_0000042 a odrl:Set ;
+    odrl:uid duodrl:DUO_0000042 ;
+    odrl:profile oac: ;
+    rdfs:label "DUO_0000042: This data use permission indicates that use is allowed for general research use for any research purpose (GRU - general research use)"@en ;
+    skos:exactMatch obo:DUO_0000042 ;
+    skos:editorialNote "We interpreted this as a permission for a research purpose that is an instance of general research purposes (GRU). We note that the DUO concept description consists of specific areas of research which can be additionally indicated if meant as an exclusive list, i.e., purpose must be one of those, or provide as subclasses of GRU if meant to be provided as a selection, i.e., purpose can be expressed as one of those"@en ;
+    odrl:permission [
+        odrl:action odrl:use ;
+        odrl:target duodrl:TemplateDataset ;
+        odrl:constraint [
+            odrl:leftOperand oac:Purpose ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand duodrl:GRU ] ] .
+    
+duodrl:DUO_0000024 a odrl:Set ;
+    odrl:uid duodrl:DUO_0000024 ;
+    rdfs:label "DUO_0000024: This data use modifier indicates that requestor agrees not to publish results of studies until a specific date (MOR - publication moratorium)"@en ;
+    skos:exactMatch obo:DUO_0000024 ;
+    skos:editorialNote "We interpret this as a prohibition to not publish results until the specified date as indicated by TemplateStudyResultsPublicationDate placeholder. We also note that this rule may be expressed using odrl:delayPeriod or odrl:dateTime if it should be expressed as a (delayed) permission to publish instead of a prohibition"@en ;
+    odrl:prohibition [
+        odrl:target duodrl:TemplateDataset ;
+        odrl:action odrl:distribute ;
+        odrl:output duodrl:ResultsOfStudies ;
+        odrl:constraint [
+            odrl:leftOperand odrl:dateTime ;
+            odrl:operator odrl:lt ;
+            odrl:rightOperand duodrl:TemplateStudyResultsPublicationDate ] ] .
+\end{minted}
+\end{listing}
+
+\paragraph{Dataset policies as \texttt{odrl:Offer}s}
 % extension of the policy matching algorithm to deal with DUODRL requirements
+% templates -- query the data registry in a Pod to find the location of the :TemplateDataset
 % poc implementation
