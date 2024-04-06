@@ -318,7 +318,7 @@ ex:offer_for_GRU_TS_COL a odrl:Offer ;
 \paragraph{Data access outcomes as \texttt{odrl:Agreement}s}
 To provide access to a dataset, data-handling environments must be able to match dataset policies with a specific request being made e.g. for research with health data.
 For this, DUO's requests must be instantiated as \texttt{odrl:Request}s to be matched with the datasets \texttt{odrl:Offer}s.
-A request for health, medical, or biomedical research studies (\texttt{DUO\_0000037}) is presented in Listing \ref{list:duodrl_request}.
+A request for health, medical, or biomedical research studies (\texttt{DUO\_0000037}) is presented in Listing~\ref{list:duodrl_request}.
 
 \begin{listing}[htp]
 \caption{An \texttt{odrl:Request} containing a request for health, medical, or biomedical research created from \texttt{DUO\_0000037}.}
@@ -341,7 +341,51 @@ ex:request_for_HMB a odrl:Request ;
 \end{minted}
 \end{listing}
 
-Section~\ref{sec:algorithm-agreement}
+In this context, an algorithm must be used to collect the conditions under which access to data is allowed/denied.
+As such, the algorithm for policy matching presented in Section~\ref{sec:algorithm-agreement} can be recycled for the particular use case of DUO matching for health datasets.
+Considering this, the following steps were taken to instantiate dataset access agreements as \texttt{odrl:Agreement}s:
+
+\begin{enumerate}
+    \item Retrieve the data requester's \texttt{odrl:Request} and the dataset's \texttt{odrl:Offer}.
+    \item Match the \texttt{odrl:Offer} with the \texttt{odrl:Request}.
+    \item Record the outcome of the matching algorithm, where the \texttt{odrl:target} property specifies the dataset to be accessed, and the \texttt{odrl:assignee} and \texttt{odrl:assigner} properties identify the data provider and the requester, respectively.
+    \item If the matching result is positive, i.e., the request and the offer are compatible, then access is permitted by employing a permission with constraints on the requested purpose for access, along with any additional constraints such as spatial or temporal constraints or duties on the requester. If access is denied, similar information is included in the policy as a prohibition.
+    \item Utilise the \texttt{dcterms:references} property to associate the agreement with the \texttt{odrl:Offer} and \texttt{odrl:Request} that were used to generate it.
+    \item Include provenance and other relevant information, such as the \texttt{dcterms:issued} property, to document the creation and acceptance of the agreement among the parties.
+\end{enumerate}
+
+Following these steps, an agreement for access to data can be reached.
+An example representation of a DUO-based data access agreement, modelled as an \texttt{odrl:Agreement}, to give access to data until 2024--12--31 for the purpose of health, medical, or biomedical research studies is presented in Listing~\ref{list:duodrl_agreement}, including also a duty which must be fulfilled after data access.
+
+\begin{listing}[htp]
+\caption{An \texttt{odrl:Agreement} representing a decision to access a \texttt{ex:EHR} dataset from \texttt{ex:provider}.}
+\label{list:duodrl_agreement}
+\begin{minted}{turtle}
+ex:agreement_for_HMB a odrl:Agreement ;
+    odrl:uid ex:agreement_for_HMB ;
+    odrl:profile oac: ;
+    dcterms:references ex:offer_for_GRU_TS_COL, ex:request_for_HMB ;
+    dcterms:issued "2024-05-01"^^xsd:date ;
+    odrl:action odrl:use ;
+    odrl:target ex:EHR ;
+    odrl:assignee ex:provider ;
+    odrl:assigner ex:requester ;
+    odrl:permission [
+        odrl:constraint [
+            odrl:and ex:constraint_purpose, ex:constraint_temporal ] ;
+        odrl:duty [ odrl:action duodrl:CollaborateWithStudyPI ] ] .
+
+ex:constraint_purpose a odrl:Constraint ;
+    odrl:leftOperand oac:Purpose ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand duodrl:HMB .
+
+ex:constraint_temporal a odrl:Constraint ;
+    odrl:leftOperand odrl:elapsedTime ;
+    odrl:operator odrl:lteq ;
+    odrl:rightOperand "2024-12-31"^^xsd:date .
+\end{minted}
+\end{listing}
 
 % extension of the policy matching algorithm to deal with DUODRL requirements
 % templates -- query the data registry in a Pod to find the location of the :TemplateDataset
