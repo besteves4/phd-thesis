@@ -387,6 +387,92 @@ ex:constraint_temporal a odrl:Constraint ;
 \end{minted}
 \end{listing}
 
-% extension of the policy matching algorithm to deal with DUODRL requirements
+As previously mentioned in the policy matching algorithm described in Section~\ref{sec:algorithm-agreement}, the matching process described in step 2 of agreement generation operates by comparing and assessing the compatibility between the conditions described in dataset policies and in data requests.
+Since DUO matching systems are supposed to match offers with requests using subsumption as a criterion, the Algorithm~\ref{alg:matching}, proposed for OAC-based systems in the previous Section, can also be adapted here for the specific use case of DUO-based health data-sharing. 
+In DUO's case, for a class $P$ and its subclass $C$, a request to access $P$ does not allow access to $C$ since $C$ is more specific than $P$.
+However, a request to access $C$ would allow use of $P$ as $P$ is less specific than $C$.
+In light of these considerations, Algorithm~\ref{alg:duodrl_matching} offers pseudo-code that showcases the adapted steps of the policy matching algorithm for the DUO health data use case.
+
+\begin{algorithm}[ht]
+\caption{Pseudo-code of the proposed matching algorithm for DUODRL.}
+\label{alg:duodrl_matching}
+\begin{algorithmic}
+\For{$prohibition \gets odrl{:}Offer$}
+    \If{$odrl{:}assignee \in offer{:}prohibition$}
+        \If{$offer{:}assignee \equiv request{:}assignee$}
+            $decision \gets DENY$
+        \EndIf
+    \EndIf
+    \For{$constraint \gets prohibition$}
+        \If{$odr{:}spatial \gets constraint$}
+            \If{$offer{:}spatial \cap request{:}spatial \neq\emptyset$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$duodrl{:}Project \gets constraint$}
+            \If{$request{:}project \cap offer{:}project \neq\emptyset$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$odrl{:}dateTime \gets constraint$}
+            \If{$timeNow < moratoriumDate$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$offer{:}purpose \cap request{:}purpose \neq\emptyset$}
+            $decision \gets DENY$
+        \EndIf
+    \EndFor
+\EndFor
+
+\For{$permission \gets odrl{:Offer}$}
+    \If{$odrl{:}assignee \in offer{:}permission$}
+        \If{$offer{:}assignee \not\equiv request{:assignee}$}
+            $decision \gets DENY$
+        \EndIf
+    \EndIf 
+    \For{$constraint \gets permission$}
+        \If{$odrl{:}dateTime \gets constraint$}
+            \If{$timeNow > timeLimit$}
+                $decision \gets DENY$
+            \EndIf 
+        \ElsIf{$request{:}purpose \in groupResearchPurposes$}
+            \If{$request{:}purpose \not\subseteq offer{:}purpose \bigvee request{:}group \not\subseteq offer{:}group$}
+                $decision \gets DENY$
+            \EndIf
+        \ElsIf{$request{:}purpose \not\subseteq offer{:}purpose$}
+            $decision \gets DENY$
+        \EndIf 
+    \EndFor 
+\EndFor
+
+\If{$ \nexists DENY$}
+    $decision \gets GRANT$
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+In this context, it is important to note that this algorithm offers a general outline of actions, since DUO's documentation lacks specific details for accurately interpreting certain semantic aspects.
+Since this interpretation significantly influences decision-making within DUO's processes, and DUO only specifies how to interpret purposes and not other restrictions, e.g., location, users, projects, this is as an area that might require further exploration and investigation in the future as more details about DUO's matching process are known.
+To address this information gap, apart from the purposes in DUO's concepts, the matching of the remaining concepts is performed according to the proposed Algorithm~\ref{alg:matching}, as this proposal considers a legally relevant interpretation of hierarchical concepts, where a narrower concept cannot be deemed compatible with a request for a broader concept, e.g., a permission to access the data within a certain city cannot be fulfilled by a request for a region broader than that city.
+Hence, the proposed algorithm mirrors the previously described algorithm for OAC.
+Firstly, the prohibitive statements are matched, and only if no incompatibilities are found are the permissions considered.
+The denial of the access request occurs during prohibition checking if any of the following restrictions in the dataset offer are found to be incompatible with the data request:
+
+\begin{enumerate}
+    \item offer assignee matches ($\equiv$) the request assignee; 
+    \item offer has a spatial constraint matching or not satisfying ($\cap\neq\emptyset$) the spatial constraint in the request;
+    \item offer has a project constraint matching ($\cap\neq\emptyset$) the project in the request;
+    \item there is a moratorium period with a date in the future; and 
+    \item offer has a purpose matching ($\cap\neq\emptyset$) the purpose in the request.
+\end{enumerate}
+
+If no prohibitions are identified, the next step is to verify the permissions.
+Access will be denied during permission checking if any of the following constraints in the request are incompatible with the dataset offer:
+
+\begin{enumerate}
+    \item offer assignee does not match ($\not\equiv$) the assignee of the request; 
+    \item offer time limit on use has lapsed;
+    \item offer has a group-related research purpose, e.g., \texttt{PopulationGroupResearch}, \texttt{AgeCategoryResearch} or \texttt{GenderCategoryResearch} and the request purpose does not match ($\not\subseteq$) it or the request purpose matches it but the group does not ($\not\subseteq$), e.g. the \texttt{PopulationGroup}, \texttt{Age} or \texttt{Gender} in the request are different from the one in the offer; and
+    \item offer purpose does not match ($\not\subseteq$) request purpose, e.g., DUO's general research use purpose \texttt{GRU} in a request does not match a health, medical or biomedical research purpose \texttt{HMB} in an offer as \texttt{GRU} is a superclass of \texttt{HMB}.
+\end{enumerate}
+
 % templates -- query the data registry in a Pod to find the location of the :TemplateDataset
 % poc implementation
