@@ -474,5 +474,43 @@ Access will be denied during permission checking if any of the following constra
     \item offer purpose does not match ($\not\subseteq$) request purpose, e.g., DUO's general research use purpose \texttt{GRU} in a request does not match a health, medical or biomedical research purpose \texttt{HMB} in an offer as \texttt{GRU} is a superclass of \texttt{HMB}.
 \end{enumerate}
 
+The described procedures are applied to all permissions and prohibitions outlined in the dataset's offer.
+If all permissions and prohibitions are met without any violations, access to the health-related data can be authorised, if not the \texttt{odrl:Agreement} will include a prohibition that states the motives for the denial of the request.
+The proof-of-concept implementation outlined in \beatriz{Section~\ref{sec:demo} } applies these steps to match an offer with request policies in order to generate a data access agreement.
+
+Table~\ref{tab:duodrl_matching_examples} illustrates examples of how the matching algorithm operates for prohibitions and permissions in offers with spatial and purpose-based constraints.
+As previously mentioned, in a semantic-based context, performing equivalence ($\equiv$), intersection ($\cap$), and subset ($\subseteq$) checking requires supplementary deliberations beyond simply employing \texttt{owl:sameAs} or \texttt{rdfs:subClassOf} inferences.
+For instance, comparing an offer with a location constraint restricted to Spain with a request to Europe using the subset ($\subseteq$) operator for permissions or the intersection ($\cap$) operator for prohibitions needs both locations to be articulated in a manner that facilitates such a hierarchical interpretation.
+In this scenario, the matching process requires understanding that \textit{Spain} is a narrower concept than \textit{Europe}.
+Further complexities arise when representing legal jurisdictions, such as the \textit{EU}, of which \textit{Spain} is a member.
+
+\begin{table}[ht]
+\centering
+\caption{Examples of outcomes of the policy matching algorithm for DUODRL.}
+\label{tab:duodrl_matching_examples}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c|c|c||c|c||c|c}
+\multicolumn{3}{c||}{\textbf{Offer}} & \multicolumn{2}{c||}{\textbf{Request}} & \multicolumn{2}{c}{\textbf{Outcome}} \\
+\hline
+Rule & Purpose & Location & Purpose & Location & Decision & Reason \\
+\hline\hline
+Permission & GS & Spain & GS & Europe & DENY & Europe $\not\subseteq$ Spain \\
+\hline
+Permission & GS & Europe & GS & Spain & GRANT & Spain $\subseteq$ Europe \\
+\hline
+Prohibition & GS & Spain & GS & Europe & DENY & Europe $\cap$ Spain $\neq\emptyset$ \\
+\hline
+Prohibition & GS & Europe & GS & Spain & DENY & Spain $\cap$ Europe $\neq\emptyset$ \\
+\hline
+Prohibition & GS & UK & GS & Spain & GRANT & Spain $\cap$ UK $=\emptyset$ \\
+\hline
+Permission & HMB & ~ & DS-Cancer & ~ & GRANT & DS-Cancer $\subseteq$ HMB \\
+\hline
+Prohibition & DS-Cancer & ~ & HMB & ~ & DENY & HMB $\cap$ DS-Cancer $\neq\emptyset$ \\
+\end{tabular}}
+\end{table}
+
+\paragraph{Expressing legal compliance with OAC}
+
 % templates -- query the data registry in a Pod to find the location of the :TemplateDataset
 % poc implementation
