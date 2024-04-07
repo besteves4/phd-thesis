@@ -78,7 +78,7 @@ Taking this into consideration, the generation of the \texttt{odrl:Agreement} sh
 \begin{enumerate}
     \item Retrieve the data requester's \texttt{odrl:Request} and the user policy's \texttt{odrl:Offer}.
     \item Match the \texttt{odrl:Offer} with the \texttt{odrl:Request}.
-    \item Record the outcome of the matching algorithm, where the \texttt{odrl:target} property specifies the data to be accessed, and the \texttt{odrl:assignee} and \texttt{odrl:assigner} properties identify the data subject and the requester, respectively.
+    \item Record the outcome of the matching algorithm, where the \texttt{odrl:target} property specifies the data to be accessed, and the \texttt{odrl:assignee} and \texttt{odrl:assigner} properties identify the requester and the data subject, respectively.
     \item If the matching result is positive, i.e., the request and the offer are compatible, then access is permitted by employing a permission with constraints on the requested purpose for access, along with any additional constraints such as legal bases, identity providers or recipients. If access is denied, similar information is included in the policy as a prohibition.
     \item Utilise the \texttt{dcterms:references} property to associate the agreement with the \texttt{odrl:Offer} and \texttt{odrl:Request} that were used to generate it.
     \item Include provenance and other relevant information, such as the \texttt{dcterms:issued} property, to document the creation and acceptance of the agreement among the parties.

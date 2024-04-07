@@ -296,6 +296,7 @@ ex:offer_for_GRU_TS_COL a odrl:Offer ;
     odrl:uid ex:offer_for_GRU_TS_COL ;
     odrl:profile oac: ;
     rdfs:label "Offer to use dataset for GRU within time limits while collaborating with the primary study investigator" ;
+    odrl:assigner ex:provider ;
     odrl:target ex:EHR ;
     odrl:action odrl:use ;
     dcterms:source duodrl:DUO_0000042, duodrl:DUO_0000025, duodrl:DUO_0000020 ;
@@ -348,7 +349,7 @@ Considering this, the following steps were taken to instantiate dataset access a
 \begin{enumerate}
     \item Retrieve the data requester's \texttt{odrl:Request} and the dataset's \texttt{odrl:Offer}.
     \item Match the \texttt{odrl:Offer} with the \texttt{odrl:Request}.
-    \item Record the outcome of the matching algorithm, where the \texttt{odrl:target} property specifies the dataset to be accessed, and the \texttt{odrl:assignee} and \texttt{odrl:assigner} properties identify the data provider and the requester, respectively.
+    \item Record the outcome of the matching algorithm, where the \texttt{odrl:target} property specifies the dataset to be accessed, and the \texttt{odrl:assignee} and \texttt{odrl:assigner} properties identify the data requester and the provider, respectively.
     \item If the matching result is positive, i.e., the request and the offer are compatible, then access is permitted by employing a permission with constraints on the requested purpose for access, along with any additional constraints such as spatial or temporal constraints or duties on the requester. If access is denied, similar information is included in the policy as a prohibition.
     \item Utilise the \texttt{dcterms:references} property to associate the agreement with the \texttt{odrl:Offer} and \texttt{odrl:Request} that were used to generate it.
     \item Include provenance and other relevant information, such as the \texttt{dcterms:issued} property, to document the creation and acceptance of the agreement among the parties.
@@ -368,8 +369,8 @@ ex:agreement_for_HMB a odrl:Agreement ;
     dcterms:issued "2024-05-01"^^xsd:date ;
     odrl:action odrl:use ;
     odrl:target ex:EHR ;
-    odrl:assignee ex:provider ;
-    odrl:assigner ex:requester ;
+    odrl:assigner ex:provider ;
+    odrl:assignee ex:requester ;
     odrl:permission [
         odrl:constraint [
             odrl:and ex:constraint_purpose, ex:constraint_temporal ] ;
@@ -511,6 +512,81 @@ Prohibition & DS-Cancer & ~ & HMB & ~ & DENY & HMB $\cap$ DS-Cancer $\neq\emptys
 \end{table}
 
 \paragraph{Expressing legal compliance with OAC}
+The terminologies and concepts employed in DUO differ significantly from those utilised in legal compliance tasks, e.g., such as the ones mandated by the GDPR.
+With the proposed DUODRL approach which leverages ODRL concepts, the terminologies involved are specified in a language which can be legally interpreted, e.g., such as the \textit{Asset} or \textit{Party} terms.
+Moreover, the ODRL vocabulary encompasses complementary terms that could extend DUO with precise legal annotations, such as the \textit{odrl:consentingParty}, \textit{odrl:informedParty}, and \textit{odrl:obtainConsent} terms.
+While these terms suffice for endowing a legally-aligned policy, they may not adequately encompass the specific requirements of laws such as the GDPR, which assigns distinct roles to entities and mandates the use of specific legal grounds for the processing of personal data, including additional requirements for special categories of such data, e.g., such as health data.
+Simultaneously, tailoring the terms solely for a single jurisdiction could confine the usefulness and applicability of the proposed work solely to that law, without providing a clear pathway for accommodating other laws and jurisdictions.
+To bridge this divide, this Thesis proposes the usage of the OAC profile, which provides legally-aligned terms designed to be jurisdiction-agnostic and adaptable across various legal frameworks.
+
+The work on OAC can be seamlessly integrated into this use case as it already aligns ODRL terms with DPV terms for the expression of legally-aligned policies.
+Using OAC, and by consequence DPV, enables the modelling of policies with constraints on the legal basis used to process the data, e.g., consent, or on the third party recipients of the results of the processing, as well as explicitly define the entities processing the data -- the data controllers -- and the data protection laws that must be respected.
+The \texttt{oac:TechnicalOrganisationalMeasure} constraint left operand can also be used to ensure that certain measures are taken before or after data access, e.g., impact assessments or records of activities.
+To explicitly designate GDPR as the law applicable to the policy and rely on its legal bases for processing, DPV's GDPR extension can be used.
+Through this segregation (between DPV and its GDPR extension), policies can be articulated in a jurisdiction-agnostic way, and subsequently tailored to a specific law such as GDPR by factoring in additional contextual information, such as the locations of patients whose data is implicated or the identity of the legal representative the requesting data controller.
+This separation also paves the way for applying other laws, within or outside of the EU, which would be possible by crafting other law extensions to DPV akin to developed GDPR one.
+Listing \ref{list:duodrol_dpv} provides two ODRL offer policies: the first uses DPV to enact jurisdiction-agnostic data protection terms and the second uses the GDPR extension to describe GDPR-specific terms.
+
+\begin{listing}[htp]
+\caption{\texttt{odrl:Offer}s that use DPV and its GDPR extension to indicate conditions of access to data. \texttt{ex:offer\_agnostic} is jurisdiction-agnostic and requires consent and an impact assessment. \texttt{ex:offer\_gdpr} is GDPR-specific and requires explicit consent and a DPIA.}
+\label{list:duodrol_dpv}
+\begin{minted}{turtle}
+ex:offer_agnostic a odrl:Offer ;
+    odrl:uid ex:offer_agnostic ;
+    odrl:profile oac: ;
+    rdfs:label "Offer to use dataset for GRU using consent, and requiring an impact assessment" ;
+    dcterms:source duodrl:DUO_0000042 ;
+    dcterms:issued "2024-04-26"^^xsd:date ;
+    odrl:target ex:EHR ;
+    odrl:action oac:Use ;
+    odrl:assigner ex:provider ;
+    odrl:assignee ex:requester ;
+    odrl:permission [
+        odrl:constraint [ 
+            odrl:leftOperand oac:LegalBasis ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand dpv:Consent ] ] ;
+    odrl:permission [
+        odrl:constraint [ 
+            odrl:leftOperand oac:TechnicalOrganisationalMeasure ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand dpv:ImpactAssessment ] ] .
+ex:offer_gdpr a odrl:Offer ;
+    odrl:uid ex:offer_gdpr ;
+    odrl:profile oac: ;
+    rdfs:label "Offer to use dataset for GRU using GDPR's explicit consent, and requiring a DPIA" ;
+    dcterms:source duodrl:DUO_0000042 ;
+    dcterms:issued "2024-04-30"^^xsd:date ;
+    odrl:target ex:EHR ;
+    odrl:action oac:Use ;
+    odrl:assigner ex:provider ;
+    odrl:assignee ex:requester ;
+    dpv:hasDataSubject ex:provider ;
+    dpv:hasDataController ex:requester ;
+    dpv:hasApplicableLaw legal-eu:law-GDPR ;
+    odrl:permission [
+        odrl:constraint [
+            odrl:leftOperand oac:LegalBasis ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand eu-gdpr:A6-1-a-explicit-consent ] ] ;
+    odrl:permission [
+        odrl:constraint [ 
+            odrl:leftOperand oac:TechnicalOrganisationalMeasure ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand dpv:DPIA ] ] .
+\end{minted}
+\end{listing}
+
+In its documentation, DUO specifies that it is the responsibility of the DUO adopter to interpret and apply data protection requirements such as the mandated GDPR rights and obligations.
+This acknowledgement stems from the challenges associated with determining their relevance prior to receiving a data request or due to variations in provider/requester jurisdictions.
+To aid in this endeavour, this Thesis proposes incorporating or providing relevant methodologies essential for identifying GDPR's applicability (or that of other laws).
+For instance, GDPR is deemed applicable when an organisation does its business within the EU or handles the personal data of EU individual. 
+This entails having the knowledge of the data subjects' birthplace of individuals whose data is being offered for use, as well as the location of the data controller.
+
+Both scenarios, jurisdiction-agnostic and GDPR-specific, can be implemented into ODRL policies through the relevant \texttt{dpv:Entity} and \texttt{dpv:Location} concepts.
+This facilitates the expression of further data access conditions using ODRL, such as data accessibility depending on the data request acknowledging GDPR's applicability or allowing access solely within GDPR-regulated jurisdictions.
+These conditions can be encoded as permissions or prohibitions to be checked during the matching step, similarly to other constraint checks described in the algorithm outlined in this Section.
+DPV's legal extension, which provides data protection laws and authorities taxonomies, should be used to specify such conditions.
 
 % templates -- query the data registry in a Pod to find the location of the :TemplateDataset
 % poc implementation
