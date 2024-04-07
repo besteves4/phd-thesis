@@ -607,4 +607,68 @@ This facilitates the expression of further data access conditions using ODRL, su
 These conditions can be encoded as permissions or prohibitions to be checked during the matching step, similarly to other constraint checks described in the algorithm outlined in this Section.
 DPV's legal extension, which provides data protection laws and authorities taxonomies, should be used to specify such conditions.
 
-% poc implementation
+\subsection{Proof of Concept implementation}
+\label{sec:poc_implementation}
+
+In this Section, the implementation of a Proof of Concept designed for generating DUODRL policies is outlined.
+This PoC also includes the implementation of the policy matching algorithm described in the previous Section, which can be accessed at \url{https://w3id.org/duodrl/demo}.
+Moreover, the PoC is installable and usable locally, while an online demonstration is also accessible at \url{https://w3id.org/duodrl/app}.
+
+Figure~\ref{fig:editor-all} depicts two instances of the developed UI of the PoC, designed for editing DUODRL policies.
+Both examples in the Figure use ODRL and the developed DUODRL extension to generate DUO-based policies for access to health datasets.
+Example (a) exclusively employs DUODRL concepts, while example (b) integrates both OAC and DPV to formulate legally-aligned \texttt{odrl:Offer}s.
+% ~\ref{fig:editor} don't work properly.
+When selecting the relevant data use permission and modifiers in the UI, the PoC application fetches the corresponding \texttt{odrl:Set}s and instantiates them as an \texttt{odrl:Offer} policy associated with a particular dataset.
+This policy is presented to the user in the UI as well.
+The source code of the appliaction and the DUODRL policies utilised for this purpose are accessible online at \url{https://w3id.org/duodrl/repo}.
+Detailed instructions on how to install, launch, and examples of usage of the PoC application are also available on the source code repository at \url{https://w3id.org/duodrl/demo}.
+
+
+\begin{figure*}[ht]
+\caption{Proof of concept implementation showing generation of \texttt{odrl:Offer} policies}
+\label{fig:editor-all}
+\centering
+\subfigure[with DUODRL concepts.]{
+    \fbox{\includegraphics[width=0.4\linewidth]{figures/chapter-6/poc-editor.PNG}}
+    \label{fig:editor}
+}
+\qquad
+\subfigure[with OAC and DPV concepts.]{
+    \fbox{\includegraphics[width=0.4\linewidth]{figures/chapter-6/poc-dpv-editor.PNG}}
+    \label{fig:dpv-editor}
+}
+\end{figure*}
+
+As mentioned in the last Section, the matching algorithm employed in this PoC was adapted from the OAC-based algorithm presented in Section~\ref{sec:algorithm-agreement} to cater to DUO's use case health data-sharing conditions, while ensuring alignment with legal requirements.
+During the matching process, the conditions outlined in the request for health data, in the \texttt{odrl:Request} policy, must be compared with those specified in the health datasets' offers, in the \texttt{odrl:Offer} policy.
+This entails ensuring that the permissions and prohibitions from the offer instantiation can be met by the request.
+Once this compatibility is established, the policies are deemed congruent, a permissive \texttt{odrl:Agreement} is generated, and access can be granted according to the established conditions.
+If the policies are not compatible then a prohibitive \texttt{odrl:Agreement} is generated and access to the dataset is denied.
+Moreover, for data discovery purposes, the \texttt{odrl:Request} policy needs to be compared against the policies of each available dataset if this PoC is to be implemented within a large-scale system, to ensure that all available datasets and corresponding policies are checked to see if they fit the request.
+While pre-computations and optimisations could streamline this process, this is not implemented within this Thesis prototype, as its purpose is solely to serve as a first PoC to test the generation of machine and human-readable data access agreements.
+
+The policy matching algorithm initiates by verifying if a dataset's policy includes a specific rule corresponding to the purpose outlined in the \texttt{odrl:Request}. 
+If the dataset's offer has a prohibition for a purpose $P$, access to the dataset may be denied if the request is for $P$; conversely, if a permission is detected, access can be allowed allowed.
+Subsequently, as described in the previous Section, similar assessments should be conducted to examine other restrictions beyond purpose, i.e., the ones outlined in Table \ref{tab:DUO_ODRL_overview}, such as constraints on the type of assigner for the agreement, on the location or timing of data use.
+In the event of encountering a matching prohibition, access to the dataset must be refused; however, if a permission is present, access may be granted.
+
+If additional obligations are mandated for dataset access and use, such as committing to collaborate with the primary study investigator or providing proof of ethical approval to perform the study, these should included within the \texttt{odrl:Agreement} together with the conditions for access.
+In instances where conflicting policies arise from the merge of distinct data use permissions and modifiers, the prohibition supersedes by default, akin to the algorithm's base protocol, established in Section~\ref{sec:algorithm}.
+Under such circumstances, access to the dataset is declined.
+
+The outcome of the matching algorithm, an \texttt{odrl:Agreement}, should be generated, incorporating a rule either permitting or prohibiting the solicited \texttt{odrl:Request}, as well as other metadata described in Section~\ref{sec:poc_duodrl}, including linkage with the corresponding \texttt{odrl:Request} and \texttt{odrl:Offer}, and any duties, if specified by the data provider.
+In this way, the \texttt{odrl:Agreement} instantiation serves to encapsulate and facilitate the creation of appropriate legal documentation to formalise and communicate the agreement stemming from the submitted request and consequent matching outcome.
+The computational overhead associated with generating such an agreement, particularly at a time when the request will be matched against a large number of offer policies, falls outside the scope of analysis of this Thesis.
+This is due to the fact that the overhead will vary significantly depending on the use case and on the interpretation of the DUO concepts, which are not explicitly defined and, as such, reflect the specific analysis proposed in this Thesis, aligned with its core foundation on the decentralisation of access to data.
+As a result, the focus of this Section is on clearly representing the information through the utilisation of ODRL policies and showcasing the applicability of the proposed OAC-based algorithm for decentralised access to health data on a purpose-based setting, aligned with the legal requirements specified in the GDPR.
+
+%TODO: add figure with screenshot of generated agreement + human readable description
+
+\paragraph{PoC preservation, maintenance, and future improvements}
+The PoC implementation is published and archived according to the methodology described in Section~\ref{sec:code_preservation}.
+Furthermore, its source code is hosted at \url{https://w3id.org/duodrl/repo}, under the CC-BY-4.0 license.
+A live demonstration of the PoC UI features is also available at \url{https://w3id.org/duodrl/app}.
+The repository can also be used by DUO/DUODRL users to suggest new features to be added to the PoC, as well as to report bugs through GitHub Issues.
+% As future work, SOPE can be extended to include all terms present in the previously mentioned DPV's taxonomies, as well as to cover all constraints defined in the OAC profile, e.g., restrict legal bases or specify the technical and organisational measures used by data controllers to ensure the secure processing of personal data.
+% Moreover, with such an extension, SOPE could also be used by data controllers to detail their privacy policies.
+% Additionally, user studies should be performed to assess the design choices included in the editor, as well as to understand what type of additional controls people want to have on top of what is legally mandated, e.g., temporal constraints or duties for the data controller to fulfil prior to data access.
