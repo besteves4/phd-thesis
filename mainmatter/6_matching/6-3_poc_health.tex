@@ -606,6 +606,14 @@ Both scenarios, jurisdiction-agnostic and GDPR-specific, can be implemented into
 This facilitates the expression of further data access conditions using ODRL, such as data accessibility depending on the data request acknowledging GDPR's applicability or allowing access solely within GDPR-regulated jurisdictions.
 These conditions can be encoded as permissions or prohibitions to be checked during the matching step, similarly to other constraint checks described in the algorithm outlined in this Section.
 DPV's legal extension, which provides data protection laws and authorities taxonomies, should be used to specify such conditions.
+Moreover, the possibility of having a jurisdiction-agnostic scenario, while still maintaining a strong connection with general legal requirements, alleviates the burden on adopters who may prefer not to express such information with jurisdiction-specific details. 
+For example, a data provider who simply mandates data access based on consent, without explicitly defining the conditions for valid consent under the GDPR, can articulate this policy using DUODRL and the previously described OAC profile, while the data access ethics board can assess it further based on their understanding of valid consent requirements.
+As such, this organisation can remove the burden of GDPR requirements from the data subject and impose any necessary additional restrictions or obligations directly to the data requester, to ensure compliance with this data protection regulation, e.g., using DPV's GDPR extension.
+
+This flexibility also provides advantages for systems like DUOS, which can explicitly designate datasets as necessitating GDPR-level consent or indicating its applicability by incorporating relevant metadata into the dataset offer.
+This approach aids the matching process in verifying legal obligations and compatibility.
+For instance, it may require specific information about the requester, e.g., such as information regarding the identity of their DPO, or demand additional legal bases and safeguards for data transfer to outside of the EU.
+Through this approach, DUO and its users and adopters can extend their legal applicability globally and also possess the means and mechanisms to address specific requirements of specific laws. 
 
 \subsection{Proof of Concept implementation}
 \label{sec:poc_implementation}
