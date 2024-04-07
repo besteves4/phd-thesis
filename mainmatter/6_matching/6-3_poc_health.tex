@@ -316,6 +316,25 @@ ex:offer_for_GRU_TS_COL a odrl:Offer ;
 \end{minted}
 \end{listing}
 
+Moreover, in decentralised data environments, the discovery of the dataset's location will play an important role as during the offer instantiation algorithm the \texttt{TemplateDataset} variable must be substituted by the real location of the dataset to which the offer applies.
+As such, the SPARQL query identified in Listing~\ref{list:sparql_duodrl} showcases an example of how to find the location of medical health data datasets, tagged as such using the DPV's personal data categories extension, and in particular the \texttt{pd:MedicalHealth} term, and using the PLASMA conforming specification of a data registry.
+By running such a query it will be possible to find the location of specific datasets in decentralised settings such as the ones promoted by Solid.
+Similar queries can also be executed for decentralised environments beyond Solid or even within centralised environments.
+
+\begin{listing}[ht]
+\caption{SPARQL query to retrieve template datasets locations from a PLASMA data registry specified in a Solid Pod.}
+\label{list:sparql_duodrl}
+\begin{minted}{sparql}
+SELECT DISTINCT ?DatasetsLocation WHERE {
+    ?DataRegistry a plasma:DataRegistry .
+    ?DataRegistry dcat:catalog ?Entry .
+    ?Entry a dcat:Catalog .
+    ?Entry dcat:themeTaxonomy pd:MedicalHealth .
+    ?Entry dcat:dataset ?DatasetsLocation .
+}
+\end{minted}
+\end{listing}
+
 \paragraph{Data access outcomes as \texttt{odrl:Agreement}s}
 To provide access to a dataset, data-handling environments must be able to match dataset policies with a specific request being made e.g. for research with health data.
 For this, DUO's requests must be instantiated as \texttt{odrl:Request}s to be matched with the datasets \texttt{odrl:Offer}s.
@@ -513,8 +532,8 @@ Prohibition & DS-Cancer & ~ & HMB & ~ & DENY & HMB $\cap$ DS-Cancer $\neq\emptys
 
 \paragraph{Expressing legal compliance with OAC}
 The terminologies and concepts employed in DUO differ significantly from those utilised in legal compliance tasks, e.g., such as the ones mandated by the GDPR.
-With the proposed DUODRL approach which leverages ODRL concepts, the terminologies involved are specified in a language which can be legally interpreted, e.g., such as the \textit{Asset} or \textit{Party} terms.
-Moreover, the ODRL vocabulary encompasses complementary terms that could extend DUO with precise legal annotations, such as the \textit{odrl:consentingParty}, \textit{odrl:informedParty}, and \textit{odrl:obtainConsent} terms.
+With the proposed DUODRL approach which leverages ODRL concepts, the terminologies involved are specified in a language which can be legally interpreted, e.g., such as the \texttt{Asset} or \texttt{Party} terms.
+Moreover, the ODRL vocabulary encompasses complementary terms that could extend DUO with precise legal annotations, such as the \texttt{odrl:consentingParty}, \texttt{odrl:informedParty}, and \texttt{odrl:obtainConsent} terms.
 While these terms suffice for endowing a legally-aligned policy, they may not adequately encompass the specific requirements of laws such as the GDPR, which assigns distinct roles to entities and mandates the use of specific legal grounds for the processing of personal data, including additional requirements for special categories of such data, e.g., such as health data.
 Simultaneously, tailoring the terms solely for a single jurisdiction could confine the usefulness and applicability of the proposed work solely to that law, without providing a clear pathway for accommodating other laws and jurisdictions.
 To bridge this divide, this Thesis proposes the usage of the OAC profile, which provides legally-aligned terms designed to be jurisdiction-agnostic and adaptable across various legal frameworks.
@@ -588,5 +607,4 @@ This facilitates the expression of further data access conditions using ODRL, su
 These conditions can be encoded as permissions or prohibitions to be checked during the matching step, similarly to other constraint checks described in the algorithm outlined in this Section.
 DPV's legal extension, which provides data protection laws and authorities taxonomies, should be used to specify such conditions.
 
-% templates -- query the data registry in a Pod to find the location of the :TemplateDataset
 % poc implementation
