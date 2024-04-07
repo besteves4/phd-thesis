@@ -28,5 +28,73 @@ This will improve both the findability and the accessibility of the vocabulary.
 \subsection{Comparison with existing access control systems}
 \label{sec:comparison_evaluation}
 
-\subsection{Lessons learned from the implemented PoC}
+\begin{table}[htp]
+    \centering
+    \caption{Comparison of the policy matching features proposed in this Thesis with other access control systems.}
+    \label{tab:comparison_matching}
+    \begin{tabular}{c||c|c|c|c}
+        ~ & \multicolumn{4}{c}{\textbf{Algorithm approaches}} \\
+        \hline
+        \textbf{Feature} & \textbf{Thesis} & \textbf{DUO} & \textbf{ACP} & \textbf{WAC} \\
+        \hline\hline
+        Requirement & OAC & \begin{tabular}[c]{@{}c@{}}Data Use Permission,\\Data Use Modifier\end{tabular} & ~ & ~ \\
+        \hline
+        Preference & OAC & ~ & ~ & ~ \\
+        \hline
+        Offer & ODRL & ~ & ACR & Authorisation \\
+        \hline
+        Request & ODRL & Investigation & Context & ~ \\
+        \hline
+        Agreement & ODRL & ~ & Access grant & Authorisation \\
+        \hline\hline
+        Permissions & ODRL & Data Use Permission & allow & $\checkmark$ \\
+        \hline
+        Prohibitions & ODRL & Data Use Modifier & deny & ~ \\
+        \hline
+        Duties & ODRL & Data Use Modifier & ~ & ~ \\
+        \hline\hline
+        Data & OAC/DPV & \textasteriskcentered{} & \textasteriskcentered{} & \textasteriskcentered{} \\
+        \hline
+        Processing & OAC/DPV & $\checkmark$ & \begin{tabular}[c]{@{}c@{}}Read, Write,\\Append, Control\end{tabular} & \begin{tabular}[c]{@{}c@{}}Read, Write,\\Append, Control\end{tabular} \\
+        \hline
+        Assigner & ODRL & ~ & ~ & ~ \\
+        \hline
+        Assignee & ODRL & $\checkmark$ & agent & \begin{tabular}[c]{@{}c@{}}agent,\\agent group\end{tabular} \\
+        \hline
+        Application & OAC & ~ & client & origin \\
+        \hline
+        Service & OAC & ~ & ~ & ~ \\
+        \hline
+        Legal roles & OAC/DPV & ~ & ~ & ~ \\
+        \hline
+        Purpose & OAC/DPV & $\checkmark$ & ~ & ~ \\
+        \hline
+        Legal basis & OAC/DPV & ~ & ~ & ~ \\
+        \hline
+        TOM & OAC/DPV & $\checkmark$ & ~ & ~ \\
+        \hline
+        Technology & OAC/DPV & ~ & ~ & ~ \\
+        \hline
+        \begin{tabular}[c]{@{}c@{}}Identity\\provider\end{tabular} & OAC & ~ & issuer & ~ \\
+        \hline\hline
+        Spatial & ODRL & $\checkmark$ & ~ & ~ \\
+        \hline
+        Project & DUODRL & $\checkmark$ & ~ & ~ \\
+        \hline
+        Temporal & ODRL & $\checkmark$ & ~ & ~ \\
+        \hline
+        Disease & DUODRL & $\checkmark$ & ~ & ~ \\
+        \hline
+        Gender & DUODRL & $\checkmark$ & ~ & ~ \\
+        \hline
+        Age & DUODRL & $\checkmark$ & ~ & ~ \\
+        \hline
+        Population & DUODRL & $\checkmark$ & ~ & ~ \\
+    \end{tabular}
+\end{table}
+% ethical approval/collaboration with PI can be a TOM in DUO
+% * as access is given to resources/datasets and not data
+
+
+\subsection{Concluding remarks}
 \label{sec:conclusions_poc}

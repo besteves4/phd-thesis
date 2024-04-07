@@ -119,15 +119,15 @@ This approach allows for a more precise expression and application of DUO's \tex
 Furthermore, upon analysing DUO's concepts and their inherent access conditions, ODRL rules were modelled to represent the conditions of each DUO concept.
 In cases where ODRL lacks the necessary concepts, an extension to its existing concepts is proposed to cover the missing ones.
 In this context, for each concept, an \texttt{odrl:Set} instance was modelled to represent the DUO concept's intrinsic rules.
-These policies are then amalgamated into an \texttt{odrl:Offer}, to serve as a unified policy for a dataset, as detailed in Section \ref{sec:algorithm-offer} regarding the instantiation of offer policies.
-A comprehensive compilation of the performed interpretations for each DUO concept is provided in Table \ref{table:DUO_ODRL_overview}.
+These policies are then amalgamated into an \texttt{odrl:Offer}, to serve as a unified policy for a dataset, as detailed in Section~\ref{sec:algorithm-offer} regarding the instantiation of offer policies.
+A comprehensive compilation of the performed interpretations for each DUO concept is provided in Table~\ref{tab:DUO_ODRL_overview}.
 During this interpretive analysis, difficulties were found in interpreting specific expressions such as `is limited to', a term that suggests that usage is restricted solely within a particular scope.
 If this interpretation holds true, DUO developers should clarify how potential conflicts arising from rules expressing exclusive limitations versus other permissive expressions, such as `is allowed for', should be resolved.
-Hence, in this Thesis, ODRL's capabilities are used to articulate these requirements as permissions, prohibitions, and obligations, and, subsequently, existing works on ODRL \citep{pellegrini_automated_2018,de_vos_odrl_2019} and OWL \citep{bonatti_realtime_2020} reasoners can be employed to aid solving conflict resolution issues.
+Hence, in this Thesis, ODRL's capabilities are used to articulate these requirements as permissions, prohibitions, and obligations, and, subsequently, existing works on ODRL~\citep{pellegrini_automated_2018,de_vos_odrl_2019} and OWL~\citep{bonatti_realtime_2020} reasoners can be employed to aid solving conflict resolution issues.
 
 \begin{table}[htp]
 \caption{Interpretation of DUO concepts' textual descriptions as ODRL policies.}
-\label{table:DUO_ODRL_overview}
+\label{tab:DUO_ODRL_overview}
 \footnotesize
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{p{1.7cm}||p{1.2cm}|p{1.45cm}|p{8.6cm}|p{3.1cm}}
@@ -211,12 +211,12 @@ Its utilisation does not confer any access privileges but solely denotes a set o
 Considering the human-readable labels linked with each DUO concept, \texttt{odrl:permission} was used when the condition permitted access to data, \texttt{odrl:prohibition} when it prohibited access, and \texttt{odrl:duty} when it outlined obligations to allow data access. 
 DUO's textual descriptions are still kept in the policies via the \texttt{rdfs:comment} property and the connection with the original DUO concept using \texttt{skos:exactMatch}.
 
-Constructing a valid ODRL policy proved challenging due to the necessity of specifying \textit{``any form of identifiable resource''} \citep{iannella_odrl_vocab_2018}.
+Constructing a valid ODRL policy proved challenging due to the necessity of specifying \textit{``any form of identifiable resource''}~\citep{iannella_odrl_vocab_2018}.
 This challenge arises because DUO concepts solely represent specific access and usage requirements unrelated to a specific dataset.
 Additionally, DUO does not indicate how to express values associated with requirements such as research in specific diseases or temporal duration of access.
 To ensure the validity of ODRL policies and provide clarity on how to later apply or instantiate them as an \texttt{odrl:Offer} for a particular dataset, the base class \texttt{TemplateQuery} was introduced in DUODRL.
 Instances of this class serve as a placeholder to be substituted with the actual value(s) obtained by executing a SPARQL query which is linked with the placeholder through the \texttt{sparqlExpression} property.
-In Table~\ref{table:DUO_ODRL_overview}, these instances are denoted in the `Placeholder' column.
+In Table~\ref{tab:DUO_ODRL_overview}, these instances are denoted in the `Placeholder' column.
 \beatriz{Examples of this approach are illustrated in Listing \ref{list:request} for an \texttt{odrl:Set} representing a DUO permission, subsequently used in a data request. The placeholders are employed to indicate datasets and assignees whose identities are not predetermined, and these placeholders are replaced with actual instances in real policies by utilising the SPARQL queries linked with each placeholder.}
 % FROM THE PAPER: Examples of this can be seen in Listing \ref{list:request} for a \texttt{odrl:Set} representing a DUO permission which is then used in a request. The placeholders are used to indicate datasets and assignees which are not known ahead of time, and which are substituted with actual instances in real policies by using the SPARQL queries associated with each placeholder.
 
@@ -657,7 +657,7 @@ While pre-computations and optimisations could streamline this process, this is 
 
 The policy matching algorithm initiates by verifying if a dataset's policy includes a specific rule corresponding to the purpose outlined in the \texttt{odrl:Request}. 
 If the dataset's offer has a prohibition for a purpose $P$, access to the dataset may be denied if the request is for $P$; conversely, if a permission is detected, access can be allowed allowed.
-Subsequently, as described in the previous Section, similar assessments should be conducted to examine other restrictions beyond purpose, i.e., the ones outlined in Table \ref{tab:DUO_ODRL_overview}, such as constraints on the type of assigner for the agreement, on the location or timing of data use.
+Subsequently, as described in the previous Section, similar assessments should be conducted to examine other restrictions beyond purpose, i.e., the ones outlined in Table~\ref{tab:DUO_ODRL_overview}, such as constraints on the type of assigner for the agreement, on the location or timing of data use.
 In the event of encountering a matching prohibition, access to the dataset must be refused; however, if a permission is present, access may be granted.
 
 If additional obligations are mandated for dataset access and use, such as committing to collaborate with the primary study investigator or providing proof of ethical approval to perform the study, these should included within the \texttt{odrl:Agreement} together with the conditions for access.
