@@ -2,13 +2,15 @@
 \label{chap:matching}
 
 \begin{tcolorbox}[colback=royallavender!40]
-The content of this Chapter has already been partially included in the articles published during this Thesis \citep{esteves_odrl_2021,esteves_using_2022,pandit_enhancing_2024}.
+The content of this Chapter has already been partially included in the articles published during this Thesis \citep{esteves_odrl_2021,esteves_using_2022,pandit_enhancing_2024,esteves_automating_2022}.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=royallavender!10]
 The source code produced during the development of this chapter is stored at:
 \begin{itemize}
     \item \url{https://w3id.org/people/besteves/sope/repo}
+    \item \url{https://w3id.org/people/besteves/access-right/api}
+    \item \url{https://w3id.org/people/besteves/access-right/solid}
     \item \url{https://w3id.org/duodrl/repo}
 \end{itemize}
 \end{tcolorbox}
@@ -19,14 +21,13 @@ This Chapter builds upon the vocabularies described in Chapter~\ref{chap:vocabul
 Section~\ref{sec:architecture} describes a detailed decomposition of the architectural building blocks for a legally-aligned, decentralised personal datastores ecosystem using the C4 graphical notation model \citep{brown_c4_2015}.
 System context, container, and component architectural diagrams are provided to report the proposed system, and a sequence diagram is provided to demonstrate how they work together.
 
-% Section~\ref{sec:policies_consent} discusses the usage of OAC policies as a precursor of consent for Solid, which can enable compliance with several GDPR requirements including the transparent information obligations of Articles 13 and 14 and the conditions to obtain valid consent pursuant to Articles 4.11 and 7.
-% 
-% Section~\ref{sec:automation_consent} argues whether the automation of consent can be performed while maintaining the `informed', `freely given', `specific', and `unambiguous' character of GDPR consent.
-% In particular, the specificity of purposes and processing operations, the distinction between data controllers and recipients, the compatibility of purposes, and the delegation of consent are further analysed through a `legal+tech' approach, relying on GDPR's requirements and on the OAC and PLASMA implementations.
-% 
-% Section~\ref{sec:biomedical_exception} discusses the special requirements of GDPR's special categories of data and research-related exceptions and, in particular, the requirements related to the sharing of health data for biomedical research or for the management of public health.
-% 
-% To conclude, Section~\ref{sec:ethical_challenges} debates the ethical challenges of controlling data and reclaiming control over it and explores how decentralised PIMS can help build confidence in data exchange practices and trust in the providers and developers of such systems.
+Section~\ref{sec:algorithm} provides a description of the design of algorithms for instantiating user requirements and preferences as user offers and for generating data access agreements, the outcome of matching data requests with user offer policies.
+Furthermore, SOPE, an RDF and ODRL-agnostic policy editor to define and store OAC policies in Solid Pods, is described, as well as a REST API service that uses the results of the policy matching algorithm to facilitate the exercising of data subject rights, in particular of the right of access.
+
+Section~\ref{sec:poc_health} discusses the implementation of a proof of concept implementation of the DUO-based algorithms for the specific use case of health datasets shared for research purposes.
+
+To conclude, Section~\ref{sec:evaluation_conclusions} evaluates the developed algorithms and PoC by assessing ontology quality, including pitfall detection and alignment with FAIR principles, and by comparing the proposed policy-based algorithm with DUO's and Solid's existing access control systems.
+Concluding remarks concerning the architecture, algorithms, and PoC implementation are also presented.
 
 \input{mainmatter/6_matching/6-1_architecture}
 \input{mainmatter/6_matching/6-2_algorithm}

@@ -188,8 +188,8 @@ DUO0000036 & ~ & Permission & Purpose is :ResearchControl & \\
 Presently, DUO concepts are confined to delineating conditions for data use, suggesting the usage of external ontologies to incorporate additional concepts needed for refining the scope of the term, e.g., \texttt{DUO\_0000007} denotes permission for disease-specific research and recommends the usage of the Mondo Disease Ontology ontology\footnote{\url{https://obofoundry.org/ontology/mondo} (accessed on 4 April 2024)} for specifying the diseases to which the permission applies. 
 Other specific concepts mentioned in DUO's textual annotations, which are not explicitly modelled, include codes inherited from previous iterations of DUO, such as purpose terms like \textit{CC} for Clinical Care Use, or \textit{GRU} for General Research Use.
 To express ODRL policies, these concepts need an explicit, individual semantic specification, so that they can be used to constrain permissions or prohibitions.
-Thus, in this Thesis' implementation, missing terms were identified and compiled into an ad-hoc vocabulary (DUODRL) to enable the correct expression of ODRL policies for each DUO concept.
-\beatriz{generate documentation for DUODRL and update w3id. }
+Thus, in this Thesis' implementation, missing terms were identified and compiled into an ad-hoc vocabulary (DUODRL\footnote{DUODRL is published at \url{https://w3id.org/duodrl}.}) to enable the correct expression of ODRL policies for each DUO concept.
+% \beatriz{generate documentation for DUODRL and update w3id. }
 % FROM THE PAPER: We recommend DUO to adopt these or to create a similar vocabulary for explicitly providing the concepts and their descriptions separate from the data use conditions in which they are used. 
 This approach also offers the benefit of delivering more comprehensive documentation related to the information represented within DUO concepts.
 For instance, by modelling \textit{IRB} as an ODRL policy representing the duty to get an Ethics Review Board approval, instead of just using the DUO concept, it becomes feasible to include details about the processes and requirements necessary for such reviews.
@@ -217,8 +217,9 @@ Additionally, DUO does not indicate how to express values associated with requir
 To ensure the validity of ODRL policies and provide clarity on how to later apply or instantiate them as an \texttt{odrl:Offer} for a particular dataset, the base class \texttt{TemplateQuery} was introduced in DUODRL.
 Instances of this class serve as a placeholder to be substituted with the actual value(s) obtained by executing a SPARQL query which is linked with the placeholder through the \texttt{sparqlExpression} property.
 In Table~\ref{tab:DUO_ODRL_overview}, these instances are denoted in the `Placeholder' column.
-\beatriz{Examples of this approach are illustrated in Listing \ref{list:request} for an \texttt{odrl:Set} representing a DUO permission, subsequently used in a data request. The placeholders are employed to indicate datasets and assignees whose identities are not predetermined, and these placeholders are replaced with actual instances in real policies by utilising the SPARQL queries linked with each placeholder.}
-% FROM THE PAPER: Examples of this can be seen in Listing \ref{list:request} for a \texttt{odrl:Set} representing a DUO permission which is then used in a request. The placeholders are used to indicate datasets and assignees which are not known ahead of time, and which are substituted with actual instances in real policies by using the SPARQL queries associated with each placeholder.
+Examples of this approach are illustrated in Listing~\ref{list:duodrl_set} for an \texttt{odrl:Set} representing a DUO data use permission and a modifier.
+In this case, the placeholders are employed to indicate datasets that are not instantiated yet and a publication date that is still not determined.
+These placeholders can be later replaced with actual instances in real policies, e.g., by utilising SPARQL queries.
 
 The indication of scoped restrictions, such as specifying the geographic location when use is confined to a particular region, was also not void of issues.
 Within DUO, the \texttt{obo:DUO\_0000010} property is used to describe a `is restricted to' relationship, which is intended to specify the specific values or instances of variables such as diseases or locations.
@@ -288,7 +289,7 @@ As such the following steps were taken to instantiate dataset policies as \textt
 
 An example \texttt{odrl:Offer}, which merges the \texttt{DUO\_0000042}, \texttt{DUO\_0000025} and \texttt{DUO\_0000020} policies as conditions to access the \texttt{ex:EHR} dataset, is presented in Listing \ref{list:duodrl_offer}.
 
-\begin{listing}[htp]
+\begin{listing}[ht]
 \caption{An example \texttt{odrl:Offer} containing a permission for general research use, from \texttt{DUO\_0000042}, a time limit on the use, from \texttt{DUO\_0000025}, and a duty to collaborate with the studies' primary investigator, defined from \texttt{DUO\_0000020}.}
 \label{list:duodrl_offer}
 \begin{minted}{turtle}
@@ -496,7 +497,7 @@ Access will be denied during permission checking if any of the following constra
 
 The described procedures are applied to all permissions and prohibitions outlined in the dataset's offer.
 If all permissions and prohibitions are met without any violations, access to the health-related data can be authorised, if not the \texttt{odrl:Agreement} will include a prohibition that states the motives for the denial of the request.
-The proof-of-concept implementation outlined in \beatriz{Section~\ref{sec:demo} } applies these steps to match an offer with request policies in order to generate a data access agreement.
+The proof-of-concept implementation outlined in Section~\ref{sec:poc_implementation} applies these steps to match an offer with request policies in order to generate a data access agreement.
 
 Table~\ref{tab:duodrl_matching_examples} illustrates examples of how the matching algorithm operates for prohibitions and permissions in offers with spatial and purpose-based constraints.
 As previously mentioned, in a semantic-based context, performing equivalence ($\equiv$), intersection ($\cap$), and subset ($\subseteq$) checking requires supplementary deliberations beyond simply employing \texttt{owl:sameAs} or \texttt{rdfs:subClassOf} inferences.
