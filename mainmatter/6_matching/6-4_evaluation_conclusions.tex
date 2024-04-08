@@ -1,6 +1,9 @@
 \section{Evaluation and concluding remarks}
 \label{sec:evaluation_conclusions}
 
+In this Section, the developed work is evaluated by assessing the quality of the implementation of DUODRL, using OOPS! to detect common issues with ontologies and FOOPS! to check the alignment with FAIR principles, and by comparing the proposed policy-based algorithm with DUO's and Solid's existing access control systems.
+Concluding remarks concerning the architecture, algorithms and PoC implementation proposed in this Thesis are also specified at the end of the Chapter.
+
 \subsection{Ontology quality evaluation}
 \label{sec:ontology_evaluation}
 
@@ -27,6 +30,9 @@ This will improve both the findability and the accessibility of the vocabulary.
 
 \subsection{Comparison with existing access control systems}
 \label{sec:comparison_evaluation}
+
+In this Section, the proposed policy matching algorithm is compared with DUO's system, as this is being used in production by organisations to share health-related datasets for research purposes, and with Solid's current access control mechanisms, as this was the environment chosen in this Thesis to demonstrate the utility of the proposed policy-based access control system due to its decentralised and Semantic Web based nature.
+Table~\ref{tab:comparison_matching} presents the results of this comparison.
 
 \begin{table}[htp]
     \centering
@@ -55,7 +61,7 @@ This will improve both the findability and the accessibility of the vocabulary.
         \hline\hline
         Data & OAC/DPV & \textasteriskcentered{} & \textasteriskcentered{} & \textasteriskcentered{} \\
         \hline
-        Processing & OAC/DPV & $\checkmark$ & \begin{tabular}[c]{@{}c@{}}Read, Write,\\Append, Control\end{tabular} & \begin{tabular}[c]{@{}c@{}}Read, Write,\\Append, Control\end{tabular} \\
+        Processing & OAC/DPV & ~ & \begin{tabular}[c]{@{}c@{}}Read, Write,\\Append, Control\end{tabular} & \begin{tabular}[c]{@{}c@{}}Read, Write,\\Append, Control\end{tabular} \\
         \hline
         Assigner & ODRL & ~ & ~ & ~ \\
         \hline
@@ -93,8 +99,19 @@ This will improve both the findability and the accessibility of the vocabulary.
     \end{tabular}
 \end{table}
 % ethical approval/collaboration with PI can be a TOM in DUO
-% * as access is given to resources/datasets and not data
 
+The different systems are compared according to their ability to represent different types of policies, e.g., requirement, preference, offer, request, and agreement, different types of rules, e.g., permissions, prohibitions, and duties, and different types of restrictions and constraints, from legal requirements related to the type of data and processing operations to use case specific restrictions such as spatial, gender or age constraints.
+As it can be checked in Table~\ref{tab:comparison_matching}, Solid's WAC system provides the lowest level of complexity in terms of access control, as it only allows the expression of authorisation statements, which can be interpreted to signify both the user's offers as well as the agreements to access data.
+Moreover, it only allows the expression of permissive statements, the processing operations are restricted to access actions, e.g., read, write, append and control, and available constraints are related to assignees and applications requesting access to data.
+Solid's ACP improves this system by allowing the expression of requests for data, through context graphs, as well as the definition of prohibitive statements and constraint on the identity provider of the data requester.
+
+Using this analysis, DUO's matching system can be consider more advanced than the current Solid efforts on access control, as beyond covering permissive and prohibitive statements, it also includes concepts to express duties on the data requesters.
+A feature which both DUO and Solid's access control mechanisms share is related to the fact that access can only be allowed and/or denied to resources/datasets and not to particular types of data -- this is flagged in Table~\ref{tab:comparison_matching} using the \textasteriskcentered{} character.
+DUO's concepts also allow the matching of constraints related to the assignee of the data request, purpose, temporal and spatial restrictions, as well as use case-related restrictions such as the project in which the data is going to be used, the gender, age group or population group of the providers of the data, and, in case where the purpose of the request is to perform research on specific diseases, the disease being studied.
+These features of the DUO policy matching process are flagged with a $\checkmark$ since the specific details of DUO's implementation of the algorithm are unknown.
+
+To conclude, even though DUO's access control mechanism provides ways to express most of the features identified in Table~\ref{tab:comparison_matching}, the approach proposed in this Thesis supersedes it as the Thesis' algorithms are not just focused on health data sharing, e.g., can be used to control access to other types of personal data for purposes beyond research, and allow for the expression of the highest number of different types of policies and constraints on policy rules, including legally-aligned constraints, e.g., the legal basis used to justify the processing of personal data.
+The Thesis proposed solutions to tackle each feature of the policy matching algorithm, i.e., ODRL, DPV, OAC or DUODRL, are also included in Table~\ref{tab:comparison_matching} to showcase how the developed work contributes to different aspects of the policy algorithm design.
 
 \subsection{Concluding remarks}
 \label{sec:conclusions_poc}
