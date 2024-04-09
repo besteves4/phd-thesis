@@ -2,7 +2,7 @@
 \label{sec:evaluation_conclusions}
 
 In this Section, the developed work is evaluated by assessing the quality of the implementation of DUODRL, using OOPS! to detect common issues with ontologies and FOOPS! to check the alignment with FAIR principles, and by comparing the proposed policy-based algorithm with DUO's and Solid's existing access control systems.
-Concluding remarks concerning the architecture, algorithms and PoC implementation proposed in this Thesis are also specified at the end of the Chapter.
+Concluding remarks concerning the architecture, algorithms, and PoC implementation proposed in this Thesis are also specified at the end of the Chapter.
 
 \subsection{Ontology quality evaluation}
 \label{sec:ontology_evaluation}
@@ -105,15 +105,20 @@ As it can be checked in Table~\ref{tab:comparison_matching}, Solid's WAC system 
 Moreover, it only allows the expression of permissive statements, the processing operations are restricted to access actions, e.g., read, write, append and control, and available constraints are related to assignees and applications requesting access to data.
 Solid's ACP improves this system by allowing the expression of requests for data, through context graphs, as well as the definition of prohibitive statements and constraint on the identity provider of the data requester.
 
-Using this analysis, DUO's matching system can be consider more advanced than the current Solid efforts on access control, as beyond covering permissive and prohibitive statements, it also includes concepts to express duties on the data requesters.
+Using this analysis, DUO's matching system can be considered more advanced than the current Solid efforts on access control, as beyond covering permissive and prohibitive statements, it also includes concepts to express duties on the data requesters.
 A feature which both DUO and Solid's access control mechanisms share is related to the fact that access can only be allowed and/or denied to resources/datasets and not to particular types of data -- this is flagged in Table~\ref{tab:comparison_matching} using the \textasteriskcentered{} character.
 DUO's concepts also allow the matching of constraints related to the assignee of the data request, purpose, temporal and spatial restrictions, as well as use case-related restrictions such as the project in which the data is going to be used, the gender, age group or population group of the providers of the data, and, in case where the purpose of the request is to perform research on specific diseases, the disease being studied.
 These features of the DUO policy matching process are flagged with a $\checkmark$ since the specific details of DUO's implementation of the algorithm are unknown.
 
 To conclude, even though DUO's access control mechanism provides ways to express most of the features identified in Table~\ref{tab:comparison_matching}, the approach proposed in this Thesis supersedes it as the Thesis' algorithms are not just focused on health data sharing, e.g., can be used to control access to other types of personal data for purposes beyond research, and allow for the expression of the highest number of different types of policies and constraints on policy rules, including legally-aligned constraints, e.g., the legal basis used to justify the processing of personal data.
-The Thesis proposed solutions to tackle each feature of the policy matching algorithm, i.e., ODRL, DPV, OAC or DUODRL, are also included in Table~\ref{tab:comparison_matching} to showcase how the developed work contributes to different aspects of the policy algorithm design.
+The Thesis proposed solutions to tackle each feature of the policy matching algorithm, i.e., ODRL, DPV, OAC, or DUODRL, are also included in Table~\ref{tab:comparison_matching} to showcase how the developed work contributes to different aspects of the policy algorithm design.
 
 \subsection{Concluding remarks}
 \label{sec:conclusions_poc}
 
-% Future work -- supported by the formal semantics work -- explain how the algorithm took certain decisions, e.g. why the prohibitions were prioritised over the permissions
+The decentralised nature of Solid provides a good ground for improvements of its access control mechanism towards having a legally-aligned ecosystem.
+By adding fine-grained policies, as well as other provenance metadata to the architecture of such environments, transparency and accountability are improved for both data subjects and data controllers.
+Moreover, the addition of a policy matching algorithm paves the way for future, real-time negotiation of access and usage conditions of data, e.g., through Web agents, which on one hand will aid data subjects on actively controlling only what they want to control, while data controllers have a mechanism and audit trail to justify how they got access to what data under which conditions.
+As future work, supported by the under-development ODRL formal semantics specification, explainability features should be integrated into the algorithm so that data subjects can understand, through a human-readable interface, how it took certain decisions, e.g. why the prohibitions were prioritised over the permissions.
+Other PoCs should be performed for other types of data, as well as focusing on other data sharing scenarios beyond data sharing for research purposes.
+Furthermore, the evolution of this work, towards production-ready architectures for the decentralised access to personal data, should continue to be followed by both technical and legal experts to ensure that any changes on the technical or legal level, e.g., changes made to policy languages or vocabularies, or new laws being proposed, respectively, can be easily accommodated.
