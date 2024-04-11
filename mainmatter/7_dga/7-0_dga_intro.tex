@@ -13,15 +13,17 @@ The source code produced during the development of this chapter is stored at:
 \end{itemize}
 \end{tcolorbox}
 
-A new series of regulations concerning the usage and management of data is currently under consideration for adoption across the EU countries.
+After witnessing the influence of the GDPR on managing the personal data of European citizens, the European Commission has shifted its attention to establishing a unified data strategy.
+This strategy aims to encourage the (re)use and exchange of data among citizens, businesses, and governments, all while ensuring control remains with the original data generators \citep{european_commission_communication_2020}.
+In this context, a new series of regulations concerning the usage and management of data is currently under consideration for adoption across the EU countries.
 Within this framework, the Data Governance Act (DGA) \citeyearpar{noauthor_regulation_2022}, a regulation primarily focused on regulating the operations of data intermediation services and data altruism organisations, was approved by the Commission in May 2022 and is now mandated for implementation in all EU member states.
+
 This Chapter outlines a range of requirements outlined by the DGA aimed at safeguarding the interests of both data subjects and data holders -- a new legal role inserted in the DGA to refer to entities providing non-personal data --, as well as regulating the jurisdiction of relevant authorities. 
 Additionally, it presents various scenarios where the application of Semantic Web technologies, such as the developed work on OAC, ODRL, and DPV, could assist these stakeholders in meeting their respective new rights and responsibilities.
+More specifically, it aims to achieve three main goals: (i) generating machine-readable policies for the reuse of public data, (ii) defining consent and permission terms for data altruism, and (iii) establishing standardised registries of data altruism organisations and intermediation service providers and records of their activities.
+By leveraging these semantic vocabularies, the aim is not only to enhance machine-readability and interoperability but also to streamline the modelling of data-sharing policies and consent forms across various scenarios, as well as facilitating the creation of a shared semantic framework for maintaining public registries of data intermediaries and altruism organisations, along with documenting their activities.
+Given the accessibility and extensibility of these vocabularies, adapting them to meet specific requirements outlined in the DGA becomes a straightforward task.
 
-% This Chapter discusses the legal and ethical challenges of the impact of data-driven innovation in society, in particular, related to the emergence of PIMS as a service that helps individuals have more control over the processing of their data.
-% While some studies have recently been published on the intersection of Solid and data protection requirements, as reviewed in Section~\ref{sec:sota_solid_data_protection}, plenty still has to be overcome to have a `legally-aligned' personal datastore.
-% This interdisciplinary discussion relies on the collaborations fostered through the PROTECT project, and other EU-funded projects described in Section~\ref{sec:projects}, as well as through the participation in the W3C DPVCG work with data protection law experts.
-% 
 % Section~\ref{sec:motivation_legal} describes the emergence of decentralised personal information management systems as a way to give users more control over their personal data and the challenges that still need to be overcome in order to have to a GDPR-aligned personal datastore.
 % 
 % Section~\ref{sec:policies_consent} discusses the usage of OAC policies as a precursor of consent for Solid, which can enable compliance with several GDPR requirements including the transparent information obligations of Articles 13 and 14 and the conditions to obtain valid consent pursuant to Articles 4.11 and 7.
@@ -36,8 +38,3 @@ Additionally, it presents various scenarios where the application of Semantic We
 \input{mainmatter/7_dga/7-1_dga_information_flows}
 \input{mainmatter/7_dga/7-2_dgaterms}
 \input{mainmatter/7_dga/7-3_lessons_for_ds}
-% \input{mainmatter/5_legal/5-4_biomedical_exceptiosn}
-% \input{mainmatter/5_legal/5-5_ethical_challenges}
-
-% How can OAC be extended to create DGA-aligned policies
-% Development of a Data Governance Act (DGA) vocabulary, to create OAC-based policies for the sharing of data for altruistic purposes and keep registries of available datasets.
