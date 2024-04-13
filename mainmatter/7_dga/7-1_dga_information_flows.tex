@@ -3,9 +3,9 @@
 
 In this Section, a detailed description of the DGA and its core legislative objectives is provided, including the introduction of use cases where Semantic Web technologies and decentralised data environments can be leveraged to aid data intermediaries and data altruism organisations to implement their services while fulfilling their renewed legal duties, in particular, related to the reporting of their activities and how they use personal and non-personal data from data subjects and data holders, respectively.
 
-In February 2020, the \cite{european_commission_communication_2020} introduced a series of regulatory proposals aimed at legislating the European strategy for data, encompassing a set of new regulatory proposals aimed at governing the utilisation of non-personal and public data, regulating digital services and markets, and fostering the creation of common European data spaces.
+In February 2020, the~\cite{european_commission_communication_2020} introduced a series of regulatory proposals aimed at legislating the European strategy for data, encompassing a set of new regulatory proposals aimed at governing the utilisation of non-personal and public data, regulating digital services and markets, and fostering the creation of common European data spaces.
 By prioritising data and ensuring its accessibility across sectors, this transformation must also maintain the interests of both data subjects and data holders, while supporting trusted entities to facilitate data sharing aligned with new regulations.
-Among these proposals was the Data Governance Act \citeyearpar{noauthor_regulation_2022}, a regulation presented to enhance data accessibility and foster trust in data intermediation services throughout the EU.
+Among these proposals was the Data Governance Act~\citeyearpar{noauthor_regulation_2022}, a regulation presented to enhance data accessibility and foster trust in data intermediation services throughout the EU.
 Following approval by both the European Parliament and the European Council, this legislation entered into force on 23 June 2022 and, following a 15 month grace period, has been applicable since September 2023.
 Similarly to other data-related legislation within the EU, the DGA relays new rights and obligations to entities holding both personal and non-personal data.
 It also regulates the operations of data users and two categories of data-related services related to data intermediation and altruism.
@@ -15,7 +15,8 @@ The principal objectives of this legislation include:
     \item[(i)] Facilitating the reuse of protected public-sector data while maintaining its privacy and confidentiality, particularly in cases where such data is subject to the rights of others, including trade secrets, personal data protection, and data safeguarded by intellectual property rights.
     \item[(ii)] Regulating and maintaining a register of data intermediation service providers, which facilitate data sharing among enterprises and support individuals to have a `personal data-sharing intermediary', designed to aid them in exercising their rights, e.g., under the GDPR.
     \item[(iii)] Allowing businesses and data subjects to voluntarily contribute data for altruistic purposes, such as medical research.
-    \item[(iv)] Establishing a novel supervisory authority, the European Data Innovation Board, tasked with supervising the operations of data intermediation service providers and data altruism organisations.
+    \item[(iv)] Establishing a novel supervisory authority, the European Data Innovation Board (EDIB), tasked with supervising the operations of data intermediation service providers and data altruism organisations.
+    This Board comprises representatives from regulatory bodies overseeing data intermediation and altruism activities across all EU member states, from the EDPB and EDPS, from the European Union Agency for Cybersecurity (ENISA) and the European Commission, as well as experts in standardisation, portability, interoperability, and other pertinent stakeholders.
 \end{enumerate}
 
 The main hurdles to overcome in order to achieve these objectives are associated with:
@@ -35,7 +36,7 @@ Their respective definitions are outlined below.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{figures/chapter-7/information-flows.png}
-\caption[Flows of information between DGA entities.]{Flows of information between DGA entities, adapted from \cite{esteves_semantics_2023}. The concepts in a black box are the entities and the ones in an orange box are the legal documentation that needs to be created and maintained by said entities. The direction of the arrows represents the direction of the information flow between entities. A short description of each flow is specified on the right side of the Figure.}
+\caption[Flows of information between DGA entities.]{Flows of information between DGA entities, adapted from~\cite{esteves_semantics_2023}. The concepts in a black box are the entities and the ones in an orange box are the legal documentation that needs to be created and maintained by said entities. The direction of the arrows represents the direction of the information flow between entities. A short description of each flow is specified on the right side of the Figure.}
 \label{fig:dga_flow}
 \end{figure}
 
@@ -62,13 +63,13 @@ Their respective definitions are outlined below.
 \textbf{European Data Innovation Board} A supranational authority responsible for supervising the operations of data intermediaries and data altruism organisations.
 
 As illustrated in Figure~\ref{fig:dga_flow} by a red arrow, the data intermediation service provider, or data intermediary, provides data users with access to data under open or commercial license conditions and, as illustrated with the (K) arrow, must maintain a record of its activities.
-This diagram was crafted from an analysis of DGA's Chapters II (`Re-use of certain categories of protected data held by public sector bodies'), III (`Requirements applicable to data intermediation services'), IV (`Data altruism'), and VI (`European Data Innovation Board').
+This diagram was crafted from an analysis of DGA's Chapters II (`Re-use of certain categories of protected data held by public sector bodies'), III (`Requirements applicable to data intermediation services'), IV (`Data altruism'), and VI (`European Data Innovation Board')~\citeyearpar{noauthor_regulation_2022}.
 Each article within these chapters was meticulously examined to identify interactions among the identified entities.
 Whenever an information flow was identified between multiple entities, the respective interaction was documented in the diagram.
 Furthermore, requirements related to compliance documentation are also included in the diagram.
 These requirements entail the recording of information that can be automated using semantic technologies.
 
-In the following three Sections, the information flows concerning the conditions for reusing public data (Section~\ref{sec:reuse}), the maintenance of registers of altruistic and intermediary entities and respective activities logs (Section~\ref{sec:registers}), and activities related to data altruism (Section~\ref{sec:altruism}).
+In the following three Sections, the information flows concerning the conditions for reusing public data (Section~\ref{sec:reuse}), the maintenance of registers of altruistic and intermediary entities and respective activities logs (Section~\ref{sec:registers}), and the forms to record data altruism terms (Section~\ref{sec:altruism}) are described in detail.
 These areas highlight the strengths of using semantic technologies to effectively aid the previously mentioned entities in automating their DGA compliance tasks.
 For each example use case, a systematic analysis of the pertinent information flows and the corresponding data exchange requirements was conducted manually.
 The findings are organised and presented in the subsequent Sections.
@@ -114,7 +115,7 @@ Additionally, single information point providers are obligated to maintain and d
 \label{sec:registers}
 
 DGA is also the first of its kind to regulate the activity of data intermediation service providers and altruistic organisations, with the requirements being outlined in Chapters III and IV.
-Regarding data intermediation, such entities \textit{``aim[s] to establish commercial relationships for the purposes of data sharing between an undetermined number of data subjects and data holders on the one hand and data users on the other, through technical, legal or other means''} \citeyearpar{noauthor_regulation_2022}.
+Regarding data intermediation, such entities \textit{``aim[s] to establish commercial relationships for the purposes of data sharing between an undetermined number of data subjects and data holders on the one hand and data users on the other, through technical, legal or other means''}~\citeyearpar{noauthor_regulation_2022}.
 Moreover, as defined in Article 11~\citeyearpar{noauthor_regulation_2022}, entities wishing to provide data intermediation services must notify their competent national authority of their intentions (indicated by the (F) arrow in Figure~\ref{fig:dga_flow}).
 Subsequently, the national authority is mandated to publish and maintain an updated public register of intermediaries (represented by the (J) arrow) and oversee their activities ((I) arrow).
 Article 12~\citeyearpar{noauthor_regulation_2022} includes a list of conditions for the provision of this service, e.g., providers should have tools to convert data into specific formats, use standards to promote interoperability across sectors, gather data subjects' consent and data holders' permission terms, as well as update or withdraw these terms, maintain records of their activity, and appoint a legal representative if the data intermediation entity is not established in the EU (shown by the (G) arrow).
@@ -129,25 +130,18 @@ This record is submitted annually to the national authority for compliance verif
 It must document the organisation's data altruism activities, including the nature and categories of data it handles.
 Additionally, it should contain logs of data users, their contact details, the processing date and duration, the altruistic purposes for data usage, fees paid by users or other sources of income, used technical processing means, and a summary of processing results.
 
-\subsection{Data altruism}
+\subsection{Data altruism forms}
 \label{sec:altruism}
 
-Data altruism as a term is also introduced by the DGA.
+Data altruism as a term was first introduced by the DGA.
 This term relates to the sharing of personal and non-personal data, based on data subjects' consent and data holders' permission, for the `common good'.
 This entails purposes such as improving healthcare, combating climate change, or performing scientific research.
-Moreover, the proposed visions for a European Health Data Space \citeyearpar{noauthor_proposal_2022} and the Data Act \citeyearpar{noauthor_dataact_2022} also emphasise the altruistic reuse of data, with the Health Data Spaces proposal in particular focusing on the challenges brought on by the access and sharing of electronic health data for scientific research and public interest purposes.
+Moreover, the proposed visions for a European Health Data Space~\citeyearpar{noauthor_proposal_2022} and the Data Act~\citeyearpar{noauthor_dataact_2022} also emphasise the altruistic reuse of data, with the Health Data Spaces proposal, in particular, focusing on the challenges brought on by the access and sharing of electronic health data for scientific research and public interest purposes.
 In this context, each EU member state can establish its altruism policy and has to appoint a competent authority to oversee the activity of altruistic organisations (it can be the same as the one that supervises intermediation providers).
-Said authority also has to keep up-to-date, public registers of altruistic organisations, including details on their identity, contact information, legal status, and main goals.
-Data altruism organisations themselves have to maintain records of their activities, in particular, to produce annual reports to share with the relevant competent authority.
-To facilitate this activity, a European data altruism consent form will be facilitated by the EC to \textit{``allow the collection of consent or permission across Member States in a uniform format''} \citeyearpar{noauthor_regulation_2022}.
+As mentioned in the previously Section, said authority also has to keep up-to-date, public registers of altruistic organisations, and organisations themselves have to maintain records of their activities, in particular, to produce annual reports to share with the relevant competent authority.
+To facilitate this activity, a European data altruism consent form will be facilitated by the EC to \textit{``allow the collection of consent or permission across Member States in a uniform format''}, as described in Article 25~\citeyearpar{noauthor_regulation_2022} and indicated by the (R) arrow in Figure~\ref{fig:dga_flow}.
+The development of this form involves consultation with GDPR's overseeing body, the EDPB, the forthcoming EDIB, and other relevant stakeholders.
+Once developed, it is to be adopted by data altruism organisations (depicted by the (S) arrow) to document both the consent provided by data subjects to share their personal data and the permissions granted by data holders to share their non-personal data.
+Furthermore, these forms are required to be maintained in both human and machine-readable formats.
 
-\subsection{European Data Innovation Board}
-\label{sec:edib}
-
-Aligned with the previously outlined regulatory objectives, the DGA established the formation of the European Data Innovation Board (EDIB), a supranational authority tasked with overseeing the operations of data intermediation service providers and data altruism organisations.
-This Board comprises representatives from regulatory bodies overseeing data intermediation and altruism activities across all EU member states, from the EDPB and EDPS, from the European Union Agency for Cybersecurity (ENISA) and the European Commission, as well as experts in standardisation, portability, interoperability, and other pertinent stakeholders.
-Article 30 \citeyearpar{noauthor_regulation_2022} delineates thirteen specific responsibilities of the EDIB, encompassing initiatives such as fostering uniform practices of data altruism throughout the EU and proposing guidelines for the development of common European data spaces.
-
-% Figure of information flows and documents (from the paper)
 % Comparison with GDPR flows
-% Identification of important use cases that can be tackled and easily extended with the work already developed for GDPR
