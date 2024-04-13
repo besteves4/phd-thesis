@@ -28,25 +28,87 @@ The main hurdles to overcome in order to achieve these objectives are associated
 
 Thus, to tackle the challenges at hand, the first task defined in this Thesis is related to the identification of relevant flows of information between DGA-regulated entities, as well as what specific information items need to be shared or kept by which entities.
 Since the DGA both advocates for data availability and legislates data sharing, a delineation of information flows among data-sharing entities can be specified.
-In addition, as a result of these interactions, certain registries and records of activities must be maintained for transparency and accountability, in line with previous EU law, e.g., the GDPR.
+In addition, as a result of these interactions, certain registries and records of activities must be maintained for transparency and accountability, in line with previous EU data protection law, e.g., the GDPR.
 Figure~\ref{fig:dga_flow} outlines the entities and their corresponding information flows identified within this context.
+Their respective definitions are outlined below.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{figures/chapter-7/information-flows.png}
-\caption[Flows of information between DGA entities.]{Flows of information between DGA entities, adapted from \cite{esteves_semantics_2023}. The concepts in a black box are the (legal) entities and the ones in an orange box are the legal documentation that needs to be created and maintained by said entities. The direction of the arrows represents the direction of the information flow between entities. A short description of each flow is specified on the right side of the Figure.}
+\caption[Flows of information between DGA entities.]{Flows of information between DGA entities, adapted from \cite{esteves_semantics_2023}. The concepts in a black box are the entities and the ones in an orange box are the legal documentation that needs to be created and maintained by said entities. The direction of the arrows represents the direction of the information flow between entities. A short description of each flow is specified on the right side of the Figure.}
 \label{fig:dga_flow}
 \end{figure}
 
-\subsection{Reuse of protected data held by public sector bodies}
+\textbf{Data Subject} Natural person whose personal data is undergoing any kind of processing (as defined in the GDPR).
+
+\textbf{Data Holder} An entity that can share personal and/or non-personal data.
+
+\textbf{Data User} An entity that wishes to use personal and/or non-personal data for commercial or non-commercial purposes.
+
+\textbf{Data Intermediation Service Provider} An entity that establishes commercial relationships for the sharing of data among data subjects, data holders, and data users.
+
+\textbf{Data Altruism Organisation} An not-for-profit organisation that collects and shares data for altruistic purposes.
+
+\textbf{Public Sector Body} An entity or group of entities governed by public law from one or more State, regional and/or local authorities.
+
+\textbf{Legal Representative} A legal entity's representative appointed to act on behalf of a data intermediation service provider or altruistic organisation.
+
+\textbf{Competent Body} An entity appointed by a public sector body to offer legal and technical assistance regarding the access and reuse of public sector data.
+
+\textbf{Single Information Point Provider} An entity tasked with receiving and forwarding requests for public data reuse.
+
+\textbf{Competent Authorities} Authorities in charge of supervising the activity of data intermediation service providers and data altruism organisations and maintaining a public register of said entities.
+
+\textbf{European Data Innovation Board} A supranational authority responsible for supervising the operations of data intermediaries and data altruism organisations.
+
+As illustrated in Figure~\ref{fig:dga_flow} by a red arrow, the data intermediation service provider, or data intermediary, provides data users with access to data under open or commercial license conditions and, as illustrated with the (K) arrow, must maintain a record of its activities.
+This diagram was crafted from an analysis of DGA's Chapters II (`Re-use of certain categories of protected data held by public sector bodies'), III (`Requirements applicable to data intermediation services'), IV (`Data altruism'), and VI (`European Data Innovation Board').
+Each article within these chapters was meticulously examined to identify interactions among the identified entities.
+Whenever an information flow was identified between multiple entities, the respective interaction was documented in the diagram.
+Furthermore, requirements related to compliance documentation are also included in the diagram.
+These requirements entail the recording of information that can be automated using semantic technologies.
+
+In the following three Sections, the information flows concerning the conditions for reusing public data (Section~\ref{sec:reuse}), the maintenance of registers of altruistic and intermediary activities (\beatriz{Section~\ref{sec:intermediation} }), and activities related to data altruism (Section~\ref{sec:altruism}).
+These areas highlight the strengths of using semantic technologies to effectively aid the previously mentioned entities in automating their DGA compliance tasks.
+For each example use case, a systematic analysis of the pertinent information flows and the corresponding data exchange requirements was conducted manually.
+The findings are organised and presented in the subsequent Sections.
+
+\subsection{Conditions for the reuse of data held by public sector bodies}
 \label{sec:reuse}
 
-DGA's Chapter II legislates the reuse of data stored by public sector bodies.
+DGA's Chapter II legislates the reuse of data stored by public sector bodies, encompassing the specification of which data categories are regulated (Article 3~\citeyearpar{noauthor_regulation_2022}), the conditions required from public sector bodies to provide such services (Articles 5 and 6~\citeyearpar{noauthor_regulation_2022}), and the delineation of single information point providers and their role in facilitating data users' search for and request of datasets for reuse purposes (Articles 8 and 9~\citeyearpar{noauthor_regulation_2022}).
 To keep such data, these entities need to have in place safeguards to protect their commercial and statistical confidentiality, intellectual property rights of third parties, and personal data-related rights.
 Moreover, they have to publish the dataset reuse conditions, and the respective data request procedure, in a transparent and publicly accessible manner.
 The reuse must be contracted, with a maximum duration of one year, including the categories of data being used as well as the purpose for the reuse. 
 Public sector bodies also have the right to obtain guidance and technical support from a competent body, which must be appointed by each EU member state.
 These appointed entities are responsible for providing guidance on data formats and storage, assisting in the implementation of privacy-preserving methods to protect personal data integrity, and supporting activities to obtain consent from data subjects and permission from data holders.
+
+A complete list of information required from public sector bodies, along with a reference to the pertinent articles in the DGA, is summarised in Table~\ref{tab:conditions_public_data}.
+This information, which may be further specified with the aid of a competent body (as previously mentioned and indicated by the (A) arrow in Figure~\ref{fig:dga_flow}), should be communicated to the single information point provider (as depicted by the (B) arrow).
+This enables data users to search for datasets ((C) arrow) and submit reuse requests through the single information point ((D) arrow). 
+Additionally, single information point providers are obligated to maintain and disclose a data asset list (illustrated by the (V) arrow), comprising details on available resources and their reuse conditions.
+
+\begin{table}[ht]
+\centering
+\caption{Information items about public sector bodies' services.}
+\label{tab:conditions_public_data}
+\begin{tabular}{c||l}
+\textbf{Article} & \multicolumn{1}{l}{\textbf{Information items}}\\ \hline\hline
+2.9 & Data user/categories of users \\ \hline
+5.1 & Public sector body information \\ \hline
+5.1 & Competent body information \\ \hline
+5.2 & Categories of data \\ \hline
+5.2 & Purposes for usage and access \\ \hline
+5.2, 5.3(a) & Nature of data \\ \hline
+5.3(b), 5.3(c) & Processing environment \\ \hline
+5.5 & Measures to prevent re-identification of data holders/subjects \\ \hline
+5.9 & Third party recipients \\ \hline
+6.2 & Fees \\ \hline
+8.2 & Data format \\ \hline
+8.2 & Data size \\ \hline
+9 & Procedure to request reuse
+\end{tabular}
+\end{table}
 
 \subsection{Data intermediaries}
 \label{sec:intermediation}
