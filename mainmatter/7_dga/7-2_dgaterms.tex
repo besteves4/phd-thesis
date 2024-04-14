@@ -125,10 +125,11 @@ This facilitates the creation of a database comprising information about these e
 From the information items that need to be represented in a public register of data intermediation service providers, as specified in Table~\ref{tab:registers_intermediation}, 7 out of 14 can be defined using DPV, DCAT, and DCMI Metadata Terms declared in Table~\ref{tab:querying_registers}.
 In addition, from the 15 identified items that are necessary for a data intermediary to provide such service, 7 can also be described with DPV, DCAT, and DCMI Metadata Terms declared in Table~\ref{tab:querying_registers}.
 
-\begin{table}[ht]
+\begin{table}[htp]
 \centering
 \caption{Information items that need to be kept to register the activity of data intermediation service providers and respective terms from existing vocabularies that can be reused.}
 \label{tab:querying_registers}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{c||l|l}
 \textbf{Article} & \textbf{Information items} & \textbf{Terms from existing vocabularies} \\ \hline\hline
 11.3 & \begin{tabular}[c]{@{}l@{}}Legal representative if not\\established in the EU\end{tabular} & \texttt{dpv:hasRepresentative} \\ \hline
@@ -148,7 +149,7 @@ In addition, from the 15 identified items that are necessary for a data intermed
 12(g,h,i,j,l) & \begin{tabular}[c]{@{}l@{}}Technical and organisational\\measures to protect, provision\\and ensure interoperability of data\end{tabular} & \texttt{dpv:hasTechnicalOrganisationalMeasure} \\ \hline
 12(k) & \begin{tabular}[c]{@{}l@{}}Notification of unauthorised\\transfer, access or use of the\\non-personal data\end{tabular} & \texttt{dpv:IncidentReportingCommunication} \\ \hline
 12(m) & \begin{tabular}[c]{@{}l@{}}Tools to facilitate exercising\\of data subjects' rights\end{tabular} & \texttt{dpv:isExercisedAt} 
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 As for the data altruism organisations, from the information items that need to be represented in a public register of such organisations, as specified in Table~\ref{tab:registers_altruism}, 5 out of 9 can be defined using the DPV and DCAT terms declared in Table~\ref{tab:querying_registers_b}.
@@ -212,6 +213,56 @@ ex:DISP_Y a dgaterms:DataCooperative ;
     dcterms:description "Provider of anonymised geolocation data" ;
     dcat:landingPage <http://cooperativeA.com/> ;
     dcterms:date "2023-12-23"^^xsd:date .
+\end{minted}
+\end{listing}
+
+Storing the public registers in RDF format, utilising existing and crafted semantic vocabularies such as DGAterms, facilitates seamless querying of these structures, using a language like SPARQL, for automated retrieval of information concerning data intermediation service providers (or of data altruism organisations).
+An example query targeting data cooperatives is presented in Listing~\ref{list:cooperatives_sparql}, which returns the providers offering such services, along with their names and public websites.
+
+\begin{listing}[ht]
+\caption{SPARQL query to retrieve data cooperatives.}
+\label{list:cooperatives_sparql}
+\begin{minted}{sparql}
+SELECT DISTINCT ?Provider ?Name ?Web WHERE {
+    ?Provider a dgaterms:DataCooperative .
+    ?Provider dpv:hasName ?Name .
+    ?Provider dcat:landingPage ?Web . }
+\end{minted}
+\end{listing}
+
+Furthermore, beyond public registers, as mentioned in Section~\ref{sec:registers}, intermediaries and altruism organisations must keep records of their respective activities for the competent authorities to verify their compliance with DGA-mandated requirements for providing such services.
+In Listing~\ref{list:activity_log}, a representation of a record of data altruism activity is presented, using the modelled \texttt{RecordOfDataIAltruismActivity}.
+These activity logs should be linked with the entities utilising the data and can be documented utilising DPV's \texttt{hasPersonalDataHandling}. 
+This property can be used to supply details regarding the data processing, encompassing aspects such as duration, purpose, and categories of (personal) data involved.
+
+\begin{listing}[ht]
+\caption{Example of a record of data altruism activity logs.}
+\label{list:activity_log}
+\begin{minted}{turtle}
+ex:altruism_logs a dgaterms:RecordOfDataIAltruismActivity ;
+    dcterms:description "Logs of Data Altruism Organisation A" ;
+    dcterms:created "2023-11-04"^^xsd:date ; 
+    dcterms:modified "2023-11-13"^^xsd:date ;
+    dcterms:publisher ex:altruism_A ;
+    dcat:record ex:log_001 .
+ex:altruism_A a dgaterms:DataAltruismOrganisation ;
+    dpv:hasName "Data Altruism Organisation A" ;
+    dpv:hasAddress "Lisboa, Portugal" ;
+    dcat:landingPage <http://example.com/altruism_A> .
+ex:log_001 a dcat:CatalogRecord ;
+    dcterms:created "2023-11-13"^^xsd:date ;
+    dgaterms:hasDataUser ex:userZ ;
+    dgaterms:hasFee "1000€"^^xsd:string ;
+    dpv:hasPersonalDataHandling [
+        dcterms:description "Download and reuse anonymised health records to improve healthcare" ;
+        dpv:hasProcessing dgaterms:Download,dgaterms:Reuse ;
+        dpv:hasDuration 6226453 ;
+        dpv:hasPurpose dgaterms:DataAltruism,dgaterms:ImproveHealthcare ;
+        dpv:hasPersonalData pd:HealthRecord ;
+        dpv:hasTechnicalMeasure dpv:Anonymisation ] .
+ex:userZ a dgaterms:DataUser ;
+    dpv:hasName "Data User Z" ;
+    dpv:hasContact "mailto:user_z@email.com" .
 \end{minted}
 \end{listing}
 
