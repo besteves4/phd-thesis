@@ -266,8 +266,58 @@ ex:userZ a dgaterms:DataUser ;
 \end{minted}
 \end{listing}
 
-% Moreover, there already exists published work that uses DPV to create a semantic model for the representation of information related to GDPR's Register of Processing Activities \cite{ryan_dpcat_2022}.
-% As such, DPV will be the base vocabulary upon which this work will be developed.
+\subsection{Uniform data altruism forms}
+\label{sec:dga_forms}
+
+As demonstrated by the examples presented in the preceding Sections, the identified vocabularies, along with the one developed in this Chapter, are suitable for automating the generation of compliance documentation for single information point providers, data altruism organisations, and data intermediation service providers alike.
+Following these steps, the representation of consent forms for data subjects and permission forms for data holders should also be possible to automate with such technologies.
+Through their (re)use, the DGA-mandated European data altruism forms can be ensured to be interoperable across the EU.
+An instance of a consent form, utilising the DGAterms-modelled \texttt{EuropeanDataAltruismConsentForm}, completed by a data subject, is detailed in Listing~\ref{list:european_form_ds}.
+In this example, an altruistic purpose for processing is used.
+To this end, a taxonomy of \texttt{DataAltruism} concepts, modelled from DGA's Article 2.16~\citeyearpar{noauthor_regulation_2022}, are presented in DGAterms, with seven new purposes applicable to a data altruism context: \texttt{ImproveHealthcare}, \texttt{CombatClimateChange}, \texttt{ImproveTransportMobility} (utilised in Listing~\ref{list:european_form_ds}), \texttt{ProvideOfficialStatistics}, \texttt{ImprovePublicServices}, \texttt{ScientificResearch}, and \texttt{PublicPolicyMaking}.
+Furthermore, additional purposes referenced throughout the DGA are also incorporated into the vocabulary developed in this Chapter.
+
+\begin{listing}[ht]
+\caption{Data altruism consent form, where the data subject consents to the usage of their location data for improving mobility.}
+\label{list:european_form_ds}
+\begin{minted}{turtle}
+ex:consentForm_001 a dgaterms:EuropeanDataAltruismConsentForm ;
+    dpv:hasIdentifier <http://example.com/consentForm_001> ;
+    dpv:hasDataSubject ex:Anne ;
+    dpv:isIndicatedBy ex:Anne ;
+    dpv:isIndicatedAtTime "2022-12-14"^^xsd:date ;
+    dpv:hasPersonalDataHandling [
+        dpv:hasPurpose dgaterms:DataAltruism, dgaterms:ImproveTransportMobility ;
+        dpv:hasLegalBasis eu-gdpr:A6-1-a ;
+        dpv:hasPersonalData pd:Location ;
+        dpv:hasProcessing dpv:Use, dpv:Store ;
+        dpv:hasDataController [
+            a dpv:DataController, dgaterms:DataAltruismOrganisation ;
+            dpv:hasName "Company A" ] ] .
+\end{minted}
+\end{listing}
+
+Similarly, Listing~\ref{list:european_form_dh} presents an example of a permission form issued by a data holder.
+
+\begin{listing}[ht]
+\caption{Permission for data altruism where data holder A allows the usage of their anonymised data for the purpose of providing official statistics.}
+\label{list:european_form_dh}
+\begin{minted}{turtle}
+ex:permissionForm_001 a dpv:Permission ;
+    dpv:hasIdentifier <http://example.com/permissionForm_001> ;
+    dgaterms:hasDataHolder ex:dataHolderA ;
+    dpv:isIndicatedBy ex:dataHolderA ;
+    dpv:isIndicatedAtTime "2022-12-15"^^xsd:date ;
+    dpv:hasPersonalDataHandling [
+        dpv:hasPurpose dgaterms:DataAltruism, dgaterms:ProvideOfficialStatistics ;
+        dpv:hasLegalBasis dgaterms:A2-6 ;
+        dpv:hasData dpv:AnonymisedData ;
+        dpv:hasProcessing dpv:Use, dpv:Store ;
+        dpv:hasDataController [
+            a dpv:DataController, dgaterms:DataAltruismOrganisation ;
+            dpv:hasName "Company A" ] ] .
+\end{minted}
+\end{listing}
 
 % requirements specification -- ORSD
 % vocab implementation details
