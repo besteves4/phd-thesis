@@ -319,6 +319,54 @@ ex:permissionForm_001 a dpv:Permission ;
 \end{minted}
 \end{listing}
 
+\subsection{DGAterms development and evaluation}
+\label{sec:dgaterms_dev_ev}
+
+The motivation and identified requirements for the development of the DGAterms, which were outlines in the previous Sections, are consolidated in the vocabularies's ORSD available in Table~\ref{tab:dgaterms_ORSD}.
+
+\begin{table}[htp]
+\centering
+\caption{Ontology Requirement Specification Document of DGAterms.}
+\label{tab:dgaterms_ORSD}
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{A0A0A0}\textbf{DGAterms -- Vocabulary to describe information flows in the Data Governance Act}} \\ \hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{1. Purpose}} \\ \hline
+\multicolumn{8}{| p{12.0cm} |}{The purpose of DGAterms is to provide concepts to describe conditions for the reuse of data held by public sector bodies, to publish and maintain public registers of entities and records of their activities, and to record data altruism consent and permission forms.} \\ \hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{2. Scope}} \\ \hline
+\multicolumn{8}{| p{12.0cm} |}{The scope of this vocabulary is limited to the flows of information depicted in DGA's Chapters II, III and IV, and respective records of information that must be maintained by DGA entities in order to fulfil their obligations. DGAterms also promotes the usage of ODRL, OAC, DPV, DCAT, and DCMI Metadata Terms to models policies for the reuse of personal and non-personal data, to keep catalogs of entities and to represent consent and permission terms.} \\ \hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{3. Implementation Language}} \\ \hline
+\multicolumn{8}{| p{12.0cm} |}{RDF, RDFS} \\ \hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{4. Intended End-Users}} \\ \hline
+\multicolumn{8}{| p{12.0cm} |}{Providers of single information points, data intermediation and altruism services, and maintainers of public registers of entities.} \\ \hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{5. Intended Uses}} \\ \hline
+\multicolumn{8}{| p{12.0cm} |}{
+Use 1. Describing entities, and processes involved in the sharing of data compliant with the DGA. \newline 
+Use 2. Expressing information regarding the representation of data-sharing policies and consent terms. \newline
+Use 3. Generating records of altruistic and data intermediary activities which can be audited by national and European authorities. 
+ } \\ \hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{6. Ontology Requirements}} \\ \hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{a. Non-Functional Requirements}}    \\ \hline
+\multicolumn{8}{| p{12.0cm} |}{
+NFR 1. The ontology is published online with HTML documentation, following W3C's specification format. } \\ \hline
+\multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{b. Functional  Requirements: Groups of Competency Questions}}  \\ \hline
+\multicolumn{8}{|p{12.0cm}|}{
+CQ1. Which legal basis can be used for the processing of personal and non-personal data regulated by the DGA? \newline
+CQ2. Which processing operations can be performed on the data? \newline
+CQ3. Who are the entities involved in DGA information flows? \newline 
+CQ4. Which purposes are considered as altruistic under the DGA? \newline 
+CQ5. Which technical and organisational measures can be used to protect, provide and ensure interoperability of data? \newline 
+CQ6. Which data types can be shared by public sector bodies? \newline 
+CQ7. What kinds of notices should be provided by DGA-related entities? \newline
+CQ8. Which public registers should be maintained by authorities? \newline 
+CQ9. What rights are provided to data subjects and data holders in the context of DGA?
+}\\ \hline
+\end{tabular}}
+\vspace{-0.1in}
+\end{table}
+
 % requirements specification -- ORSD
 % vocab implementation details
 % Vocabulary publication and maintenance
