@@ -1,5 +1,5 @@
-\section{DGAterms}
-\label{sec:dgaterms}
+\section{Extending ODRL and DPV vocabularies to cover DGA requirements}
+\label{sec:extending_dga}
 
 As an active contributor in the realm of data protection, the Semantic Web community possesses significant potential to aid with the compliance processes that such a legislation involve.
 This potential is based on the opportunities for interoperability that such a Web of Linked Data can support.
@@ -12,10 +12,109 @@ In this context, Semantic Web technologies can be utilised:
 \end{itemize}
 
 Hence, vocabularies like the DPV, ODRL, and DCAT play a pivotal role in these procedures, serving as interoperable frameworks for the expression of legally-aligned documentation.
-DCAT and ODRL, both W3C Recommendations, can be used to publish records of activities as data catalogs and conditions for data access and usage as digital policies, respectively.
+DCAT and ODRL (including the work developed in OAC) can be used to publish records of activities as data catalogs and conditions for data access and usage as digital policies, respectively.
 Meanwhile, DPV provides a comprehensive, openly accessible set of taxonomies for articulating machine-readable metadata regarding the handling and usage of personal data.
-%As such, by integrating these standards and specifications, organizations can automate dataset discovery, articulate policies for data reuse and sharing, and ensure compliance with legal mandates such as notifying competent authorities under the DGA.
 Using such solutions facilitates a transition from manual processes to automated ones by leveraging semantic technologies to uphold accuracy and scalability within the data-sharing ecosystems promoted by the DGA.
+In the forthcoming Sections, terms from the previously mentioned standards and specifications are employed to represent some of the information items delineated in Section~\ref{sec:dga_flows}.
+Additionally, the terms that cannot be expressed with existing vocabularies are provided in an open-source ad-hoc vocabulary -- DGAterms.
+Examples to illustrate the practical applicability of the existing and developed semantic vocabularies are also supplied.
+
+\subsection{Policies for the reuse and sharing of public data}
+\label{sec:dga_policies}
+
+In Section~\ref{sec:reuse}, it is highlighted that public sector bodies must provide single information point providers with details on their data resources and conditions for their re-usage.
+This enables the providers to compile and maintain a searchable data asset list, facilitating data users' search and request for datasets for reuse.
+Table~\ref{tab:conditions_public_data_vocabs} presents terms from DPV, DCAT, and DCMI Metadata Terms that can be repurposed to model some of the concepts identified in Table~\ref{tab:conditions_public_data}.
+
+\begin{table}[ht] 
+\centering
+\caption{Information items that need to be represented to detail policies concerning the conditions of reuse of public sector bodies' datasets and respective reusable concepts from existing vocabularies.}
+\label{tab:conditions_public_data_vocabs}
+\begin{tabular}{c||l|l}
+\textbf{Article} & \textbf{Information items} &\textbf{Terms from existing vocabularies} \\ \hline\hline
+5.1 & Public sector body information & \texttt{dpv:hasName}, \texttt{dpv:hasContact} \\ \hline
+5.1 & Competent body information & \texttt{dpv:hasName}, \texttt{dpv:hasContact} \\ \hline
+5.2 & Categories of data & \texttt{dpv:hasData}, \texttt{dpv:Data} \\ \hline
+5.2 & Purposes for usage and access & \texttt{dpv:hasPurpose}, \texttt{dpv:Purpose} \\ \hline
+5.3(a) & Nature of data & \begin{tabular}[c]{@{}l@{}}\texttt{dpv:hasData}, \texttt{dpv:AnonymisedData},\\ \texttt{dpv:PseudonymisedData}\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}c@{}}5.3(b),\\5.3(c)\end{tabular} & Processing environment & \begin{tabular}[c]{@{}l@{}}\texttt{dpv:ProcessingContext},\\ \texttt{dpv:hasLocation}\\ \texttt{dpv:WithinVirtualEnvironment}, \\ \texttt{dpv:WithinPhysicalEnvironment}\end{tabular} \\ \hline
+5.5 & \begin{tabular}[c]{@{}l@{}}Technical and operational\\measures to prevent\\re-identification of data\\holders/subjects\end{tabular} & \texttt{dpv:Deidentification} \\ \hline
+5.9 & Third party recipients & \texttt{dpv:ThirdParty} \\ \hline
+8.2 & Data format & \texttt{dcat:mediaType}, \texttt{dcterms:format}\\ \hline
+8.2 & Data size & \texttt{dcterms:extent} \\          
+\end{tabular}
+\end{table}
+
+Expanding upon the existing \texttt{dpv:LegalEntity} term, four new classes of entities were introduced in DGAterms, as subclasses, to represent data users, public sector bodies, competent bodies, and single information point providers.
+These classes are named \texttt{DataUser}, \texttt{PublicSectorBody}, \texttt{DataReuseCompetentBody}, and \texttt{SingleInformationPointProvider}, respectively.
+Additionally, subclasses of \texttt{SingleInformationPointProvider} were created to represent EU, national, regional, local, and sectorial-level single information point providers, as outlined in DGA's Article 8~\citeyearpar{noauthor_regulation_2022}.
+Furthermore, to classify the nature of data kept by public sector bodies, as detailed in Article 3.1~\citeyearpar{noauthor_regulation_2022}, four new subclasses of texttt{dpv:Data} -- \texttt{ConfidentialData}, \texttt{CommerciallyConfidentialData}, \texttt{StatisticallyConfidentialData} and \texttt{IntellectualPropertyData} -- were modelled in DGAterms as well.
+These subclasses represent data protected through \texttt{CommercialConfidentialityAgreement}s or \texttt{StatisticalConfidentialityAgreement}s, as well as data protected by intellectual property rights.
+
+Beyond the aforementioned additions, the following concepts were included in the DGAterms vocabulary:
+\begin{itemize}
+    \item \texttt{A5-9} for permissions to transfer, \texttt{A5-11} for model contractual clauses, and \texttt{A5-12} for adequacy decisions were added as subclasses of \texttt{dpv:DataTransferLegalBasis}.
+    \item \texttt{DataReusePolicy}, \texttt{DataTransferNotice} and \texttt{ThirdCountryDataRequestNotice} concepts were introduced as subclasses of DPV's policy and notice concepts. These represent the conditions for data reuse and the notice provided to data owners.
+    \item \texttt{DataAssetList} and \texttt{DataReuseRequestProcedure} were modelled as subclasses of \texttt{dpv:OrganisationalMeasure} to represent the searchable asset list maintained by \texttt{SingleInformationPointProvider}s and the procedure to request datasets, respectively.
+\end{itemize}
+
+To illustrate the application of both established and newly introduced terms, an instance of a \texttt{DataReusePolicy} concerning the dataset located at \url{http://example.com/dataset_001} is presented in Listing~\ref{list:public_sector_body}.
+This policy delineates the terms of usage for the dataset, specifying that it can be reused until the end of 2024, more specifically for the purpose of \texttt{ScientificResearch}.
+It is noteworthy that this policy, structured as an ODRL offer, outlines the conditions for utilising the dataset without granting any privileges to the data user.
+Single information point providers can utilise this policy to maintain an updated catalog of available assets along with their respective usage conditions.
+Furthermore, Listing~\ref{list:data_asset_list} offers an example of a \texttt{DataAssetList} produced by a \texttt{SingleInformationPointProvider}, employing both pre-existing and newly devised terms.
+This list includes the aforementioned dataset, \url{http://example.com/dataset_001}, supplemented with additional metadata encompassing its data type, the governing policy (\url{http://example.com/offer_publicsectorbody}), data format and size, and any associated fees charged by the dataset publisher.
+
+\begin{listing}[ht]
+\caption{Data reuse policy, set by Public Sector Body X, that allows the reuse of a dataset until the end of 2024 for scientific research.}
+\label{list:public_sector_body}
+\begin{minted}{turtle}
+ex:offer_publicsectorbody a odrl:Offer, dgaterms:DataReusePolicy ;
+    odrl:uid ex:offer_publicsectorbody ;
+    odrl:profile oac: ;
+    odrl:permission [
+        odrl:target ex:dataset_001 ;
+        odrl:action dgaterms:Reuse ;
+        odrl:assigner ex:publicsectorbodyX ;
+        odrl:constraint [
+            odrl:and [
+                odrl:leftOperand odrl:dateTime ;
+                odrl:operator odrl:lteq ;
+                odrl:rightOperand "2024-12-31"^^xsd:date ], [
+                odrl:leftOperand oac:Purpose ;
+                odrl:operator odrl:isA ;
+                odrl:rightOperand dgaterms:ScientificResearch ] ] ] .
+ex:publicsectorbodyX a dgaterms:PublicSectorBody ;
+    dpv:hasName "Public Sector Body X" ;
+    dpv:hasContact "mailto:publicsectorbodyX@email.com" ;
+    dgaterms:hasCompetentBody [
+        a dgaterms:DataReuseCompetentBody ;
+        dpv:hasName "Competent Body X" ;
+        dpv:hasContact "mailto:competentbodyX@email.com" ] .
+\end{minted}
+\end{listing}
+
+\begin{listing}[ht]
+\caption{Data asset list maintained by the Single Information Point Provider A.}
+\label{list:data_asset_list}
+\begin{minted}{turtle}
+ex:SIPPA_assets a dgaterms:DataAssetList, dcat:Catalog ;
+    dcterms:description "Asset list maintained by SIPPA" ;
+    dcterms:created "2023-12-10"^^xsd:date ;
+    dcterms:publisher ex:SIPPA ;
+    dcat:dataset ex:dataset_001 .
+ex:SIPPA a dgaterms:SingleInformationPointProvider .
+ex:dataset_001 a dcat:Dataset ;
+    dcterms:publisher ex:publicsectorbodyX ;
+    dpv:hasData dgaterms:StatisticallyConfidentialData ;
+    dcterms:description "Dataset with statistically confidential data" ;
+    dcterms:created "2023-12-04"^^xsd:date ; 
+    odrl:hasPolicy ex:policy_001 ;
+    dgaterms:hasFee "0€"^^xsd:string ;
+    dcat:mediaType <https://iana.org/assignments/media-types/text/csv> ;
+    dcterms:extent "5.6MB"^^xsd:string .
+\end{minted}
+\end{listing}
 
 % Moreover, there already exists published work that uses DPV to create a semantic model for the representation of information related to GDPR's Register of Processing Activities \cite{ryan_dpcat_2022}.
 % As such, DPV will be the base vocabulary upon which this work will be developed.
