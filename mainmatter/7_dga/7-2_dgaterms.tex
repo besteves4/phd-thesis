@@ -1,4 +1,4 @@
-\section{Extending ODRL and DPV vocabularies to cover DGA requirements}
+\section{Extending W3C vocabularies to cover DGA requirements}
 \label{sec:extending_dga}
 
 As an active contributor in the realm of data protection, the Semantic Web community possesses significant potential to aid with the compliance processes that such a legislation involve.
@@ -24,7 +24,7 @@ Examples to illustrate the practical applicability of the existing and developed
 
 In Section~\ref{sec:reuse}, it is highlighted that public sector bodies must provide single information point providers with details on their data resources and conditions for their re-usage.
 This enables the providers to compile and maintain a searchable data asset list, facilitating data users' search and request for datasets for reuse.
-Table~\ref{tab:conditions_public_data_vocabs} presents terms from DPV, DCAT, and DCMI Metadata Terms that can be repurposed to model some of the concepts identified in Table~\ref{tab:conditions_public_data}.
+Table~\ref{tab:conditions_public_data_vocabs} presents terms from DPV, DCAT, OAC, and DCMI Metadata Terms that can be repurposed to model some of the concepts identified in Table~\ref{tab:conditions_public_data}.
 
 \begin{table}[ht] 
 \centering
@@ -35,7 +35,7 @@ Table~\ref{tab:conditions_public_data_vocabs} presents terms from DPV, DCAT, and
 5.1 & Public sector body information & \texttt{dpv:hasName}, \texttt{dpv:hasContact} \\ \hline
 5.1 & Competent body information & \texttt{dpv:hasName}, \texttt{dpv:hasContact} \\ \hline
 5.2 & Categories of data & \texttt{dpv:hasData}, \texttt{dpv:Data} \\ \hline
-5.2 & Purposes for usage and access & \texttt{dpv:hasPurpose}, \texttt{dpv:Purpose} \\ \hline
+5.2 & Purposes for usage and access & \texttt{dpv:hasPurpose}, \texttt{oac:Purpose} \\ \hline
 5.3(a) & Nature of data & \begin{tabular}[c]{@{}l@{}}\texttt{dpv:hasData}, \texttt{dpv:AnonymisedData},\\ \texttt{dpv:PseudonymisedData}\end{tabular} \\ \hline
 \begin{tabular}[c]{@{}c@{}}5.3(b),\\5.3(c)\end{tabular} & Processing environment & \begin{tabular}[c]{@{}l@{}}\texttt{dpv:ProcessingContext},\\ \texttt{dpv:hasLocation}\\ \texttt{dpv:WithinVirtualEnvironment}, \\ \texttt{dpv:WithinPhysicalEnvironment}\end{tabular} \\ \hline
 5.5 & \begin{tabular}[c]{@{}l@{}}Technical and operational\\measures to prevent\\re-identification of data\\holders/subjects\end{tabular} & \texttt{dpv:Deidentification} \\ \hline
@@ -100,7 +100,7 @@ ex:publicsectorbodyX a dgaterms:PublicSectorBody ;
 \begin{minted}{turtle}
 ex:SIPPA_assets a dgaterms:DataAssetList, dcat:Catalog ;
     dcterms:description "Asset list maintained by SIPPA" ;
-    dcterms:created "2023-12-10"^^xsd:date ;
+    dcterms:created "2023-12-04"^^xsd:date ;
     dcterms:publisher ex:SIPPA ;
     dcat:dataset ex:dataset_001 .
 ex:SIPPA a dgaterms:SingleInformationPointProvider .
@@ -113,6 +113,105 @@ ex:dataset_001 a dcat:Dataset ;
     dgaterms:hasFee "0€"^^xsd:string ;
     dcat:mediaType <https://iana.org/assignments/media-types/text/csv> ;
     dcterms:extent "5.6MB"^^xsd:string .
+\end{minted}
+\end{listing}
+
+\subsection{Querying DGA-mandated public registers}
+\label{sec:dga_registers}
+
+As outlined in Section~\ref{sec:registers}, data intermediation service providers and data altruism organisations are required to provide detailed information about the purpose of their operations to a public register dedicated to such entities. 
+This facilitates the creation of a database comprising information about these entities, which can be accessed by data users, holders, or subjects for retrieving or publishing data, e.g., for altruistic endeavors.
+
+From the information items that need to be represented in a public register of data intermediation service providers, as specified in Table~\ref{tab:registers_intermediation}, 7 out of 14 can be defined using DPV, DCAT, and DCMI Metadata Terms declared in Table~\ref{tab:querying_registers}.
+In addition, from the 15 identified items that are necessary for a data intermediary to provide such service, 7 can also be described with DPV, DCAT, and DCMI Metadata Terms declared in Table~\ref{tab:querying_registers}.
+
+\begin{table}[ht]
+\centering
+\caption{Information items that need to be kept to register the activity of data intermediation service providers and respective terms from existing vocabularies that can be reused.}
+\label{tab:querying_registers}
+\begin{tabular}{c||l|l}
+\textbf{Article} & \textbf{Information items} & \textbf{Terms from existing vocabularies} \\ \hline\hline
+11.3 & \begin{tabular}[c]{@{}l@{}}Legal representative if not\\established in the EU\end{tabular} & \texttt{dpv:hasRepresentative} \\ \hline
+11.6(a) & \begin{tabular}[c]{@{}l@{}}Name of the data intermediation\\services provider\end{tabular} & \texttt{dpv:hasName} \\ \hline
+11.6(c) & \begin{tabular}[c]{@{}l@{}}Address of the data intermediation\\services provider\end{tabular} & \texttt{dpv:hasAddress} \\ \hline
+11.6(c) & \begin{tabular}[c]{@{}l@{}}Address of the representative of the\\data intermediation services provider\end{tabular} & \texttt{dpv:hasAddress} \\ \hline
+11.6.(d) & Public website & \texttt{dcat:landingPage} \\ \hline
+11.6(e) & \begin{tabular}[c]{@{}l@{}}Data intermediation services\\provider’s contact persons\end{tabular} & \texttt{dcat:contactPoint} \\ \hline
+11.6(e) & \begin{tabular}[c]{@{}l@{}}Data intermediation services\\provider’s contact details\end{tabular} & \texttt{dpv:hasContact} \\ \hline
+11.6(f) & \begin{tabular}[c]{@{}l@{}}Description of the data\\intermediation service\end{tabular} & \texttt{dcterms:description} \\ \hline
+11.6(g) & Date of the notification & \texttt{dcterms:issued} \\ \hline\hline
+\textbf{Article} & \textbf{\begin{tabular}[c]{@{}l@{}}Conditions to provide\\intermediation services\end{tabular}} & \textbf{Terms from existing vocabularies} \\ \hline\hline
+12(c) & Date and time of creation of data & \texttt{dcterms:created} \\ \hline
+12(c) & Geolocation data & \texttt{dpv:hasLocation} \\ \hline
+12(c) & Duration of the activity & \texttt{dpv:hasDuration} \\ \hline
+12(d) & Data format & \texttt{dcat:mediaType}, \texttt{dcterms:format} \\ \hline
+12(g,h,i,j,l) & \begin{tabular}[c]{@{}l@{}}Technical and organisational\\measures to protect, provision\\and ensure interoperability of data\end{tabular} & \texttt{dpv:hasTechnicalOrganisationalMeasure} \\ \hline
+12(k) & \begin{tabular}[c]{@{}l@{}}Notification of unauthorised\\transfer, access or use of the\\non-personal data\end{tabular} & \texttt{dpv:IncidentReportingCommunication} \\ \hline
+12(m) & \begin{tabular}[c]{@{}l@{}}Tools to facilitate exercising\\of data subjects' rights\end{tabular} & \texttt{dpv:isExercisedAt} 
+\end{tabular}
+\end{table}
+
+As for the data altruism organisations, from the information items that need to be represented in a public register of such organisations, as specified in Table~\ref{tab:registers_altruism}, 5 out of 9 can be defined using the DPV and DCAT terms declared in Table~\ref{tab:querying_registers_b}.
+In addition, from the 11 identified items which are necessary for a data altruism organisation to keep records of its activity, 5 can also be described with the DPV and DCMI Metadata Terms declared in Table~\ref{tab:querying_registers_b}.
+
+\begin{table}[ht]
+\centering
+\caption{Information items that need to be kept to record the activity of data altruism organisations and respective terms from existing vocabularies that can be reused.}
+\label{tab:querying_registers_b}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{c||l|l}
+\textbf{Article} & \textbf{Information items} & \textbf{Terms from existing vocabularies} \\ \hline\hline
+19.3 & \begin{tabular}[c]{@{}l@{}}Legal representative if not \\ established in the EU\end{tabular} & \texttt{dpv:hasRepresentative} \\ \hline
+19.4(a) & Name of the entity & \texttt{dpv:hasName} \\ \hline
+19.4(e) & Address of the entity & \texttt{dpv:hasAddress} \\ \hline
+19.4(e) & \begin{tabular}[c]{@{}l@{}}Address of the representative \\ of the entity\end{tabular} & \texttt{dpv:hasAddress} \\ \hline
+19.4(f) & Public website & \texttt{dcat:landingPage} \\ \hline
+19.4(g) & Entity’s contact persons & \texttt{dcat:contactPoint} \\ \hline
+19.4(g) & Entity’s contact details & \texttt{dpv:hasContact} \\ \hline
+19.4(i) & Nature of data & \texttt{dpv:hasData} \\ \hline
+19.4(i) & Categories of personal data & \texttt{dpv:hasPersonalData}, pd extension \\ \hline\hline
+\textbf{Article} & \textbf{Records of altruism activity} & \textbf{Terms from existing vocabularies} \\ \hline\hline
+20.1(a) & Data users' contact details & \texttt{dpv:hasContact} \\ \hline
+20.1(b) & Duration of the processing of data & \texttt{dpv:hasDuration} \\ \hline
+20.2(b) & \begin{tabular}[c]{@{}l@{}}Description of the objectives of \\ general interest\end{tabular} & \texttt{dcterms:description} \\ \hline
+20.2(c) & Technical means used for processing & \begin{tabular}[c]{@{}l@{}}\texttt{dpv:hasTechnicalMeasure}, \\ \texttt{dpv:PrivacyPreservingProtocol}\end{tabular} \\ \hline
+20.2(d) & \begin{tabular}[c]{@{}l@{}}Summary of the results of the data \\ processing\end{tabular} & \texttt{dpv:hasOutcome} 
+\end{tabular}}
+\end{table}
+
+In addition to these terms that can be reused from existing standards and specifications, DGAterms models the \texttt{DataIntermediationServiceProvider} concept to specify a data intermediation service provider (as a subclass of \texttt{dpv:LegalEntity}), and three new classes of entities to represent distinct types of intermediaries, i.e., \texttt{DataCooperativeServiceProvider}, \texttt{DataIntermediationServiceProviderForDataHolder}, and \texttt{DataIntermediationServiceProviderForDataSubject}.
+The \texttt{DataAltruismOrganisation} concept is also introduced in DGAterms as a subclass of \texttt{dpv:NonProfitOrganisation}.
+% Additionally, to be able to classify the nature of the entity, as specified in Article 11.6(b)~\citeyearpar{noauthor_regulation_2022}, five new properties were added to the vocabulary, \texttt{hasLegalStatus}, \texttt{hasForm}, \texttt{hasOwnershipStructure}, \texttt{hasSubsidiary}, and \texttt{hasRegistrationNumber}, to represent information regarding the legal status, form, ownership structure, subsidiary and registration number of an entity, respectively.
+Details concerning the nature of the entity, as outlined in Article 11.6(b)~\citeyearpar{noauthor_regulation_2022} regarding its legal status, form, ownership structure, subsidiary relationships, and registration number, fall beyond the scope of DGAterms as they pertain to organisational-specific items.
+However, as future work, upper ontologies like GIST \citeyearpar{semantic_arts_gist} or Schema.org \citep{guha_schemaorg_2015} can be examined and potentially extended to encompass these concepts if deemed necessary.
+Moreover, a \texttt{PublicRegister} class was also modelled, as a new subclass of DPV's organisational measures, and its respective subclasses \texttt{PublicRegisterOfDataIntermediationServiceProviders} and \texttt{PublicRegisterOfDataAltruismOrganisations} to represent public registers of data intermediaries and altruistic organisations, respectively.
+
+An illustration of a register of data intermediation service providers, incorporating both existing and newly introduced terms, is available in Listing~\ref{list:intermediary_register}.
+The register \texttt{ex:publicregistry\_DI\_PT} presents a comprehensive list of intermediaries operating in Portugal.
+In addition to storing metadata concerning the national authority \texttt{ex:nationalauthority\_PT} and creation dates, the register already includes a registered company, \texttt{ex:DISP\_Y}, which operates as a \texttt{DataCooperative}.
+DPV's \texttt{hasName}, \texttt{hasContact}, and \texttt{hasAddress}, along with DCAT's \texttt{landingPage}, are used to detail the providers offering data intermediation services.
+On the other hand, DCMI's \texttt{description}, \texttt{created}, and \texttt{publisher} predicates are essential in describing metadata pertaining to the register itself.
+
+\begin{listing}[ht]
+\caption{Example of a public register of data intermediation service providers.}
+\label{list:intermediary_register}
+\begin{minted}{turtle}
+ex:publicregistry_DI_PT a dgaterms:RegisterOfDataIntermediationServiceProviders ;
+    dcterms:description "Public register of intermediaries in PT" ;
+    dcterms:created "2023-12-15"^^xsd:date ; 
+    dcterms:modified "2023-12-23"^^xsd:date ;
+    dcterms:publisher ex:nationalauthority_PT ;
+    dgaterms:hasDataIntermediationServiceProvider ex:DISP_Y .
+ex:nationalauthority_PT a dgaterms:DataIntermediationAuthority ;
+    dpv:hasName "Data Intermediation Authority of Portugal" ;
+    dpv:hasContact "mailto:nationalauthority_PT@email.com" ;
+    dpv:hasJurisdiction "PT" .
+ex:DISP_Y a dgaterms:DataCooperative ;
+    dpv:hasName "Data Cooperative Y" ;
+    dpv:hasAddress "Lisboa, Portugal" ;
+    dcterms:description "Provider of anonymised geolocation data" ;
+    dcat:landingPage <http://cooperativeA.com/> ;
+    dcterms:date "2023-12-23"^^xsd:date .
 \end{minted}
 \end{listing}
 
