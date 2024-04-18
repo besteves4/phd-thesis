@@ -1,4 +1,27 @@
 \section{Lessons learned for the (Personal) Data Spaces future}
 \label{sec:lessons}
 
-contributions towards the EHDS
+While the European data strategy is robust, it presents numerous interoperability challenges that must be overcome to establish shared data spaces across individuals, businesses, and governments.
+Consequently, the work developed in this Chapter, focusing on analysing the requirements of the DGA and developing a unified semantic model for documenting the activities of public sector bodies, intermediaries, and altruistic organisations, represent an initial stride towards addressing these interoperability hurdles.
+In this context, semantic technologies offer promising applications in operationalising compliance with the DGA.
+Among them, the following advantages can be mentioned:
+\begin{itemize}
+    \item \textbf{Enhanced Interoperability} -- Semantic technologies enable better integration and interoperability of data coming from distinct sources and systems, facilitating the work of data altruism organisations and intermediation providers in consolidating datasets coming from different data subjects and other data holders.
+    \item \textbf{Improved Knowledge Management} -- By structuring, organising and publishing data with semantic standards, e.g., DCAT for cataloguing datasets, data discovery and analysis can be performed more efficiently.
+    \item \textbf{Enhanced Decision Support} -- Semantic technologies enable the development of Web agents with sophisticated decision support systems that can provide actionable insights to data subjects and data holders, aiding them in making informed decisions when it comes to the use of their data.
+    \item \textbf{Improved Legal Support} -- Using a common semantic model to tackle legal requirements from distinct data-related regulations, e.g., DPV, aids businesses to have a shared understanding of regulatory provisions and to comply with their legal duties related to the processing of personal and non-personal data.
+\end{itemize}
+
+While these advantages are promising, it should be acknowledged that there are challenges that need to be addressed to support the sustainable development of data altruism and data intermediation services towards having common European data spaces:
+
+\begin{itemize}
+    \item Most constraints specified in the policies cannot be automatically enforced, and the declarative nature of the policies may inadvertently result in data misuse.
+    \item If an agreement is not reached in terms of which semantic models need to be used, interoperability will be difficult to achieve among data subjects, holders, users and even public authorities.
+\end{itemize}
+
+As future contributions, it is imperative to explore the potential of the Data Act and the European Health Data Space proposals to enhance the outreach of DPV and achieve the envisioned interoperability to have common European data spaces.
+Moreover, to complement the described system, future efforts should include:
+(i) implementing SHACL shapes to validate data reuse and data altruism policies,
+(ii) conducting usability tests to evaluate the design choices made in SoDA, including scalability testing, which may involve utilising data aggregators to manage organisations seeking simultaneous access to numerous datasets,
+(iii) enhancing/automating the process of authorising/denying data requests through technologies such as RDF surfaces \citep{hochstenbach_rdf_2023} to perform reasoning tasks over data policies, and 
+(iv) facilitating the creation of immutable agreements, e.g., by integrating Verifiable Credentials into the Solid ecosystem \citep{braun_attributebased_2022} to digitally sign data usage conditions, which can be utilised by authorities in case of misuse by data users.
