@@ -1,22 +1,19 @@
 \section{Future work}
 \label{sec:future_work}
 
-% Regarding future work, as described in Section 6.3, there are still several open problems in the processing of temporal information. Besides targeting the context-dependent temporal expressions described there, future work envisaged is outlined below.
+With the European Commission expanding the scope of its legislative initiatives from personal data, to non-personal data and to the under-development common European data spaces, further opportunities for future work based on the contributions proposed in this Thesis can be envisioned.
 
-\paragraph{beyond consent}
+\paragraph{Beyond consent} The contributions proposed in this Thesis focus on the usage of consent as the legal basis for the processing of personal data. This places a lot of responsibilities on the data subject, which would need to individually approve every request for data. To avoid consent fatigue, other GDPR legal bases, described in Article 6~\citeyearpar{noauthor_regulation_2016}, should also be used by data controllers for the lawful processing of personal data, in particular the usage of contracts or legitimate interests.
 
-\paragraph{new data protection laws} within and outside EU and how they are interconnected, which ones apply in what scenarios
+\paragraph{Delegation and data reuse} The central theme of this Thesis revolves around empowering data subjects to exert control over the fate of their data. However, there are situations where data subjects might want to rely on other people or organisations to make the decisions for them. A first step was taken by the work on DGAterms, which can be used by data subjects to specify under which conditions their data is available, and in turn intermediation service providers and altruistic organisations make it available to data users, following these conditions. This work should be expanded to cover a wider set of use cases, e.g., allow data subjects to delegate the decision of what happens with their health data to their doctor. Moreover, the EHDS proposal~\citeyearpar{noauthor_proposal_2022} expands on DGA's altruistic intentions by providing an extensive set of altruistic purposes for the secondary use of data for improved healthcare services or innovative research on rare diseases.
 
-\paragraph{delegation}
+\paragraph{Usage control and data spaces} While this Thesis focused on building solutions to aid data subjects and data controllers in dealing with access to data, the envisioned European data spaces are putting the focus on usage control solutions. As proven by the work on DUODRL, the proposed vocabularies can be easily extended to include usage constraints, e.g., publishing the results of the research, and the proposed architecture should be developed to include a usage control enforcement component.
 
-\paragraph{data reuse}
+\paragraph{Web agents} Building on the previous three points, decentralised data environments such as Solid can rely on Web agents to assist data subjects, data controllers, and newly-introduced DGA entities to exercise their rights or fulfil their duties in an automated manner. In this context, agents can be useful in making decisions for the data subjects, according to their preferences, help data controllers to compile the necessary compliance documentation, or aid altruistic organisations in their data meddling functions.
 
-\paragraph{more interfaces}
+\paragraph{More privacy interfaces} This Thesis showcases three proof of concept user interfaces for data subjects to edit their privacy preferences and exercise their right of access. These interfaces should be further improved to cover a wider range of policies, as well as to enclose tools to assist data subjects in the exercise of all of their GDPR data subjects and further rights from other European and non-European laws. Moreover, privacy dashboards for users to manage their data and understand how it is being used and by whom should also be developed.
 
-\paragraph{web agents}
+\paragraph{Contextualised and verifiable data} As described by~\cite{verborgh_rawdata_2023}, \textit{``Data without context is meaningless; data without trust is useless.''} When data subjects give access to their data, they want to know that it is going to be used according to their preferences and not for purposes that they do not agreed with. On the other hand, data controllers and data users want to know that they are receiving complete and correct data, while supervisory authorities need to have access to contextualised data access and usage metadata to verify that it is not being misused. As such, to have trustful and responsible data flows in decentralised data environments, data should be accessed and shared with accompanying access and usage policies as well as contextual metadata and digital signatures.
 
-\paragraph{usage control}
-
-\paragraph{contextualised data}
-
-\paragraph{data spaces}
+\paragraph{Interaction of data protection and AI laws} Beyond GDPR and the DGA, the European strategy for data also introduced the Digital Services Act (DSA)~\citeyearpar{noauthor_dsa_2022}, the Digital Markets Act (DMA)~\citeyearpar{noauthor_dma_2022}, and the Data Act~\citeyearpar{noauthor_dataact_2022} legislative initiatives. Moreover, the EC also launched the first-ever legal framework on AI, the AI Act~\citeyearpar{noauthor_proposal_2021}.
+Additionally, the rest of the world is following the European approach, with new data and AI-related legal frameworks being launched outside the EU. To deal with the new requirements brought on by these new laws, further vocabularies need to be developed and integrated into DPV's existing framework, which currently covers jurisdiction-agnostic as well as GDPR and DGA-specific terms. Furthermore, a study of how these laws are related and in which data processing scenarios they apply still needs to be performed to be incorporated into the developed decentralised systems.
