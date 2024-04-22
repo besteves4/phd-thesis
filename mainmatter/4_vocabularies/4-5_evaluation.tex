@@ -3,10 +3,10 @@
 
 This Section describes the results of the ontologies quality evaluation, including the detection of common pitfalls with OOPS!\footnote{The OOPS! tool is available at \url{https://oops.linkeddata.es/} (accessed on 14 June 2023).} \citep{poveda-villalon_oops_2014}, alignment with FAIR principles with FOOPS!\footnote{The FOOPS! tool is available at \url{https://w3id.org/foops} (accessed on 30 November 2023).} \citep{garijo_foops_2021} and validation of competency questions with SPARQL queries \citep{harris_sparql_2013}.
 
-In terms of quality evaluation, the OOPS! tool was used to evaluate PLASMA and OAC in order to detect common errors in ontology development, such as missing domain or range properties or missing human readable annotations.
+In terms of quality evaluation, the OOPS! tool was used to evaluate PLASMA and OAC in order to detect common errors in ontology development, such as missing domain or range properties or missing human-readable annotations.
 Both evaluations did not detect any critical (issues affecting the ontology consistency, reasoning, or applicability) or important (issues not critical for ontology functionality but that should be corrected) pitfalls.
 Furthermore, FOOPS! was used to evaluate the alignment of the developed vocabularies with the FAIR (Findable, Accessible, Interoperable and Reusable) principles.
-Additionally, the vocabularies that were reused in this Section, e.g., DPV, ODRL or ActivityStreams, were also evaluated with FOOPS! for comparison.
+Additionally, the vocabularies that were reused in this Section, e.g., DPV, ODRL, or ActivityStreams, were also evaluated with FOOPS! for comparison.
 Table~\ref{tab:foops_evaluation} presents the results of this evaluation.
 
 \begin{table}[htp]
@@ -38,14 +38,14 @@ Table~\ref{tab:foops_evaluation} presents the results of this evaluation.
 \end{table}
 
 Both PLASMA and OAC obtained a good score in all FAIR aspects.
-In terms of improvements, both vocabularies will be submitted to LOV (Linked Open Vocabularies), a public registry of ontologies which includes ontology metadata related to its terms and the creators/developers of the ontologies \citep{dumontier_linked_2017}.
+In terms of improvements, both vocabularies will be submitted to LOV (Linked Open Vocabularies), a public registry of ontologies that includes ontology metadata related to its terms and the creators/developers of the ontologies \citep{dumontier_linked_2017}.
 This will improve both the findability and the accessibility of the vocabularies.
-Using Table~\ref{tab:foops_evaluation}, it can be observed that both PLASMA and OAC rate much higher that other reused ontologies in terms of findability and reusability as the used URIs and version URIs are persistent and resolvable, both include the recommended ontology and ontology terms metadata, a resolvable data usage license and provenance metadata.
+Using Table~\ref{tab:foops_evaluation}, it can be observed that both PLASMA and OAC rate much higher than other reused ontologies in terms of findability and reusability as the used URIs and version URIs are persistent and resolvable, both include the recommended ontology and ontology terms metadata, a resolvable data usage license and provenance metadata.
 
 Additionally, SPARQL queries are used to assess whether the developed models satisfy the competency questions, presented in Tables~\ref{tab:OAC_ORSD}, \ref{tab:plasma_orsd} and \ref{tab:rights_ORSD}, which were used to guide the development of the vocabularies in order to fulfil the identified requirements.
 
 Table~\ref{tab:oac_cq_sparql} presents the SPARQL queries drafted to fulfil OAC's competency questions presented in Table~\ref{tab:OAC_ORSD}.
-The presented work demonstrates that OAC satisfies the identified requirements of answering competency questions regarding the modelling of policies representing personal preferences, requests of data for particular purposes and agreements of data access, including contextual information.
+The presented work demonstrates that OAC satisfies the identified requirements of answering competency questions regarding the modelling of policies representing personal preferences, requests of data for particular purposes, and agreements of data access, including contextual information.
 
 \begin{table}[htp]
     \centering
@@ -115,7 +115,7 @@ SELECT ?entity ?address ?contact ?name WHERE {
 Moreover, Table~\ref{tab:plasma_cq_concepts} lists concepts that can be used to answer the competency questions identified in PLASMA's ORSD, available in Table~\ref{tab:plasma_orsd}.
 Listing~\ref{list:plasma_sparql_cq} illustrates how these concepts can be used in SPARQL queries to fulfil the \textit{``CQ1. Which Pod management data is stored in the Pod?''} and \textit{``CQ4. What policy describes the data access requirements of a certain app or service?''} competency questions.
 A similar exercise can be done for the remaining competency questions.
-The presented work demonstrates that PLASMA satisfies the identified requirements of answering competency questions regarding the representation of information related to entities, infrastructure and processes in Solid, the modelling of information related to legal roles in a jurisdiction-agnostic manner and the definition of patterns to express apps and services policies, data usage logs and registries of data, schemas, apps, services, entities and authorisations for convenient access to information.
+The presented work demonstrates that PLASMA satisfies the identified requirements of answering competency questions regarding the representation of information related to entities, infrastructure, and processes in Solid, the modelling of information related to legal roles in a jurisdiction-agnostic manner, and the definition of patterns to express apps and services policies, data usage logs and registries of data, schemas, apps, services, entities, and authorisations for convenient access to information.
 
 \begin{table}[htp]
     \centering
@@ -164,7 +164,7 @@ SELECT ?app ?appmanifest ?policy WHERE {
 \end{listing}
 
 Finally, Table~\ref{tab:rights_cq_sparql} presents the SPARQL queries drafted to fulfil the competency questions of the proposed model to express rights-related exercising activities presented in Table~\ref{tab:rights_ORSD}.
-The presented work demonstrates that the developed model satisfies the identified requirements of answering competency questions regarding the modelling of the existence of data subject rights, how and where such rights can be exercised and how to keep records of said exercising activities.
+The presented work demonstrates that the developed model satisfies the identified requirements of answering competency questions regarding the modelling of the existence of data subject rights, how and where such rights can be exercised, and how to keep records of said exercising activities.
 
 \begin{table}[htp]
     \centering
