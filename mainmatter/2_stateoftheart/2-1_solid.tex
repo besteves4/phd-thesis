@@ -1,7 +1,7 @@
 \section{Decentralising the access to personal data with Solid}
 \label{sec:sota_solid}
 
-As attested in Section \ref{sec:def_decentralised_env}, current efforts are underway to decentralise today's Web. By decoupling data from applications, Web users will have their data stored in an environment they can control and can choose what data they want to make publicly accessible or accessible only to certain users while using their application of choice to manage said data.
+As attested in Section~\ref{sec:def_decentralised_env}, current efforts are underway to decentralise today's Web. By decoupling data from applications, Web users will have their data stored in an environment they can control and can choose what data they want to make publicly accessible or accessible only to certain users while using their application of choice to manage said data.
 This represents a significant paradigm shift regarding users' current online experience -- instead of being locked away in Big Tech companies' storage servers, data can be stored on individual personal datastores maintained by a provider chosen by the user or hosted by the user itself on its private server.
 In this context, the Solid project~\citep{sambra_solid_2016,mansour_demonstration_2016} has been gaining prominence as it relies on Web standards to achieve this degree of decentralisation -- its ultimate goal is to give Web users a personal datastore, i.e., a Pod, per user, with a granular access control system managed by the user, which they can use to select which people and/or applications have access to the resources stored on their Pod.
 As such, with Solid, applications and the companies behind them do not store the (personal) data of their users, acting only as interfaces that can read, write, or append data to/from Pods.
@@ -84,8 +84,9 @@ As is visible by the examples, both solutions do not have the depth to deal with
 \end{minted}
 \end{listing}
 
-Moreover, these access protocols were deemed not enough to ensure the interoperability of agents, data, and applications and, as such, an interoperability specification is being developed to describe the implementation of agent, data, and access registries, to track user interactions with other agents, to keep records of where data is being stored and to manage access grants given to other agents~\citep{bingham_interop_2023}.
-Listing~\ref{list:interop_registryset} provides an example of a registry set that should only be readable by the Pod owner and Listing~\ref{list:interop_authz_registry} an example of an authorisation registry, which contains an \texttt{AccessAuthorization} for the \texttt{projectron} app which requires data with a particular shape\footnote{SAI assumes the use of ACL access modes which are still not approved, e.g. \texttt{acl:Create}, \texttt{acl:Update}, \texttt{acl:Delete}, and are under discussion on the Solid CG authorisation panel (see issue at \url{https://github.com/solid/authorization-panel/issues/253}).}. While SAI is a step forward in Solid towards having a more transparent ecosystem, it is still in the early stages of development, and as such it is still not clear how this specification will fit in with the existing access control protocols or how it is going to be implemented/enforced.
+Moreover, these access protocols were deemed not enough to ensure the interoperability of agents, data, and applications, and as such an interoperability specification is being developed to describe the implementation of agent, data, and access registries, to track user interactions with other agents, to keep records of where data is being stored and to manage access grants given to other agents~\citep{bingham_interop_2023}.
+Listing~\ref{list:interop_registryset} provides an example of a registry set that should only be readable by the Pod owner and Listing~\ref{list:interop_authz_registry} an example of an authorisation registry, which contains an \texttt{AccessAuthorization} for the \texttt{projectron} app which requires data with a particular shape\footnote{SAI assumes the use of ACL access modes which are still not approved, e.g., \texttt{acl:Create}, \texttt{acl:Update}, \texttt{acl:Delete}, and are under discussion on the Solid CG authorisation panel (see the issue at \url{https://github.com/solid/authorization-panel/issues/253}).}.
+While SAI is a step forward in Solid towards having a more transparent ecosystem, it is still in the early stages of development, and as such it is still not clear how this specification will fit in with the existing access control protocols or how it is going to be implemented/enforced.
 In addition, as is illustrated by Listing \ref{list:interop_authz_registry}, SAI does not entirely fulfil GDPR requirements, e.g., it does not provide transparency regarding the purpose for access or which type of data is being accessed nor does it provide information regarding the identity of the entities that develop/provide the apps.
 
 \begin{listing}[h]
@@ -147,7 +148,7 @@ beatriz-authz:54a1b6a0 a interop:DataAuthorization ;
 Furthermore, the idea of having registries of data and applications is also compatible with the graph-centric interpretation of a Pod debated by~\cite{dedecker_whats_2022}. Certain apps might require the presence of particular data stored in a particular container -- this will cause an interoperability problem as it is something that cannot be standardised across the ecosystem for all apps.
 With a graph-centric approach, \textit{``each Solid pod is a hybrid, contextualized knowledge graph, wherein `hybrid' indicates first-class support for both documents and RDF statements, and `contextualized' the ability to associate each of its individual documents and statements with metadata such as policies, provenance, and trust''}.
 With such metadata, including context and provenance metadata, distinct views of the Pod can be rendered as required by different applications or agents.
-Moreover, data request policies can simply be appended to the \textit{`Pod as a Graph'}, without the need to have it hardcoded in the app, and can be viewed by users using graphic-centric Solid apps.
+Moreover, data request policies can simply be appended to the \textit{`Pod as a Graph'}, without the need to have it hard-coded in the app, and can be viewed by users using graphic-centric Solid apps.
 
 \subsection{Solid and data protection}
 \label{sec:sota_solid_data_protection}
@@ -197,10 +198,6 @@ Distinct works were also found to tackle the right to data portability, withdraw
 \centering
 \includegraphics[width=\textwidth]{figures/chapter-2/solid-sota.png}
 \end{figure}
-
-%Inrupt\footnote{\url{https://www.inrupt.com/} (accessed on 20 August 2023)}, an enterprise co-founded by Sir Tim Berners-Lee to create Solid products and to help advance and maintain the Solid protocol, is working with the BBC\footnote{\url{https://www.bbc.com/} (accessed on 20 August 2023)} \citep{kuesel_bbc_2022} and with NatWest\footnote{\url{https://www.natwest.com/} (accessed on 20 August 2023)} \citep{olivo_solid_2020} to provide Solid apps to these companies that offer personalised services to their costumers, e.g., recommend a new program to watch or to open a new bank account, respectively.
-
-%\cite{hochstenbach_rdf_2023} are developing RDF Surfaces\footnote{\url{https://w3c-cg.github.io/rdfsurfaces/}}, a Notation3 language which intends to bring first-order logic to the Semantic Web and therefore can be used to \textit{``provide enforcement of data policies using logic-based rules''}.
 
 \subsection{Other decentralised technologies}
 \label{sec:sota_other_technologies}
@@ -257,10 +254,3 @@ The usage of VCs is being contemplated in the ACP specification, however, no spe
 \end{listing}
 
 Moreover, \cite{braun_selfverifying_2022,braun_attributebased_2022} have previously published work on using VCs and RDF-star\footnote{RDF-star\citep{arndt_rdfstar_2023} is an under-development W3C specification that \textit{``extends RDF with a convenient way to make statements about other statements''}.} to sign and verify Web resources using a Solid app\footnote{The source code is available at \url{https://github.com/uvdsl/solid-web-ldsig}, under an MIT license (accessed on 19 August 2023).} and on using VCs and Linked Data Notifications (LDNs)\footnote{The W3C LDNs Recommendation \citep{capadisli_linked_2017} is a protocol that describes how servers can send and retrieve RDF-based messages, sent/retrieved by applications.}, extending previous work from~ \citeauthor{ezike_solidvc_2019}, to request attribute-based access to Solid Pods\footnote{The source code is available at \url{https://github.com/uvdsl/solid-vc-pwa/}, under an MIT license (accessed on 19 August 2023).}.
-
-% TODO: \paragraph{Data Spaces} IDSA + Gaia-X - comparison with solid in enabler paper
-
-% TODO: \paragraph{Interplanetary file system (IPFS)}
-
-% TODO: \paragraph{DTP (Data Transfer Project)}
-% A DTP and SoLiD based Service for Multi-Source Semantically-Heterogeneous Personal Data Management

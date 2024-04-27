@@ -1,10 +1,10 @@
 \section{Representing personal data processing information}
 \label{sec:sota_vocabularies}
 
-The Web of Data and its semantic specifications are thriving, with the W3C guiding this effort to have machine-readable and interoperable linked data on the Web, described by open standards which promote portability and extensibility, allow for seamless integration of data from different origins and re-usage across distinct Web applications and services~\citep{berners-lee_semantic_2001}.
+The Web of Data and its semantic specifications are thriving, with the W3C guiding this effort to have machine-readable and interoperable linked data on the Web, described by open standards that promote portability and extensibility, allow for seamless integration of data from different origins and re-usage across distinct Web applications and services~\citep{berners-lee_semantic_2001}.
 Accordingly, a wave of vocabularies and ontologies has appeared in the last few years to formalise common concepts, such as objects or entities, or terms from specific domains, such as legal or medical ontologies.
 More recently, with the increasing concerns around personal data processing abuse by Big Tech companies, data protection has been on the agenda of governments in a worldwide manner, with the EU taking the lead with its data protection law, the GDPR.
-This has led to a new wave of personal data protection law ontologies being developed to help companies to comply with GDPR's legal requirements and which also intend to assist individuals to manage their personal data.
+This has led to a new wave of personal data protection law ontologies being developed to help companies comply with GDPR's legal requirements and which also intend to assist individuals in managing their personal data.
 
 In the following Sections, the criteria used to analyse each specified data protection vocabulary are included, as well as a description of each identified solution.
 
@@ -14,7 +14,7 @@ In the following Sections, the criteria used to analyse each specified data prot
 For each identified solution, we describe the core terms formalised in the ontologies, as well as dependencies on other existing works, and, when available, case studies where it has been applied.
 As for the analysis of their representational abilities, we analyse whether such ontologies can represent the privacy terms mentioned in GDPR's data subject rights, to assess to what extent they can be used by data subjects to exercise their rights and by data controllers to manage compliance.
 
-In particular, the so-called \textit{`right to be informed'}, described in detail on Articles 13 and 14, obliges data controllers to inform data subjects about any processing of personal data, whether being from data collected directly from the data subjects or from other sources. In addition to this, the following rights are also provided to data subjects:
+In particular, the so-called \textit{`right to be informed'}, described in detail in Articles 13 and 14, obliges data controllers to inform data subjects about any processing of personal data, whether being from data collected directly from the data subjects or from other sources. In addition to this, the following rights are also provided to data subjects:
 
 \begin{enumerate}
   \item[(Art. 15)] \textit{`right of access'} to the personal data being processed, including a copy of the data as well as information about the purposes for processing, categories of the personal data being processed and their source, any recipients to whom the data may have been shared and corresponding measures to ensure its security, storage and retention conditions and the existence of other data subject's rights.
@@ -29,7 +29,7 @@ In particular, the so-called \textit{`right to be informed'}, described in detai
 
 For such rights to be exercised by data subjects and fulfilled by data controllers, a set of privacy terms must be modelled, namely the terms identified in Table~\ref{tab:GDPR_privacy_terms}, which is derived from~\cite{esteves_analysis_2022}. These terms will be used to compare the described privacy and data protection vocabularies and ontologies and identify representational gaps in the existing solutions. The outcomes of this comparative analysis will be provided in Section~\ref{sec:sota_vocabularies_analysis}.
 
-\begin{table}
+\begin{table}[htp]
 \centering
 \caption{Privacy terms to be represented and respective identifiers (I*). The GDPR articles that mention these terms are also specified.}
 \label{tab:GDPR_privacy_terms}
@@ -103,10 +103,10 @@ For such rights to be exercised by data subjects and fulfilled by data controlle
 \label{sec:sota_vocabularies_description}
 
 In this Section, a systematic description of each identified work is provided, including an example that uses the vocabulary's concepts, when available.
-Moreover, Table~\ref{tab:analysed_vocabularies} provides an overview of these solutions and supplies information about the creators of the resources, their versions, the date of publication and the date of the last known update.
+Moreover, Table~\ref{tab:analysed_vocabularies} provides an overview of these solutions and supplies information about the creators of the resources, their versions, the date of publication, and the date of the last known update.
 Said solutions are then analysed in chronological order regarding the date of publication and a dependency graph -- a chart that demonstrates the relations between the reviewed vocabularies and its dependencies and extensions -- is presented in Figure~\ref{fig:voc_dependency_graph}.
 
-\begin{table}
+\begin{table}[ht]
 \centering
 \caption{Brief description of the vocabularies described in Section \ref{sec:sota_vocabularies_description}.}
 \label{tab:analysed_vocabularies}
@@ -135,7 +135,7 @@ Abbreviation (Section) & Full Name & Creators & Version & \multicolumn{1}{c|}{\b
 \end{tabular}}
 \end{table}
 
-\begin{figure}
+\begin{figure}[ht]
 \caption{Data protection vocabularies dependency chart.}
 \label{fig:voc_dependency_graph}
 \centering
@@ -143,8 +143,6 @@ Abbreviation (Section) & Full Name & Creators & Version & \multicolumn{1}{c|}{\b
 \end{figure}
 
 To complement the description of vocabularies presented in this Section, additional documentation and resources were published in a Web page\footnote{Available at \url{https://protect.oeg.fi.upm.es/sota/ontologies}. Its public repository can be consulted at \url{https://github.com/besteves4/SotAResources} for further improvement when new solutions appear.}, including diagrams and code examples.
-
-% TODO: all concepts should be \texttt{}
 
 \subsubsection{NEURONA}
 \label{sec:neurona}
@@ -156,7 +154,7 @@ The main objectives of the ontologies developed in the context of this project w
 DPKO's main classes are \textbf{data}, \textbf{consent}, \textbf{purpose}, \textbf{person}, \textbf{security measures} and \textbf{security degree}.
 In relation to the data class, categories such as health data are defined and associated with special security measures. 
 The consent should be given by the data subject in an unambiguous way and for a specific purpose.
-In addition, technical and organisational measures (TOMs) for data security, such as access control measures or authentication procedures, are modeled and connected to the nature of the data, taking into consideration the security level associated with the type of data or how the data was obtained. 
+In addition, technical and organisational measures (TOMs) for data security, such as access control measures or authentication procedures, are modelled and connected to the nature of the data, taking into consideration the security level associated with the type of data or how the data was obtained. 
 For example, a file with health data obtained without consent should have high-level security measures, while a file with anonymised data can implement low-level measures.
 DPRO is then used to access data protection compliance by reasoning over the measures applied to files.
 
@@ -167,13 +165,13 @@ The Data Protection Ontology (DPO)~\citep{bartolini_reconciling_2015,otake_using
 
 The core classes of DPO are \textbf{data protection principles}, \textbf{rules} for processing and transferring data, and \textbf{data subjects rights}.
 The ontology is designed so that each rule and right is linked to at least one principle.
-For instance, data subjects have the right to rectify inaccurate or incomplete data and data controllers must provide the means to do it, according to GDPR's \textit{`accuracy'} principle.
+For instance, data subjects have the right to rectify inaccurate or incomplete data, and data controllers must provide the means to do it, according to GDPR's \textit{`accuracy'} principle.
 Furthermore, DPO defines consent as a legal justification connected with the principle of trust and also specifies concepts to model the special case of giving consent as a parent for a child, although the concept of \textit{`consent provided by delegation'} is missing.
-Data protection-related entities, such as data controllers, supervisory authorities, processors, representatives or data protection officers, are modelled as a type of \textbf{person}.
+Data protection-related entities, such as data controllers, supervisory authorities, processors, representatives, or data protection officers, are modelled as a type of \textbf{person}.
 
 Listing \ref{list:sparql_dpo} provides an example of a SPARQL query to retrieve duties of a data controller that do not concern the transfer of personal data using DPO.\footnote{More examples are available in a project repository at \url{https://bitbucket.org/guerret/lu.uni.eclipse.bpmn2/} (accessed on 16/July/2023).}
 
-\begin{listing}
+\begin{listing}[ht]
 \caption{SPARQL query to retrieve duties of the data controller that do not concern data transfer using the Data Protection Ontology.}
 \label{list:sparql_dpo}
 \begin{minted}{sparql}
@@ -195,11 +193,11 @@ The GDPR Provenance Ontology (GDPRov)~\citep{pandit_modelling_2017} aims to reco
 GDPRov extends PROV-O~\citep{lebo_prov-o_2013}, a W3C Recommendation created to define the provenance of entities and systems, and P-Plan~\citep{garijo_augmenting_2012}, an extension of PROV-O to represent activities and corresponding steps to execute them, as well as the entities involved.
 Using these terms, it is possible to monitor changes in consent or to track the interaction between entities involved in the exchange of data.
 
-GDPRov's main concept to record the provenance of consent is the \textbf{consent agreement template} class, a common template which includes the consent conditions presented to the users and the entities in charge of data  processing, and also information on third party sharing, approved processing activities and additional rights.
-Provenance metadata on the origin, use, storage and sharing of the data can also be recorded with GDPRov, as well as information regarding transformations performed to the data.
-In addition to this, provenance data on the exercising and fulfilment of GDPR-related rights and obligations can also be represented with GDPRov -- for each right or obligation, a plan can be modelled to include the activities that need to be executed when an user exercises a particular right.
+GDPRov's main concept to record the provenance of consent is the \textbf{consent agreement template} class, a common template that includes the consent conditions presented to the users and the entities in charge of data processing, and also information on third party sharing, approved processing activities and additional rights.
+Provenance metadata on the origin, use, storage, and sharing of the data can also be recorded with GDPRov, as well as information regarding transformations performed to the data.
+In addition to this, provenance data on the exercising and fulfilment of GDPR-related rights and obligations can also be represented with GDPRov -- for each right or obligation, a plan can be modelled to include the activities that need to be executed when a user exercises a particular right.
 
-Listing \ref{list:sparql_gdprov} illustrates a SPARQL query which uses GDPRov's terms to retrieve the entities involved in acquiring consent.
+Listing \ref{list:sparql_gdprov} illustrates a SPARQL query that uses GDPRov's terms to retrieve the entities involved in acquiring consent.
 
 \begin{listing}
 \caption{SPARQL query retrieving entities involved in acquiring consent using GDPRov~\citep{pandit_modelling_2017}.}
@@ -221,36 +219,36 @@ SELECT ?consent ?template ?toc WHERE {
 
 The Cloud GDPR ontology was developed by~\cite{elluri_knowledge_2018} to express data protection obligations of cloud data consumers and providers, taking into consideration the Cloud Security Alliance (CSA) controls defined on the \textit{Code of Conduct for GDPR Compliance}~\citep{cloud_security_alliance_-_privacy_level_agreement_working_group_code_2017}.
 
-The \textbf{stakeholders}, \textbf{controls} and \textbf{obligations} are the core concepts of this ontology.
-Cloud-related obligations are extracted and connected to GDPR's articles and are also associated to CSA requirements using the \textbf{hasCSAcontrol} property.
+The \textbf{stakeholders}, \textbf{controls}, and \textbf{obligations} are the core concepts of this ontology.
+Cloud-related obligations are extracted and connected to GDPR's articles and are also associated with CSA requirements using the \textbf{hasCSAcontrol} property.
 Moreover, these obligations are further specified into common or provider/consumer-specific obligations taking into consideration which stakeholders they are applicable to, e.g., maintaining records of data processing activities and notifying data breaches are common obligations, while providing legal representatives for non-EU stakeholders or hiring a DPO are the responsibility of the consumer and of the provider, respectively.
 
 This work was later extended \citep{elluri_integrated_2018} to automate the implementation of compliance tasks mandated by the GDPR and the Payment Card Industry Data Security Standard (PCI DSS) guidelines~\citep{pci_security_standards_council_payment_2018} and also to include the rights of consumers, providers and end users.
 These guidelines deal with financial data, such as the credit card number or card-holder's name, which fall under the protection offered by the GDPR.
-As such, and since its scope is narrower, a data breach of PCI DSS-related data automatically results in GDPR-related one.
+As such, and since its scope is narrower, a data breach of PCI DSS-related data automatically results in a GDPR-related one.
 Thus, the cloud-related PCI DSS requirements were used to enhance this ontology and its evaluation was performed using privacy policies from five major companies that deal with card-holder's data.
 
 \subsubsection{PrOnto}
 \label{sec:pronto}
 
-PrOnto, the Privacy Ontology for legal reasoning, aims to model GDPR-related associations between agents, processing activities, data categories and deontic modalities, with the main goal to support legal reasoning and compliance with data protection regulations~\citep{ko_pronto_2018}.
+PrOnto, the Privacy Ontology for legal reasoning, aims to model GDPR-related associations between agents, processing activities, data categories, and deontic modalities, with the main goal to support legal reasoning and compliance with data protection regulations~\citep{ko_pronto_2018}.
 PrOnto relies on a number of ontologies to model these relationships:
 \begin{itemize}
-    \item LKIF-Core~\citep{hoekstra_lkif_2007} is used to model agents, e.g., organisations, software or people, as well as the several legal roles which can be assigned to them, i.e., acting as a data controller or processor.
+    \item LKIF-Core~\citep{hoekstra_lkif_2007} is used to model agents, e.g., organisations, software, or people, as well as the several legal roles which can be assigned to them, i.e., acting as data controller or processor.
     \item The Functional Requirements for Bibliographic Records (FRBR) ontology~\citep{byrum_functional_2009} is used to model legal documents as sources of information, that regulate the different relationships between the agents documented in the text, and to register changes in their representation over time. % copied
-    \item The ALLOT (A Light Legal Ontology On Top level classes) ontology, developed by Barabucci et al.~\citep{barabucci_managing_2010}, extends the Akoma Ntoso standard~\citep{palmirani_akoma-ntoso_2011} to link documents with the data they contain, e.g., people, events or locations.
-    \item The Publishing Workflow Ontology (PWO)~\citep{gangemi_publishing_2017} is used to characterize provenance data associated with the publication of a document, e.g., to model the different types of processing of personal data.
-    \item The TVC (Time-indexed Value in Context) ontology~\citep{peroni_semantic_2014} and the TI (Time Interval) ontology pattern\footnote{\url{http://www.ontologydesignpatterns.org/cp/owl/timeinterval.owl} (accessed on 16/July/2023)} are used to associate time-dependant variables such as events to specific agent roles that only emerge in particular point in time.
+    \item The ALLOT (A Light Legal Ontology On Top level classes) ontology, developed by~\citep{barabucci_managing_2010}, extends the Akoma Ntoso standard~\citep{palmirani_akoma-ntoso_2011} to link documents with the data they contain, e.g., people, events or locations.
+    \item The Publishing Workflow Ontology (PWO)~\citep{gangemi_publishing_2017} is used to characterise provenance data associated with the publication of a document, e.g., to model the different types of processing of personal data.
+    \item The TVC (Time-indexed Value in Context) ontology~\citep{peroni_semantic_2014} and the TI (Time Interval) ontology pattern\footnote{\url{http://www.ontologydesignpatterns.org/cp/owl/timeinterval.owl} (accessed on 16/July/2023)} are used to associate time-dependent variables such as events to specific agent roles that only emerge in particular point in time.
 \end{itemize}
 
 PrOnto's main classes are defined as follows: \textbf{documents and data}, \textbf{agents and roles}, \textbf{processing and workflow}, \textbf{legal rules and deontic formula}, and \textbf{purposes and legal bases}.
 GDPR is the main document used to extract personal data categories such as judicial or sensitive data and non-personal data such as anonymous or legal person data.
 Moreover, processing activities are represented as a workflow of actions that should be recorded together with provenance data such as the context and time in which each action occurs.
-Each processing activity is also associated with a purpose and a legal rule, which is composed of deontic specifications, i.e., prohibitions, rights, permissions and obligations, used to check if the activity being executed is compliant with the GDPR. PrOnto is, however, not publicly available for re-usage, which hinders the assessment of the totality of concepts it models\footnote{As PrOnto is not available online, its namespace is unknown. We use the prefix \texttt{pronto} to identify PrOnto's concepts that are available in the analysed publication.}. 
+Each processing activity is also associated with a purpose and a legal rule, which is composed of deontic specifications, i.e., prohibitions, rights, permissions, and obligations, used to check if the activity being executed is compliant with the GDPR. PrOnto is, however, not publicly available for re-usage, which hinders the assessment of the totality of concepts it models\footnote{As PrOnto is not available online, its namespace is unknown. In this Thesis, the prefix \texttt{pronto} is used to identify PrOnto's concepts that are available in the analysed publication.}. 
 
 Listing \ref{list:sparql_pronto} illustrates a query to retrieve information regarding personal data processing activities performed by company \textit{X} in the role of controller from time \textit{t1} to \textit{t2}.
 
-\begin{listing}
+\begin{listing}[ht]
 \caption{SPARQL query used to retrieve personal data processing activities performed by company \textit{X} in the role of controller from \textit{t1} to \textit{t2} using PrOnto~\citep{ko_pronto_2018}.}
 \label{list:sparql_pronto}
 \begin{minted}{sparql}
@@ -271,14 +269,15 @@ SELECT ?pdp WHERE {
 
 GConsent \citep{hitzler_gconsent_2019} is an ontology focused on the GDPR concept of consent and, as such, it models information regarding how consent was collected and stored, as well as records of any changes that may occur over time, including withdrawal, including data on the parties involved, according to Article 6 of the GDPR.
 Additionally, other documentation sources were also adopted, including EDPB's guidelines on consent~\citep{european_data_protection_board_guidelines_2020}.
-As GConsent aims at not only capturing the concept of consent, but also to represent its state, context and provenance, existing vocabularies on this subject, such as PROV-O~\citep{lebo_prov-o_2013}, GDPRov~\citep{pandit_modelling_2017} and GDPRtEXT~\citep{gangemi_gdprtext_2018} -- later presented in Section \ref{sec:gdprtext}, are reused. % copied
+GConsent encompasses not just the notion of consent, but also depicts its status, context, and origin.
+To achieve this, it leverages established vocabularies in this domain, including PROV-O~\citep{lebo_prov-o_2013}, GDPRov~\citep{pandit_modelling_2017}, and GDPRtEXT~\citep{gangemi_gdprtext_2018} (discussed in Section~\ref{sec:gdprtext}).
 
 GConsent's main concepts are the terms to represent \textbf{data subjects}, \textbf{personal data}, \textbf{purpose} and \textbf{processing types}, as well as the \textbf{consent} and \textbf{consent status} classes -- the latter fills a gap on the available ontologies on this domain as it not only defines \textbf{explicitly given consent} as a concept, but also classifies other states of consent, such as \textbf{implicitly given}, \textbf{expired} or \textbf{refused}.
-GConsent also includes concepts to represent information regarding the context in which the consent was obtained -- information about the entities involved, spatial and temporal aspects and the format used to record it, e.g., Web form, voice recording or signature -- and a taxonomy of processing types, e.g., data alignment or data retrieval.
+GConsent also includes concepts to represent information regarding the context in which the consent was obtained -- information about the entities involved, spatial and temporal aspects, and the format used to record it, e.g., Web form, voice recording, or signature -- and a taxonomy of processing types, e.g., data alignment or data retrieval.
 
 Listing \ref{list:ttl_gconsent} provides an example of a record of provenance data regarding an activity of withdrawing consent using GConsent.
 
-\begin{listing}
+\begin{listing}[ht]
 \caption{Turtle record of provenance data regarding an activity of withdrawing consent using GConsent \citep{hitzler_gconsent_2019}.}
 \label{list:ttl_gconsent}
 \begin{minted}{turtle}
@@ -300,14 +299,28 @@ ex:consent2 a gc:Consent ;
 
 The Information Model Ontology (IMO)~\citep{papagiannakopoulou_leveraging_2014,lioudakis_compliance_2019} was developed in the context of the BPR4GDPR project\footnote{BPR4GDPR (Business Process Re-engineering and functional toolkit for GDPR compliance) is an European Union H2020 innovation programme with the main goal of providing a framework to reinforce the implementation of GDPR-compliant measures inside organisations at diverse scales and in several domains. More information available at \url{https://www.bpr4gdpr.eu/} (accessed on 16/July/2023).} and it aims to define the entities and respective roles that are involved in the organisation lifecycle of processing personal data.
 
-IMO's core classes are \textbf{data types}, \textbf{roles} assigned to users within different \textbf{organisation types}, \textbf{machine types} that host \textbf{operations} for particular \textbf{purposes}, \textbf{events} and their \textbf{context} information.
-The roles class is related to the responsibilities that are assigned to the user in the context of the organisation and its instances can be implemented hierarchically according to the detail level of the data and connected through the \textit{isA} property -- a structure which is valid for most classes in the ontology. % copied
-The data processing activities are implemented through the operations class, which have associated the \textit{hasInput} and \textit{hasOutput} properties that allow to connect the operations with the data that is processed and the one that is generated and respective states, i.e., plain or anonymised. % copied
-These operations can be grouped in an operation container -- a class that groups processing activities in contexts where they usually work together, for instance, in the management of a database, in which functions such as create, read, update or delete are commonly used.  % copied
-The role and operation classes should always be connected with an instance of the purpose class.  % copied
-The events class, that aims at capturing all processing activities, a data breach or the revoke of consent, has associated the context class to instantiate specific cases and provide temporal and spatial details, among others.  % copied
+
+IMO's main concepts encompass various categories: \textbf{data types}, \textbf{roles} across diverse organisational structures, \textbf{machine types} housing \textbf{operations} tailored for specific \textbf{purposes}, \textbf{events} alongside their contextual details.
+The roles class specifically pertains to the duties assigned to users within organisational contexts, with the potential for hierarchical implementations based on the granularity of data.
+Data processing activities are represented via the operations class, which is equipped with the \textbf{hasInput} and \textbf{hasOutput} properties.
+These properties facilitate the connection between operations and the data being processed, as well as the resulting data and their corresponding states, e.g., normal or anonymised form.
+These operations can be organised within an operation container, a concept designed to group processing activities that typically function together within specific contexts.
+For example, within database management, functions such as create, read, update, or delete are frequently employed together.
+Instances of the role and operation classes are consistently linked with a purpose instance.
+Moreover, the events class, designed to encompass all processing activities such as data breaches or consent withdrawals, should be paired with the context class to create specific event instances with temporal and spatial details, among other pertinent information.
 
 % TODO: extract example from https://www.researchgate.net/profile/Joaquin-Garcia-Alfaro/publication/260706010/figure/fig3/AS:296857856167938@1447787836426/Example-of-Ontological-Access-Control-Rule.png
+\begin{listing}
+\caption{Turtle record of a personal data handling related to the collection and usage of email addresses for marketing purposes using DPV~\citep{panetto_creating_2019}.}
+\label{list:ttl_dpv}
+\begin{minted}{turtle}
+ex:PDHforMarketing a dpv:PersonalDataHandling ;
+    dpv:hasDataController [ a dpv:DataController ] ;
+    dpv:hasPersonalData dpv-pd:EmailAddress ;
+    dpv:hasProcessing dpv:Collect, dpv:Use ;
+    dpv:hasPurpose dpv:Marketing .
+\end{minted}
+\end{listing}
 
 \subsubsection{DPV}
 \label{sec:dpv}
@@ -323,20 +336,20 @@ DPV also provides five extensions:
 \begin{itemize}
     \item Personal data categories are defined in the DPV-PD extension\footnote{\url{https://w3id.org/dpv/dpv-pd} (accessed on 17/July/2023)} -- the personal data class is split into generic classes such as financial or social data, adapted from the \textbf{EnterPrivacy} taxonomy by \cite{cronk_categories_2017}, which are further specified into concepts such as credit card number or social media accounts.
     \item GDPR-specific concepts are defined in the DPV-GDPR extension\footnote{\url{https://w3id.org/dpv/dpv-gdpr} (accessed on 17/July/2023)} -- it covers legal bases specified on GDPR's Articles 6 and 9 for the processing of personal data and also the legal bases for the transfer of personal data to third countries defined on Articles 45, 46 and 49. It also models GDPR's data subject rights, data transfer tools and Data Protection Impact Assessment (DPIA) terms.
-    \item Technology-relevant concepts are defined in the DPV-TECH extension\footnote{\url{https://w3id.org/dpv/dpv-tech} (accessed on 17/July/2023)} -- it includes concepts to model specific technologies, their management, technology actors and relevant tools and systems.
+    \item Technology-relevant concepts are defined in the DPV-TECH extension\footnote{\url{https://w3id.org/dpv/dpv-tech} (accessed on 17/July/2023)} -- it includes concepts to model specific technologies, their management, technology actors, and relevant tools and systems.
     \item Jurisdiction-relevant concepts are defined in the DPV-LEGAL extension\footnote{\url{https://w3id.org/dpv/dpv-legal} (accessed on 17/July/2023)} -- it contains terms related to specific laws, adequacy decisions and a taxonomy of authorities.
     \item Risk concepts are defined in the RISK extension\footnote{\url{https://w3id.org/dpv/risk} (accessed on 17/July/2023)} -- it covers concepts related to risk, likelihood, severity levels, consequences and impacts, as well as risk assessment techniques and methodologies.
 \end{itemize}
 
 Listing \ref{list:ttl_dpv} provides an example of a personal data handling related to the collection and usage of email addresses for marketing purposes using DPV.
 
-\begin{listing}
+\begin{listing}[ht]
 \caption{Turtle record of a personal data handling related to the collection and usage of email addresses for marketing purposes using DPV~\citep{panetto_creating_2019}.}
 \label{list:ttl_dpv}
 \begin{minted}{turtle}
 ex:PDHforMarketing a dpv:PersonalDataHandling ;
     dpv:hasDataController [ a dpv:DataController ] ;
-    dpv:hasPersonalData dpv-pd:EmailAddress ;
+    dpv:hasPersonalData pd:EmailAddress ;
     dpv:hasProcessing dpv:Collect, dpv:Use ;
     dpv:hasPurpose dpv:Marketing .
 \end{minted}
