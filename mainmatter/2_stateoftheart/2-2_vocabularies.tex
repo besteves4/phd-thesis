@@ -297,8 +297,7 @@ ex:consent2 a gc:Consent ;
 \subsubsection{IMO}
 \label{sec:imo}
 
-The Information Model Ontology (IMO)~\citep{papagiannakopoulou_leveraging_2014,lioudakis_compliance_2019} was developed in the context of the BPR4GDPR project\footnote{BPR4GDPR (Business Process Re-engineering and functional toolkit for GDPR compliance) is an European Union H2020 innovation programme with the main goal of providing a framework to reinforce the implementation of GDPR-compliant measures inside organisations at diverse scales and in several domains. More information available at \url{https://www.bpr4gdpr.eu/} (accessed on 16/July/2023).} and it aims to define the entities and respective roles that are involved in the organisation lifecycle of processing personal data.
-
+The Information Model Ontology (IMO)~\citep{papagiannakopoulou_leveraging_2014,lioudakis_compliance_2019} was developed in the context of the BPR4GDPR project\footnote{BPR4GDPR (Business Process Re-engineering and functional toolkit for GDPR compliance) is an European Union H2020 innovation programme with the main goal of providing a framework to reinforce the implementation of GDPR-compliant measures inside organisations at diverse scales and in several domains. More information is available at \url{https://www.bpr4gdpr.eu/} (accessed on 16/July/2023).} and it aims to define the entities and respective roles that are involved in the organisation lifecycle of processing personal data.
 
 IMO's main concepts encompass various categories: \textbf{data types}, \textbf{roles} across diverse organisational structures, \textbf{machine types} housing \textbf{operations} tailored for specific \textbf{purposes}, \textbf{events} alongside their contextual details.
 The roles class specifically pertains to the duties assigned to users within organisational contexts, with the potential for hierarchical implementations based on the granularity of data.
@@ -309,36 +308,23 @@ For example, within database management, functions such as create, read, update,
 Instances of the role and operation classes are consistently linked with a purpose instance.
 Moreover, the events class, designed to encompass all processing activities such as data breaches or consent withdrawals, should be paired with the context class to create specific event instances with temporal and spatial details, among other pertinent information.
 
-% TODO: extract example from https://www.researchgate.net/profile/Joaquin-Garcia-Alfaro/publication/260706010/figure/fig3/AS:296857856167938@1447787836426/Example-of-Ontological-Access-Control-Rule.png
-\begin{listing}
-\caption{Turtle record of a personal data handling related to the collection and usage of email addresses for marketing purposes using DPV~\citep{panetto_creating_2019}.}
-\label{list:ttl_dpv}
-\begin{minted}{turtle}
-ex:PDHforMarketing a dpv:PersonalDataHandling ;
-    dpv:hasDataController [ a dpv:DataController ] ;
-    dpv:hasPersonalData dpv-pd:EmailAddress ;
-    dpv:hasProcessing dpv:Collect, dpv:Use ;
-    dpv:hasPurpose dpv:Marketing .
-\end{minted}
-\end{listing}
-
 \subsubsection{DPV}
 \label{sec:dpv}
 
 The Data Privacy Vocabulary is being developed and maintained by the W3C Data Protection Vocabularies and Controls Community Group (DPVCG)\footnote{\url{https://www.w3.org/community/dpvcg/} (accessed on 16/July/2023)} -- an output of a W3C workshop on data privacy controls which took place in 2018, with the objective of defining priorities for the standardisation of this domain~\citep{bonatti_data_2018}.
 
 DPV's core concepts, \textbf{processing}, \textbf{purpose}, \textbf{recipient} and \textbf{personal data categories}, were adapted from the SPECIAL Usage Policy Language (SPL) vocabularies~\citep{bonatti_policy_2018} and new concepts were/are continuously added to DPV after being discussed and agreed upon by the Community Group.
-In addition to previously mentioned concepts, DPV's base vocabulary was first published with the following additional classes: \textbf{legal basis}, \textbf{technical and organizational measures} and \textbf{legal entities}, including \textbf{data subject} and \textbf{child}, \textbf{recipients}, \textbf{data controller}, \textbf{data processor} and \textbf{third party}~\citep{panetto_creating_2019}.
+In addition to previously mentioned concepts, DPV's base vocabulary was first published with the following additional classes: \textbf{legal basis}, \textbf{technical and organisational measures} and \textbf{legal entities}, including \textbf{data subject} and \textbf{child}, \textbf{recipients}, \textbf{data controller}, \textbf{data processor} and \textbf{third party}~\citep{panetto_creating_2019}.
 In December of 2022, DPV version 1 was published including additional concepts to model \textbf{risk}, \textbf{rights} and \textbf{data subject rights}, \textbf{technology}, \textbf{laws} and \textbf{context of processing} classes and the previously existing taxonomies were extended with new terms -- new legal entities, including authority and data protection authority, vulnerable data subject, data sub-processor, data protection officer and representative, were added to the vocabulary, as well as new purpose and legal basis sub-classes.
 For instance, the purpose taxonomy is composed of 76 purpose sub-classes, which are topped by classes such as R\&D or Service Provision, and can be further constrained to specific contexts or business sectors, and DPV's processing operations taxonomy covers the terms defined in Article 4.2 of the GDPR, providing a set of 44 processing categories.
 
 DPV also provides five extensions:
 \begin{itemize}
-    \item Personal data categories are defined in the DPV-PD extension\footnote{\url{https://w3id.org/dpv/dpv-pd} (accessed on 17/July/2023)} -- the personal data class is split into generic classes such as financial or social data, adapted from the \textbf{EnterPrivacy} taxonomy by \cite{cronk_categories_2017}, which are further specified into concepts such as credit card number or social media accounts.
-    \item GDPR-specific concepts are defined in the DPV-GDPR extension\footnote{\url{https://w3id.org/dpv/dpv-gdpr} (accessed on 17/July/2023)} -- it covers legal bases specified on GDPR's Articles 6 and 9 for the processing of personal data and also the legal bases for the transfer of personal data to third countries defined on Articles 45, 46 and 49. It also models GDPR's data subject rights, data transfer tools and Data Protection Impact Assessment (DPIA) terms.
-    \item Technology-relevant concepts are defined in the DPV-TECH extension\footnote{\url{https://w3id.org/dpv/dpv-tech} (accessed on 17/July/2023)} -- it includes concepts to model specific technologies, their management, technology actors, and relevant tools and systems.
-    \item Jurisdiction-relevant concepts are defined in the DPV-LEGAL extension\footnote{\url{https://w3id.org/dpv/dpv-legal} (accessed on 17/July/2023)} -- it contains terms related to specific laws, adequacy decisions and a taxonomy of authorities.
-    \item Risk concepts are defined in the RISK extension\footnote{\url{https://w3id.org/dpv/risk} (accessed on 17/July/2023)} -- it covers concepts related to risk, likelihood, severity levels, consequences and impacts, as well as risk assessment techniques and methodologies.
+    \item Personal data categories are defined in the PD extension\footnote{\url{https://w3id.org/dpv/pd} (accessed on 17/July/2023)} -- the personal data class is split into generic classes such as financial or social data, adapted from the \textbf{EnterPrivacy} taxonomy by \cite{cronk_categories_2017}, which are further specified into concepts such as credit card number or social media accounts.
+    \item GDPR-specific concepts are defined in the EU-GDPR extension\footnote{\url{https://w3id.org/dpv/legal/eu/gdpr} (accessed on 17/July/2023)} -- it covers legal bases specified on GDPR's Articles 6 and 9 for the processing of personal data and also the legal bases for the transfer of personal data to third countries defined on Articles 45, 46 and 49. It also models GDPR's data subject rights, data transfer tools, and Data Protection Impact Assessment (DPIA) terms.
+    \item Technology-relevant concepts are defined in the TECH extension\footnote{\url{https://w3id.org/dpv/tech} (accessed on 17/July/2023)} -- it includes concepts to model specific technologies, their management, technology actors, and relevant tools and systems.
+    \item Jurisdiction-relevant concepts are defined in the LEGAL extension\footnote{\url{https://w3id.org/dpv/legal/} (accessed on 17/July/2023)} -- it contains terms related to specific laws, adequacy decisions, and a taxonomy of authorities.
+    \item Risk concepts are defined in the RISK extension\footnote{\url{https://w3id.org/dpv/risk} (accessed on 17/July/2023)} -- it covers concepts related to risk, likelihood, severity levels, consequences, and impacts, as well as risk assessment techniques and methodologies.
 \end{itemize}
 
 Listing \ref{list:ttl_dpv} provides an example of a personal data handling related to the collection and usage of email addresses for marketing purposes using DPV.
@@ -361,29 +347,19 @@ ex:PDHforMarketing a dpv:PersonalDataHandling ;
 GDPRtEXT was developed by~\cite{gangemi_gdprtext_2018} as a linked data resource, which extends the European Legislation Identifier (ELI) ontology~\citep{office_of_publications_on_eur-lex_eu_2017}, to connect GDPR concepts with the specific chapters, articles or points of the regulatory text.
 
 The main concepts modelled in this ontology are related to the specific \textbf{entities} mentioned in the GDPR text, their \textbf{rights} and \textbf{obligations}, the \textbf{principles} and the \textbf{activities} which specify processes and actions defined in the GDPR, such as reporting a data breach, exercising rights or demonstrating consent.
-These terms are linked to the relevant GDPR articles using the \texttt{rdfs:isDefinedBy} property.
+These terms are linked to the relevant GDPR provisions using \texttt{rdfs:isDefinedBy}.
 
 \subsection{Comparative analysis}
 \label{sec:sota_vocabularies_analysis}
 
-% TODO: \beatriz{DPKO: I7 - only consent; I17 - data}
-% TODO: \beatriz{DPKO: I20 - transfer rule}
-
 As it is visible in Tables \ref{tab:vocabsTerms-first} and \ref{tab:vocabsTerms-second}, existing ontologies and vocabularies in the domain of data protection are of particular interest to represent the privacy terms described in Table~\ref{tab:GDPR_privacy_terms}, however, there are still representational gaps to be filled.
 More specifically, each ontology was analysed in terms of the concepts they model and, when a particular concept was found to represent a particular privacy term, the name of the respective term was included in the comparative tables, as well as the number of sub-classes which can be used to more precisely define the term.
-The cases in which there was no specific concept to represent the privacy term, yet there were terms that can be extended to accomplish it, are marked with an asterisk. % copied
-Privacy terms I15, I19, I24, I26, and I28 to I30 are not represented in either Table~\ref{tab:vocabsTerms-first} or~\ref{tab:vocabsTerms-second} since they are not modelled by any of the analysed ontologies. % copied
+The cases where no concepts were found to represent the privacy term, but existing terms could be expanded to do it, are indicated with an asterisk.
+Privacy terms I15, I19, I24, I26, and I28 to I30 are absent from both Table~\ref{tab:vocabsTerms-first} and~\ref{tab:vocabsTerms-second} since none of the analysed ontologies include them.
 
-DPO, GDPRov, PrOnto, DPV and GDPRtEXT can be used to partially populate a great deal of the informational items required by the \textit{`right to be informed'} and the other GDPR rights. % copied
-However, DPV and GDPRtEXT must be highlighted since they contain the concepts to represent, at least partially, 19 and 14 privacy terms, respectively, out of the 30 described in Table~\ref{tab:GDPR_privacy_terms}.
-Furthermore, these vocabularies are the ones that have the largest number of sub-classes to specifically define the respective terms. % copied
-
-Of particular importance, it must be referred that most of presented resources are obsolete or without new developments in recent years, with DPV being the only one that presented new outcomes in the last two years.
-Moreover, of all the covered vocabularies, only DPKO, IMO and PrOnto do not have open and accessible resources. % copied
-
-\begin{table}
+\begin{table}[ht]
 \centering
-\caption[Representation of privacy terms I1 to I22 in the DPKO, DPRO, DPO, GDPRov, Cloud and PrOnto ontologies.]{Representation of privacy terms I1 to I22 in the DPKO, DPRO, DPO, GDPRov, Cloud and PrOnto ontologies. The names of the classes which can be used to specify a particular item are depicted in the table, as well as their respective number of sub-classes, if available. The privacy terms which can not be fully represented by the current ontology terms are illustrated with an asterisk.}
+\caption[Representation of privacy terms I1 to I22 in the DPKO, DPRO, DPO, GDPRov, Cloud, and PrOnto ontologies.]{Representation of privacy terms I1 to I22 in the DPKO, DPRO, DPO, GDPRov, Cloud, and PrOnto ontologies. The names of the classes that can be used to specify a particular item are depicted in the table, as well as their respective number of subclasses, if available. The privacy terms that can not be fully represented by the current ontology terms are illustrated with an asterisk.}
 \label{tab:vocabsTerms-first}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{ c||c|c|c|c|c|c}
@@ -419,9 +395,9 @@ Moreover, of all the covered vocabularies, only DPKO, IMO and PrOnto do not have
 \end{tabular}}
 \end{table}
 
-\begin{table}
+\begin{table}[ht]
 \centering
-\caption[Representation of privacy terms I1 to I27 in the GConsent, IMO, DPV and GDPRtEXT ontologies.]{Representation of privacy terms I1 to I27 in the GConsent, IMO, DPV and GDPRtEXT ontologies. The names of the classes which can be used to specify a particular item are depicted in the table, as well as their respective number of sub-classes, if available. The privacy terms which can not be fully represented by the current ontology terms are illustrated with an asterisk.}
+\caption[Representation of privacy terms I1 to I27 in the GConsent, IMO, DPV, and GDPRtEXT ontologies.]{Representation of privacy terms I1 to I27 in the GConsent, IMO, DPV, and GDPRtEXT ontologies. The names of the classes that can be used to specify a particular item are depicted in the table, as well as their respective number of subclasses, if available. The privacy terms that can not be fully represented by the current ontology terms are illustrated with an asterisk.}
 \label{tab:vocabsTerms-second}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{ c||c|c|c||c}
@@ -472,3 +448,10 @@ Moreover, of all the covered vocabularies, only DPKO, IMO and PrOnto do not have
  I27 & & & & RightToRestrictProcessing (3) \\
 \end{tabular}}
 \end{table}
+
+DPO, GDPRov, PrOnto, DPV, and GDPRtEXT offer the potential to partially populate a significant portion of the informational items necessary for the \textit{`right to be informed'} and other data subject rights.
+It is important to emphasise DPV and GDPRtEXT as they include concepts to represent, at least partially, 19 and 14 informational items, respectively, out of the 30 outlined in Table~\ref{tab:GDPR_privacy_terms}.
+Moreover, these vocabularies boast the highest count of subclasses dedicated to specifically defining their respective items.
+
+It should be noted that the majority of the resources presented are outdated or lacking recent developments, with DPV being the sole exception, having introduced new outcomes in the past two years.
+Additionally, among all the covered vocabularies, only DPKO, IMO, and PrOnto lack open and accessible resources.
