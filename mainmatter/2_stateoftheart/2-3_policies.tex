@@ -1,6 +1,6 @@
-\section{Using policy languages to specify access control conditions}
+\section{Using policy languages to specify access conditions}
 \label{sec:sota_policies}
-%everything copied from languages+vocabs_review, needs to be updated
+
 Policy languages have been used in the last decades to specify information regarding the usage of data, e.g., to represent licenses associated with datasets or software usage.
 As such, they seem perfectly aligned with the goal of representing the conditions to access data on the Web, whether being preferences set by data subjects or access requests from other entities.
 In addition, if used together with privacy and data protection-specific terms, e.g., coming from the ontologies described in the previous Section, they can be used to model legally-aligned access control policies.
@@ -10,29 +10,14 @@ In the following Sections, the criteria used to analyse each specified policy la
 \subsection{Criteria for analysis}
 \label{sec:sota_policies_criteria}
 
-% below copied
-For each solution, there is an introductory summary of the language complemented by a description of its main contributions, followed by a description of the core elements of the language. When available, specific examples of use cases using the language are mentioned, as well as implementations derived from it, including details on any available reasoners that use the work. The dependencies of the solutions in previously existing works are also documented when described in the literature. In Table \ref{tab:resources-policy-languages}, there is a brief description of the policy languages specified in the subsequent Sections, \ref{sec:p3p} to \ref{sec:lpl}, including information about the creators of the resources, version, date of publication and date of the last known update. These solutions are analysed in chronological order in relation to the date of publication and then in relation to the date of the last update. In Figure \ref{fig:lang-dependency-graph}, a dependency graph, that captures the relations between languages and their dependencies and follow-up works, is presented.
+Each solution is accompanied by an introductory summary of the language, detailing its primary contributions, followed by an overview of its core elements.
+Additionally, where applicable, specific examples of use cases employing the language are provided, along with details on any derived implementations, including information on available reasoners that use it.
+The dependencies on prior existing works are also noted when outlined in the literature.
+Table~\ref{tab:resources-policy-languages} presents a concise description of the policy languages detailed in the following Sections, along with details about the creators of the resources, version number, publication date, and the most recent update date.
+The solutions were examined chronologically based on their publication date, followed by their last update date.
+Figure~\ref{fig:lang-dependency-graph} depicts a dependency graph illustrating the relationships between languages, their dependencies, and subsequent developments.
 
-Moreover, the following criteria were used to analyse existing research on semantic policy languages:
-\begin{enumerate}
-    \item[(C1)] Ability to model deontic concepts, e.g., permissions, prohibitions, obligations.
-    \item[(C2)] Ability to model GDPR concepts, such as the privacy terms in Table \ref{tab:GDPR_privacy_terms}.
-    \item[(C3)] Existence of taxonomies of terms to populate policy conditions.
-    \item[(C4)] Existence of mechanisms to assist with compliance.
-    \item[(C5)] Resource is maintained/continues to be actively developed.
-    \item[(C6)] Existence of an open and accessible specification.
-\end{enumerate}
-
-The outcomes of this comparative analysis will be provided in Section \ref{sec:sota_policies_analysis} and systematised in Table \ref{tab:languagesComparison}.
-
-\subsection{Semantic policy languages for access control}
-\label{sec:sota_policies_description}
-
-In this Section, we aim to identify privacy-related policy languages, describing the structure and information provided by each language as well as identify its compatibility with the GDPR to describe not only rights but also obligations. % copied
-Moreover, Table \ref{tab:resources-policy-languages} provides an overview of these languages and collects information about the creators of the resources, their versions, the date of publication and the date of the last known update.
-Said languages are then analysed in chronological order regarding the date of publication and a dependency graph is presented in Figure \ref{fig:lang-dependency-graph}.
-
-\begin{table}
+\begin{table}[ht]
 \centering
 \caption{Brief description of the policy languages described in Section \ref{sec:sota_policies_description}.}
 \label{tab:resources-policy-languages}
@@ -69,39 +54,56 @@ Abbreviation (Section) & Full Name & Creators & Version & \multicolumn{1}{c|}{\b
 \end{table}
 
 \begin{figure}
-\caption{Privacy-related policy languages dependency chart.}
-\label{fig:lang-dependency-graph}
-\centering
-\includegraphics[width=\textwidth]{figures/chapter-2/languages.png}
+    \caption{Privacy-related policy languages dependency chart.}
+    \label{fig:lang-dependency-graph}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter-2/languages.png}
 \end{figure}
 
-To complement the description of the languages presented in this Section, additional documentation and resources were published on a Web page\footnote{Available at \url{https://protect.oeg.fi.upm.es/sota/languages}. Its public repository can be consulted at \url{https://github.com/besteves4/SotAResources} for further improvement when new solutions appear.}, including diagrams and code examples.
+Moreover, the following criteria were used to analyse existing research on semantic policy languages:
+\begin{enumerate}
+    \item[(C1)] Ability to model deontic concepts, e.g., permissions, prohibitions, obligations.
+    \item[(C2)] Ability to model GDPR concepts, such as the privacy terms in Table \ref{tab:GDPR_privacy_terms}.
+    \item[(C3)] Existence of taxonomies of terms to populate policy conditions.
+    \item[(C4)] Existence of mechanisms to assist with compliance.
+    \item[(C5)] Resource is maintained/continues to be actively developed.
+    \item[(C6)] Existence of an open and accessible specification.
+\end{enumerate}
 
-% BPR4GDPR: 
-% Using this ontology, BPR4GDPR defines a policy instantiating its purpose, context, action, pre-action and pos-action.
-% The action reflects the activity permitted, prohibited or obliged by the policy, while the pre-action and pos-action indicate the actions that must take place before and after the main action.
-% In turn, each action is specified by the user's role, data, operation and the organization where it takes place.
+The outcomes of this comparative analysis will be provided in Section~\ref{sec:sota_policies_analysis} and systematised in Table~\ref{tab:languagesComparison}.
+
+\subsection{Semantic policy languages for access control}
+\label{sec:sota_policies_description}
+
+This Section's main goal is to describe existing policy languages related to privacy, delineating the structure and information offered by each language.
+Additionally, their compatibility with the GDPR is assessed, focusing on their ability to describe the provisioned rights and obligations.
+Moreover, Table~\ref{tab:resources-policy-languages} provides an overview of these languages and collects information about the creators of the resources, their versions, the date of publication, and the date of the last known update.
+Said languages are then analysed in chronological order regarding the date of publication and a dependency graph is presented in Figure~\ref{fig:lang-dependency-graph}.
+
+To complement the description of the languages presented in this Section, additional documentation and resources were published on a Web page\footnote{Available at \url{https://w3id.org/people/besteves/phd/sota/languages}. Its public repository can be consulted at \url{https://w3id.org/people/besteves/phd/sota/repo} for further improvement when new solutions appear.}, including diagrams and code examples.
 
 \subsubsection{P3P}
 \label{sec:p3p}
 
-The Platform for Privacy Preferences (P3P) language, implemented by \cite{cranor_platform_2002}, emerged as a specification for Web pages to disclose privacy protocols in a machine-readable format so that Web user agents could easily interpret them and notify the users about the decisions based on these practices.
-However, these mechanisms, which allow the user to be informed about the Web pages' privacy policies in relation to their respective data collection, do not mean that the sites are actually implementing these policies since P3P does not provide a way to enforce them.
-Thus, the P3P vocabulary was not built to comply with a specific regulation but rather to specify the practices of each Web page. 
+\cite{cranor_platform_2002} introduced the Platform for Privacy Preferences (P3P) language as a standard for Web services to disclose their privacy practices in a machine-readable format.
+This facilitated user agents in easily interpreting these practices and notifying users about decisions based on them. 
+However, despite enabling users to be informed about the privacy policies of Web pages, these mechanisms do not ensure that the pages are actively adhering to these policies, as P3P lacks enforcement capabilities.
+Therefore, the P3P vocabulary was designed not to comply with a specific regulation but rather to specify the practices of single Web pages.
 
-The main contributions of the P3P specification are a P3P-based data schema for the data that the Web page intends to collect, a standard group of purposes, data categories and recipients and an XML standard to define privacy policies.
-The P3P policies are made up of general assertions and specific ones, called statements, that are related only to certain types of data.
-General assertions are constituted by the legal \textbf{entity} that applies the policy and an \textbf{access}, \textbf{disputes} and \textbf{remedies} elements.
-The access element expresses whether the Web page provides access to the data it collects.
-The disputes element provides a procedure for disputes on privacy practices, while the remedy element specifies the possible solutions in case a policy breach happens.
-In addition, each P3P statement is composed of a specific \textbf{data group}, that could contain one or more data elements, and includes \textbf{purpose}, \textbf{recipient} and \textbf{retention} elements.
-P3P defines a list of Web-relevant purposes for data processing, e.g., completion and support of the activity for which the data was provided, research and development or individual analysis.
-The purpose element should contain at least one purpose specification.
-The recipient element should specify the beneficiaries of the collected data according to the recipient types established by P3P and the retention element must reflect the retention policy that covers the statement data.
-Listing \ref{list:p3p_example} presents a P3P policy which highlights the above-described P3P elements. CatalogExample collects basic information about its users' computers and connections and also information on what pages users access, for system administration and research and development purposes, which is only used by the company and its agents and kept as long as appropriate for the stated purposes.
+The primary contributions of the P3P specification include a data schema for outlining the data intended to be collected by the Web page, a standardised set of purposes, data categories, and recipients, and an XML standard for defining privacy policies.
+P3P policies consist of both general assertions and specific statements, the latter being related only to certain types of data.
+General assertions encompass the legal entity applying the policy and informational elements related to access, disputes, and remedies.
+The access element indicates whether the Web page allows access to the data it gathers and the disputes element outlines a process for resolving privacy-related disputes, while the remedy element details potential solutions in the event of a policy breach.
+Additionally, each P3P statement consists of a distinct `data group' containing one or more data elements, along with purpose, recipient types, and retention elements.
+In this context, P3P outlines a range of purposes relevant to Web-based data processing operations, such as facilitating and supporting the initial activity for which the data was supplied, conducting research and development, or performing data analysis.
+%The purpose element is required to include at least one specification of purpose.
+The recipient type element can be used to specify who will benefit from the collected data, while the retention element must accurately reflect the policy regarding how long the data will be kept.
+Listing~\ref{list:p3p_example} displays a P3P policy that underscores the aforementioned P3P elements.
+CatalogExample gathers essential details concerning its users' computer systems, as well as data regarding the pages they visit.
+This information serves system administration and research and development purposes and is exclusively utilised by the company and retained for a duration deemed suitable for the specified purposes.
 
 \begin{listing}
-\caption{P3P policy adapted from Example 3.1 of the P3P specification \citep{cranor_platform_2002}, which specifies the privacy policy of CatalogExample for Browsers.}
+\caption{P3P policy extracted from Example 3.1 of the P3P specification~\citep{cranor_platform_2002}, which specifies the privacy policy of CatalogExample.}
 \label{list:p3p_example}
 \begin{minted}{turtle}
 <http://example.com/#forBrowsers> a p3p:Policy ;
@@ -128,20 +130,25 @@ Listing \ref{list:p3p_example} presents a P3P policy which highlights the above-
 \end{minted}
 \end{listing}
 
-As P3P was designed to express Web services policies, APPEL \citep{cranor_p3p_2002} was developed as an extension of P3P so that users can express their preferences.
-Therefore both languages should be used in order to match the user's privacy preferences with the services' privacy policies.
-In addition, in 2000, \cite{bohrer_customer_2000} developed the CPExchange language, an XML specification for the transfer of customer data among enterprise services, which implements P3P privacy policies applicable to the data that is being exchanged. Similarly, IBM Research's\footnote{\url{http://www.research.ibm.com/} (accessed on 16/July/2023)} EPAL \citep{ashley_enterprise_2003}, and its predecessor E-P3P \citep{ashley_e-p3p_2002}, were also built using P3P statements to match enterprises' privacy policies with the users' preferences.
-\cite{li_semantics-base_2006} proposes a declarative data-centric semantics and a concise and clear syntax for P3P policies to represent the association of the different P3P elements. The main objective of this language is to declare policies that can be interpreted and represented in the same manner by different user agents. Building upon this semantics, the authors proposed a preference language, SemPref, that takes into account the meaning of the privacy policy instead of its syntactical representation.
+P3P was initially developed to articulate policies of Web services, prompting the design of APPEL as an extension to empower users in expressing their preferences~\citep{cranor_p3p_2002}.
+Consequently, the utilisation of both languages becomes imperative to align user privacy preferences with service privacy policies.
+Furthermore, \cite{bohrer_customer_2000} introduced the CPExchange language, an XML specification facilitating the transfer of customer data across enterprise services, incorporating P3P privacy policies relevant to the exchanged data.
+Likewise, EPAL~\citep{ashley_enterprise_2003}, developed by IBM Research\footnote{\url{http://www.research.ibm.com/} (accessed on 16/July/2023)} along with its precursor E-P3P~\citep{ashley_e-p3p_2002}, leveraged P3P statements to align enterprise privacy policies with user preferences.
+\cite{li_semantics-base_2006} introduces a declarative data-centric semantic model alongside a succinct syntax for P3P policies, facilitating the representation of the relationship between various P3P elements.
+The primary aim of this language is to articulate policies in a manner that can be uniformly interpreted and represented across diverse user agents.
+Extending this semantic foundation, the authors put forward SemPref, a preference language that considers the significance of the privacy policy rather than its syntactic form.
 
-The P3P 1.0 Specification became a W3C Recommendation on April 16, 2002.
-However, it has had a limited implementation, since its use needs to be adopted by both Web services and users and, in addition, no protocol has been implemented for these P3P policies to reflect the actual privacy practices of the sites.
-Its status has turned to W3C obsolete recommendation on August 30, 2018 and thereby future implementations are not recommended.
-
-Although this specification became a W3C recommendation, its lack of adoption made it obsolete in 2018, as previously mentioned. However, the influence of P3P cannot be underestimated, as its development and implementation was the first major effort made in the area of machine-readable privacy languages. The main lessons brought by this language are therefore related to the need of having a formal semantics, to describe both the data subject and controller policies that reflect their data preferences and practices, respectively, and the need to have tools that actually enforce the policies described by the languages.
+The P3P 1.0 Specification achieved W3C Recommendation status on April 16, 2002.
+Nonetheless, its adoption was restricted as it requires acceptance from both Web services and users.
+Furthermore, there has been no protocol established for these P3P policies to accurately reflect the privacy practices of Web pages.
+While this specification did attain W3C recommendation status, its failure to gain widespread adoption rendered it obsolete by 2018.
+Nonetheless, the significance of P3P remains considerable, as its inception and utilisation marked a pioneering endeavour in the realm of machine-readable privacy languages. 
+Consequently, the primary lessons derived from this language pertain to the necessity of establishing a formal semantics capable of delineating both data subject and controller policies, which accurately reflect their data preferences and practices, and the need for tools that effectively enforce the outlined policies.
 
 \subsubsection{ODRL}
 \label{sec:odrl}
 
+% still needs to be evaluated
 The ODRL Vocabulary \& Expression 2.2 \citep{iannella_odrl_2018} is a W3C Recommendation since February 2018, published by the Permissions \& Obligations Expression Working Group, being that its first version was released in 2001.
 The aim of this vocabulary is to define a language that can translate natural language policies to machine-readable formats, providing information about permissions, prohibitions and duties related to an asset.
 This vocabulary is based on the merge of the previous work performed by the ODRL CG, the ODRL V2.1 Common Vocabulary, the ODRL V2.1 XML Encoding, the ODRL V2.1 Ontology and the ODRL V2.1 JSON Encoding.
