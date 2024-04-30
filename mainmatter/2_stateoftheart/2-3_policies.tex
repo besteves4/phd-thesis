@@ -195,23 +195,25 @@ ODRL was applied in various contexts, including its usage by working groups with
 \subsubsection{XPref}
 \label{sec:xpref}
 
-% still needs to be evaluated
-\cite{agrawal_xpref_2005} established XPref as an alternative to APPEL, which only allows for the definition of P3P policies that are unacceptable for the user.
-XPref resorts to XPath (XML Path Language) 1.0 and 2.0 expressions to replace APPEL rules, making the preferences formulation more precise and less error-prone.
-XPath 1.0, by \cite{clark_xml_1999}, and XPath 2.0, by \cite{berglund_xml_2010}, are W3C Recommendations since November 16th, 1999, and December 14th, 2010, respectively, although no further maintenance will be performed to these specifications since later versions exist and have achieved the Recommendation statute.
-XPath's main goal is to provide a way to navigate through the hierarchical elements present in an XML document.
-To accomplish this task, XPath treats an XML document as a tree of nodes and an XPath expression, when applied to the document, establishes the ordered sequence of the nodes to produce a compact path notation.
-The path is then comprised of expressions that return nodes, such as root, element, text, attribute, namespace, processing instruction or comment nodes.
+\cite{agrawal_xpref_2005} introduced XPref as an alternative to APPEL, which only permits the definition of P3P policies that are not allowed by the user.
+XPref utilises XPath (XML Path Language) 1.0 and 2.0 expressions to replace APPEL rules, enhancing the precision and reducing errors in policy formulation.
+Both XPath 1.0, as described by~\cite{clark_xml_1999}, and XPath 2.0, as detailed by~\cite{berglund_xml_2010}, attained W3C Recommendation status on November 16th, 1999, and December 14th, 2010, respectively.
+It should be noted that these specifications are no longer subject to further maintenance since subsequent versions have been developed.
+In this context, the primary objective of XPath is to offer a method for traversing the hierarchical elements within an XML document.
+In pursuit of this objective, XPath views an XML document as a tree structure of nodes
+When an XPath expression is applied to the document, it determines an ordered sequence of nodes, resulting in a concise path representation.
+This path consists of expressions that yield various types of nodes, including root, element, text, attribute, namespace, processing instruction, or comment nodes.
 
-XPref was designed so that its rules can not only identify combinations of P3P elements which make a policy unacceptable, according to the user's preferences but also verify that the presented elements are specified as acceptable.
-XPref manages these goals maintaining the APPEL syntax and semantics and its top classes, \textbf{ruleset} and \textbf{rule}.
-However, the rule bodies are replaced by XPath expressions since P3P policies are XML documents and thus can be easily matched with the XPath-based rules.
-These expressions are specified by adding a \textit{condition} attribute to the rule, which is responsible for triggering the rule when the XPath expression provides a non-empty outcome.
-Thus with XPref rules, using the \textit{behavior} attribute, it is possible to establish a preference to block or allow services according to the P3P policy elements, e.g. purposes and recipients, specified on the \textit{condition} attribute.
+XPref was crafted to ensure that its rules not only recognise combinations of P3P elements that render a policy unacceptable based on user preferences, but also confirm that the presented elements are defined as acceptable.
+It achieves these objectives while preserving the syntax and semantics of APPEL, along with its core classes.
+However, the contents of the rules are substituted with XPath expressions, given that P3P policies are XML documents and can thus be readily compared with XPath-based rules.
+These expressions are defined by appending a `condition' attribute to the rule, which activates the rule when the XPath expression yields a non-empty result.
+%Consequently, utilising the `behavior' attribute in XPref rules allows for preferences to be set to either permit or restrict services based on the P3P policy elements they contain, such as purposes and recipients, specified in the "condition" attribute.
 
 \subsubsection{AIR}
 \label{sec:air}
 
+% still needs to be evaluated
 \cite{hitzler_analyzing_2010} implemented Accountability in RDF (AIR), a declarative language to make assertions of facts and addition of rules, based on N3Logic \citep{berners-lee_n3logic_2008}, that supports rule nesting, rule reuse, and automated explanations of rule-based actions performed by the AIR reasoner.
 These explanations are customizable and, since they can be a source of sensitive information such as Personally Identifiable Information (PII), can be used to provide privacy, for instance, to hide actions performed under certain rules.
 
