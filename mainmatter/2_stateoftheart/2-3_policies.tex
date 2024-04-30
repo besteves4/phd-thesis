@@ -232,25 +232,28 @@ This feature offers a means to segment the conditions outlined by the rule, allo
 \subsubsection{S4P}
 \label{sec:s4p}
 
-% still needs to be evaluated
-S4P (SecPAL for Privacy), developed by \cite{becker_framework_2009, becker_s4p_2010}, is a language framework to express users' privacy preferences and Web services data handling policies.
-This language was developed by Microsoft Research\footnote{\url{https://www.microsoft.com/en-us/research/} (accessed on 16 March 2024)} and it is an extension of the company's previous work, SecPAL, to define the handling of PII.
+S4P (SecPAL for Privacy), designed by \cite{becker_framework_2009, becker_s4p_2010}, constitutes a language framework designed for articulating users' privacy preferences and the data handling practices of Web services. Originating from Microsoft Research\footnote{\url{https://www.microsoft.com/en-us/research/} (accessed on 16 March 2024)}, this language serves as an extension of the company's earlier endeavor, SecPAL, aimed at delineating PII management.
 
-SecPAL \citep{becker_design_2007} is an extensible and decentralised authorisation language, developed to express policies and better disclose expressiveness features such as delegation, domain-specific constraints, and negation.
-An authorisation policy is composed of a group of assertions that have an issuer, that vouches for the assertion, the collection of conditional facts and constraints related to times, dates or addresses.
-Then, when requesting access to the service, this request is transformed into a series of queries, which are checked against the clauses defined to represent the system's policy, so that the decision is made.
-S4P extends SecPAL to treat granted rights and required obligations as assertions and queries and, based on these, a satisfaction checking algorithm is defined for the disclosure of PII between users and data-collecting services.
-Therefore, services express data-handling policies as SecPAL queries, defining what is going to be their behaviour in relation to the users' PII, and the users express their preferences as SecPAL assertions, making precise what the services are permitted to do and what their obligations are towards the users' PII.
-The satisfaction algorithm then checks if the services data collecting activities match the behaviours permitted by the users and if the obligations defined on the users' preferences are respected by the services' policies.
-If the outcome of this algorithm is positive, meaning the service's policy satisfies the preferences of the user, the service can proceed with its data-collecting activities.
-S4P also defines a data disclosure protocol to ensure that the users' preferences are regarded when their data is provided to third parties.
-This protocol only allows the disclosure of the user's PII if the service's policies satisfy the preferences of the user while allowing the disclosure and if the policies of the third parties are aligned with the preferences of the user.
+SecPAL \citep{becker_design_2007} is a flexible, decentralised authorisation language, crafted for articulating policies and enhancing their expressiveness to define delegation conditions, domain-specific constraints, and negation.
+An authorisation policy comprises a set of assertions, each associated with an issuer responsible for vouching for the assertion, along with a collection of conditional facts and constraints pertaining to temporal or spatial aspects.
+Subsequently, when an access request is made, it undergoes a transformation into a series of queries.
+These queries are then matched against the clauses that represent the system's policies, ultimately leading to a decision on data access conditions.
+S4P extends SecPAL by treating granted rights and required obligations as assertions and queries.
+Based on these, a satisfaction checking algorithm is formulated to evaluate the disclosure of PII between users and data-collecting services.
+As a result, services should articulate their data-handling practices in the form of SecPAL queries.
+Conversely, users specify their preferences as SecPAL assertions, precisely delineating what services are authorised to do and what duties they have regarding r=the usage of said PII.
+% The satisfaction algorithm evaluates whether the data collection practices of the services align with the behaviors permitted by the users and whether the obligations specified in the users' preferences are adhered to by the services' policies.
+If the algorithm yields a positive result, indicating that the service's policies complies with the user's preferences, the service can proceed with its data handling activities.
+Additionally, S4P establishes a data disclosure protocol to ensure that users' preferences are respected when their data is shared with third party recipients.
+% This protocol permits the disclosure of the user's PII only if the service's policies satisfy the user's preferences and if the policies of the third parties are in harmony with the user's preferences.
 
-In addition to having an XML schema for implementations, S4P has a human-readable and unambiguous syntax that allows it to be used in other applications.
-Listing \ref{list:s4p_example} presents S4P syntax through an example where the user, Alice, specifies her privacy preferences regarding the collection of her email address. Alice allows eBooking services to use her email address for sending confirmations and newsletters, and for statistical purposes. Alice also allows the booking services to forward her email address to trusted partners, which they can define for themselves, and she is only considering using registered services which will delete her email address within a month.
+In addition to possessing an XML schema for implementation purposes, S4P features a human-readable and unambiguous syntax, enabling its utilisation in various applications. 
+Listing~\ref{list:s4p_example} illustrates the S4P syntax in a scenario where Alice, the user, delineates her privacy preferences concerning the collection of her email address. 
+Specifically, Alice permits eBooking services to utilise her email address for sending confirmations, newsletters, and for statistical purposes.
+Additionally, Alice authorises the booking services to share her email address with trusted partners exclusively to engage with registered services that commit to deleting her email address within a month.
 
 \begin{listing}
-\caption{S4P example adapted from \cite{becker_framework_2009}, which specifies the privacy preferences of Alice regarding the collection of her email address by eBooking services.}
+\caption{S4P example, extracted from \cite{becker_framework_2009}, which specifies Alice's privacy preferences concerning the collection of her email address by eBooking services.}
 \label{list:s4p_example}
 \begin{minted}[escapeinside=||]{python}
 Alice says x may use Email for p if
@@ -268,7 +271,7 @@ Alice says |$\langle$|Service|$\rangle$| is a RegisteredService|$?$| |$\wedge$|
 
 \subsubsection{POL}
 \label{sec:pol}
-
+% still needs to be evaluated
 The Privacy Option Language (POL) was developed by \cite{berthold_privacy_2013} in order to define privacy contracts between data controllers and data subjects, based on the concepts of financial option contracts and respective data disclosure agreements.
 Its framework applies the data minimization principle by automatically transforming privacy contracts into a canonical form.
 This canonical form allows the differences among contract compositions to be normalized and so contracts have a similar semantic structure.
