@@ -148,28 +148,25 @@ Consequently, the primary lessons derived from this language pertain to the nece
 \subsubsection{ODRL}
 \label{sec:odrl}
 
-% still needs to be evaluated
-The ODRL Vocabulary \& Expression 2.2 \citep{iannella_odrl_2018} is a W3C Recommendation since February 2018, published by the Permissions \& Obligations Expression Working Group, being that its first version was released in 2001.
-The aim of this vocabulary is to define a language that can translate natural language policies to machine-readable formats, providing information about permissions, prohibitions and duties related to an asset.
-This vocabulary is based on the merge of the previous work performed by the ODRL CG, the ODRL V2.1 Common Vocabulary, the ODRL V2.1 XML Encoding, the ODRL V2.1 Ontology and the ODRL V2.1 JSON Encoding.
-ODRL is currently supported and maintained by the ODRL CG.
+The ODRL Vocabulary \& Expression 2.2~\citep{iannella_odrl_2018} gained W3C Recommendation status in February 2018, developed by the Permissions \& Obligations Expression Working Group, with its initial version launched back in 2001.
+Its primary objective was to establish a language capable of translating natural language policies into machine-readable formats, specifying details regarding permissions, prohibitions, and obligations pertaining to an asset.
+This vocabulary stems from the consolidation of previous efforts undertaken by the ODRL CG, encompassing the ODRL V2.1 Common Vocabulary, the ODRL V2.1 XML Encoding, the ODRL V2.1 Ontology, and the ODRL V2.1 JSON Encoding.
+Ongoing maintenance of the ODRL's standards and specifications are supported by the ODRL CG.
 
-Two vocabularies are used to describe ODRL: the ODRL Core Vocabulary and the ODRL Common Vocabulary.
-ODRL's Core Vocabulary main class is the \textbf{policy}, which allows for the identification of a particular policy using its unique identifier.
-Each policy may contain several \textbf{rules} -- a rule is an abstract class that defines the common features of permissions, prohibitions and duties.
-These types of rules are used to declare that a certain action is allowed, disallowed or obligated (duty and obligation are used as synonyms in ODRL), typically in relation to an asset.
-The permission may also be associated with a \textbf{duty} in the case where the action is mandatory.
-The rules are further refined by using \textbf{constraints} to determine the conditions under which the rule is applied, e.g., to establish that a certain permission is only valid until the end of 2022.
-The ODRL Vocabulary also specifies a set of 49 actions for rules, of which 9 are defined by Creative Commons (CC) vocabulary.
-The \textbf{parties} (can be a group of people, an organization or an agent) that enforce the rules can take different roles, depending on their position in relation to the asset -- a party that issues the rule takes on the assigner role, while the recipient of the rule  is the assignee.
-An \textbf{asset} is an identifiable entity, such as data, software, services or even a collection of these resources, that is subject to a rule.
-The ODRL Common Vocabulary further specifies the policy sub-classes, the functions that can be exercised by the parties involved, the actions to which the rules apply and a set of different constraint operands, e.g., temporal, spatial, or sector, that can be specified.
-Of particular interest in relation to the GDPR is the privacy policy subclass.
-This sub-class is related to policies that express rules over assets incorporating personal data.
-Therefore, the privacy policies that implement the ODRL language must inform the parties involved in which way the policy is being used and also with whom and for what purpose the policy is being shared with other parties.
-Listing \ref{list:odrl_example} implements an ODRL privacy policy which highlights the described elements above.
+ODRL includes two vocabularies for the description of policies: the ODRL Core Vocabulary and the ODRL Common Vocabulary.
+The primary class within ODRL's Core Vocabulary is the `policy' concept, facilitating the identification of a specific policy through its unique identifier.
+Within each policy, there may exist multiple rules -- an abstract class that outlines the shared characteristics of permissions, prohibitions, and duties.
+These rule types serve to declare whether a particular action, e.g., over as asset, is permitted, prohibited, or obligatory.
+Additionally, permissions might also be linked with duties that must be fulfilled for said permissions to be active.
+Furthermore, rules undergo further refinement through the usage of constraints, which specify the circumstances under which the rule applies, e.g., a particular permission remains valid until the conclusion of 2024.
+The ODRL Vocabulary also outlines a collection of 49 actions, nine of which are imported the Creative Commons (CC) vocabulary.
+The entities, or parties, involved (which can encompass a group of individuals, an organisation, or an agent) are responsible for enforcing the rules and may assume various roles contingent upon their relationship with the asset, e.g., the entity issuing the rule adopts the assigner role, whereas the recipient of the rule assumes the assignee role.
+An asset, on the other hand, refers to an identifiable resource, such as data, software, services, or a combination thereof, that is subject to a rule.
+The ODRL Common Vocabulary further delineates subclasses of policies, roles played by the involved parties, taxonomies of use and transfer actions for rules, and a variety of constraint operands, such as temporal, spatial, or sector-specific.
+Of particular significance concerning the GDPR is the privacy policy subclass regarding assets containing personal data. 
+Consequently, privacy policies implementing the ODRL language must specify to the involved parties the manner in which data is utilised, as well as with whom and for what purpose.
+Listing~\ref{list:odrl_example} provides an implementation of an ODRL privacy policy that underscores the aforementioned elements, including a duty for the assignee to be allowed to use the data and a consequence in case they do not.
 
-% ODRL privacy policy between Company A and Beatriz, regarding the Asset \textit{http://example.com/beatriz/contacts}, which allows the assigner to use it under the pre-condition they obtain consent from Beatriz. If the assigner does not fulfil the duty, then the consequence will be that they will have to delete the asset.
 \begin{listing}
 \caption{ODRL \texttt{Privacy} policy.}
 \label{list:odrl_example}
@@ -190,13 +187,15 @@ Listing \ref{list:odrl_example} implements an ODRL privacy policy which highligh
 \end{minted}
 \end{listing}
 
-The representational power of ODRL has a few shortcomings, as described by \cite{kebede_critical_2020}, especially when it comes to the representation of delegation, the different semantics to represent duties or the handling of conflicts. However, there are works \citep{fornara_operational_2018, fornara_using_2019} on the way to formalise and harmonise the semantics of ODRL policies and constraints.
+ODRL's representational capabilities exhibit some limitations, as highlighted by~\cite{kebede_critical_2020}, particularly regarding the portrayal of delegation, the various semantics utilised for expressing duties, and the management of conflicts.
+Nevertheless, efforts such as those described by~\cite{fornara_operational_2018, fornara_using_2019} are underway to formalise the semantics of ODRL policies.
 
-ODRL has already been used in several contexts, for instance by the working groups on Open Mobile Alliance SpecWorks\footnote{\url{https://www.omaspecworks.org/}} and by the IPTC Rights Expressions WG for the RightsML Standard, a rights expression language for the media industry\footnote{\url{https://www.iptc.org/std/RightsML/2.0/RightsML\textunderscore2.0-specification.html}}.
+ODRL was applied in various contexts, including its usage by working groups within the Open Mobile Alliance SpecWorks\footnote{\url{https://www.omaspecworks.org/} (accessed on 18/July/2023)} and by the IPTC Rights Expressions WG for the RightsML Standard\footnote{\url{https://www.iptc.org/std/RightsML/2.0/RightsML_2.0-specification.html} (accessed on 18/July/2023)}.
 
 \subsubsection{XPref}
 \label{sec:xpref}
 
+% still needs to be evaluated
 \cite{agrawal_xpref_2005} established XPref as an alternative to APPEL, which only allows for the definition of P3P policies that are unacceptable for the user.
 XPref resorts to XPath (XML Path Language) 1.0 and 2.0 expressions to replace APPEL rules, making the preferences formulation more precise and less error-prone.
 XPath 1.0, by \cite{clark_xml_1999}, and XPath 2.0, by \cite{berglund_xml_2010}, are W3C Recommendations since November 16th, 1999, and December 14th, 2010, respectively, although no further maintenance will be performed to these specifications since later versions exist and have achieved the Recommendation statute.
