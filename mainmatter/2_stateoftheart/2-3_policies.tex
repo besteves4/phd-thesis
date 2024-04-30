@@ -213,23 +213,26 @@ These expressions are defined by appending a `condition' attribute to the rule, 
 \subsubsection{AIR}
 \label{sec:air}
 
-% still needs to be evaluated
-\cite{hitzler_analyzing_2010} implemented Accountability in RDF (AIR), a declarative language to make assertions of facts and addition of rules, based on N3Logic \citep{berners-lee_n3logic_2008}, that supports rule nesting, rule reuse, and automated explanations of rule-based actions performed by the AIR reasoner.
-These explanations are customizable and, since they can be a source of sensitive information such as Personally Identifiable Information (PII), can be used to provide privacy, for instance, to hide actions performed under certain rules.
+In 2010, \citeauthor{hitzler_analyzing_2010} developed Accountability in RDF (AIR) -- a declarative language enabling the assertion of facts and the inclusion of rules.
+AIR is built on N3Logic~\citep{berners-lee_n3logic_2008}, which supports rule nesting, rule reuse, and automated explanations of actions carried out by the AIR reasoner. 
+These explanations can be customised and, given that they may contain sensitive data like Personally Identifiable Information (PII), can be employed to ensure privacy.
+For example, they can be utilised to conceal actions executed under specific rules.
 
-N3Logic is an extension of the RDF data model that aims at expressing logic rules on the Web so that the same language is used for data and logic.
+N3Logic extends the RDF data model with the aim of expressing logic rules on the Web, thereby promoting the use of a unified language for both data representation and logical inference.
+Thus, AIR leverages N3Logic's inherent capabilities, including built-in functions, nested graphs, and contextualised reasoning.
+This enables AIR rules to incorporate the usage of graphs as literal values, and built-in functions or operators defined as RDF properties.
 
-AIR builds on N3Logic's built-in functions, nested graphs and contextualized reasoning, allowing the AIR rules to adopt the usage of graphs as literal values, universally or existentially quantified variables in graphs and built-in functions or operators expressed as RDF properties.
-
-Each rule has a unique IRI, an HTTP URI, so that it is part of the linked data cloud and can be reused.
-These rules are defined using the following structure: \textbf{air:if} \textit{condition}; \textbf{air:then} \textit{then-actions}; \textbf{air:else} \textit{else-actions}.
-The action instances can be annotated through the \textbf{air:description} properties.
-These annotations are then incorporated by the AIR reasoner in its justifications and can be used to hide PIIs present in the rule set.
-Also, the rules graph format allows for the nesting of rules within the same rule set, thus providing a way to segment the conditions stated by the rule in order to only expose part of them in the justifications.
+Each AIR rule is assigned a unique IRI, ensuring its seamless integration with the linked data cloud and facilitating its reuse.
+These rules adhere to the following structure: \texttt{air:if} \texttt{condition}; \texttt{air:then} \texttt{then-actions}; \texttt{air:else} \texttt{else-actions}.
+The action instances can include annotations using the \texttt{air:description} property.
+These annotations are subsequently integrated by the AIR reasoner into its justifications and can serve to conceal PII found within the rules.
+Additionally, the format of the rules graph permits the nesting of rules within the same rule set.
+This feature offers a means to segment the conditions outlined by the rule, allowing only a portion of them to be revealed in the justifications.
 
 \subsubsection{S4P}
 \label{sec:s4p}
 
+% still needs to be evaluated
 S4P (SecPAL for Privacy), developed by \cite{becker_framework_2009, becker_s4p_2010}, is a language framework to express users' privacy preferences and Web services data handling policies.
 This language was developed by Microsoft Research\footnote{\url{https://www.microsoft.com/en-us/research/} (accessed on 16 March 2024)} and it is an extension of the company's previous work, SecPAL, to define the handling of PII.
 
