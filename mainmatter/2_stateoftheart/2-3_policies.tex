@@ -325,114 +325,25 @@ The objective was to empower users to articulate their individual privacy prefer
 
 \subsubsection{LegalRuleML}
 \label{sec:legalruleml}
-% still needs to be evaluated
-LegalRuleML is a rule interchange language applied to the legal domain, defined by the OASIS\footnote{Non-profit organization focused on open standards for cloud, security and other areas, \url{https://www.oasis-open.org/}} LegalRuleML Technical Committee, which achieved the OASIS Standard status in August 2021 \citep{palmirani_legalruleml_2021}.
-It is an XML-schema specification that reuses and extends RuleML concepts and syntax -- RuleML is an XML language for rule representation \citep{boley_specification_2017} -- with formal features to represent and reason over legal norms, guidelines and policies.
-LegalRuleML's main features include the use of multiple semantic annotations to represent different legal interpretations, the modelling of deontic operators, the temporal management of rules, the authorial tracking of rules and a mapping to RDF triples. 
 
-Thus, the core elements of a LegalRuleML document are the \textbf{metadata}, the \textbf{context} and the \textbf{statements}.
-The metadata section contains information about the \textbf{legal source} of the norms, to ensure that they are connected with the legal text statements that specify them, and also about the \textbf{actors} and the \textbf{roles} they execute in relation to the established rules, about the \textbf{jurisdiction} and the \textbf{authorities} that create, endorse and enforce the rules and information about the \textbf{temporal parameters} that define the period of validity of the rules.
-The context element allows the expression of alternative interpretations of the source of the rule, which can change over time or according to jurisdiction, and also enables the representation of the \textbf{association} element, which connects the legal sources with the rules.
-The statements section encompasses the formalization of the norms, including the expression of constitutive and prescriptive statements, overrides statements or violation-reparation statements.
-The \textbf{constitutive} rules represent the definitions present in the legal documents, while the \textbf{prescriptive} rules encode the deontic specifications.
-\textbf{Override} statements can be used to deal with incompatible rules and \textbf{violation and reparation} statements formalize the penalties applied to norm' breaches.
+LegalRuleML, a rule language tailored to the legal domain, is developed and maintained by the OASIS\footnote{OASIS is a non-profit organisation that focuses on open standards for cloud, security and other domains, \url{https://www.oasis-open.org/} (accessed on 18/July/2023).} LegalRuleML Technical Committee and it attained OASIS Standard status in August 2021~\citep{palmirani_legalruleml_2021}.
+This XML-schema specification builds upon and extends RuleML~\citep{boley_specification_2017} and incorporates formal features to represent and facilitate reasoning over legal norms, guidelines, and policies.
+Key attributes of LegalRuleML include the utilisation of multiple semantic annotations for various legal interpretations, deontic operators, temporal rule management and tracking, and a mapping to RDF.
 
-Particularly, \cite{palmirani_modelling_2018} proposed a framework which uses LegalRuleML, Akoma Ntoso and the PrOnto ontology (described in Section \ref{sec:pronto}) to model GDPR rules and check for compliance.
-% Listing \ref{list:legalruleml_example} presents an extract of LegalRuleML's formalisation of GDPR\footnote{The formalisation of GDPR's provisions in LegalRuleML is available at \url{https://raw.githubusercontent.com/dapreco/daprecokb/master/gdpr/rioKB_GDPR.xml}}, in particular of Article 19.
+Hence, the fundamental components of a LegalRuleML document encompass \textbf{metadata}, \textbf{context}, and \textbf{statements}. 
+The metadata segment comprises details concerning the \textbf{legal source} of the norms, ensuring their linkage with the corresponding legal text statements.
+Additionally, it includes information about the \textbf{actors} and their \textbf{roles} in relation to the established rules, the \textbf{jurisdiction}, the \textbf{authorities} responsible for rule creation, endorsement, and enforcement, as well as temporal parameters defining rule validity.
+The context element facilitates the expression of varying interpretations of rule sources, which may evolve over time or differ across jurisdictions.
+It also facilitates the representation of the \textbf{association} element, establishing connections between legal sources and rules.
+The statements segment involves the formalisation of norms, encompassing constitutive and prescriptive statements, as well as override and violation-reparation statements.
+Constitutive rules encapsulate definitions outlined in legal documents, whereas prescriptive rules encode deontic specifications.
+Override statements serve to address conflicting rules, while violation and reparation statements formalise penalties for breaches of norms.
 
-% \begin{listing}
-% \caption{Extract of LegalRuleML formalisation of GDPR's Article 19.}
-% \label{list:legalruleml_example}
-% \begin{minted}{xml}
-% <lrml:LegalReference refersTo="gdprC3S3A19P1ref" 
-%     refID="GDPR:art_19__para_1" />
-% <lrml:Associations key="ascs1">
-%     <lrml:Association>
-%         <lrml:appliesSource keyref="#gdprC3S3A19P1ref" />
-%         <lrml:toTarget keyref="#statements103" />
-%     </lrml:Association>
-% </lrml:Associations>
-% <lrml:Context>
-%     <lrml:appliesAssociations keyref="#ascs1"/>
-%     <lrml:inScope keyref="#statements103Formula1" />
-%     <lrml:inScope keyref="#statements103Formula2" />
-%     <lrml:inScope keyref="#statements103Formula3" />
-%     <lrml:inScope keyref="#statements103Formula4" />
-% </lrml:Context>
-% <lrml:Statements key="statements103">
-%     <lrml:ConstitutiveStatement key="statements103Formula1">
-%       <ruleml:Rule closure="universal">
-%         <ruleml:if>
-%           <ruleml:Exists>
-%             <ruleml:Var key=":a1">a1</ruleml:Var>
-%             <ruleml:Var key=":eor">eor</ruleml:Var>
-%             <ruleml:Var key=":enr">enr</ruleml:Var>
-%             <ruleml:Var key=":edp">edp</ruleml:Var>
-%             <ruleml:Var key=":w">w</ruleml:Var>
-%             <ruleml:Var key=":z">z</ruleml:Var>
-%             ...
-%             <ruleml:And>
-%               <ruleml:Atom>
-%                 <ruleml:Rel iri="rioOnto:RexistAtTime" />
-%                 <ruleml:Var keyref=":a1" />
-%                 <ruleml:Var key=":t1">t1</ruleml:Var>
-%               </ruleml:Atom>
-%               <ruleml:Atom keyref=":A2570">
-%                 <ruleml:Rel iri="rioOnto:and" />
-%                 <ruleml:Var keyref=":a1" />
-%                 <ruleml:Var keyref=":eor" />
-%                 <ruleml:Var keyref=":enr" />
-%                 <ruleml:Var keyref=":edp" />
-%               </ruleml:Atom>
-%               <ruleml:Atom>
-%                 <ruleml:Rel iri="prOnto:DataSubject" />
-%                 <ruleml:Var keyref=":w" />
-%               </ruleml:Atom>
-%               <ruleml:Atom>
-%                 <ruleml:Rel iri="prOnto:PersonalData" />
-%                 <ruleml:Var keyref=":z" />
-%                 <ruleml:Var keyref=":w" />
-%               </ruleml:Atom>
-%               ...
-%             </ruleml:And>
-%           </ruleml:Exists>
-%         </ruleml:if>
-%         <ruleml:then>
-%           <ruleml:Exists>
-%             <ruleml:Var key=":t2">t2</ruleml:Var>
-%             <ruleml:And>
-%               <ruleml:Atom>
-%                 <ruleml:Rel iri="rioOnto:RexistAtTime" />
-%                 <ruleml:Var keyref=":en" />
-%                 <ruleml:Var keyref=":t2" />
-%               </ruleml:Atom>
-%               <ruleml:Atom>
-%                 <ruleml:After>
-%                   <ruleml:Var keyref=":t2" />
-%                   <ruleml:Var keyref=":t1" />
-%                 </ruleml:After>
-%               </ruleml:Atom>
-%             </ruleml:And>
-%           </ruleml:Exists>
-%         </ruleml:then>
-%       </ruleml:Rule>
-%     </lrml:ConstitutiveStatement>
-%     <lrml:ConstitutiveStatement key="statements103Formula2">
-%       ...
-%     </lrml:ConstitutiveStatement>
-%     <lrml:ConstitutiveStatement key="statements103Formula3">
-%         ...
-%     </lrml:ConstitutiveStatement>
-%     <lrml:ConstitutiveStatement key="statements103Formula4">
-%         ...
-%     </lrml:ConstitutiveStatement>
-%   </lrml:Statements>
-% \end{minted}
-% \end{listing}
+Specifically, \cite{palmirani_modelling_2018} introduced a framework that leverages LegalRuleML, Akoma Ntoso, and the PrOnto ontology (outlined in Section~\ref{sec:pronto}) to model GDPR rules and verify compliance.
 
 \subsubsection{A-PPL}
 \label{sec:appl}
-
+% still needs to be evaluated
 The Accountable Policy Language (A-PPL), implemented by \cite{azraoui_appl_2014}, has its origin in the A4Cloud\footnote{\url{http://www.a4cloud.eu/}} project, with the objective of applying accountability requirements to the representation of privacy policies.
 To accomplish this goal, the A-PPL expands PPL (PrimeLife Policy Language) by taking into account guidelines on notification, data location and retention, and auditability.
 PPL by \cite{ardagna_primelife_2009} is an extensible privacy policy language designed within the context of the PrimeLife\footnote{\url{http://primelife.ercim.eu/}} project, based on XACML \citep{parducci_extensible_2013}, an eXtensible Access Control Markup Language which is an OASIS standard for access control policies that has been previously tested to deal with GDPR requirements related to consent \citep{fatema_compliance_2017} and privacy by design \citep{piras_defend_2019}. %updated
