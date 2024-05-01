@@ -271,24 +271,29 @@ Alice says |$\langle$|Service|$\rangle$| is a RegisteredService|$?$| |$\wedge$|
 
 \subsubsection{POL}
 \label{sec:pol}
-% still needs to be evaluated
-The Privacy Option Language (POL) was developed by \cite{berthold_privacy_2013} in order to define privacy contracts between data controllers and data subjects, based on the concepts of financial option contracts and respective data disclosure agreements.
-Its framework applies the data minimization principle by automatically transforming privacy contracts into a canonical form.
-This canonical form allows the differences among contract compositions to be normalized and so contracts have a similar semantic structure.
 
-In POL, each privacy contract is focused on defining the rights and obligations regarding data disclosure.
-As this language emerged in the financial context, contract formulations are mainly based on obligations, unless there is no trivial formulation of them.
-To implement these formulations, POL resorts to several modules that can also be extended.
-The main components defined by the language are the \textbf{syntax} module, the data-related modules for \textbf{personal data}, \textbf{purpose}, \textbf{observable} values and \textbf{time}, and the semantics modules  for \textbf{management} and \textbf{human readability}.
-The syntax module contains the language primitives to define the POL contracts' canonical form. 
-The data modules can then be hooked to the contracts through data support structures as simple as an attribute-value pair, such as \textit{(eye colour, brown)}, or as complex as tree-like data organizations.
-Specifically, the observable module specifies comparison and Boolean operators, which are available in the contract execution environment, to evaluate data retention periods for instance.
-The time component is useful to formalise distinct time models, i.e., event-driven, discrete or continuous time.
-The semantic modules, for management and human readability, are used to manage changes in observables, i.e. when time elapses, and to translate POL contracts into natural language, respectively. 
-Listing \ref{list:pol_example} presents a list of POL contract examples: (1) contract $c_{company}$, that settles the immediate usage of personal data $a_1$ for purpose $p_1$, describes the rights and obligations of the institution that receives the data; (2) $c_{user}$, the negation of $c_{companyA}$, belongs to the user that discloses the data; (3) $c_A$ represents a contract in which a company has the right to use data $a_A$ for purpose $p_A$ at time $t_A$ or not use it at all (represented by the $zero$ contract); and (4) $c_B$ in which a company may or may not use data $a_B$ for purpose $p_B$ until $t_B$ and has the obligation to delete it after the $t_B$ deadline.
+The Privacy Option Language (POL) was formulated by~\cite{berthold_privacy_2013} to establish privacy contracts between data controllers and data subjects, drawing on the principles of financial option contracts and corresponding data disclosure agreements.
+Its architecture enforces the `data minimisation' principle by converting privacy contracts into a standard format.
+This standardised format ensures that variations in contract compositions are normalised, thus providing a consistent semantic structure across contracts.
 
-\begin{listing}
-\caption{POL contract examples adapted from \cite{berthold_towards_2011}.}
+Within POL, every privacy contract is dedicated to delineating the responsibilities and entitlements concerning data disclosure.
+Given its origins in the financial sphere, contract constructions in POL primarily revolve around obligations, except when a straightforward formulation of such rule types is impractical.
+To specify these formulations, POL relies on various modules that are also open to extension.
+The language delineates key components, including the \textbf{syntax} module, alongside modules addressing \textbf{personal data}, \textbf{purpose}, \textbf{observable} values, and \textbf{time}.
+Additionally, it includes semantics modules focusing on \textbf{management} and enhancing \textbf{human readability}.
+The syntax module comprises language primitives essential for defining POL contracts in their standard format.
+These contracts can then integrate with data modules through various data support structures, ranging from basic attribute-value pairs, e.g., \textit{(eye colour, brown)}, to intricate tree-like data structures.
+More specifically, the observable module defines comparison and Boolean operators, which are accessible within the contract execution environment, facilitating evaluations related to e.g. data retention periods.
+The time module can be used to formalise different time restrictions, e.g. event-driven, discrete, or continuous time.
+Furthermore, semantic modules are utilised for managing changes in observable variables, e.g., when time elapses, and for translating POL contracts into natural language.
+Listing~\ref{list:pol_example} showcases the semantics of POL through a list of contracts examples:
+(1) Contract $c_{company}$ delineates the immediate usage of personal data $a_1$ for purpose $p_1$;
+(2) $c_{user}$ represents the negation of $c_{companyA}$ and pertains to the user disclosing the data;
+(3) $c_A$ signifies a contract wherein a company holds the right to utilise data $a_A$ for purpose $p_A$ at time $t_A$ or can opt not to use it at all (represented by the $zero$ variable in the contract instantiation); and
+(4) $c_B$ denotes a scenario where a company may or may not utilise data $a_B$ for purpose $p_B$ until time $t_B$ and is obligated to delete it after the deadline $t_B$.
+
+\begin{listing}[ht]
+\caption{POL contracts extracted from~\cite{berthold_towards_2011}.}
 \label{list:pol_example}
 \begin{minted}[escapeinside=||]{text}
 (1) |$c_{company}$| = data |$a_1$| |$p_1$|
@@ -298,12 +303,12 @@ Listing \ref{list:pol_example} presents a list of POL contract examples: (1) con
 \end{minted}
 \end{listing}
 
-This language was developed on the PETWeb II project, with the main goal of addressing societal questions in the domain of electronic identifiers.
-The online documentation provides application scenarios for the usage of POL.
+The development of this language took place within the PETWeb II project, primarily aimed at tackling societal inquiries within the electronic identifiers domain.
+The online documentation offers various application scenarios illustrating POL's utilisation.
 
 \subsubsection{PPO}
 \label{sec:ppo}
-
+% still needs to be evaluated
 As privacy is one of the challenges of the open data era, it is of the utmost importance to define who has access to what, especially in the context of the Web.
 In this light, the Privacy Preference Ontology (PPO) \citep{sacco_privacy_2011} proposes to represent users' privacy preferences for the restriction or permission of access to specific RDF data within a document.
 This ontology extends the Web Access Control (WAC) specification, a taxonomy for detailing access control privileges that uses Access Control Lists (ACLs) to determine which data users have access to.
