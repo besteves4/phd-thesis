@@ -308,25 +308,24 @@ The online documentation offers various application scenarios illustrating POL's
 
 \subsubsection{PPO}
 \label{sec:ppo}
-% still needs to be evaluated
-As privacy is one of the challenges of the open data era, it is of the utmost importance to define who has access to what, especially in the context of the Web.
-In this light, the Privacy Preference Ontology (PPO) \citep{sacco_privacy_2011} proposes to represent users' privacy preferences for the restriction or permission of access to specific RDF data within a document.
-This ontology extends the Web Access Control (WAC) specification, a taxonomy for detailing access control privileges that uses Access Control Lists (ACLs) to determine which data users have access to.
-Its fundamental concepts are the \textbf{Read} and \textbf{Write} terms, as well as the \textbf{Control} privilege to specify and modify the ACL, although this control can only be exercised to define who can access the full RDF document and not to specify access restrictions over specific data within the document.
-Therefore, PPO's main goal is to offer highly granular mechanisms to regulate users' access to specific data represented as Linked Data, building on the work previously carried out by the WAC.
 
-PPO's restriction abilities apply to particular statements, to groups of statements (such as RDF graphs) and to resources, that can be particular subjects or objects within statements.
-The type of restriction must also be defined, as the user can either have read, write or both privileges to the data.
-Through the defined \textbf{hasCondition} property, certain conditions can be set to define privacy preferences in relation to specific resources, instances of particular classes or properties or even to specific values of properties.
-The access space should also be defined so that the requirements are met by the users to access certain resources.
-These requirements can be verified through a SPARQL ASK query that contains all attributes and properties that must be met by the users.
+Given that privacy poses a significant challenge in the open data era, it becomes crucial to delineate access rights, particularly within the Web environment.
+In this context, the Privacy Preference Ontology (PPO)~\citep{sacco_privacy_2011} proposes a framework for expressing users' privacy preferences regarding the restriction or allowance of access to particular RDF statements within a document.
+This ontology expands upon WAC to determine users' data access rights, which is limited to specifying who can access an entire RDF document, by allowing finely-grained mechanisms for governing users' access to specific data within RDF resources.
 
-Particularly, the same authors focused on developing a specific tool for the Semantic Web domain, a privacy preference manager \citep{sacco_privacy_2011b} based on PPO with the target of providing users with a way to specify their particular privacy choices and regulating access to their data depending on profile characteristics such as relationships, interests or other common features.
-This ontology can be used to cover any social data that is modelled in RDF or through RDF wrappers that can be applied to any major Web page through their Application Programming Interface (API).
+PPO's capabilities for imposing access restrictions extend to individual statements, statement groups, and resources, which can be specific subjects or objects within RDF triples. 
+Additionally, it is essential to specify the type of restriction, as users may be granted either read, write, or both access modes to the data.
+By utilising the designated \textbf{hasCondition} property, specific conditions can be established to delineate privacy preferences concerning particular resources, instances of specific classes or properties, or even specific property values.
+%Furthermore, it's imperative to define the access criteria to ensure that users fulfill the necessary requirements to access certain resources.
+These conditions can then be checked against a SPARQL ASK query containing all the attributes and properties that users must satisfy to allow or deny access to data.
+
+The authors also created a dedicated privacy preference manager~\citep{sacco_privacy_2011b} based on PPO.
+The objective was to empower users to articulate their individual privacy preferences and manage data access based on profile attributes such as relationships, interests, or other shared characteristics.
+% This ontology has the versatility to encompass social data modeled in RDF or facilitated via RDF wrappers, which can be integrated into various web pages using their Application Programming Interface (API).
 
 \subsubsection{LegalRuleML}
 \label{sec:legalruleml}
-
+% still needs to be evaluated
 LegalRuleML is a rule interchange language applied to the legal domain, defined by the OASIS\footnote{Non-profit organization focused on open standards for cloud, security and other areas, \url{https://www.oasis-open.org/}} LegalRuleML Technical Committee, which achieved the OASIS Standard status in August 2021 \citep{palmirani_legalruleml_2021}.
 It is an XML-schema specification that reuses and extends RuleML concepts and syntax -- RuleML is an XML language for rule representation \citep{boley_specification_2017} -- with formal features to represent and reason over legal norms, guidelines and policies.
 LegalRuleML's main features include the use of multiple semantic annotations to represent different legal interpretations, the modelling of deontic operators, the temporal management of rules, the authorial tracking of rules and a mapping to RDF triples. 
