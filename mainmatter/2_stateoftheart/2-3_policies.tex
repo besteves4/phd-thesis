@@ -422,20 +422,23 @@ However, this implementation does not mandate data consumers to adhere to user-d
 \subsubsection{SPECIAL}
 \label{sec:special}
 
-The EU H2020 SPECIAL (Scalable Policy-awarE linked data arChitecture For prIvacy, trAnsparency and compLiance) project aimed to develop technology that supports today's ongoing struggle between privacy and Big Data innovation, providing tools, for data subjects, controllers and processors, that facilitate the management and transparent usage of such data.
-Two vocabularies were produced as outcomes of this project: the SPL (SPECIAL Usage Policy Language) and the SPLog (SPECIAL Policy Log) vocabularies \citep{gangemi_scalable_2018}.
+The EU H2020 Scalable Policy-awarE linked data arChitecture For prIvacy, trAnsparency and compLiance (SPECIAL) project endeavoured to create technology that aids in navigating the contemporary tension between privacy and Big Data-based technologies.
+As such, it aimed to furnish tools for data subjects, controllers, and processors, streamlining the management and transparent utilisation of such data.
+As a result of this project, two vocabularies were developed: the SPL (SPECIAL Usage Policy Language) and the SPLog (SPECIAL Policy Log) vocabularies~\citep{gangemi_scalable_2018}.
 
-A usage policy represents a set of lawful activities that can be performed in accordance with the data subject's consent.
-To specify these in formal terms in compliance with the GDPR, the SPL establishes five core elements: the \textbf{data} that is going to be processed, the \textbf{purpose} of such processing, a description of the \textbf{processing} itself, the \textbf{storage} information and the \textbf{recipients} of the processing results.
-The data storage element needs two attributes to be instantiated, as both the location and the duration of the storage need to be defined.
-So, in mathematical terms, the usage policy is a five-element tuple, composed of instantiations of the five core classes, that specifies an authorized operation.
-A general usage policy can then be defined with a union of authorized operations.
-The vocabularies designed to specify each of the elements on the SPL are based on previous privacy-related ontologies, such as ODRL, for the processing terms\footnote{\url{https://specialprivacy.ercim.eu/vocabs/processing\#}}, and the P3P, for the data categories\footnote{\url{https://specialprivacy.ercim.eu/vocabs/data\#}}, recipients\footnote{\url{https://specialprivacy.ercim.eu/vocabs/recipients\#}}, purposes\footnote{\url{https://specialprivacy.ercim.eu/vocabs/purposes\#}} and storage duration\footnote{\url{https://specialprivacy.ercim.eu/vocabs/duration\#}} and location\footnote{\url{https://specialprivacy.ercim.eu/vocabs/locations\#}}.
-The vocabularies can be further extended by introducing new sub-classes to its terms \citep{bonatti_policy_2018}.
-Listing \ref{list:spl_example} presents an example where the auxiliary vocabularies are extended with new terms to create a usage policy (ex:HeartRate as a subclass of the personal data class svd:Health, ex:Profiling as a subclass of the processing term svpr:Analyze and ex:Recommendation as a subclass of the purpose svpu:Marketing). In this policy, heart rate and location data are used for user profiling with the purpose of creating recommendations, while the data is stored indefinitely in the servers of the data controllers in the EU and can be released to any recipients.
+A SPL usage policy delineates a collection of permissible actions aligned with the consent of the data subject.
+To formalise these actions in accordance with GDPR requirements, SPL outlines five fundamental concepts: the \textbf{data} subjected to processing, the intended \textbf{purpose} of such processing, detailed information of the \textbf{processing} operation, information regarding \textbf{storage}, and the designated \textbf{recipients} of the processing outcomes. 
+The data storage term encompasses the specification of two attributes: the storage location and duration.
+Therefore, in mathematical terms, the usage policy is represented as a tuple consisting of five elements, each representing an instantiation of the five core classes, thereby defining a permitted activity.
+Moreover, a composed usage policy can be formulated by joining a set of authorised processing activities.
+The vocabularies crafted to delineate each concept within the SPL construct draw upon established privacy-related ontologies.
+For instance, terms related to processing operations\footnote{\url{https://specialprivacy.ercim.eu/vocabs/processing\#} (accessed on 20/July/2023)} are derived from previous ontologies such as ODRL, while data categories\footnote{\url{https://specialprivacy.ercim.eu/vocabs/data\#} (accessed on 20/July/2023)}, recipients\footnote{\url{https://specialprivacy.ercim.eu/vocabs/recipients\#} (accessed on 20/July/2023)}, purposes\footnote{\url{https://specialprivacy.ercim.eu/vocabs/purposes\#} (accessed on 20/July/2023)}, storage duration\footnote{\url{https://specialprivacy.ercim.eu/vocabs/duration\#} (accessed on 20/July/2023)}, and location\footnote{\url{https://specialprivacy.ercim.eu/vocabs/locations\#} (accessed on 20/July/2023)} are derived from P3P.
+These taxonomies have the potential for expansion through the introduction of additional sub-classes~\citep{bonatti_policy_2018}.
+An example showcasing this extension possibility is illustrated in Listing~\ref{list:spl_example}, where the terms \texttt{HeartRate}, a sub-class of \texttt{svd:Health}, \texttt{Profiling} a sub-class of the processing term \texttt{svpr:Analyze}, and \texttt{Recommendation} as a subclass of the purpose \texttt{svpu:Marketing}, are introduced. 
+In this example, data concerning heart rate and location are utilised for user profiling with the aim of generating recommendations, while the data is stored indefinitely within the servers of the data controllers situated in the EU and may be disclosed to any recipients.
 
 \begin{listing}
-\caption{SPL general usage policy extracted from \cite{bonatti_special_2019}.}
+\caption{SPL general usage policy adapted from \cite{bonatti_special_2019}.}
 \label{list:spl_example}
 \begin{minted}{text}
 ObjectIntersectionOf(
@@ -454,17 +457,16 @@ ObjectIntersectionOf(
 \end{minted}
 \end{listing}
 
-SPLog was designed to provide a record of the processing events related to the consent actions given by the data owners.
-This vocabulary builds upon \textbf{PROV-O} \citep{lebo_prov-o_2013} to have information on the provenance of the log and is in line with the terms developed for the SPL vocabulary.
-The main concepts defined by SPLog are the \textbf{log} itself and the actual \textbf{log entries}.
-Each log has meta-data attached to it, such as the software agent it belongs to, and log entries that contain information about each event.
-The log entries can be from one of two types: policy entries -- related to a consent form and related policy terms -- or data events such as data processing or sharing.
-These entries should also contain information about the data subject involved in the event, a description, the event's content itself, time stamps, related data-set and so on.
-Therefore these logs can be used to track the provenance of an event.
-SPLog uses the SPL vocabulary to instantiate a log entry content.
-This vocabulary is easily extendable and allows the grouping of events to promote scalability \citep{kirrane_transparency_2018}.
+SPLog was developed to document the processing events associated with the consent actions granted by data subjects.
+It leverages PROV-O~\citep{lebo_prov-o_2013} to incorporate provenance information into the log, aligning with the terminology established for the SPL vocabulary. 
+The key concepts outlined by SPLog encompass the \textbf{log} itself and the corresponding \textbf{log entries}.
+Each log is accompanied by metadata, including the software agent to which it pertains, while log entries provide details about individual events. 
+These entries can be categorised into two types: policy entries, which are linked to consent forms and associated terms, and data events, e.g., processing or sharing activities. 
+Additionally, these entries should encompass information regarding the involved data subject, event description, content, timestamps, and relevant datasets, facilitating the tracking of event provenance.
+Hence, SPLog utilises the SPL vocabulary to instantiate the content of a log entry, which allows event grouping to enhance scalability~\citep{kirrane_transparency_2018}.
 
-The SPECIAL framework was implemented in various use-cases in distinct sectors: to build personalized touristic recommendations in collaboration with \textit{Proximus}\footnote{\url{https://www.proximus.be/}}; for traffic alert notifications with \textit{Deutsche Telekom}\footnote{\url{https://www.telekom.com/en}}; with \textit{Thomson Reuters Limited}\footnote{\url{https://www.thomsonreuters.com}} to support anti-money laundering requirements.
+The SPECIAL framework found application across diverse sectors through various use cases: collaborating with \textit{Proximus}\footnote{\url{https://www.proximus.be/} (accessed on 20/July/2023)} to develop personalised tourist recommendations; partnering with \textit{Deutsche Telekom}\footnote{\url{https://www.telekom.com/en} (accessed on 20/July/2023)} to deliver traffic alert notifications; and working alongside \textit{Thomson Reuters Limited}\footnote{\url{https://www.thomsonreuters.com} (accessed on 20/July/2023)upui} to address anti-money laundering requirements.
+% still needs to be updated
 
 \subsubsection{DPF}
 \label{sec:dpf}
