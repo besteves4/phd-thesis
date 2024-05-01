@@ -343,24 +343,24 @@ Specifically, \cite{palmirani_modelling_2018} introduced a framework that levera
 
 \subsubsection{A-PPL}
 \label{sec:appl}
-% still needs to be evaluated
-The Accountable Policy Language (A-PPL), implemented by \cite{azraoui_appl_2014}, has its origin in the A4Cloud\footnote{\url{http://www.a4cloud.eu/}} project, with the objective of applying accountability requirements to the representation of privacy policies.
-To accomplish this goal, the A-PPL expands PPL (PrimeLife Policy Language) by taking into account guidelines on notification, data location and retention, and auditability.
-PPL by \cite{ardagna_primelife_2009} is an extensible privacy policy language designed within the context of the PrimeLife\footnote{\url{http://primelife.ercim.eu/}} project, based on XACML \citep{parducci_extensible_2013}, an eXtensible Access Control Markup Language which is an OASIS standard for access control policies that has been previously tested to deal with GDPR requirements related to consent \citep{fatema_compliance_2017} and privacy by design \citep{piras_defend_2019}. %updated
-PPL's core classes to express an obligation are \textbf{triggers} and \textbf{actions}.
-Triggers are events that can be filtered using certain conditions and are connected to an obligation.
-These triggers are responsible to fire the data controller's actions, which are executed according to the data subject's authorizations.
-However, neither PPL nor XACML have the concepts to cover requirements such as the representation of information related to data location and retention rules or auditability provisions to be in line with data handling regulations such as the GDPR.%updated
 
-A-PPL introduced a role attribute identifier and added the data protection authority role to the ones already modelled by PPL, the data subject, data controller and data processor.
-Also, two new triggers to allow or prohibit access to personal data were included.
-Duration and region attributes related to a particular data processing purpose are used to enforce data retention and location rules.
-A-PPL further extends the PPL notification system to define the recipient and the type of notification to be sent in relation to a particular action.
-For auditing purposes, A-PPL added a trigger to monitor the data controller and collect evidence of data-related events which are logged with parameters such as the purpose of the action, the time-stamp or the executed action on the data.
-Listing \ref{list:appl_example} presents an example of an A-PPL obligation to notify a data subject in case of a breach. A-PPL's $ActionNotify$ element provides a way to notify data subjects, which is triggered in case of a policy violation or loss of data.
+The Accountable Policy Language (A-PPL), developed by~\cite{azraoui_appl_2014}, originates from the A4Cloud\footnote{\url{http://www.a4cloud.eu/} (accessed on 19/July/2023)} project, aimed at incorporating accountability requirements into the expression of privacy policies.
+To achieve this aim, A-PPL extends PPL (PrimeLife Policy Language) by integrating considerations for notification protocols, data storage and retention practices, and auditability guidelines.
+PPL by~\cite{ardagna_primelife_2009} is an extensible, XACML-based \citeyearpar{parducci_extensible_2013} privacy policy language established in the context of the PrimeLife\footnote{\url{http://primelife.ercim.eu/} (accessed on 19/July/2023)} project -- XACML is an OASIS standard for access control policies that has been previously tested to deal with GDPR requirements related to consent~\citep{fatema_compliance_2017} and privacy by design~\citep{piras_defend_2019}.
+The main concepts within PPL for articulating obligations consist of \textbf{triggers} and \textbf{actions}.
+Triggers denote events that can undergo filtering based on specific conditions and are linked to an obligation.
+These triggers are responsible for initiating actions by the data controller, which are executed in accordance with the data subject's permissions.
+However, neither PPL nor XACML encompass concepts that address needs such as representing information concerning data storage and retention restrictions or incorporating auditability conditions to align with personal data protection regulations.
+
+A-PPL incorporated a role attribute identifier and introduced the role of data protection authority to those already present in PPL, namely the data subject, data controller, and data processor.
+Additionally, two new triggers for permitting or denying access to personal data were incorporated.
+Duration and location attributes pertaining to specific processing activities are utilised to enforce data retention and storage rules.
+Furthermore, A-PPL extends the PPL notification system by specifying the recipient and notification type to be dispatched concerning a particular action.
+To facilitate auditing, A-PPL introduced a trigger to oversee the data controller's activities and gather evidence of data-related occurrences, which are logged along with parameters such as the activity's purpose, timestamp, or the executed processing operation.
+Listing~\ref{list:appl_example} showcases an instance of an A-PPL obligation to inform a data subject in the event of a personal data breach -- the $ActionNotify$ element offers a mechanism for notifying data subjects, triggered in instances of policy violations or data loss.
 
 \begin{listing}
-\caption{A-PPL example extracted from \cite{azraoui_appl_2014}.}
+\caption{A-PPL example adapted from \cite{azraoui_appl_2014}.}
 \label{list:appl_example}
 \begin{minted}{xml}
 <Obligation>
@@ -380,7 +380,7 @@ Listing \ref{list:appl_example} presents an example of an A-PPL obligation to no
 
 \subsubsection{P2U}
 \label{sec:p2u}
-
+% still needs to be evaluated
 Purpose-To-Use (P2U), by \cite{iyilade_p2u_2014}, has taken inspiration from P3P to build a policy language for the sharing of user information across different services and data consumers, resting on the principle of purpose of use.
 Its main focus is to provide a language for the secondary sharing and usage of data, making sure that the user's privacy is maintained.
 It is designed to combine information about the data sharing purpose, its retention time and, in the case the user wants to sell it, the selling price and simultaneously allows the data consumers to negotiate prices and retention periods.
