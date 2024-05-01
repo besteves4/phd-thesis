@@ -359,7 +359,7 @@ Furthermore, A-PPL extends the PPL notification system by specifying the recipie
 To facilitate auditing, A-PPL introduced a trigger to oversee the data controller's activities and gather evidence of data-related occurrences, which are logged along with parameters such as the activity's purpose, timestamp, or the executed processing operation.
 Listing~\ref{list:appl_example} showcases an instance of an A-PPL obligation to inform a data subject in the event of a personal data breach -- the $ActionNotify$ element offers a mechanism for notifying data subjects, triggered in instances of policy violations or data loss.
 
-\begin{listing}
+\begin{listing}[ht]
 \caption{A-PPL example adapted from \cite{azraoui_appl_2014}.}
 \label{list:appl_example}
 \begin{minted}{xml}
@@ -380,24 +380,23 @@ Listing~\ref{list:appl_example} showcases an instance of an A-PPL obligation to 
 
 \subsubsection{P2U}
 \label{sec:p2u}
-% still needs to be evaluated
-Purpose-To-Use (P2U), by \cite{iyilade_p2u_2014}, has taken inspiration from P3P to build a policy language for the sharing of user information across different services and data consumers, resting on the principle of purpose of use.
-Its main focus is to provide a language for the secondary sharing and usage of data, making sure that the user's privacy is maintained.
-It is designed to combine information about the data sharing purpose, its retention time and, in the case the user wants to sell it, the selling price and simultaneously allows the data consumers to negotiate prices and retention periods.
 
-This policy framework involves the interaction of the \textit{users} (the owners of the data), the \textit{data consumers} (services that need the data), \textit{the data providers} (services that collect and share the data) and the \textit{data brokers} (services that monitor the consumers' and providers' activities and execute the negotiations, among other tasks).
-The main elements of P2U are the \textbf{policies}, the \textbf{data provider}, the \textbf{user}, the \textbf{purposes}, the \textbf{data consumers}, the \textbf{retention}, the \textbf{data groups} and respective \textbf{data} elements.
-Policies are the root element of P2U, and each one needs to have an associated provider, a user and at least one purpose of use.
-Each policy should have a name, and optionally an attribute with the path to the human-readable policy, and the name and identifier of the data provider and user to which the policy refers.
-A P2U policy can specify more than one purpose for the sharing of data, along with information on how long it can be retained, with whom and the relevant data it applies to.
-The data consumer element has the particularity of containing an attribute, \textit{name}, that can be set to 'public' if the data can be shared with any third-party service.
-Also, the retention period of the purpose should be defined in days and a \textit{negotiable} attribute can be detailed, which is set to false by default.
-The same attribute is available for the data group element.
-This component is composed of one or more data elements and each one can have an expiry date, which overrides the retention period, and the possibility of setting an initial price for the data in cases where the user is willing to sell it.
-Listing \ref{list:p2u_example} presents an example of a P2U policy for secondary sharing of user's information. In the example, the data provider "FoodIntakeApp" wants to share Jerry's data with the data consumer "MyShopApp" for the purpose of shopping recommendations. The consumer can retain the data for 180 days and negotiate it with the provider.
+The work presented by \cite{iyilade_p2u_2014} in Purpose-To-Use (P2U) draws inspiration from P3P to construct a policy framework facilitating the sharing of user information across various services and data consumers, grounded in the principle of purpose-driven usage.
+Its primary objective is to furnish a language tailored for secondary data sharing and usage, with an emphasis on safeguarding user privacy. 
+P2U is structured to encompass details regarding the purpose of data sharing, its duration, and, if desired by the user, potential selling price, while also enabling data consumers to engage in negotiations concerning pricing and retention time.
+
+This policy framework entails the interaction among distinct entities: \textbf{users} (who own the data), \textbf{data consumers} (services requiring the data), \textbf{data providers} (services gathering and sharing the data), and \textbf{data brokers} (services overseeing consumer and provider activities, including negotiation tasks).
+Thus, the principal concepts of P2U are \textbf{policies}, \textbf{purposes}, \textbf{retention} restrictions, \textbf{data groups}, and their corresponding \textbf{data} elements, and the previously mentioned entities.
+Policies serve as the foundational component of P2U, with each requiring an associated provider, user, and at least one designated purpose of use. 
+In addition, every policy must be assigned a name and may optionally include an attribute indicating the path to a human-readable policy, as well as the name and identifier of the corresponding data provider and user. 
+Within a P2U policy, multiple purposes for data sharing can be specified, along with details on retention duration, authorised recipients, and the pertinent data involved. 
+Moreover, the data consumer element includes a \textbf{name} property which can be designated as `public' to allow data sharing with any third-party service. 
+The duration of each purpose's retention period should be defined in days, and an optional \textbf{negotiable} property, which defaults to false, can be specified (this term can also be applied to the data group element).
+The data group component comprises one or more data elements, each capable of being assigned an expiry date, which takes precedence over the retention period of the period, and the option to specify an initial price for the data, should the user opt to sell it.
+Listing~\ref{list:p2u_example} illustrates an instance of a secondary data sharing P2U policy -- the data provider ``FoodIntakeApp'' wants to share Jerry's data with the data consumer ``MyShopApp'' for the purpose of shopping recommendations, allowing the consumer to retain the data for a period of 180 days and to negotiate terms with the provider.
 
 \begin{listing}
-\caption{P2U example extracted from \cite{iyilade_p2u_2014}.}
+\caption{P2U example adapted from \cite{iyilade_p2u_2014}.}
 \label{list:p2u_example}
 \begin{minted}{xml}
 <POLICY discuri=http://mydatawebsite.com/privacy.html name="ShoppingPolicy">
@@ -416,8 +415,8 @@ Listing \ref{list:p2u_example} presents an example of a P2U policy for secondary
 \end{minted}
 \end{listing}
 
-An application scenario where a user allows data sharing between several mobile applications is further specified in an additional publication by the same authors \citep{hutchison_framework_2013}.
-However, this implementation does not enforce compliance of the data consumers with the policies defined by the users and does not specify any special treatment for cases dealing with sensitive data.
+Another publication by the same authors~\citep{hutchison_framework_2013} outlines a scenario where a user permits data sharing among multiple mobile applications.
+However, this implementation does not mandate data consumers to adhere to user-defined policies nor does it delineate any particular handling protocols for sensitive data.
 
 
 \subsubsection{SPECIAL}
