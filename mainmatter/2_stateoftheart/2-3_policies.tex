@@ -465,33 +465,37 @@ These entries can be categorised into two types: policy entries, which are linke
 Additionally, these entries should encompass information regarding the involved data subject, event description, content, timestamps, and relevant datasets, facilitating the tracking of event provenance.
 Hence, SPLog utilises the SPL vocabulary to instantiate the content of a log entry, which allows event grouping to enhance scalability~\citep{kirrane_transparency_2018}.
 
-The SPECIAL framework found application across diverse sectors through various use cases: collaborating with \textit{Proximus}\footnote{\url{https://www.proximus.be/} (accessed on 20/July/2023)} to develop personalised tourist recommendations; partnering with \textit{Deutsche Telekom}\footnote{\url{https://www.telekom.com/en} (accessed on 20/July/2023)} to deliver traffic alert notifications; and working alongside \textit{Thomson Reuters Limited}\footnote{\url{https://www.thomsonreuters.com} (accessed on 20/July/2023)upui} to address anti-money laundering requirements.
-% still needs to be updated
+The SPECIAL framework found application across diverse sectors through various use cases: collaborating with \textit{Proximus}\footnote{\url{https://www.proximus.be/} (accessed on 20/July/2023)} to develop personalised tourist recommendations; partnering with \textit{Deutsche Telekom}\footnote{\url{https://www.telekom.com/en} (accessed on 20/July/2023)} to deliver traffic alert notifications; and working alongside \textit{Thomson Reuters Limited}\footnote{\url{https://www.thomsonreuters.com} (accessed on 20/July/2023)} to address anti-money laundering requirements.
 
 \subsubsection{DPF}
 \label{sec:dpf}
 
-The Declarative  Policy Framework (DPF) \citep{martiny_protecting_2018, martiny_partial_2020} is being developed by an established team under the DARPA Brandeis programme\footnote{\url{https://www.darpa.mil/program/brandeis}} with the main goal of providing a privacy policy framework based on ontology engineering and a formal shareability theory.
-DPF's policy engine builds on the ontology to define policy objects which are used in the development of user interfaces (UIs).
-These UIs allow non-technical users to create, validate and manage privacy policies without the need to burden them with the technical formalisms of a policy language.
-DPF's engine can also be integrated into systems supporting the management of data requests and other Privacy Enhancing Technologies (PETs).
+The Declarative Policy Framework (DPF), as documented by \cite{martiny_protecting_2018} and \cite{martiny_partial_2020}, was developed as part of the DARPA Brandeis program\footnote{\url{https://www.darpa.mil/program/brandeis} (accessed on 20/July/2023)}.
+Its primary objective is to furnish a privacy policy framework grounded in ontology engineering principles and a formal theory of shareability.
+DPF's policy engine utilises the ontology to delineate policy instantiations, which subsequently inform the generation of user interfaces. 
+These interfaces are designed to empower non-technical users to generate, validate, and manage privacy policies, alleviating them from the intricacies of technical policy language formalisms.
+Furthermore, DPF's engine is adaptable for integration into systems that support data request management and other Privacy Enhancing Technologies (PETs).
 
-Therefore, DPF uses a defined ontology as a common data model to specify a particular domain in order to support the definition of permissive and restrictive privacy policies.
-Each policy rule corresponds to an allow or disallow statement that should have an identifier and a description, a policy authority, the data requesters to whom the policy applies, and also the affected data and effectiveness time imposed by the policy.
-Optionally, in the case of a permissive statement, there is the possibility to define a set of constraints to establish the conditions under which the data can be shared.
-The policy authority evaluates whether a certain data request complies with the defined policies.
-Hence, each data request must include, in addition to the data being requested, the policy authority that will be consulted to grant or refuse access, and the time of the request.
-Then the request follows the policy engine pipeline and if there is a matching rule the engine returns the decision, the identifier and description of the analogous rule and, in the case the request is authorized, the valid conditions in which it is allowed.
-Since a single request can trigger multiple policy rules, the engine must be equipped to deal with conflicting decisions.
-To achieve this, DPF implements baseline policies and then exceptions are created to define policy rules with higher priority in relation to the data that is being shared.
-With this mechanism in place, this privacy framework can override decisions based on detailed constraints.
+Thus, DPF employs a predefined ontology as a common data model to articulate a specific domain, facilitating the formulation of both permissive and prohibitive privacy policies. 
+Each policy rule encompasses either an allowance or denial statement, necessitating an identifier, a description, an authority, designated data requesters, and the pertinent data affected by the policy, along with the timeframe of its effectiveness. 
+In instances of permissive statements, there is the option to outline a set of constraints that dictate the circumstances under which data may be shared. 
+The policy authority is responsible for assessing whether a given data request aligns with the established policies.
+Consequently, each data request must include not only the requested data but also the consulted policy authority tasked with granting or denying access, as well as the request timestamp.
+Subsequently, the request travels through the policy engine pipeline, and upon encountering a matching rule, the engine furnishes the decision along with the identifier and description of the corresponding rule.
+If the request is authorised, the engine also provides the valid conditions under which it is permissible. 
+Given that a single request may trigger multiple policy rules, the engine must effectively manage conflicting decisions.
+To address this, DPF incorporates baseline policies, and exceptions are established to delineate policy rules with higher priority concerning the shared data. 
+Through this mechanism, this privacy framework is capable of overriding decisions based on specific constraints.
 
-The ontologies are defined in OWL and can be translated to Flora\footnote{\url{http://flora.sourceforge.net/}}, an object-oriented reasoning system which can be used to reason with policies.
-To illustrate this framework, the authors provide a pandemic use case where nation and community policy authorities implement data-sharing policies about their residents and respective health status to monitor the disease's outbreak.
-Listing \ref{list:dpf_example} presents an example DPF policy rule based on this use-case, where any national policy authority, $?pa$, allows the nations to share their residents' disease states, $?reqData$, with any response coordinators, $?requester$, at a certain time, $?time$, under certain constraints, $?constr$. The $?polData$ query specifies the connection between the nations and the medical state of its residents and it is constrained by $?constr$, a constraint attached to the $?Resident$ variable. In this constraint, the birthday of the resident is taken into account to subtract from the requested data the residents younger than thirteen.
+The ontologies are specified in OWL and can be converted to Flora\footnote{\url{http://flora.sourceforge.net/} (accessed on 20/July/2023)}, an object-oriented reasoning system. 
+To demonstrate this framework, the authors offer a pandemic use case wherein national and community policy authorities establish data-sharing policies concerning their residents' health statuses to monitor disease outbreaks. 
+In Listing~\ref{list:dpf_example}, an example DPF policy rule is provided based on this scenario.
+Any national policy authority, $?pa$, permits nations to share information regarding their residents' disease states, $?reqData$, with response coordinators, $?requester$, at a specified time, $?time$, subject to certain constraints, $?constr$. 
+The $?polData$ query delineates the relationship between nations and the medical statuses of their residents, constrained by $?constr$, which is attached to the $?Resident$ variable.
+Within this constraint, the birthday of the resident is considered to exclude residents younger than thirteen from the requested data.
 
-\begin{listing}
-\caption{DPF constrained policy rule extracted from \cite{martiny_protecting_2018}.}
+\begin{listing}[ht]
+\caption{DPF constrained policy rule adapted from \cite{martiny_protecting_2018}.}
 \label{list:dpf_example}
 \begin{minted}[escapeinside=||]{text}
 @!{NationsAllowConstrainedDiseaseStatesToRCs}
@@ -517,9 +521,9 @@ Listing \ref{list:dpf_example} presents an example DPF policy rule based on this
 
 \subsubsection{LPL}
 \label{sec:lpl}
-
+% still needs to be updated
 Layered Privacy Language (LPL), implemented by \cite{gerl_lpl_2018}, is a human and machine-readable privacy language which aims to promote the expression and enforcement of GDPR's legal requirements related to data subject's consent, personal data provenance and retention and also to implement privacy-preserving processing activities based on the application of state-of-the-art anonymization techniques. 
-Further work by \cite{gerl_critical_2018} focused on improving LPL to be able to fully represent the requirements derived from Articles 12 to 14 of the GDPR, the so-called data subject's `Right to be informed'.
+Further work by \cite{gerl_critical_2018} focused on improving LPL to be able to fully represupdate DPFent the requirements derived from Articles 12 to 14 of the GDPR, the so-called data subject's `Right to be informed'.
 
 LPL's policy structure is \textbf{purpose-based}, i.e., its core architecture is composed of a set of purposes and each purpose has associated a set of \textbf{data} types being processed and also the \textbf{recipients} of said data.
 The purpose element in LPL can be enriched with a human-readable description and also includes a `required' property, which can be used to specify if a certain purpose requires the explicit consent of the data subject, and an `optOut' property, which can be used to imply that the user has to actively deny or accept the purpose.
