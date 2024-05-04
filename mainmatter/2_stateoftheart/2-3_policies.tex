@@ -521,18 +521,25 @@ Within this constraint, the birthday of the resident is considered to exclude re
 
 \subsubsection{LPL}
 \label{sec:lpl}
-% still needs to be updated
-Layered Privacy Language (LPL), implemented by \cite{gerl_lpl_2018}, is a human and machine-readable privacy language which aims to promote the expression and enforcement of GDPR's legal requirements related to data subject's consent, personal data provenance and retention and also to implement privacy-preserving processing activities based on the application of state-of-the-art anonymization techniques. 
-Further work by \cite{gerl_critical_2018} focused on improving LPL to be able to fully represupdate DPFent the requirements derived from Articles 12 to 14 of the GDPR, the so-called data subject's `Right to be informed'.
 
-LPL's policy structure is \textbf{purpose-based}, i.e., its core architecture is composed of a set of purposes and each purpose has associated a set of \textbf{data} types being processed and also the \textbf{recipients} of said data.
-The purpose element in LPL can be enriched with a human-readable description and also includes a `required' property, which can be used to specify if a certain purpose requires the explicit consent of the data subject, and an `optOut' property, which can be used to imply that the user has to actively deny or accept the purpose.
-Data elements can be used to specify which data group the data being processed belongs to and also to classify them as sensitive or explicit.
-In parallel with data recipients, other entities can be specified, such as controllers or the data protection officer and, additionally, information regarding the retention period, data subject's rights, legal basis and also description details related to automated decision-making activities can be detailed in LPL policies.
-Listing \ref{list:lpl_example} presents an example LPL policy. Company $dr_{C1}$ has a service, with an LPL privacy policy $lpp_{ds_{U1}-dr_{C1}}$, which collects and uses personal information from a user $ds_{U1}$ for the purpose $p_{U1}$ and, optionally, the data collected by the company could be shared with a third party recipient. In this case, a new contract has to be concluded for the data sharing, where company $C1$, $ds_{C1}$, is the data source and the third party $C2$, $dr_{C2}$, is the data recipient. 'Marketing' is the purpose for the processing, $p_{U1}$, of the personal data $\hat{D}_1$, which includes postal code (which is anonymised using the 'Suppression' method) and salary data that has to be deleted 180 days after the completion of the purpose.
+The Layered Privacy Language (LPL), as developed by~\cite{gerl_lpl_2018}, is a privacy language designed to be comprehensible by both humans and machines.
+Its primary objective is to facilitate the expression and enforcement of GDPR's requirements pertaining to data subject consent, personal data provenance, retention, and the implementation of privacy-preserving processing activities utilising advanced anonymisation techniques.
+In subsequent research by~\cite{gerl_critical_2018}, efforts were directed towards enhancing LPL to comprehensively address the requirements outlined in Articles 12 to 14 of the GDPR, collectively known as the data subject's `Right to be informed'.
 
-\begin{listing}
-\caption{LPL policy adapted from \cite{gerl_lpl_2018}.}
+The policy structure of LPL is organised around purposes.
+In this structure, a collection of \textbf{purposes} forms the core architecture, with each purpose being associated with a set of processed \textbf{data} types and their corresponding \textbf{recipients}.
+Moreover, the purpose element can be enriched with a human-readable description and also includes properties such as \textbf{required}, which specifies whether a particular purpose needs explicit consent from the data subject, and \textbf{optOut}, indicating whether the user must actively accept or decline the purpose.
+Data elements serve to identify the data group to which the processed data belongs, as well as categorise them as sensitive or explicit.
+Alongside data recipients, other entities like data controllers or the data protection officer can also be designated with LPL.
+Furthermore, LPL policies can include details on the retention period, data subject's rights, legal basis, and description details pertaining to automated decision-making activities.
+The example LPL policy provided in Listing~\ref{list:lpl_example} illustrates how company $dr_{C1}$ operates its personal data handling activities under the LPL privacy policy $lpp_{ds_{U1}-dr_{C1}}$.
+This policy governs the collection and usage of personal information from a user $ds_{U1}$ for a specific purpose $p_{U1}$.
+Additionally, it allows for the optional sharing of collected data with a third-party recipient.
+Should such sharing occur, a new contract must be established, with company $C1$ ($ds_{C1}$) acting as the data source and the third party $C2$ ($dr_{C2}$) as the data recipient.
+The purpose of processing, denoted as $p_{U1}$, is `Marketing', involving personal data $\hat{D}_1$ such as postal code (anonymised via the `Suppression' method) and salary information, which must be deleted within 180 days following the fulfilment of the purpose.
+
+\begin{listing}[ht]
+\caption{LPL policy extracted from \cite{gerl_lpl_2018}.}
 \label{list:lpl_example}
 \begin{minted}[escapeinside=||]{text}
 |$ds_{U1}$|=('U1','Person',|$publicKey_{U1}$|,'DataSource')
@@ -553,13 +560,16 @@ Listing \ref{list:lpl_example} presents an example LPL policy. Company $dr_{C1}$
 \end{minted}
 \end{listing}
 
-\cite{gerl_privacy_2019} validate this language against an actual privacy policy use-case scenario in the complex healthcare domain to demonstrate its capabilities and limitations in relation to GDPR compliance.
-In addition, further work extends LPL with machine-readable privacy icons \citep{gerl_extending_2018} to assess its impact on the speed and accuracy of understanding privacy policies and introduces an LPL Personal Privacy Policy User Interface \citep{gerl_interface_2018}.
-This UI has the main goal of representing information related to the contents of privacy policies in order to support data subjects to give free and informed consent, which includes a policy header with a link to the human-readable policy and an overview of the purposes for processing using the aforementioned privacy icons, and a purpose section with an overview of all the purposes mentioned in the privacy policy and details regarding the identity of the controllers, data recipients, retention period and anonymisation methods.
+\cite{gerl_privacy_2019} conducted validation of this language through a real-world use-case scenario within the healthcare domain, showcasing its effectiveness and constraints concerning GDPR compliance.
+Subsequent research expanded upon LPL by integrating machine-readable privacy icons~\citep{gerl_extending_2018}, aiming to evaluate their impact on the comprehension of privacy policies.
+Additionally, an LPL Personal Privacy Policy User Interface was introduced~\citep{gerl_interface_2018}.
+This interface primarily aims to present information pertinent to privacy policies, aiding data subjects in providing informed consent.
+It includes a policy header containing a link to the human-readable policy and an overview of processing purposes using the previously mentioned privacy icons.
+Furthermore, a purpose section outlines all purposes outlined in the privacy policy, along with details regarding data controllers, recipients, retention periods, and anonymisation methods.
 
 \subsection{Comparative analysis}
 \label{sec:sota_policies_analysis}
-
+% still needs to be updated
 Using Table \ref{tab:languagesComparison} as a reference, it is possible to compare the policy languages described in Section \ref{sec:sota_policies_description} in relation to their capacity to assist with the representation of GDPR rights and obligations.
 In this table, the languages are sorted in descending order by the number of supported criteria, then alphabetically, if necessary, to improve readability.
 
