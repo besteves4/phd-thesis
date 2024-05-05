@@ -56,8 +56,8 @@ The collected publications were reviewed, evaluated, and, if relevant, included 
 \label{sec:ontology_engineering}
 
 The Linked Open Terms (LOT)\footnote{More details regarding the methodology and the tools promoted by LOT are available at \url{https://lot.linkeddata.es/} (accessed on 14 June 2023).} methodology for the specification, implementation, publication, and maintenance of ontologies~\citep{poveda-villalon_lot_2022} was used for the development of the ontologies in this Thesis, as it is based on existing methodologies for the development of Semantic Web technologies and it is aligned with software development and research projects lifecycles.
-Moreover, the~\cite{suarez-figueroa_neon_2012} methodology was used to define formal competency questions (CQ) and to collect the ontology requirements, which are then consolidated in an Ontology Requirement Specification Document (ORSD).
-Figure~\ref{fig:lot} presents a diagram of the main steps of the LOT methodology workflow, with a specific focus on the ontology implementation phase.
+Moreover, the~\cite{suarez-figueroa_neon_2012} methodology was used to define formal competency questions (CQ) and to collect the ontologies requirements, which are then consolidated in an Ontology Requirement Specification Document (ORSD).
+Figure~\ref{fig:lot} presents a diagram of the main steps of the LOT methodology workflow, with a specific focus on the ontologies implementation phase.
 
 \begin{figure}
     \centering
@@ -66,9 +66,11 @@ Figure~\ref{fig:lot} presents a diagram of the main steps of the LOT methodology
     \label{fig:lot}
 \end{figure}
 
-Taking into account the requirements specified in the ontology's ORSD, its first conceptualisation was then generated through a visualisation tool, the Chowlk Visual Notation tool\footnote{The Chowlk Converter tool and respective usage instructions are available at \url{https://chowlk.linkeddata.es/} (accessed on 14 June 2023).}~\citep{chavez-feria_chowlk_2022}, followed by feedback from experts. The generated conceptualisation diagram was then used to generate the first version of the ontology encoding as a Turtle file.
-Furthermore, after the generation of the first version of the ontology, the created terms were evaluated against a set of use case scenarios and using SPARQL queries. From this evaluation, if necessary, new concepts were added to the ontology and the ORSD was also updated accordingly. The ontology was also evaluated by using the OntOlogy Pitfall Scanner (OOPS!)\footnote{The OOPS! tool is available at \url{https://oops.linkeddata.es/} (accessed on 14 June 2023).}~\citep{poveda-villalon_oops_2014} to detect common errors in ontology development, such as missing domain or range properties or missing annotations, and using FOOPS!\footnote{The FOOPS! tool is available at \url{https://w3id.org/foops} (accessed on 30 November 2023).}, the Ontology Pitfall Scanner to ensure ontology alignment with the Findable, Accessible, Interoperable and Reusable (FAIR) principles~\citep{garijo_foops_2021}.
-As a final evaluation, ontology classes and properties and, in particular, their definitions were reviewed by legal and technical experts and, when applicable, connected with the relevant legal rules, guidelines, and other literature.
+Taking into account the requirements specified in the ontologies' ORSD, their first conceptualisations were then generated through a visualisation tool, the Chowlk Visual Notation tool\footnote{The Chowlk Converter tool and respective usage instructions are available at \url{https://chowlk.linkeddata.es/} (accessed on 14 June 2023).}~\citep{chavez-feria_chowlk_2022}, followed by feedback from experts. The generated conceptualisation diagrams were then used to generate the first version of the ontologies encoding as a Turtle file.
+Furthermore, after the generation of the first version of the ontologies, the created terms were evaluated against a set of use case scenarios and using SPARQL queries.
+From this evaluation, if necessary, new concepts were added to the ontologies, and the ORSDs were also updated accordingly.
+The ontologies were also evaluated by using the OntOlogy Pitfall Scanner (OOPS!)\footnote{The OOPS! tool is available at \url{https://oops.linkeddata.es/} (accessed on 14 June 2023).}~\citep{poveda-villalon_oops_2014} to detect common errors in ontology development, such as missing domain or range properties or missing annotations, and using FOOPS!\footnote{The FOOPS! tool is available at \url{https://w3id.org/foops} (accessed on 30 November 2023).}, the Ontology Pitfall Scanner to ensure ontology alignment with the Findable, Accessible, Interoperable and Reusable (FAIR) principles~\citep{garijo_foops_2021}.
+As a final evaluation, ontologies classes and properties and, in particular, their definitions were reviewed by legal and technical experts and, when applicable, connected with the relevant legal rules, guidelines, and other literature.
 
 The ontologies are published using the \url{w3id.org}, ``Permanent Identifiers for the Web'', service\footnote{This service is run by the W3C Permanent Identifier Community Group (\url{https://www.w3.org/community/perma-id/}, accessed on 22 October 2023).}.
 This service provides a secure and permanent re-direction and content negotiation service that serves both human-readable documentation and a machine-readable file from the same URI.
@@ -87,7 +89,7 @@ As such, the following best practices, adopted from the aforementioned guideline
 \begin{enumerate}
     \item Description of the software is included in the README.md file of the software repository. 
     \item Software is archived in a software registry, i.e., Zenodo.
-    \item Software has an persistent identifier such as Digital Object Identifier (DOI) and/or a \url{w3id.org}.
+    \item Software has a persistent identifier such as Digital Object Identifier (DOI) and/or a \url{w3id.org}.
     \item Software is downloadable.
     \item Software follows a semantic versioning scheme.
     \item Software requirements are listed in the software repository.
@@ -95,7 +97,7 @@ As such, the following best practices, adopted from the aforementioned guideline
     \item Software usage instructions are included in the README.md file of the software repository.
     \item The software repository has a license.
     \item The software repository provides instructions on how to cite it.
-    \item The software repository includes metadata including programming language, creation date, keywords and releases.
+    \item The software repository includes metadata including programming language, creation date, keywords, and releases.
 \end{enumerate}
 
 Moreover, the source code of the developed research software is hosted on GitHub and version control is done using Git.
