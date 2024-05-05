@@ -21,32 +21,32 @@ In particular, the Solid protocol~\citep{capadisli_solid_2022} describes how ser
 Moreover, Table \ref{tab:definitions} provides an overview of Solid-related concepts, their definitions, and corresponding classes and properties already modelled in Solid-related vocabularies.
 The authentication and authorisation protocols compose Solid's two main building blocks -- an up-to-date list of Solid specifications, including technical reports for both aforementioned building blocks, is maintained by the Solid Community Group at \url{https://solidproject.org/TR/}.
 Authentication is a necessary feature to identify users when they want to log into their Pod and/or when they want to use an app to perform a certain action over resources stored in their Pod.
-Thus, Solid's authentication protocol uses Solid's WebID specification to identify agents through URIs, as specified in Table \ref{tab:definitions}, which when dereferenced return a WebID profile document that should include information regarding the identity provider chosen by the Solid user and the Pod storage location and may include information regarding an available inbox where users and applications can leave messages to the user~\citep{balseiro_solid_2022}.
+Thus, Solid's authentication protocol uses Solid's WebID specification to identify agents through URIs, as specified in Table~\ref{tab:definitions}, which when dereferenced return a WebID profile document that should include information regarding the identity provider chosen by the Solid user and the Pod storage location and may include information regarding an available inbox where users and applications can leave messages to the user~\citep{balseiro_solid_2022}.
 In addition, to verify the identity of agents, the Solid Protocol recommends the usage of the Solid OIDC protocol\footnote{A Solid-OIDC Primer~\citep{morgan_oidcprimer_2022} is also being developed to provide additional knowledge on Solid OIDC's authentication flows.}~\citep{coburn_oidc_2022}, however additional authentication methods, such as the previously mentioned WebID-TLS, can also be implemented.
 
 The authorisation protocol specifies mechanisms used by Solid servers to reply to requests of particular users or apps to have access to certain resources, containers of resources, or even to the whole Pod.
 Furthermore, the Solid protocol states that a Solid server \textit{``MUST conform to either or both Web Access Control (WAC) and Access Control Policy (ACP) specifications''} in order for it to be a compliant Solid server.
-Specific authorisation use cases and requirements are documented by the~\cite{solid_editorial_team_use_2023} and further details on the authorisation methods will be given in Section \ref{sec:sota_solid_access_control}.
+Specific authorisation use cases and requirements are documented by the~\cite{solid_editorial_team_use_2023} and further details on the authorisation methods will be given in Section~\ref{sec:sota_solid_access_control}.
 In addition to the authorisation specifications, there is a third protocol being developed to ensure data interoperability and (re)usability across Pod providers, agents, and applications -- the Solid Application Interoperability (SAI) specification~\citep{bingham_interop_2023}.
 
 \begin{landscape}
-\begin{table}[ht]
+\begin{table}[p]
 \caption{Overview of Solid-related concepts, their definitions, and related terms modelled on Solid specifications.}
 \label{tab:definitions}
 \begin{tabular}{c||l|c}
 \textbf{Concept} & \textbf{Definition} & \textbf{Solid vocabularies} \\ \hline\hline
 Pod & A personal datastore that conforms to the Solid protocol & \texttt{pim:Storage} \\ \hline
-Resource & \begin{tabular}[c]{@{}l@{}}Target asset stored in a Pod identified by a URI. Container resources can contain \\ other resources including containers\end{tabular} & \begin{tabular}[c]{@{}c@{}}\texttt{acl:accessTo}, \\ \texttt{acp:target} \end{tabular} \\ \hline
+Resource & \begin{tabular}[c]{@{}l@{}}Target asset stored in a Pod identified by a URI. Container resources can\\ contain other resources including containers\end{tabular} & \begin{tabular}[c]{@{}c@{}}\texttt{acl:accessTo}, \\ \texttt{acp:target} \end{tabular} \\ \hline
 Inbox & Container resource for messages sent to an agent & \begin{tabular}[c]{@{}c@{}}\texttt{ldp:inbox}, \\ \texttt{interop:hasInbox}\end{tabular} \\ \hline
 Server & Server capable of hosting resources and responding to resource requests & \\ \hline
 App & An application that reads and writes data to Pods & \begin{tabular}[c]{@{}c@{}}\texttt{interop:Application}, \\ \texttt{acp:client}, \texttt{acl:origin}\end{tabular} \\ \hline
 Agent & A person, social or virtual entity identified by a URI & \begin{tabular}[c]{@{}c@{}}\texttt{interop:Agent}, \\\texttt{acl:agent}, \texttt{acp:agent}\end{tabular} \\ \hline
-\begin{tabular}[c]{@{}c@{}}Pod \\ Owner\end{tabular} & Agent that has control over all resources in a Pod including access control resources & \begin{tabular}[c]{@{}c@{}}\texttt{solid:owner}, \\ \texttt{acp:owner}\end{tabular} \\ \hline
-WebID & \begin{tabular}[c]{@{}l@{}}URI that acts as a primary identifier for agents, which, when dereferenced, resolves \\ to an identity profile document (WebID profile)\end{tabular} & \\ \hline
+\begin{tabular}[c]{@{}c@{}}Pod \\ Owner\end{tabular} & \begin{tabular}[c]{@{}c@{}}Agent that has control over all resources in a Pod including access control\\ resources\end{tabular} & \begin{tabular}[c]{@{}c@{}}\texttt{solid:owner}, \\ \texttt{acp:owner}\end{tabular} \\ \hline
+WebID & \begin{tabular}[c]{@{}l@{}}URI that acts as a primary identifier for agents, which, when dereferenced,\\ resolves to an identity profile document (WebID profile)\end{tabular} & \\ \hline
 \begin{tabular}[c]{@{}c@{}}Identity \\ Provider\end{tabular} & Entity implementing the identity service capable of authenticating a WebID & \begin{tabular}[c]{@{}c@{}}\texttt{solid:oidcIssuer}, \\ \texttt{acp:issuer}\end{tabular} \\ \hline
 \begin{tabular}[c]{@{}c@{}}Pod \\ Provider\end{tabular} & Entity providing the storage space and maintaining the server implementation & \\ \hline
 Policy & Conditions for accessing the Pod and its resources & \texttt{acp:Policy} \\ \hline
-Registry & Records where agents can store and find different types of data for different purposes & \texttt{interop:Registry}
+Registry & \begin{tabular}[c]{@{}c@{}}Records where agents can store and find different types of data for different\\ purposes\end{tabular} & \texttt{interop:Registry}
 \end{tabular}
 \end{table}
 \end{landscape}
@@ -56,10 +56,10 @@ Registry & Records where agents can store and find different types of data for d
 
 As discussed in the previous Section, there are two distinct access control methods being specified in the Solid ecosystem -- both use URIs to identify resources and users, while WAC~\citep{capadisli_wac_2022} relies on ACLs and ACP~\citep{bosquet_acp_2022} on Access Control Resources (ACRs) to specify who is authorised or refused access and access grants to represent the final authorisation decision.
 While server providers can implement only one of the authorisation protocols, Solid applications can not do the same or else they will not work with server providers that use a distinct protocol from the one they choose to implement.
-Listings \ref{list:wac} and \ref{list:acp} provide examples of both types of access control statements.
-As is visible by the examples, both solutions do not have the depth to deal with the users \textit{`Right to be Informed'} (GDPR's Article 13 and 14), since these models do not contain the terms to specify the purpose for accessing data on Pods, the personal data categories being consulted, used legal basis or even information on the identity of application developers.
+Listings~\ref{list:wac} and~\ref{list:acp} provide examples of both types of access control statements.
+As is visible by the examples, both solutions do not have the depth to deal with the users \textit{`Right to be Informed'} \hyperref[art:13-14]{(Arts. 13 and 14)}~\citeyearpar{noauthor_regulation_2016}, since these models do not contain the terms to specify the purpose for accessing data on Pods, the personal data categories being consulted, used legal basis or even information on the identity of application developers.
 
-\begin{listing}[h]
+\begin{listing}[ht]
 \caption[WAC authorisation that makes a WebID profile, readable by any agent.]{WAC authorisation that makes a WebID profile, \url{https://solidweb.me/besteves4/profile/card}, readable by any agent.}
 \label{list:wac}
 \begin{minted}{turtle}
@@ -70,7 +70,7 @@ As is visible by the examples, both solutions do not have the depth to deal with
 \end{minted}
 \end{listing}
 
-\begin{listing}[h]
+\begin{listing}[ht]
 \caption[ACP authorisation that makes a WebID profile, issued by \url{https://solidweb.me/}, readable by any agent using any application.]{ACP authorisation that makes a WebID profile, \url{https://solidweb.me/besteves4/profile/card}, issued by \url{https://solidweb.me/}, readable by any agent using any application.}
 \label{list:acp}
 \begin{minted}{turtle}
@@ -87,9 +87,9 @@ As is visible by the examples, both solutions do not have the depth to deal with
 Moreover, these access protocols were deemed not enough to ensure the interoperability of agents, data, and applications, and as such an interoperability specification is being developed to describe the implementation of agent, data, and access registries, to track user interactions with other agents, to keep records of where data is being stored and to manage access grants given to other agents~\citep{bingham_interop_2023}.
 Listing~\ref{list:interop_registryset} provides an example of a registry set that should only be readable by the Pod owner and Listing~\ref{list:interop_authz_registry} an example of an authorisation registry, which contains an \texttt{AccessAuthorization} for the \texttt{projectron} app which requires data with a particular shape\footnote{SAI assumes the use of ACL access modes which are still not approved, e.g., \texttt{acl:Create}, \texttt{acl:Update}, \texttt{acl:Delete}, and are under discussion on the Solid CG authorisation panel (see the issue at \url{https://github.com/solid/authorization-panel/issues/253}).}.
 While SAI is a step forward in Solid towards having a more transparent ecosystem, it is still in the early stages of development, and as such it is still not clear how this specification will fit in with the existing access control protocols or how it is going to be implemented/enforced.
-In addition, as is illustrated by Listing \ref{list:interop_authz_registry}, SAI does not entirely fulfil GDPR requirements, e.g., it does not provide transparency regarding the purpose for access or which type of data is being accessed nor does it provide information regarding the identity of the entities that develop/provide the apps.
+In addition, as is illustrated by Listing~\ref{list:interop_authz_registry}, SAI does not entirely fulfil GDPR requirements, e.g., it does not provide transparency regarding the purpose for access or which type of data is being accessed nor does it provide information regarding the identity of the entities that develop/provide the apps.
 
-\begin{listing}[h]
+\begin{listing}[ht]
 \caption[SAI registry set that stores private information regarding the storage location of registries.]{Registry set, established according to the SAI specification, that stores private information regarding the storage location of registries of \url{https://solidweb.me/besteves4/}.}
 \label{list:interop_registryset}
 \begin{minted}{turtle}
@@ -103,7 +103,7 @@ beatriz-registry: a interop:RegistrySet ;
 \end{minted}
 \end{listing}
 
-\begin{listing}[p]
+\begin{listing}[htp]
 \caption{Authorisation registry of \url{https://solidweb.me/besteves4/}.}
 \label{list:interop_authz_registry}
 \begin{minted}{turtle}
@@ -145,7 +145,8 @@ beatriz-authz:54a1b6a0 a interop:DataAuthorization ;
 \end{minted}
 \end{listing}
 
-Furthermore, the idea of having registries of data and applications is also compatible with the graph-centric interpretation of a Pod debated by~\cite{dedecker_whats_2022}. Certain apps might require the presence of particular data stored in a particular container -- this will cause an interoperability problem as it is something that cannot be standardised across the ecosystem for all apps.
+Furthermore, the idea of having registries of data and applications is also compatible with the graph-centric interpretation of a Pod debated by~\cite{dedecker_whats_2022}.
+Certain apps might require the presence of particular data stored in a particular container -- this will cause an interoperability problem as it is something that cannot be standardised across the ecosystem for all apps.
 With a graph-centric approach, \textit{``each Solid pod is a hybrid, contextualized knowledge graph, wherein `hybrid' indicates first-class support for both documents and RDF statements, and `contextualized' the ability to associate each of its individual documents and statements with metadata such as policies, provenance, and trust''}.
 With such metadata, including context and provenance metadata, distinct views of the Pod can be rendered as required by different applications or agents.
 Moreover, data request policies can simply be appended to the \textit{`Pod as a Graph'}, without the need to have it hard-coded in the app, and can be viewed by users using graphic-centric Solid apps.
@@ -158,12 +159,12 @@ In addition, beyond the access control mechanisms discussed in the previous Sect
 As such, in this Section, we describe the existing body of work on data protection and governance aspects of Solid-related technologies, with a particular focus on GDPR-related academic and industrial research.
 
 \paragraph{Exercising of data subject rights} 
-\cite{de_mulder_prov4itdata_2021} developed PROV4ITDaTa\footnote{The source code is available at \url{https://github.com/RMLio/prov4itdata-web-app}, under an MIT license (accessed on 14 August 2023).}, a configurable application that facilitates the exercising of the data subject's \textit{`right to data portability'}, using open sources resources such as RML.io\footnote{\url{https://rml.io/} (accessed on 14 August 2023)}~\citep{dimou_rml_2014} -- to access and generate interoperable Linked Data datasets using the Schema.org or DCAT vocabularies, Solid -- to store the datasets, and Comunica\footnote{\url{https://comunica.dev/} (accessed on 14 August 2023)}~\citep{taelman_comunica_2018} -- to query the datasets, and promotes transparency by automatically generating and recording provenance metadata using the PROV Ontology standard.
+\cite{de_mulder_prov4itdata_2021} developed PROV4ITDaTa\footnote{The source code is available at \url{https://github.com/RMLio/prov4itdata-web-app}, under an MIT license (accessed on 14 August 2023).}, a configurable application that facilitates the exercising of the data subject's \textit{`right to data portability'}~\hyperref[art:20]{(Art. 20)}~\citeyearpar{noauthor_regulation_2016}, using open sources resources such as RML.io\footnote{\url{https://rml.io/} (accessed on 14 August 2023)}~\citep{dimou_rml_2014} -- to access and generate interoperable Linked Data datasets using the Schema.org or DCAT vocabularies, Solid -- to store the datasets, and Comunica\footnote{\url{https://comunica.dev/} (accessed on 14 August 2023)}~\citep{taelman_comunica_2018} -- to query the datasets, and promotes transparency by automatically generating and recording provenance metadata using the PROV Ontology standard.
 The PDS Interop collaboration~\citeyearpar{noauthor_pds_2021}, an effort that started with the goal to make Solid and Nextcloud\footnote{\url{https://nextcloud.com/} (accessed on 20 August 2023)} interoperable, also developed an app, the Solid Migrator App\footnote{The source code is available at \url{https://github.com/pdsinterop/solid-migrator-app}, under an MIT license (accessed on 20 August 2023).}, to assist in the migration of Pod resources to a different Pod, independently of the Pod provider.
 
 \paragraph{GDPR principles}
 \cite{pandit_making_2023} describes Solid as a \textit{`cloud technology'}, according to ISO standards, provides a theoretical discussion on how GDPR principles apply to Solid and suggests how to extend its specifications to deal with such requirements.
-\cite{esposito_assessing_2023} also provide a theoretical analysis of technical security and privacy measures to assist Solid developers in complying with the GDPR -- a mapping of Solid actors and respective legal roles is provided for accountability, as well as security measures to ensure data confidentiality and minimisation and protocols to safeguard the data subjects' rights to be notified, to object and to not be a target of automated decision-making.
+\cite{esposito_assessing_2023} also provide a theoretical analysis of technical security and privacy measures to assist Solid developers in complying with the GDPR -- a mapping of Solid actors and respective legal roles is provided for accountability, as well as security measures to ensure data confidentiality and minimisation and protocols to safeguard the data subjects' rights to be notified~\hyperref[art:19]{(Art. 19)}~\citeyearpar{noauthor_regulation_2016}, to object~\hyperref[art:21]{(Art. 21)}~\citeyearpar{noauthor_regulation_2016} and to not be a target of automated decision-making~\hyperref[art:22]{(Art. 22)}~\citeyearpar{noauthor_regulation_2016}.
 \cite{van_damme_towards_2022} present a qualitative analysis of a series of plenary sessions with academia, governments, citizens, and industry regarding the adoption of decentralised personal datastore technologies. The main challenges that were identified are related to social, technical, legal, and ecosystem issues, which need to be considered for the \textit{``development of an interdisciplinary research agenda''}. In terms of legal challenges, the core aspects that were discussed are related to control, portability, compliance, accountability, delegation of consent, and the usage of other legal bases such as legitimate interests. The role of intermediates, promoted by the DGA, was also discussed. % Use cases related to mobility, media, health, finance and administration were also discussed.
 Digita\footnote{\url{https://www.digita.ai/} (accessed on 15 August 2023)}, a Belgian startup that offers Solid-based identity and storage solutions, published a research report reflecting on accountability aspects related to the implementation of Solid products, mainly regarding the lawfulness of data usage and transfer to recipients, particularly based on consent, and the specificity and compatibility of purposes~\citep{de_bot_data_2021}.
 \cite{bailly_prototyping_2023} propose to use the SAI and DPV vocabularies to specify access and usage control policies, respectively, and provide a prototype User Interface (UI) for users to consent to data requests\footnote{The source code is available at \url{https://github.com/HBailly/solid-auth-ui/}, under a GNU General Public License v3.0 (accessed on 15 August 2023).}, which the authors found to have a low score in terms of usability.
@@ -177,27 +178,28 @@ Janeiro Digital\footnote{\url{https://www.janeirodigital.com/} (accessed on 15 A
 In addition, they are developing an app to allow users to decide what data should be stored in the Pod, and who should have access to it, and to share their data with other research initiatives.
 
 In addition to the work of~\cite{de_bot_data_2021}, \cite{chugunov_streamlining_2020} also focus on government-related use cases. In this work, a Solid app for Flemish citizens, that allows them to share data with government administrations and to reuse said data in different contexts, is described to increase the accuracy of personal data which is difficult to keep updated, e.g., telephone numbers or email addresses, and to allow data portability.
-\citeauthor{wang_enhancing_2020}'s thesis also discusses the usage of Solid to enhance governmental services, including provisions to improve the access and rectification rights exercised in this context, including a use case scenario of applying to a social house and dealing with the subsequent changes to the address. 
+\citeauthor{wang_enhancing_2020}'s thesis also discusses the usage of Solid to enhance governmental services, including provisions to improve the access~\hyperref[art:15]{(Art. 15)}~\citeyearpar{noauthor_regulation_2016} and rectification~\hyperref[art:16]{(Art. 16)}~\citeyearpar{noauthor_regulation_2016} rights exercised in this context, including a use case scenario of applying to a social house and dealing with the subsequent changes to the address. 
 
-Karamel\footnote{\url{https://karamel.career/} (accessed on 20 August 2023)} also partnered with Digita to create a human resources platform for applicants and recruiters to find new jobs~\citep{verstraete_solid_2022} -- users can manage data stored in Solid Pods through an app that allows applicants to revoke access and to request to be forgotten by recruiters.
+Karamel\footnote{\url{https://karamel.career/} (accessed on 20 August 2023)} also partnered with Digita to create a human resources platform for applicants and recruiters to find new jobs~\citep{verstraete_solid_2022} -- users can manage data stored in Solid Pods through an app that allows applicants to revoke access and to request to be forgotten~\hyperref[art:17]{(Art. 17)}~\citeyearpar{noauthor_regulation_2016} by recruiters.
 
-\cite{toth_preserving_2022} developed a prototype architecture for the domain of hospitality where users can use Solid applications to book/manage accommodations and edit personal information. This proof of concept\footnote{The source code is available at \url{https://github.com/gergelyth/solid-hotel}, under an MIT license (accessed on 21 August 2023).} allows its users to request deletion and rectification of data and of copies of said data.
+\cite{toth_preserving_2022} developed a prototype architecture for the domain of hospitality where users can use Solid applications to book/manage accommodations and edit personal information. This proof of concept\footnote{The source code is available at \url{https://github.com/gergelyth/solid-hotel}, under an MIT license (accessed on 21 August 2023).} allows its users to request deletion~\hyperref[art:17]{(Art. 17)}~\citeyearpar{noauthor_regulation_2016} and rectification~\hyperref[art:16]{(Art. 16)}~\citeyearpar{noauthor_regulation_2016} of data and of copies of said data.
 
 \cite{van_de_wynckel_solidbased_2022} are researching the usage of Solid to develop transparent indoor positioning systems that store individual and sensor data in Solid Pods in an interoperable format. In addition, they developed an app that reads the user’s personal position, orientation, and velocity from the Pod and displays them along with additional information\footnote{The source code is available at \url{https://github.com/OpenHPS/ipin2022-solid/} (accessed on 23 August 2023).}.
 
-The described solutions can be compared through Figure \ref{fig:solid_sota}.
+The described solutions can be compared through Figure~\ref{fig:solid_sota}.
 Each solution was analysed in terms of whether it assists in the exercising of data subject rights or the implementation of a certain GDPR principle, as well as the type of solution developed by the authors of the paper.
 Works describing Solid apps are marked with a \textbf{black} shape, identity provider solutions with a \textbf{\textcolor{orange}{orange}} shape, Pod provider solutions with a \textbf{\textcolor{blue}{blue}} shape and theoretical work with a \textbf{\textcolor{red}{red}} shape.
 In addition, works marked with a $\medcircle$ discuss a government-related use case, $\medtriangleup$ a health-related use case, $\meddiamond$ a hospitality-related use case, \faStarO\space a location-related use case, $\medsquare$ a human resources-related use case and \textbf{X} represents work without a particular domain-related use case.
-As illustrated by the Figure, most works concentrate on fulfilling one or more GDPR principles, with a strong focus on the \textit{`lawfulness, fairness and transparency'} principle.
-Distinct works were also found to tackle the right to data portability, withdrawal of consent, and rectification, while no specific work was found on the right to restrict the processing of personal data. 
 
-\begin{figure}
+\begin{figure}[htp]
 \caption[Comparison of existing work on Solid and data protection topics.]{Comparison of existing work on Solid and data protection topics. Each work was analysed in terms of whether it assists in the exercising of data subject rights or in the implementation of a certain GDPR principle, as well as the type of solution they developed -- works describing Solid apps are marked with a \textbf{black} shape, identity provider solutions with a \textbf{\textcolor{orange}{orange}} shape, Pod provider solutions with a \textbf{\textcolor{blue}{blue}} shape and theoretical work with a \textbf{\textcolor{red}{red}} shape. In addition, works marked with a $\medcircle$ discuss a government-related use case, $\medtriangleup$ a health-related use case, $\meddiamond$ a hospitality-related use case, \faStarO\space a location-related use case, $\medsquare$ a human resources-related use case and \textbf{X} represents work without a particular domain-related use case.}
 \label{fig:solid_sota}
 \centering
 \includegraphics[width=\textwidth]{figures/chapter-2/solid-sota.png}
 \end{figure}
+
+As illustrated by the Figure, most works concentrate on fulfilling one or more GDPR principles, with a strong focus on the \textit{`lawfulness, fairness and transparency'} principle.
+Distinct works were also found to tackle the right to data portability, withdrawal of consent, and rectification, while no specific work was found on the right to restrict the processing of personal data.
 
 \subsection{Other decentralised technologies}
 \label{sec:sota_other_technologies}
@@ -218,7 +220,7 @@ As in the physical world, VCs can be used to identify data subjects, to provide 
 An example of a VC, with a DID-identifiable subject, is presented in Listing \ref{list:vc_fromspec}.
 The usage of VCs is being contemplated in the ACP specification, however, no specific details are provided regarding its implementation/development.
 
-\begin{listing}[htbp]
+\begin{listing}[ht]
 \caption[Verifiable credential with terms of use, extracted from~\cite{sporny_verifiable_2023}.]{Verifiable credential with terms of use where the issuer is prohibiting verifiers from archiving a degree credential, extracted from~\cite{sporny_verifiable_2023}, with the credential subject being identified by a DID.}
 \label{list:vc_fromspec}
 \begin{minted}{json}
@@ -253,4 +255,4 @@ The usage of VCs is being contemplated in the ACP specification, however, no spe
 \end{minted}
 \end{listing}
 
-Moreover, \cite{braun_selfverifying_2022,braun_attributebased_2022} have previously published work on using VCs and RDF-star\footnote{RDF-star\citep{arndt_rdfstar_2023} is an under-development W3C specification that \textit{``extends RDF with a convenient way to make statements about other statements''}.} to sign and verify Web resources using a Solid app\footnote{The source code is available at \url{https://github.com/uvdsl/solid-web-ldsig}, under an MIT license (accessed on 19 August 2023).} and on using VCs and Linked Data Notifications (LDNs)\footnote{The W3C LDNs Recommendation \citep{capadisli_linked_2017} is a protocol that describes how servers can send and retrieve RDF-based messages, sent/retrieved by applications.}, extending previous work from~ \citeauthor{ezike_solidvc_2019}, to request attribute-based access to Solid Pods\footnote{The source code is available at \url{https://github.com/uvdsl/solid-vc-pwa/}, under an MIT license (accessed on 19 August 2023).}.
+Moreover, \cite{braun_selfverifying_2022,braun_attributebased_2022} have previously published work on using VCs and RDF-star\footnote{RDF-star\citep{arndt_rdfstar_2023} is an under-development W3C specification that \textit{``extends RDF with a convenient way to make statements about other statements''}.} to sign and verify Web resources using a Solid app\footnote{The source code is available at \url{https://github.com/uvdsl/solid-web-ldsig}, under an MIT license (accessed on 19 August 2023).} and on using VCs and Linked Data Notifications (LDNs)\footnote{The W3C LDNs Recommendation \citep{capadisli_linked_2017} is a protocol that describes how servers can send and retrieve RDF-based messages, sent/retrieved by applications.}, extending previous work from~\citeauthor{ezike_solidvc_2019}, to request attribute-based access to Solid Pods\footnote{The source code is available at \url{https://github.com/uvdsl/solid-vc-pwa/}, under an MIT license (accessed on 19 August 2023).}.
