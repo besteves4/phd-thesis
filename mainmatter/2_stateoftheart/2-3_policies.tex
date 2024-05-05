@@ -53,17 +53,17 @@ Abbreviation (Section) & Full Name & Creators & Version & \multicolumn{1}{c|}{\b
 \end{tabular}}
 \end{table}
 
-\begin{figure}
-    \caption{Privacy-related policy languages dependency chart.}
-    \label{fig:lang-dependency-graph}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{figures/chapter-2/languages.png}
+    \caption{Privacy-related policy languages dependency chart.}
+    \label{fig:lang-dependency-graph}
 \end{figure}
 
 Moreover, the following criteria were used to analyse existing research on semantic policy languages:
 \begin{enumerate}
     \item[(C1)] Ability to model deontic concepts, e.g., permissions, prohibitions, obligations.
-    \item[(C2)] Ability to model GDPR concepts, such as the privacy terms in Table \ref{tab:GDPR_privacy_terms}.
+    \item[(C2)] Ability to model GDPR concepts, such as the privacy terms in Table~\ref{tab:GDPR_privacy_terms}.
     \item[(C3)] Existence of taxonomies of terms to populate policy conditions.
     \item[(C4)] Existence of mechanisms to assist with compliance.
     \item[(C5)] Resource is maintained/continues to be actively developed.
@@ -309,8 +309,7 @@ The online documentation offers various application scenarios illustrating POL's
 \subsubsection{PPO}
 \label{sec:ppo}
 
-Given that privacy poses a significant challenge in the open data era, it becomes crucial to delineate access rights, particularly within the Web environment.
-In this context, the Privacy Preference Ontology (PPO)~\citep{sacco_privacy_2011} proposes a framework for expressing users' privacy preferences regarding the restriction or allowance of access to particular RDF statements within a document.
+The Privacy Preference Ontology (PPO)~\citep{sacco_privacy_2011} proposes a framework for expressing users' privacy preferences regarding the restriction or allowance of access to particular RDF statements within a document.
 This ontology expands upon WAC to determine users' data access rights, which is limited to specifying who can access an entire RDF document, by allowing finely-grained mechanisms for governing users' access to specific data within RDF resources.
 
 PPO's capabilities for imposing access restrictions extend to individual statements, statement groups, and resources, which can be specific subjects or objects within RDF triples. 
@@ -339,7 +338,7 @@ The statements segment involves the formalisation of norms, encompassing constit
 Constitutive rules encapsulate definitions outlined in legal documents, whereas prescriptive rules encode deontic specifications.
 Override statements serve to address conflicting rules, while violation and reparation statements formalise penalties for breaches of norms.
 
-Specifically, \cite{palmirani_modelling_2018} introduced a framework that leverages LegalRuleML, Akoma Ntoso, and the PrOnto ontology (outlined in Section~\ref{sec:pronto}) to model GDPR rules and verify compliance.
+Specifically, \cite{palmirani_modelling_2018} introduced a framework that leverages LegalRuleML, Akoma Ntoso, and the PrOnto ontology (outlined in Section~\ref{sec:pronto}) to model rules and verify compliance with GDPR's \textit{`Conditions applicable to child's consent in relation to information society services'}, described in Article 8~\citeyearpar{noauthor_regulation_2016}.
 
 \subsubsection{A-PPL}
 \label{sec:appl}
@@ -619,4 +618,7 @@ In their documentation, LegalRuleML, SPL, A-PPL, DPF, AIR, LPL, and S4P also ack
 Some of these languages also provide access to such tools.
 Nevertheless, LegalRuleML and ODRL are the only languages that are actively maintained and developed, while, among the languages examined, only LegalRuleML, ODRL, SPL, P3P, and AIR offer resources that can be readily reused on the Web.
 
-Notably, LegalRuleML and ODRL distinguish themselves from other languages by possessing the capabilities to positively address a larger proportion of the established comparison criteria.
+Notably, LegalRuleML and ODRL distinguish themselves from other languages by possessing the capabilities to positively address a larger proportion of the established comparison criteria, including the ability to model deontic concepts and GDPR terms, e.g., purposes or data recipients.
+Moreover, their development and extension can be supported by the community groups in charge of their maintenance, and their resources are open and accessible.
+Beyond this, ODRL also supports the modelling of other constraints with particular importance in the definition of access control policies, e.g., spatial and temporal constraints, the representation of distinct types of policies, e.g., offers, requests and agreements, and has a profile mechanism to develop extensions to its core vocabulary.
+As such, ODRL will be the basis upon which access policies are expressed in this Thesis.
