@@ -121,7 +121,8 @@ In cases where ODRL lacks the necessary concepts, an extension to its existing c
 In this context, for each concept, an \texttt{odrl:Set} instance was modelled to represent the DUO concept's intrinsic rules.
 These policies are then amalgamated into an \texttt{odrl:Offer}, to serve as a unified policy for a dataset, as detailed in Section~\ref{sec:algorithm-offer} regarding the instantiation of offer policies.
 A comprehensive compilation of the performed interpretations for each DUO concept is provided in Table~\ref{tab:DUO_ODRL_overview}.
-During this interpretive analysis, difficulties were found in interpreting specific expressions such as `is limited to', a term that suggests that usage is restricted solely within a particular scope.
+As will also be mentioned later in this Section, the original DUO concept definitions will still be kept in the interpreted ODRL policies using the \texttt{rdfs:label} property.
+Moreover, due to the interpretive nature of this analysis, difficulties were found in interpreting specific expressions such as `is limited to', a term that suggests that usage is restricted solely within a particular scope.
 If this interpretation holds true, DUO developers should clarify how potential conflicts arising from rules expressing exclusive limitations versus other permissive expressions, such as `is allowed for', should be resolved.
 Hence, in this Thesis, ODRL's capabilities are used to articulate these requirements as permissions, prohibitions, and obligations, and, subsequently, existing works on ODRL~\citep{pellegrini_automated_2018,de_vos_odrl_2019} and OWL~\citep{bonatti_realtime_2020} reasoners can be employed to aid solving conflict resolution issues.
 
@@ -209,7 +210,7 @@ Furthermore, these agreements can be employed in automated processes that period
 Considering the points raised above, every DUO restriction should be portrayed as a \texttt{odrl:Set} instance, which, according to its definition, should include at least one permission, prohibition, or obligation, along with one associated data asset, to be deemed a semantically correct ODRL policy.
 Its utilisation does not confer any access privileges but solely denotes a set of rules that are applicable to the resource.
 Considering the human-readable labels linked with each DUO concept, \texttt{odrl:permission} was used when the condition permitted access to data, \texttt{odrl:prohibition} when it prohibited access, and \texttt{odrl:duty} when it outlined obligations to allow data access. 
-DUO's textual descriptions are still kept in the policies via the \texttt{rdfs:comment} property and the connection with the original DUO concept using \texttt{skos:exactMatch}.
+DUO's textual descriptions are still kept in the policies via the \texttt{rdfs:label} property and the connection with the original DUO concept using \texttt{skos:exactMatch}.
 
 Constructing a valid ODRL policy proved challenging due to the necessity of specifying \textit{``any form of identifiable resource''}~\citep{iannella_odrl_vocab_2018}.
 This challenge arises because DUO concepts solely represent specific access and usage requirements unrelated to a specific dataset.
@@ -234,7 +235,9 @@ Hence, to address this challenge, four possible approaches were identified:
 \end{enumerate}
 Each of these approaches influences how a condition is articulated and impacts the performance and functionality of the policy matching algorithm, e.g., leveraging approach (i) would necessitate the execution of an OWL2 reasoner before the matching process, while approach (ii) would require a SHACL validator.
 In this Thesis, the fourth approach was taken by declaring the concept as an instance of both the DUO and the scoping classes.
-This method was chosen for its simplicity, absence of the need for additional tools or modifications to ODRL, ease of replacement with a different method in the future, and alignment with the algorithms specified in Section~\ref{sec:algorithm}.
+This method was chosen for its simplicity and absence of the need for additional tools or modifications to ODRL.
+Moreover, if no extra tools or modifications are needed and a different method in the future is found to be more effective then it can easily replace the one proposed in this Section.
+Additionally, by reusing the existing ODRL and OAC models, it is also possible to reuse the algorithms specified in Section~\ref{sec:algorithm}.
 
 The \texttt{odrl:Set} formulated to represent DUO's concept of \textit{``general research use''} and the one to represent DUO's concept of \textit{``publication moratorium''} are detailed in Listing~\ref{list:duodrl_set}.
 When instantiated, beyond additional provenance metadata such as the \texttt{dcterms:creator} and \texttt{dcterms:issued} properties to indicate the creator and date of issuance of the offer, the \texttt{duodrl:TemplateDataset} must be replaced by the dataset's identifier and, in the case of the moratorium, a date must be instantiated to express until when the distribution of the outcomes of the research study is prohibited. 
@@ -502,7 +505,7 @@ The proof-of-concept implementation outlined in Section~\ref{sec:poc_implementat
 Table~\ref{tab:duodrl_matching_examples} illustrates examples of how the matching algorithm operates for prohibitions and permissions in offers with spatial and purpose-based constraints.
 As previously mentioned, in a semantic-based context, performing equivalence ($\equiv$), intersection ($\cap$), and subset ($\subseteq$) checking requires supplementary deliberations beyond simply employing \texttt{owl:sameAs} or \texttt{rdfs:subClassOf} inferences.
 For instance, comparing an offer with a location constraint restricted to Spain with a request to Europe using the subset ($\subseteq$) operator for permissions or the intersection ($\cap$) operator for prohibitions needs both locations to be articulated in a manner that facilitates such a hierarchical interpretation.
-In this scenario, the matching process requires understanding that \textit{Spain} is a narrower concept than \textit{Europe}.
+In this scenario, the matching process requires understanding that \textit{Spain} is a narrower concept, geographically speaking, than \textit{Europe}.
 Further complexities arise when representing legal jurisdictions, such as the \textit{EU}, of which \textit{Spain} is a member.
 
 \begin{table}[ht]

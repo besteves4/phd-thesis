@@ -273,17 +273,21 @@ Permission & \begin{tabular}[c]{@{}c@{}}Research and\\development\end{tabular} &
 \end{tabular}}
 \end{table}
 
-Hence, any implementation of an OAC-based, policy matching algorithm must be aware of such relationships and carefully consider when is makes sense to employ equivalence, intersection, and subset methodologies using established semantic web interpretations such as the \texttt{rdf:type} and \texttt{rdfs:subClassOf} properties.
+Hence, any implementation of an OAC-based, policy matching algorithm must be aware of such relationships and carefully consider when it makes sense to employ equivalence, intersection, and subset methodologies using established Semantic Web interpretations such as the \texttt{rdf:type} and \texttt{rdfs:subClassOf} properties.
 As such, to facilitate the consistent application and interpretation of the algorithm, a standardised specification of vocabulary terms is essential.
 This specification should clarify how concepts are expressed and how they are to be interpreted within the policy matching process.
 For instance, it should specify that any purpose term in an offer or request policy \textit{MUST} be an instance of \texttt{Purpose} and \textit{MUST} be associated with at least one concept in the purpose taxonomy using \texttt{rdf:type} or \texttt{rdfs:subClassOf} properties.
 By adhering to such a standardised specification, the matching algorithm can rely on these assertions to accurately interpret the constraints included in both offer and request policies.
-To achieve this, in this Thesis, the adoption of DPV's taxonomies is strongly encouraged when defining both offer and request terms to ensure accuracy and explainability of the desired outcomes in the policy matching algorithm.
+To achieve this, in this Thesis, the adoption of DPV's taxonomies is strongly encouraged when defining both offer and request terms to ensure the accuracy and explainability of the desired outcomes in the policy matching algorithm.
+Moreover, one of the real advantages of using the Semantic Web is that the set of vocabularies employed in such a matching algorithm can be changed or expanded without having to change the code base.
+However, it needs to be clear who has the authority to admit the usage of new vocabularies or extensions to existing ones, which in this particular case should reside in the data subjects.
+Nonetheless, data subjects may not have the expertise to make such decisions, and as such they can rely on public bodies' guidelines to make their choices or even rely on a DGA-trusted data intermediary to provide them with this vocabulary recommendation service.
+Finally, it should also be noted that such vocabulary recommendations could also be made in the form of mappings to other vocabularies, i.e., map DPV's purposes with the purposes defined in a specific health-data sharing ontology such as DUO.
 
 \subsection{Development of a `Right of Access' API}
 \label{sec:right-api}
 
-\beatriz{To Victor: do I need to mention that part of this work was implemented in the context of a master thesis?}
+%\beatriz{To Victor: do I need to mention that part of this work was implemented in the context of a master thesis?}
 
 This Section features the development of an API, which builds on the previous work on policies (Section~\ref{sec:oac}) and rights exercising metadata (Section~\ref{sec:rights_exercising}), to assist data controllers in the automation or simplification of the process to answer to a data subject's right of access request.
 Additionally, the implemented API method is utilised to implement a PoC Solid-based application whose main goal is to aid data subjects in exercising their GDPR right of access related to data stored in Solid Pods.
