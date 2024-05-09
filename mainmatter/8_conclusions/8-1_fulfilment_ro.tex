@@ -2,8 +2,8 @@
 \label{sec:fulfilment}
 
 In Section~\ref{sec:rqs}, the main research question driving the development of this Thesis is presented as 
-\textit{``Are Semantic Web vocabularies and decentralised technologies able to support the exercising of data subject rights and determine the access conditions to personal data?''}
-As such the following objective,
+\textit{``Are Semantic Web vocabularies and decentralised technologies able to support the exercising of data subject rights and determine the access conditions to personal data?''}.
+As such, the following objective,
 \textit{``Research methodologies and design vocabularies and services to aid EU data subjects in taking control of the movement of their personal data.''},
 was identified to guide the Thesis development towards answering such question.
 This objective was further divided into three sub-objectives and the extent of their fulfilment, based on the work presented in the previous Chapters and consolidated in the contributions outlined in Section~\ref{sec:contributions}, is discussed in this Section.
@@ -12,8 +12,11 @@ This objective was further divided into three sub-objectives and the extent of t
 
 \paragraph{O2 -- Use machine-readable policies for accessing decentralised personal data} The architecture and algorithms described in Chapter~\ref{chap:matching} targeted the achievement of this objective and, in particular, the proof of concept described in Section~\ref{sec:poc_health}, including the work on DUODRL, showcases its fulfilment for a health data sharing scenario.
 
-\paragraph{O3 -- Aid the exercising of GDPR’s data subject rights} The work developed in Section~\ref{sec:rights_exercising}, on having machine-readable information related to the exercising of data subject rights with DPV, and in Section~\ref{sec:right-api}, on having a service to assist in the exercising and recording of such rights exercise activities, aimed to fulfil this goal. 
+\paragraph{O3 -- Aid the exercising of GDPR’s data subject rights} The work developed in Section~\ref{sec:rights_exercising}, on having machine-readable information related to the exercising of data subject rights with DPV, and in Section~\ref{sec:right-api}, on having a service to assist in the exercising and recording of such rights exercise activities, aimed to fulfil this goal. Moreover, the work on OAC also enables the data subjects' right to be informed, as described in GDPR's Articles 13 and 14.
 
 These results confirm the hypotheses drafted in Section~\ref{sec:hypotheses} as Semantic Web technologies can be used to successfully express data protection-related information, including the definition of data subject's privacy preferences as access control policies related to their personal data.
-Furthermore, said technologies can be used to increase the transparency and accountability of decentralised data environments, in particular when it comes to the involved entities and infrastructure, including their access control mechanisms. 
-By confirming such hypotheses, the work in this Thesis leaves data subjects one step closer to have control over the publication and movement of their personal data, and in return data controllers with a variety of tools to express information related with their GDPR duties.
+This is supported by the evaluation performed in Section~\ref{sec:evaluation} and the legal analysis described in Chapter~\ref{chap:legal}.
+Furthermore, said technologies can be used to increase the transparency and accountability of decentralised data environments, in particular when it comes to the involved entities and infrastructure, as currently systems such as Solid do not keep provenance metadata regarding the providers of storage, applications or other services, neither do they keep logs of the activities of the involved actors or processes, e.g., no records are kept of users updating existing resources or of changes to identity provider of the data subject.
+The developed vocabularies allow the expression of such information, which can be used by data subjects to inspect the usage of their data and external auditors to validate if personal data handling practices are done according to the law.
+Moreover, the improved access control mechanism, based on the proposed architecture and policy matching algorithm, provides alignment with the transparency information requirement outlined in the GDPR, extending Solid's read-write access control system with legally-aligned policies that allow the expression of purposes for accessing data, as well as legal grounds, processing operations and particular data types.
+By confirming the outlines hypotheses, the work in this Thesis leaves data subjects one step closer to having control over the publication and movement of their personal data, and in return data controllers with a variety of tools to express information related to their GDPR duties.
