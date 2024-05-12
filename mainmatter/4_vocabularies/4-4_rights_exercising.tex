@@ -3,9 +3,7 @@
 
 This Section describes the usage of vocabulary-based patterns to describe rights exercising metadata.
 Such patterns can be used by entities dealing with the handling of personal data to maintain consistent records of data subject rights exercising activities, aligned with GDPR requirements.
-In a decentralised data system environment, these rights must also be fulfilled by data controllers,  while notices and records can be kept by data subjects in their personal datastores for transparency and accountability.
-
-%records of what? this could be explained more clearly, since data controller need to fulfil subject right regardless of whether the platform is decentralised or not.
+In a decentralised data system environment, these rights must also be fulfilled by data controllers, while notices and records of rights exercising activities can be kept by data subjects in their personal datastores for transparency and accountability.
 
 \subsection{Requirements to express rights-related activities}
 \label{sec:rights_concepts}
@@ -16,14 +14,16 @@ This work was developed (and is already integrated) within the context of the DP
 As previously mentioned in Section~\ref{sec:def_gdpr} and represented in Figure~\ref{fig:gdpr_information_flows}, the focus of this Thesis is on the representation of information related to legislation on data protection in the European Union, in particular regarding the GDPR and related data subject rights, listed on Chapter III.
 Moreover, in Section~\ref{sec:sota_vocabularies_criteria}, and in particular in Table~\ref{tab:GDPR_privacy_terms}, the privacy terms that need to be represented for such rights to be exercised by data subjects and fulfilled by data controllers.
 
-Figure~\ref{fig:gdpr-rights} illustrates the flows of information between a data subject and a data controller for the exercising of a right request.
-After sending a notice to the data subject confirming that the request was received, the controller must be able to identify the data subject in order to proceed with the request.
-If the controller cannot identify the data subject, then the data subject must provide additional information to enable the controller to identify them.
-If the controller disregards the request or has a justification to not fulfil the right, then the data subject does not receive any information related to their right request.
-In case the controller has a justification to delay the request due to its complexity or a high number of requests, then the controller has a 2-month extension to fulfil its duty.
-Moreover, in case the request is unfounded or excessive, the controller can charge a fee and the data subject will get the information once this fee is paid.
+Figure~\ref{fig:gdpr-rights} illustrates the flows of information between a data subject and a data controller for the exercising of a right request, according to the GDPR.
+After sending a notice to the data subject confirming that the request was received, the controller must be able to identify the data subject in order to proceed with the request~(Article 12.2, second sentence~\citeyearpar{noauthor_regulation_2016}).
+If the controller cannot identify the data subject, then the data subject must provide additional information to enable the controller to identify them~(Article 11.2~\citeyearpar{noauthor_regulation_2016}).
+If the controller disregards the request or has a justification for not fulfilling the right, then the data subject does not receive any information related to the right request~(Article 12.2, second sentence~\citeyearpar{noauthor_regulation_2016}).
+In case the controller has a justification to delay the request due to its complexity or a high number of requests, then the controller has a 2-month extension to fulfil its duty~(Article 12.3,
+second sentence~\citeyearpar{noauthor_regulation_2016}).
+Moreover, in case the request is unfounded or excessive, the controller can charge a fee and the data subject will get the information once this fee is paid~(Article 12.5, first sentence~\citeyearpar{noauthor_regulation_2016}).
 As it is visible by the diagram, at any point if the data controller does not fulfil its duty then a GDPR breach occurs and the data subject does not receive their requested information.
 
+% this could be clearer as a uml process diagram with separate swim lanes for subject and controller to clarify which does which activities and decision and also to clarify the start and end states of the flow.
 \begin{figure}[htp]
     \centering
     \includegraphics[width=0.78\linewidth]{figures/chapter-4/GDPR-DSR.png}
@@ -31,7 +31,7 @@ As it is visible by the diagram, at any point if the data controller does not fu
     \label{fig:gdpr-rights}
 \end{figure}
 
-From the analysis of these flows of information, a set of high-level concepts was proposed and adopted by the DPVCG (general concepts on Rights are modelled in the main DPV specification at \url{https://w3id.org/dpv#vocab-rights} and GDPR-specific ones in the DPV-GDPR extension at \url{https://w3id.org/dpv/legal/eu/gdpr#vocab-rights}).
+From the analysis of these flows of information, a set of high-level concepts was proposed and adopted by the DPVCG (general concepts on Rights are modelled in the main DPV specification at \url{https://w3id.org/dpv#vocab-rights} and GDPR-specific ones in the DPV-GDPR extension at \url{https://w3id.org/dpv/legal/eu/gdpr#vocab-rights}\footnote{The concepts that have `Beatriz Esteves' has a contributor are an outcome of this Thesis}).
 Figure~\ref{fig:rights_dpv}, adapted from \cite{pandit_primer_2022}, provides an overview of these concepts.
 
 \begin{figure}[ht]
@@ -52,7 +52,8 @@ Such activity instances should include metadata, e.g., timestamps, duration, or 
 In order to justify a certain right exercise activity, a collection of justifications for the non-fulfilment, \texttt{RightNonFulfilmentJustification}, delay of fulfilment, \texttt{RightFulfilmentDelayJustification}, and exercise of rights, \texttt{RightExerciseJustification}, were modelled as subclasses of the \texttt{NonPerformanceJustification}, \texttt{DelayJustification}, and \texttt{ExerciseJustification} concepts, which were modelled to have generic justification concepts that can be used beyond the rights domain.
 \texttt{NotRequiredJustification}s are also modelled for when a certain request is not required as it does not apply. 
 Figure~\ref{fig:justifications} contains the modelled justifications -- they are modelled as generic justifications to be included in DPV, which are then extended in DPV-GDPR by referencing specific GDPR clauses.
-These concepts have already approved to be integrated into DPV and DPV-GDPR's outputs\footnote{Meeting notes of the DPVCG call where the concepts were accepted: \url{https://w3id.org/dpv/meetings/meeting-2024-03-13}.}.
+Moreover, the \texttt{dcterms:source} property will be used to connect the justification term with the GDPR provision that inspired its definition. 
+These concepts have already been approved to be integrated into DPV and DPV-GDPR's outputs\footnote{Meeting notes of the DPVCG call where the concepts were accepted: \url{https://w3id.org/dpv/meetings/meeting-2024-03-13}.}.
 
 \begin{figure}[ht]
     \centering
@@ -68,6 +69,8 @@ For GDPR-specific rights, the \texttt{DataSubjectRight} concept is extended in D
 Moreover, notices for direct and indirect data collection, to fulfil the information requirements in Articles 13 and 14, for Subject Access Requests (SARs), described in Article 15, and for notifying recipients, necessary to fulfil the communication requirements of Articles 16, 17 and 18, are provided as GDPR-specific subclasses of \texttt{RightFulfilmentNotice}s.
 
 An overview of the aforementioned requirements and the intended purpose for modelling these concepts is presented in the ORSD illustrated in Table~\ref{tab:rights_ORSD}.
+
+% also with these questions(in the ORSD) can you link directly to gdpr articles or other literature of gdpr implementation that help indicate these are valid requirements?
 
 \begin{table}[htbp]
 \centering
@@ -191,6 +194,7 @@ Figure~\ref{fig:request_status} illustrates the sequence in which these concepts
 Once the request is initiated, it should be then acknowledged by the entity implementing it and either accepted towards fulfilment or rejected towards non-fulfilment.
 Additionally, after being rejected, the entity fulfilling the request can also require further action from the requester (e.g., request additional data to be able to fulfil the request), which can delay the acceptance or rejection of the request, and after the required action is performed, the request can either be accepted towards fulfilment or get rejected again towards non-fulfilment or towards asking again for further action.
 
+% perhaps formalise the semantics a bit more using uml state machine notation?
 \begin{figure}[htp]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/chapter-4/request-status.png}
@@ -436,7 +440,8 @@ ex:DataCopy a dcat:Dataset ;
 Moreover, DCAT \citep{albertoni_data_2020} can be used to model resources beyond notices, for instance, a copy of the personal data, in the case of a right of access request according to the GDPR, as in Listing~\ref{list:sar_notice}.
 Information regarding the format, validity and dataset provision/download location can be attached to the dataset representation using the \texttt{dcterms:format}, \texttt{dcterms:valid} and \texttt{dcat:landingPage} properties, respectively.
 Additionally, DCAT -- and also the Data on the Web Best Practices Recommendation~\citep{loscio_data_2017} -- promotes the usage of ODRL to express license and rights statements, by linking the dataset with an ODRL policy using the \texttt{odrl:hasPolicy} property, or the usage of DCMI Metadata Terms' \texttt{license}, \texttt{accessRights} or \texttt{rights} properties to link datasets with licenses, access rights statements or other types of rights statements, e.g., copyrights, respectively.
-In the case of using the latter, controlled vocabularies such as COAR's Access Rights vocabulary~\citep{apollaro_controlled_2022}, used in Listing~\ref{list:sar_notice} to restrict access only to the data subject, or the Named Authority List of Access rights from the \cite{publications_office_of_the_european_union_named_2023} can be used to express `high-level' access control statements, e.g., embargoed, restricted or open access.
+In the case of using the latter, controlled vocabularies such as COAR's Access Rights vocabulary~\citep{apollaro_controlled_2022}, used in Listing~\ref{list:sar_notice} to restrict access only to the data subject, or the Named Authority List of Access rights from the~\cite{publications_office_of_the_european_union_named_2023} can be used to express `high-level' access control statements, e.g., embargoed, restricted or open access.
+As such, by using DCAT and a policy expression vocabulary, i.e., ODRL, the user can easily control the transition of a compliance log and respective metadata, as proposed in PLASMA, from being only accessible by the user to be accessible by external auditors.
 
 In this Section, the GDPR's Right of Access is used as an example to showcase how to model notices and right exercising activities using DPV, DCMI Metadata Terms, PROV-O and DCAT.
 However, a similar pattern can be followed by data controllers to fulfil the other rights as in most cases the only substantial change would be the notice concept that needs to be used for a particular right instance, e.g., \texttt{eu-gdpr:DirectDataCollectionNotice} for the right fulfilment notice related to GDPR's Article 13, \texttt{eu-gdpr:IndirectDataCollectionNotice} for the right fulfilment notice related to GDPR's Article 14 or \texttt{eu-gdpr:RightsRecipientsNotice} for the right fulfilment notice related to GDPR's Article 19.
