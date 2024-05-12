@@ -5,6 +5,8 @@ This Section describes the usage of vocabulary-based patterns to describe rights
 Such patterns can be used by entities dealing with the handling of personal data to maintain consistent records of data subject rights exercising activities, aligned with GDPR requirements.
 In a decentralised data system environment, these rights must also be fulfilled by data controllers,  while notices and records can be kept by data subjects in their personal datastores for transparency and accountability.
 
+%records of what? this could be explained more clearly, since data controller need to fulfil subject right regardless of whether the platform is decentralised or not.
+
 \subsection{Requirements to express rights-related activities}
 \label{sec:rights_concepts}
 
@@ -96,20 +98,20 @@ Use 4. Fulfilment of data subject rights requests from specific data protection 
 \multicolumn{8}{| p{12.0cm} |}{
 NFR 1. The concepts are either published online within DPVCG's outputs, following W3C's specification format, or are under discussion for being adopted by the same CG. } \\ \hline
 \multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{b. Functional  Requirements: Groups of Competency Questions}}  \\ \hline
-\multicolumn{5}{|c|}{\cellcolor[HTML]{EFEFEF}CQG1. Related to data subject rights} & \multicolumn{3}{|c|}{\cellcolor[HTML]{EFEFEF}CQG2. Related to GDPR} \\ \hline
+\multicolumn{5}{|c|}{\cellcolor[HTML]{EFEFEF}CQRG1. Related to data subject rights} & \multicolumn{3}{|c|}{\cellcolor[HTML]{EFEFEF}CQRG2. Related to GDPR} \\ \hline
 \multicolumn{5}{ | m{7cm} |}{
-CQ1. What rights are applicable in a given context? \newline
-CQ2. Where can the right be exercised? \newline
-CQ3. How can the right be exercised? \newline
-CQ4. What data is necessary to implement the right? \newline 
-CQ5. Which entity implements the right? \newline 
-CQ6. Which entity exercised the right? \newline 
-CQ7. When is the exercising activity occurring? \newline 
-CQ8. What is the status of the right request? } & 
+CQR1. What rights are applicable in a given context? \newline
+CQR2. Where can the right be exercised? \newline
+CQR3. How can the right be exercised? \newline
+CQR4. What data is necessary to implement the right? \newline 
+CQR5. Which entity implements the right? \newline 
+CQR6. Which entity exercised the right? \newline 
+CQR7. When is the exercising activity occurring? \newline 
+CQR8. What is the status of the right request? } & 
 \multicolumn{3}{ m{5cm} |}{
-CQ9. Which data subject rights are applicable according to the legal basis used by the data controller? \newline
-CQ10. Which provenance metadata must controllers provide when replying to data subject rights requests? \newline 
-CQ11. Which justification can be provided to not fulfil, delay or exercise a request?
+CQR9. Which data subject rights are applicable according to the legal basis used by the data controller? \newline
+CQR10. Which provenance metadata must controllers provide when replying to data subject rights requests? \newline 
+CQR11. Which justification can be provided to not fulfil, delay or exercise a request?
 }\\ \hline
 \end{tabular}}
 \vspace{-0.1in}
@@ -474,7 +476,7 @@ The justifications concepts have already been approved to be accepted, but are s
 As such, the justifications vocabulary human-readable documentation and machine-readable file are available at \url{https://w3id.org/people/besteves/justifications} using content negotiation.
 Once the justification terms are fully integrated into DPV, this documentation will be archived as the maintenance of the terms will be performed as part of the DPVCG's activities.
 
-The HTML documentation includes a description of the defined terms, which was conducted and validated with domain experts, diagrams with graphical representations of the several taxonomies used in the vocabulary patterns specific in this section, and RDF examples that use the defined terms to express rights-related activities.
+The HTML documentation includes a description of the defined terms, which was conducted and validated with domain experts\footnote{This validation was performed with legal and ontology engineering experts in the context of W3C's DPV community group.}, diagrams with graphical representations of the several taxonomies used in the vocabulary patterns specific in this section, and RDF examples that use the defined terms to express rights-related activities.
 The vocabulary documentation also includes metadata, such as the identity of the creators and publishers of the ontology, the dates of creation and last modification or the version number.
 The source code is hosted at \url{https://w3id.org/people/besteves/justifications/repo}, under the CC-BY-4.0 license.
 The repository can also be used by implementers to suggest new inclusions to the vocabulary and to report bugs through GitHub Issues.

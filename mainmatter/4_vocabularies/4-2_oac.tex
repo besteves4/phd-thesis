@@ -19,7 +19,8 @@ However, for individuals to control their data practices, the Solid Pod must als
 \end{enumerate}
 
 To achieve this, it is necessary to understand the provisions of the law regarding the information that needs to be provided, including the particular requirements of certain legal bases such as consent, and the forms of control that individuals want to have or the information they want to know in the context of the handling of their personal data.
-Therefore, based on these considerations, the usage of ODRL and DPV is motivated by the following needs: 
+These requirements are based not just on the GDPR, but also on the guidelines of data protection supervisory authorities.
+Therefore, based on these considerations and also on the Solid-related challenges identified in Section~\ref{sec:challenges}, the usage of ODRL and DPV is motivated by the following needs:
 
 \begin{itemize}
   \item[1.]Organisations need to:
@@ -52,15 +53,16 @@ Moreover, taking into consideration the previously described motivation points, 
       \item[R6.]Support querying policies and authorisations for introspection of data access.
 \end{itemize}
 
-As such, following the LOT methodology, these requirements are consolidated in the profile's ORSD available in Table \ref{tab:OAC_ORSD}.
+As such, following the LOT methodology, these requirements are consolidated in the profile's ORSD available in Table~\ref{tab:OAC_ORSD}.
 As Solid's current access control mechanisms only partially implement R1, R3, and R5, OAC allows its users to declare not only granular permissive policies but also prohibitive policies, both aligned with legal requirements, which can be stored in their decentralised datastores for future inspection and can be used with additional constraints and contextual information.
+Moreover, requirement R1 is covered by the competency questions CQO1 to CQO5, R2 by CQO8 and CQO9, R4 by CQO6, and R3, R5, and R6 by all CQs in Table~\ref{tab:OAC_ORSD}.
 
 \begin{table}[htbp]
 \centering
 \caption{Ontology Requirement Specification Document of the OAC profile.}
 \label{tab:OAC_ORSD}
 \scriptsize
-\resizebox{\textwidth}{!}{%
+\resizebox{\textwidth}{!}{
 \begin{tabular}{| l | l | l | l  | l | l | l |l| }
 \hline
 \multicolumn{8}{|c|}{\cellcolor[HTML]{A0A0A0}\textbf{ODRL Profile for Access Control}} \\ \hline
@@ -75,7 +77,7 @@ As Solid's current access control mechanisms only partially implement R1, R3, an
 \multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{5. Intended Uses}} \\ \hline
 \multicolumn{8}{| p{12.0cm} |}{
 Use 1. Declaration of a policy by an individual storing personal data in a decentralised datastore, such as a Solid Pod. \newline 
-Use 2. Request of data made by an entity, service or application to gain access to the data in different modalities. \newline
+Use 2. Request of data made by an entity, service, or application to gain access to the data in different modalities. \newline
 Use 3. Records of data access with transparent information related to the policy matching algorithm, including contextual information. 
  } \\ \hline
 \multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{6. Ontology Requirements}} \\ \hline
@@ -83,26 +85,25 @@ Use 3. Records of data access with transparent information related to the policy
 \multicolumn{8}{| p{12.0cm} |}{
 NFR 1. The profile is published online with HTML documentation, following W3C's specification format. } \\ \hline
 \multicolumn{8}{|c|}{\cellcolor[HTML]{EFEFEF}\textbf{b. Functional  Requirements: Groups of Competency Questions}}  \\ \hline
-\multicolumn{5}{|c|}{\cellcolor[HTML]{EFEFEF}CQG1. Related to access} & \multicolumn{3}{|c|}{\cellcolor[HTML]{EFEFEF}CQG2. Related to GDPR} \\ \hline %\multicolumn{4}{c|}{\cellcolor[HTML]{EFEFEF}}    \\ \hline
+\multicolumn{5}{|c|}{\cellcolor[HTML]{EFEFEF}CQOG1. Related to access} & \multicolumn{3}{|c|}{\cellcolor[HTML]{EFEFEF}CQOG2. Related to GDPR} \\ \hline
 \multicolumn{5}{ | m{7cm} |}{
-CQ1. Which policy type is being defined? \newline
-CQ2. Which actions are defined in the policy? \newline
-CQ3. Which data types are mentioned in the policy? \newline 
-CQ4. Which policy constraints need to be fulfilled? \newline 
-CQ5. Who are the parties intervening in the policy? \newline 
-CQ6. Which is the conflict strategy of a policy? \newline 
-CQ7. What are the contextual elements that need to be considered in the policy matching algorithm? } & 
+CQO1. Which policy type is being defined? \newline
+CQO2. Which actions are defined in the policy? \newline
+CQO3. Which data types are mentioned in the policy? \newline 
+CQO4. Which policy constraints need to be fulfilled? \newline 
+CQO5. Who are the parties intervening in the policy? \newline 
+CQO6. Which is the conflict strategy of a policy? \newline 
+CQO7. What are the contextual elements that need to be considered in the policy matching algorithm? } & 
 \multicolumn{3}{ m{5cm} |}{
-CQ8. Which information about personal data and its processing is necessary to have legally aligned policies? \newline 
-CQ9. What identification information needs to be provided by the policy parties? \newline 
+CQO8. Which information about personal data and its processing is necessary to have legally aligned policies? \newline 
+CQO9. What identification information needs to be provided by the policy parties? \newline 
 }\\ \hline
 \end{tabular}}
 \vspace{-0.1in}
 \end{table}
 
-%For continued interoperability and adherence to the specification, the proposed extension to Solid’s ACL must ideally continue to implement existing functionality while incorporating the legal and user-centric requirements.
-
 Lastly, it should be clear that OAC is \textbf{not dependent on Solid}, as it is not based on any Solid-specific vocabularies, and can be used in other decentralised data environments.
+This platform independence is an important component of OAC as OAC can be used in any personal datastores that store primarily personal data, with the goal of enabling data subjects to understand and control policies to exercise their individual GDPR rights and respect GDPR principles.
 Nevertheless, throughout this Thesis, the use of OAC is demonstrated through the Solid ecosystem as it is an example of the implementation of a decentralised environment for the sharing of (personal) data that is based on the Semantic Web stack of technologies.
 
 \subsection{Profile implementation}
@@ -376,7 +377,7 @@ SELECT DISTINCT ?User ?Data ?Purpose WHERE {
 \label{sec:oac_publication}
 
 The ontology human-readable documentation and machine-readable file are available at \url{https://w3id.org/oac} using content negotiation.
-The HTML documentation includes a description of the classes and properties of the ontology, that was done in collaboration with domain experts, a diagram with the graphical representation of the ontology, examples of policies defined with the OAC profile, and information related to the policy matching algorithm.
+The HTML documentation includes a description of the classes and properties of the ontology, that was done in collaboration with domain experts\footnote{This collaboration was performed with legal and ontology engineering experts in the context of W3C's ODRL and DPV community groups.}, a diagram with the graphical representation of the ontology, examples of policies defined with the OAC profile, and information related to the policy matching algorithm.
 The ontology documentation also includes metadata, such as the identity of the creators and publishers of the ontology, the dates of creation and last modification, or the version number.
 
 The source code is hosted at \url{https://w3id.org/oac/repo}, under the CC-BY-4.0 license.

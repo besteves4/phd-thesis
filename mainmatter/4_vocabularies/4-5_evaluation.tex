@@ -52,50 +52,50 @@ The presented work demonstrates that OAC satisfies the identified requirements o
     \caption{Validation of OAC's competency questions with SPARQL queries.}
     \label{tab:oac_cq_sparql}
     \begin{tabular}{c|l}
-        \textbf{CQ*} & \textbf{SPARQL query} \\
+        \textbf{CQO*} & \textbf{SPARQL query} \\
         \hline\hline
-        CQ1 & \begin{lstlisting}[numbers=none]
+        CQO1 & \begin{lstlisting}[numbers=none]
 SELECT ?policy WHERE {
     ?policy_uri a ?policy . 
     ?policy_uri odrl:uid ?policy_id . } \end{lstlisting} \\
         \hline
-        CQ2 & \begin{lstlisting}[numbers=none]
+        CQO2 & \begin{lstlisting}[numbers=none]
 SELECT ?action WHERE {
     ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
     ?policy_uri odrl:permission|odrl:prohibition ?rule .
     ?rule odrl:action ?action . } \end{lstlisting} \\
         \hline
-        CQ3 & \begin{lstlisting}[numbers=none]
+        CQO3 & \begin{lstlisting}[numbers=none]
 SELECT ?data WHERE {
     ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
     ?policy_uri odrl:permission|odrl:prohibition ?rule .
     ?rule odrl:target ?data . } \end{lstlisting} \\
         \hline
-        CQ4 & \begin{lstlisting}[numbers=none]
+        CQO4 & \begin{lstlisting}[numbers=none]
 SELECT ?constraint WHERE {
     ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
     ?policy_uri odrl:permission ?rule .
     ?rule odrl:constraint ?constraint . } \end{lstlisting} \\
         \hline
-        CQ5 & \begin{lstlisting}[numbers=none]
+        CQO5 & \begin{lstlisting}[numbers=none]
 SELECT ?assigner ?assignee WHERE {
     ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
     ?policy_uri odrl:permission|odrl:prohibition ?rule .
     OPTIONAL { ?rule odrl:assigner ?assigner } . 
     OPTIONAL { ?rule odrl:assignee ?assignee } . } \end{lstlisting} \\
         \hline
-        CQ6 & \begin{lstlisting}[numbers=none]
+        CQO6 & \begin{lstlisting}[numbers=none]
 SELECT ?conflict_term WHERE {
     ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
     ?policy_uri odrl:conflict ?conflict_term . } \end{lstlisting} \\
         \hline
-        CQ7 & \begin{lstlisting}[numbers=none]
+        CQO7 & \begin{lstlisting}[numbers=none]
 SELECT ?context WHERE {
     ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
     ?policy_uri odrl:permission|odrl:prohibition ?rule .
     ?rule dpv:hasContext ?context . } \end{lstlisting} \\
         \hline
-        CQ8 & \begin{lstlisting}[numbers=none]
+        CQO8 & \begin{lstlisting}[numbers=none]
 SELECT ?legal_basis WHERE {
     ?policy_uri a ?policy . ?policy_uri odrl:uid ?policy_id . 
     ?policy_uri odrl:permission|odrl:prohibition ?rule .
@@ -103,7 +103,7 @@ SELECT ?legal_basis WHERE {
     ?constraint odrl:leftOperand oac:LegalBasis .
     ?constraint odrl:rightOperand ?legal_basis . } \end{lstlisting} \\
         \hline
-        CQ9 & \begin{lstlisting}[numbers=none]
+        CQO9 & \begin{lstlisting}[numbers=none]
 SELECT ?entity ?address ?contact ?name WHERE {
     ?entity a oac:Entity . 
     ?entity dpv:hasAddress ?address . 
@@ -113,7 +113,7 @@ SELECT ?entity ?address ?contact ?name WHERE {
 \end{table}
 
 Moreover, Table~\ref{tab:plasma_cq_concepts} lists concepts that can be used to answer the competency questions identified in PLASMA's ORSD, available in Table~\ref{tab:plasma_orsd}.
-Listing~\ref{list:plasma_sparql_cq} illustrates how these concepts can be used in SPARQL queries to fulfil the \textit{``CQ1. Which Pod management data is stored in the Pod?''} and \textit{``CQ4. What policy describes the data access requirements of a certain app or service?''} competency questions.
+Listing~\ref{list:plasma_sparql_cq} illustrates how these concepts can be used in SPARQL queries to fulfil the \textit{``CQP1. Which Pod management data is stored in the Pod?''} and \textit{``CQP4. What policy describes the data access requirements of a certain app or service?''} competency questions.
 A similar exercise can be done for the remaining competency questions.
 The presented work demonstrates that PLASMA satisfies the identified requirements of answering competency questions regarding the representation of information related to entities, infrastructure, and processes in Solid, the modelling of information related to legal roles in a jurisdiction-agnostic manner, and the definition of patterns to express apps and services policies, data usage logs and registries of data, schemas, apps, services, entities, and authorisations for convenient access to information.
 
@@ -122,30 +122,30 @@ The presented work demonstrates that PLASMA satisfies the identified requirement
     \caption{Concepts in PLASMA and other vocabularies for answering competency questions defined in Table~\ref{tab:plasma_orsd}.}
     \label{tab:plasma_cq_concepts}
     \begin{tabular}{c|c}
-        \textbf{CQ*} & \textbf{Concepts} \\
+        \textbf{CQP*} & \textbf{Concepts} \\
         \hline\hline
-        CQ1 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{PodManagementData}, \texttt{hasProvider}, \texttt{hasDeveloper}, \\ \texttt{implementedSolidPlatform}, \texttt{implementedSolidSpecification} \end{tabular}} \\
+        CQP1 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{PodManagementData}, \texttt{hasProvider}, \texttt{hasDeveloper}, \\ \texttt{implementedSolidPlatform}, \texttt{implementedSolidSpecification} \end{tabular}} \\
         \hline
-        CQ2 & \texttt{DataLog}, \texttt{DataProvider}, \texttt{ResourceMetadata}, \texttt{DataAgreement} \\
+        CQP2 & \texttt{DataLog}, \texttt{DataProvider}, \texttt{ResourceMetadata}, \texttt{DataAgreement} \\
         \hline
-        CQ3 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{Policy}, \texttt{Log}, \texttt{UserData}, \texttt{AppData}, \texttt{ServiceData}, \\ \texttt{PodManagementData}, \texttt{SchemaData} \end{tabular}} \\
+        CQP3 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{Policy}, \texttt{Log}, \texttt{UserData}, \texttt{AppData}, \texttt{ServiceData}, \\ \texttt{PodManagementData}, \texttt{SchemaData} \end{tabular}} \\
         \hline
-        CQ4 & \texttt{DataRequest}, \texttt{AppManifest}, \texttt{ServiceManifest} \\
+        CQP4 & \texttt{DataRequest}, \texttt{AppManifest}, \texttt{ServiceManifest} \\
         \hline
-        CQ5 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{InfrastructureProvider}, \texttt{PodProvider}, \texttt{PodDeveloper}, \\ \texttt{SolidPlatformProvider}, \texttt{SolidPlatformProvider} \end{tabular}} \\
+        CQP5 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{InfrastructureProvider}, \texttt{PodProvider}, \texttt{PodDeveloper}, \\ \texttt{SolidPlatformProvider}, \texttt{SolidPlatformProvider} \end{tabular}} \\
         \hline
-        CQ6 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{DataLog}, \texttt{DataProvider}, \texttt{dcat:landingPage},\\ \texttt{dcat:distribution}, \texttt{dcat:accessURL}, \texttt{dcat:mediaType} \end{tabular}} \\
+        CQP6 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{DataLog}, \texttt{DataProvider}, \texttt{dcat:landingPage},\\ \texttt{dcat:distribution}, \texttt{dcat:accessURL}, \texttt{dcat:mediaType} \end{tabular}} \\
         \hline
-        CQ7 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{AccessControlRegistry}, \texttt{DataRegistry}, \texttt{DataSchemaRegistry},\\ \texttt{PolicyRegistry}, \texttt{AppRegistry}, \texttt{ServiceRegistry}, \texttt{UserRegistry} \end{tabular}} \\
+        CQP7 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{AccessControlRegistry}, \texttt{DataRegistry}, \texttt{DataSchemaRegistry},\\ \texttt{PolicyRegistry}, \texttt{AppRegistry}, \texttt{ServiceRegistry}, \texttt{UserRegistry} \end{tabular}} \\
         \hline
-        CQ8 & \texttt{dpv:hasName}, \texttt{dpv:hasAddress}, \texttt{dpv:hasContact} \\
+        CQP8 & \texttt{dpv:hasName}, \texttt{dpv:hasAddress}, \texttt{dpv:hasContact} \\
         \hline
-        CQ9 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{InfrastructureProvider}, \texttt{PodProvider}, \texttt{SolidPlatformProvider},\\ \texttt{dpv:Purpose}, \texttt{dpv:LegalBasis}, \texttt{Log}, \texttt{Notice} \end{tabular}} \\
+        CQP9 & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} \texttt{InfrastructureProvider}, \texttt{PodProvider}, \texttt{SolidPlatformProvider},\\ \texttt{dpv:Purpose}, \texttt{dpv:LegalBasis}, \texttt{Log}, \texttt{Notice} \end{tabular}} \\
     \end{tabular}
 \end{table}
 
 \begin{listing}[htp]
-\caption{Example SPARQL queries to validate PLASMA's CQ1 and CQ4.}
+\caption{Example SPARQL queries to validate PLASMA's CQP1 and CQP4.}
 \label{list:plasma_sparql_cq}
 \begin{minted}{sparql}
 SELECT ?provider ?developer ?platform ?spec WHERE {
@@ -171,56 +171,56 @@ The presented work demonstrates that the developed model satisfies the identifie
     \caption{Validation of the competency questions of the proposed model to express rights-related exercising activities with SPARQL queries.}
     \label{tab:rights_cq_sparql}
     \begin{tabular}{c|l}
-        \textbf{CQ*} & \textbf{SPARQL query} \\
+        \textbf{CQR*} & \textbf{SPARQL query} \\
         \hline\hline
-        CQ1 & \begin{lstlisting}[numbers=none]
+        CQR1 & \begin{lstlisting}[numbers=none]
 SELECT ?pdh ?right WHERE {
     ?pdh a dpv:PersonalDataHandling . ?pdh dpv:hasRight ?right . } \end{lstlisting} \\
         \hline
-        CQ2 & \begin{lstlisting}[numbers=none]
+        CQR2 & \begin{lstlisting}[numbers=none]
 SELECT ?right ?exercise_point WHERE {
     ?right a dpv:DataSubjectRight . ?right dpv:isExercisedAt ?notice . 
     ?notice a dpv:RightExerciseNotice . ?notice foaf:page ?exercise_point . } \end{lstlisting} \\
         \hline
-        CQ3 & \begin{lstlisting}[numbers=none]
+        CQR3 & \begin{lstlisting}[numbers=none]
 SELECT ?right ?notice WHERE {
     ?right a dpv:DataSubjectRight . ?right dpv:isExercisedAt ?notice . 
     ?notice a dpv:RightExerciseNotice . } \end{lstlisting} \\
         \hline
-        CQ4 & \begin{lstlisting}[numbers=none]
+        CQR4 & \begin{lstlisting}[numbers=none]
 SELECT ?right ?necessary_data WHERE {
     ?right a dpv:DataSubjectRight . ?right dpv:isExercisedAt ?notice . 
     ?notice a dpv:RightExerciseNotice .
     ?notice dpv:hasPersonalDataHandling ?necessary_data . } \end{lstlisting} \\
         \hline
-        CQ5 & \begin{lstlisting}[numbers=none]
+        CQR5 & \begin{lstlisting}[numbers=none]
 SELECT ?right ?implementer WHERE {
     ?right a dpv:DataSubjectRight . ?right dpv:isExercisedAt ?notice . 
     ?notice a dpv:RightExerciseNotice .
     ?notice dpv:isImplementedByEntity ?implementer . } \end{lstlisting} \\
         \hline
-        CQ6 & \begin{lstlisting}[numbers=none]
+        CQR6 & \begin{lstlisting}[numbers=none]
 SELECT ?activity ?data_subject WHERE {
     ?activity a dpv:RightExerciseActivity .
     ?activity dpv:hasStatus dpv:RequestInitiated . 
     ?activity dpv:hasDataSubject ?data_subject . } \end{lstlisting} \\
         \hline
-        CQ7 & \begin{lstlisting}[numbers=none]
+        CQR7 & \begin{lstlisting}[numbers=none]
 SELECT ?activity ?date WHERE {
     ?activity a dpv:RightExerciseActivity . 
     ?activity dcterms:date ?date . } \end{lstlisting} \\
         \hline
-        CQ8 & \begin{lstlisting}[numbers=none]
+        CQR8 & \begin{lstlisting}[numbers=none]
 SELECT ?activity ?status WHERE {
     ?activity a dpv:RightExerciseActivity . 
     ?activity dpv:hasStatus ?status . } \end{lstlisting} \\
         \hline
-        CQ9 & \begin{lstlisting}[numbers=none]
+        CQR9 & \begin{lstlisting}[numbers=none]
 SELECT ?pdh ?legal_basis ?right WHERE {
     ?pdh a dpv:PersonalDataHandling . 
     ?pdh dpv:hasRight ?right . ?pdh dpv:hasLegalBasis ?legal_basis . } \end{lstlisting} \\
         \hline
-        CQ10 & \begin{lstlisting}[numbers=none]
+        CQR10 & \begin{lstlisting}[numbers=none]
 SELECT ?activity ?data_subject ?status ?date ?controller WHERE {
     ?activity a dpv:RightExerciseActivity . 
     ?activity dpv:hasStatus ?status . 
@@ -228,7 +228,7 @@ SELECT ?activity ?data_subject ?status ?date ?controller WHERE {
     ?activity dcterms:date ?date . 
     ?activity prov:wasAssociatedWith ?controller . } \end{lstlisting} \\
         \hline
-        CQ11 & \begin{lstlisting}[numbers=none]
+        CQR11 & \begin{lstlisting}[numbers=none]
 SELECT ?activity ?justification WHERE {
     ?activity a dpv:RightExerciseActivity . 
     ?activity dpv:hasStatus dpv:RequestRejected . 
