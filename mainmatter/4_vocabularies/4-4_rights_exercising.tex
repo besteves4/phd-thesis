@@ -27,7 +27,7 @@ As it is visible by the diagram, at any point if the data controller does not fu
 \begin{figure}[htp]
     \centering
     \includegraphics[width=0.78\linewidth]{figures/chapter-4/GDPR-DSR.png}
-    \caption{Flow diagram of GDPR data subject rights exercising, according to Article 12.}
+    \caption[Flow diagram of GDPR data subject rights exercising.]{Flow diagram of GDPR data subject rights exercising, according to Article 12.}
     \label{fig:gdpr-rights}
 \end{figure}
 
@@ -37,7 +37,7 @@ Figure~\ref{fig:rights_dpv}, adapted from \cite{pandit_primer_2022}, provides an
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/chapter-4/DPV-rights.png}
-    \caption{Core concepts of DPV's rights taxonomy, adapted from \cite{pandit_primer_2022}.}
+    \caption[Core concepts of DPV's rights taxonomy.]{Core concepts of DPV's rights taxonomy, adapted from \cite{pandit_primer_2022}.}
     \label{fig:rights_dpv}
 \end{figure}
 
@@ -58,7 +58,7 @@ These concepts have already been approved to be integrated into DPV and DPV-GDPR
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{figures/chapter-4/justifications.png}
-    \caption{Justification concepts for the non-fulfilment, delay of fulfilment and exercise of rights.}
+    \caption[Justification concepts.]{Justification concepts for the non-fulfilment, delay of fulfilment and exercise of rights.}
     \label{fig:justifications}
 \end{figure}
 
@@ -133,7 +133,7 @@ The example provides information regarding the type of personal data, \texttt{pd
 This pattern can be followed by data controllers to express which rights are applicable, including rights beyond the ones in the GDPR, e.g., EU's fundamental rights and the rights depicted in other EU regulations or in other jurisdictions.
 
 \begin{listing}[htp]
-\caption{Personal data handling activity example which includes information regarding the applicable rights.}
+\caption[Personal data handling activity with applicable rights.]{Personal data handling activity example which includes information regarding the applicable rights.}
 \label{list:applicable_rights}
 \begin{minted}{turtle}
 ex:ProcessEmailForServiceProvision a dpv:PersonalDataHandling ;
@@ -162,7 +162,7 @@ Such information can also be expressed in personal data handling instances inclu
 % need to be provided / are being provided
 
 \begin{listing}[htp]
-\caption{Article 15's right of access exercise notice, including information on where to exercise the right and on necessary data to fulfil the right.}
+\caption[GDPR Article 15's right of access exercise notice.]{GDPR Article 15's right of access exercise notice, including information on where to exercise the right and on necessary data to fulfil the right.}
 \label{list:exercise_point}
 \begin{minted}{turtle}
 ex:RightToAccess a eu-gdpr:A15 ;
@@ -252,7 +252,7 @@ Such right exercise activity is identified with the \texttt{dpv:RequestRequiresA
 Afterwards, a right exercise activity associated with the data subject and with a \texttt{dpv:RequestRequiredActionPerformed} status is recorded with the information that the data subject provided.
 
 \begin{listing}[htp]
-\caption{Record of data controller requesting further information to fulfil the data subject's SAR and of the data subject providing the controller with said information.}
+\caption[Record requesting further information to fulfil SAR.]{Record of data controller requesting further information to fulfil the data subject's SAR and of the data subject providing the controller with said information.}
 \label{list:further_action}
 \begin{minted}{turtle}
 ex:SARRejected a dpv:RightExerciseActivity, prov:Activity;
@@ -397,7 +397,7 @@ Listing~\ref{list:sar_notice} illustrates the follow-up to Listing~\ref{list:fur
 Beyond temporal information and providing the location of the notice, a personal data handling instance can be used to provide additional information to the data subject -- in the case of this SAR notice, the data subject is also notified of the type of personal data being processed, the purpose for the processing, the time period when the data was processed and the additional data subject rights that can be exercised.
 
 \begin{listing}[htp]
-\caption{Record of the acceptance and fulfilment of the request and respective \texttt{SARNotice}.}
+\caption[Record of the acceptance and fulfilment of a SAR request.]{Record of the acceptance and fulfilment of the request and respective \texttt{SARNotice}.}
 \label{list:sar_notice}
 \begin{minted}{turtle}
 ex:SARAccepted a dpv:RightExerciseActivity, prov:Activity ;

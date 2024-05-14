@@ -31,7 +31,7 @@ In addition to the authorisation specifications, there is a third protocol being
 
 \begin{landscape}
 \begin{table}[p]
-\caption{Overview of Solid-related concepts, their definitions, and related terms modelled on Solid specifications.}
+\caption[Overview of Solid-related concepts.]{Overview of Solid-related concepts, their definitions, and related terms modelled on Solid specifications.}
 \label{tab:definitions}
 \begin{tabular}{c||l|c}
 \textbf{Concept} & \textbf{Definition} & \textbf{Solid vocabularies} \\ \hline\hline
@@ -60,7 +60,7 @@ Listings~\ref{list:wac} and~\ref{list:acp} provide examples of both types of acc
 As is visible by the examples, both solutions do not have the depth to deal with the users \textit{`Right to be Informed'} \hyperref[art:13-14]{(Arts. 13 and 14)}~\citeyearpar{noauthor_regulation_2016}, since these models do not contain the terms to specify the purpose for accessing data on Pods, the personal data categories being consulted, used legal basis or even information on the identity of application developers.
 
 \begin{listing}[ht]
-\caption[WAC authorisation that makes a WebID profile, readable by any agent.]{WAC authorisation that makes a WebID profile, \url{https://solidweb.me/besteves4/profile/card}, readable by any agent.}
+\caption[WAC authorisation.]{WAC authorisation that makes a WebID profile, \url{https://solidweb.me/besteves4/profile/card}, readable by any agent.}
 \label{list:wac}
 \begin{minted}{turtle}
 <#public> a acl:Authorization ;
@@ -71,7 +71,7 @@ As is visible by the examples, both solutions do not have the depth to deal with
 \end{listing}
 
 \begin{listing}[ht]
-\caption[ACP authorisation that makes a WebID profile, issued by \url{https://solidweb.me/}, readable by any agent using any application.]{ACP authorisation that makes a WebID profile, \url{https://solidweb.me/besteves4/profile/card}, issued by \url{https://solidweb.me/}, readable by any agent using any application.}
+\caption[ACP authorisation.]{ACP authorisation that makes a WebID profile, \url{https://solidweb.me/besteves4/profile/card}, issued by \url{https://solidweb.me/}, readable by any agent using any application.}
 \label{list:acp}
 \begin{minted}{turtle}
 <#public> a acp:AccessGrant ;
@@ -90,7 +90,7 @@ While SAI is a step forward in Solid towards having a more transparent ecosystem
 In addition, as is illustrated by Listing~\ref{list:interop_authz_registry}, SAI does not entirely fulfil GDPR requirements, e.g., it does not provide transparency regarding the purpose for access or which type of data is being accessed nor does it provide information regarding the identity of the entities that develop/provide the apps.
 
 \begin{listing}[ht]
-\caption[SAI registry set that stores private information regarding the storage location of registries.]{Registry set, established according to the SAI specification, that stores private information regarding the storage location of registries of \url{https://solidweb.me/besteves4/}.}
+\caption[SAI registry set.]{Registry set, established according to the SAI specification, that stores private information regarding the storage location of registries of \url{https://solidweb.me/besteves4/}.}
 \label{list:interop_registryset}
 \begin{minted}{turtle}
 PREFIX beatriz-registry: <https://solidweb.me/besteves4/registry/>
@@ -104,7 +104,7 @@ beatriz-registry: a interop:RegistrySet ;
 \end{listing}
 
 \begin{listing}[htp]
-\caption{Authorisation registry of \url{https://solidweb.me/besteves4/}.}
+\caption[SAI authorisation registry.]{Authorisation registry of \url{https://solidweb.me/besteves4/}.}
 \label{list:interop_authz_registry}
 \begin{minted}{turtle}
 PREFIX beatriz-authz: <https://solidweb.me/besteves4/registry/authz/>
@@ -221,7 +221,7 @@ An example of a VC, with a DID-identifiable subject, is presented in Listing \re
 The usage of VCs is being contemplated in the ACP specification, however, no specific details are provided regarding its implementation/development.
 
 \begin{listing}[ht]
-\caption[Verifiable credential with terms of use, extracted from~\cite{sporny_verifiable_2023}.]{Verifiable credential with terms of use where the issuer is prohibiting verifiers from archiving a degree credential, extracted from~\cite{sporny_verifiable_2023}, with the credential subject being identified by a DID.}
+\caption[Verifiable credential with terms of use.]{Verifiable credential with terms of use where the issuer is prohibiting verifiers from archiving a degree credential, extracted from~\cite{sporny_verifiable_2023}, with the credential subject being identified by a DID.}
 \label{list:vc_fromspec}
 \begin{minted}{json}
 {

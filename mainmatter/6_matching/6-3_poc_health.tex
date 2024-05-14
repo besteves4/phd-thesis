@@ -42,7 +42,7 @@ The NHGRI Genomic Data Science Analysis, Visualization, and Informatics Lab-spac
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\linewidth]{figures//chapter-6/DUO-matching-with-license.png}
-    \caption{DUO-based matching algorithm, adapted from \url{https://github.com/EBISPOT/DUO}.}
+    \caption[DUO-based matching algorithm.]{DUO-based matching algorithm, adapted from \url{https://github.com/EBISPOT/DUO}.}
     \label{fig:duo-matching}
 \end{figure}
 
@@ -243,7 +243,7 @@ The \texttt{odrl:Set} formulated to represent DUO's concept of \textit{``general
 When instantiated, beyond additional provenance metadata such as the \texttt{dcterms:creator} and \texttt{dcterms:issued} properties to indicate the creator and date of issuance of the offer, the \texttt{duodrl:TemplateDataset} must be replaced by the dataset's identifier and, in the case of the moratorium, a date must be instantiated to express until when the distribution of the outcomes of the research study is prohibited. 
 
 \begin{listing}[htp]
-\caption{\texttt{odrl:Set}s representing \texttt{DUO\_0000042}, a data use permission for general research purposes (GRU), and \texttt{DUO\_0000024}, a data use modifier to indicate that the results of the research should be published only after a moratorium period (MOR).}
+\caption[\texttt{odrl:Set}s representing DUO's GRU and MOR concepts.]{\texttt{odrl:Set}s representing \texttt{DUO\_0000042}, a data use permission for general research purposes (GRU), and \texttt{DUO\_0000024}, a data use modifier to indicate that the results of the research should be published only after a moratorium period (MOR).}
 \label{list:duodrl_set}
 \begin{minted}{turtle}
 duodrl:DUO_0000042 a odrl:Set ;
@@ -293,7 +293,7 @@ As such the following steps were taken to instantiate dataset policies as \textt
 An example \texttt{odrl:Offer}, which merges the \texttt{DUO\_0000042}, \texttt{DUO\_0000025} and \texttt{DUO\_0000020} policies as conditions to access the \texttt{ex:EHR} dataset, is presented in Listing \ref{list:duodrl_offer}.
 
 \begin{listing}[ht]
-\caption{An example \texttt{odrl:Offer} containing a permission for general research use, from \texttt{DUO\_0000042}, a time limit on the use, from \texttt{DUO\_0000025}, and a duty to collaborate with the studies' primary investigator, defined from \texttt{DUO\_0000020}.}
+\caption[\texttt{odrl:Offer} containing DUO's GRU, TS and COL concepts.]{An example \texttt{odrl:Offer} containing a permission for general research use (GRU), from \texttt{DUO\_0000042}, a time limit on the use (TS), from \texttt{DUO\_0000025}, and a duty to collaborate with the studies' primary investigator (COL), defined from \texttt{DUO\_0000020}.}
 \label{list:duodrl_offer}
 \begin{minted}{turtle}
 ex:offer_for_GRU_TS_COL a odrl:Offer ;
@@ -326,7 +326,7 @@ By running such a query it will be possible to find the location of specific dat
 Similar queries can also be executed for decentralised environments beyond Solid or even within centralised environments.
 
 \begin{listing}[ht]
-\caption{SPARQL query to retrieve template datasets locations from a PLASMA data registry specified in a Solid Pod.}
+\caption[SPARQL query to retrieve datasets location from PLASMA data registry.]{SPARQL query to retrieve template datasets locations from a PLASMA data registry specified in a Solid Pod.}
 \label{list:sparql_duodrl}
 \begin{minted}{sparql}
 SELECT DISTINCT ?DatasetsLocation WHERE {
@@ -345,7 +345,7 @@ For this, DUO's requests must be instantiated as \texttt{odrl:Request}s to be ma
 A request for health, medical, or biomedical research studies (\texttt{DUO\_0000037}) is presented in Listing~\ref{list:duodrl_request}.
 
 \begin{listing}[htp]
-\caption{An \texttt{odrl:Request} containing a request for health, medical, or biomedical research created from \texttt{DUO\_0000037}.}
+\caption[\texttt{odrl:Request} containing DUO's HMB concept.]{An \texttt{odrl:Request} containing a request for health, medical, or biomedical research (HMB) created from \texttt{DUO\_0000037}.}
 \label{list:duodrl_request}
 \begin{minted}{turtle}
 ex:request_for_HMB a odrl:Request ;
@@ -382,7 +382,7 @@ Following these steps, an agreement for access to data can be reached.
 An example representation of a DUO-based data access agreement, modelled as an \texttt{odrl:Agreement}, to give access to data until 2024--12--31 for the purpose of health, medical, or biomedical research studies is presented in Listing~\ref{list:duodrl_agreement}, including also a duty which must be fulfilled after data access.
 
 \begin{listing}[htp]
-\caption{An \texttt{odrl:Agreement} representing a decision to access a \texttt{ex:EHR} dataset from \texttt{ex:provider}.}
+\caption[\texttt{odrl:Agreement} representing an access decision.]{An \texttt{odrl:Agreement} representing a decision to access a \texttt{ex:EHR} dataset from \texttt{ex:provider}.}
 \label{list:duodrl_agreement}
 \begin{minted}{turtle}
 ex:agreement_for_HMB a odrl:Agreement ;
@@ -551,7 +551,7 @@ This separation also paves the way for applying other laws, within or outside of
 Listing \ref{list:duodrol_dpv} provides two ODRL offer policies: the first uses DPV to enact jurisdiction-agnostic data protection terms and the second uses the GDPR extension to describe GDPR-specific terms.
 
 \begin{listing}[htp]
-\caption{\texttt{odrl:Offer}s that use DPV and its GDPR extension to indicate conditions of access to data. \texttt{ex:offer\_agnostic} is jurisdiction-agnostic and requires consent and an impact assessment. \texttt{ex:offer\_gdpr} is GDPR-specific and requires explicit consent and a DPIA.}
+\caption[\texttt{odrl:Offer}s for DUO that use DPV and its GDPR extension.]{\texttt{odrl:Offer}s that use DPV and its GDPR extension to indicate conditions of access to data. \texttt{ex:offer\_agnostic} is jurisdiction-agnostic and requires consent and an impact assessment. \texttt{ex:offer\_gdpr} is GDPR-specific and requires explicit consent and a DPIA.}
 \label{list:duodrol_dpv}
 \begin{minted}{turtle}
 ex:offer_agnostic a odrl:Offer ;
@@ -637,7 +637,7 @@ Detailed instructions on how to install, launch, and examples of usage of the Po
 
 
 \begin{figure*}[ht]
-\caption{Proof of concept implementation showing generation of \texttt{odrl:Offer} policies}
+\caption[Proof of concept showing generation of \texttt{odrl:Offer} policies.]{Proof of concept implementation showing generation of \texttt{odrl:Offer} policies}
 \label{fig:editor-all}
 \centering
 \subfigure[with DUODRL concepts.]{

@@ -28,7 +28,7 @@ Table~\ref{tab:conditions_public_data_vocabs} presents terms from DPV, DCAT, OAC
 
 \begin{table}[ht] 
 \centering
-\caption{Information items that need to be represented to detail policies concerning the conditions of reuse of public sector bodies' datasets and respective reusable concepts from existing vocabularies.}
+\caption[Information items related to the reuse of public sector bodies' datasets.]{Information items that need to be represented to detail policies concerning the conditions of reuse of public sector bodies' datasets and respective reusable concepts from existing vocabularies.}
 \label{tab:conditions_public_data_vocabs}
 \begin{tabular}{c||l|l}
 \textbf{Article} & \textbf{Information items} &\textbf{Terms from existing vocabularies} \\ \hline\hline
@@ -66,7 +66,7 @@ Furthermore, Listing~\ref{list:data_asset_list} offers an example of a \texttt{D
 This list includes the aforementioned dataset, \url{http://example.com/dataset_001}, supplemented with additional metadata encompassing its data type, the governing policy (\url{http://example.com/offer_publicsectorbody}), data format and size, and any associated fees charged by the dataset publisher.
 
 \begin{listing}[ht]
-\caption{Data reuse policy, set by Public Sector Body X, that allows the reuse of a dataset until the end of 2024 for scientific research.}
+\caption[Public sector body data reuse policy.]{Data reuse policy, set by Public Sector Body X, that allows the reuse of a dataset until the end of 2024 for scientific research.}
 \label{list:public_sector_body}
 \begin{minted}{turtle}
 ex:offer_publicsectorbody a odrl:Offer, dgaterms:DataReusePolicy ;
@@ -95,7 +95,7 @@ ex:publicsectorbodyX a dgaterms:PublicSectorBody ;
 \end{listing}
 
 \begin{listing}[ht]
-\caption{Data asset list maintained by the Single Information Point Provider A.}
+\caption[Data asset list maintained by a single information point provider.]{Data asset list maintained by the Single Information Point Provider A.}
 \label{list:data_asset_list}
 \begin{minted}{turtle}
 ex:SIPPA_assets a dgaterms:DataAssetList, dcat:Catalog ;
@@ -127,7 +127,7 @@ In addition, from the 15 identified items that are necessary for a data intermed
 
 \begin{table}[htp]
 \centering
-\caption{Information items that need to be kept to register the activity of data intermediation service providers and respective terms from existing vocabularies that can be reused.}
+\caption[Terms from existing vocabularies to record intermediation activities.]{Information items that need to be kept to register the activity of data intermediation service providers and respective terms from existing vocabularies that can be reused.}
 \label{tab:querying_registers}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{c||l|l}
@@ -157,7 +157,7 @@ In addition, from the 11 identified items which are necessary for a data altruis
 
 \begin{table}[ht]
 \centering
-\caption{Information items that need to be kept to record the activity of data altruism organisations and respective terms from existing vocabularies that can be reused.}
+\caption[Terms from existing vocabularies to record altruistic activities.]{Information items that need to be kept to record the activity of data altruism organisations and respective terms from existing vocabularies that can be reused.}
 \label{tab:querying_registers_b}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{c||l|l}
@@ -194,7 +194,7 @@ DPV's \texttt{hasName}, \texttt{hasContact}, and \texttt{hasAddress}, along with
 On the other hand, DCMI's \texttt{description}, \texttt{created}, and \texttt{publisher} predicates are essential in describing metadata pertaining to the register itself.
 
 \begin{listing}[ht]
-\caption{Example of a public register of data intermediation service providers.}
+\caption[Public register of data intermediation service providers.]{Example of a public register of data intermediation service providers.}
 \label{list:intermediary_register}
 \begin{minted}{turtle}
 ex:publicregistry_DI_PT a dgaterms:RegisterOfDataIntermediationServiceProviders ;
@@ -236,7 +236,7 @@ These activity logs should be linked with the entities utilising the data and ca
 This property can be used to supply details regarding the data processing, encompassing aspects such as duration, purpose, and categories of (personal) data involved.
 
 \begin{listing}[ht]
-\caption{Example of a record of data altruism activity logs.}
+\caption[Data altruism activity logs.]{Example of a record of data altruism activity logs.}
 \label{list:activity_log}
 \begin{minted}{turtle}
 ex:altruism_logs a dgaterms:RecordOfDataIAltruismActivity ;
@@ -278,7 +278,7 @@ To this end, a taxonomy of \texttt{DataAltruism} concepts, modelled from DGA's A
 Furthermore, additional purposes referenced throughout the DGA are also incorporated into the vocabulary developed in this Chapter.
 
 \begin{listing}[ht]
-\caption{Data altruism consent form, where the data subject consents to the usage of their location data for improving mobility.}
+\caption[Data altruism consent form.]{Data altruism consent form, where the data subject consents to the usage of their location data for improving mobility.}
 \label{list:european_form_ds}
 \begin{minted}{turtle}
 ex:consentForm_001 a dgaterms:EuropeanDataAltruismConsentForm ;
@@ -300,7 +300,7 @@ ex:consentForm_001 a dgaterms:EuropeanDataAltruismConsentForm ;
 Similarly, Listing~\ref{list:european_form_dh} presents an example of a permission form issued by a data holder.
 
 \begin{listing}[ht]
-\caption{Permission for data altruism where data holder A allows the usage of their anonymised data for the purpose of providing official statistics.}
+\caption[Data holder's permission for data altruism.]{Permission for data altruism where data holder A allows the usage of their anonymised data for the purpose of providing official statistics.}
 \label{list:european_form_dh}
 \begin{minted}{turtle}
 ex:permissionForm_001 a dpv:Permission ;

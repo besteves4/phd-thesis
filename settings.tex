@@ -52,13 +52,19 @@
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage{listings}
-\usepackage{minted}
+%\usepackage{minted}
+\usepackage[chapter]{minted}
 \setminted{frame=lines,
     framesep=2mm,
     fontsize=\footnotesize,
     breaklines=true,
     linenos
     }
+
+\makeatletter 
+\renewcommand\thealgorithm{\thechapter.\arabic{algorithm}} 
+\@addtoreset{algorithm}{chapter} 
+\makeatother
 
 \definecolor{royallavender}{RGB}{124, 77, 255}
 
@@ -113,3 +119,6 @@
 % Increase indentation in lists
 \newlist{mydescription}{description}{1}
 \setlist[mydescription,1]{labelindent=2em, leftmargin=2em}
+
+\let\Chapter\chapter
+\def\chapter{\addtocontents{lol}{\protect\addvspace{10pt}}\Chapter}

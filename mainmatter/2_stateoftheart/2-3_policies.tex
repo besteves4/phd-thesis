@@ -103,7 +103,7 @@ CatalogExample gathers essential details concerning its users' computer systems,
 This information serves system administration and research and development purposes and is exclusively utilised by the company and retained for a duration deemed suitable for the specified purposes.
 
 \begin{listing}
-\caption{P3P policy extracted from Example 3.1 of the P3P specification~\citep{cranor_platform_2002}, which specifies the privacy policy of CatalogExample.}
+\caption[P3P privacy policy.]{P3P policy extracted from Example 3.1 of the P3P specification~\citep{cranor_platform_2002}, which specifies the privacy policy of CatalogExample.}
 \label{list:p3p_example}
 \begin{minted}{turtle}
 <http://example.com/#forBrowsers> a p3p:Policy ;
@@ -168,7 +168,7 @@ Consequently, privacy policies implementing the ODRL language must specify to th
 Listing~\ref{list:odrl_example} provides an implementation of an ODRL privacy policy that underscores the aforementioned elements, including a duty for the assignee to be allowed to use the data and a consequence in case they do not.
 
 \begin{listing}
-\caption{ODRL \texttt{Privacy} policy.}
+\caption[ODRL privacy policy.]{ODRL \texttt{Privacy} policy.}
 \label{list:odrl_example}
 \begin{minted}{turtle}
 <http://example.com/privacy-policy> a odrl:Privacy ;
@@ -253,7 +253,7 @@ Specifically, Alice permits eBooking services to utilise her email address for s
 Additionally, Alice authorises the booking services to share her email address with trusted partners exclusively to engage with registered services that commit to deleting her email address within a month.
 
 \begin{listing}
-\caption{S4P example, extracted from \cite{becker_framework_2009}, which specifies Alice's privacy preferences concerning the collection of her email address by eBooking services.}
+\caption[S4P instantiation.]{S4P example, extracted from \cite{becker_framework_2009}, which specifies Alice's privacy preferences concerning the collection of her email address by eBooking services.}
 \label{list:s4p_example}
 \begin{minted}[escapeinside=||]{python}
 Alice says x may use Email for p if
@@ -293,7 +293,7 @@ Listing~\ref{list:pol_example} showcases the semantics of POL through a list of 
 (4) $c_B$ denotes a scenario where a company may or may not utilise data $a_B$ for purpose $p_B$ until time $t_B$ and is obligated to delete it after the deadline $t_B$.
 
 \begin{listing}[ht]
-\caption{POL contracts extracted from~\cite{berthold_towards_2011}.}
+\caption[POL contracts.]{POL contracts extracted from~\cite{berthold_towards_2011}.}
 \label{list:pol_example}
 \begin{minted}[escapeinside=||]{text}
 (1) |$c_{company}$| = data |$a_1$| |$p_1$|
@@ -359,7 +359,7 @@ To facilitate auditing, A-PPL introduced a trigger to oversee the data controlle
 Listing~\ref{list:appl_example} showcases an instance of an A-PPL obligation to inform a data subject in the event of a personal data breach -- the $ActionNotify$ element offers a mechanism for notifying data subjects, triggered in instances of policy violations or data loss.
 
 \begin{listing}[ht]
-\caption{A-PPL example adapted from \cite{azraoui_appl_2014}.}
+\caption[A-PPL policy.]{A-PPL example adapted from \cite{azraoui_appl_2014}.}
 \label{list:appl_example}
 \begin{minted}{xml}
 <Obligation>
@@ -395,7 +395,7 @@ The data group component comprises one or more data elements, each capable of be
 Listing~\ref{list:p2u_example} illustrates an instance of a secondary data sharing P2U policy -- the data provider ``FoodIntakeApp'' wants to share Jerry's data with the data consumer ``MyShopApp'' for the purpose of shopping recommendations, allowing the consumer to retain the data for a period of 180 days and to negotiate terms with the provider.
 
 \begin{listing}
-\caption{P2U example adapted from \cite{iyilade_p2u_2014}.}
+\caption[P2U policy.]{P2U example adapted from \cite{iyilade_p2u_2014}.}
 \label{list:p2u_example}
 \begin{minted}{xml}
 <POLICY discuri=http://mydatawebsite.com/privacy.html name="ShoppingPolicy">
@@ -437,7 +437,7 @@ An example showcasing this extension possibility is illustrated in Listing~\ref{
 In this example, data concerning heart rate and location are utilised for user profiling with the aim of generating recommendations, while the data is stored indefinitely within the servers of the data controllers situated in the EU and may be disclosed to any recipients.
 
 \begin{listing}
-\caption{SPL general usage policy adapted from \cite{bonatti_special_2019}.}
+\caption[SPL general usage policy.]{SPL general usage policy adapted from \cite{bonatti_special_2019}.}
 \label{list:spl_example}
 \begin{minted}{text}
 ObjectIntersectionOf(
@@ -494,7 +494,7 @@ The $?polData$ query delineates the relationship between nations and the medical
 Within this constraint, the birthday of the resident is considered to exclude residents younger than thirteen from the requested data.
 
 \begin{listing}[ht]
-\caption{DPF constrained policy rule adapted from \cite{martiny_protecting_2018}.}
+\caption[DPF policy.]{DPF constrained policy rule adapted from \cite{martiny_protecting_2018}.}
 \label{list:dpf_example}
 \begin{minted}[escapeinside=||]{text}
 @!{NationsAllowConstrainedDiseaseStatesToRCs}
@@ -538,7 +538,7 @@ Should such sharing occur, a new contract must be established, with company $C1$
 The purpose of processing, denoted as $p_{U1}$, is `Marketing', involving personal data $\hat{D}_1$ such as postal code (anonymised via the `Suppression' method) and salary information, which must be deleted within 180 days following the fulfilment of the purpose.
 
 \begin{listing}[ht]
-\caption{LPL policy extracted from \cite{gerl_lpl_2018}.}
+\caption[LPL policy.]{LPL policy extracted from \cite{gerl_lpl_2018}.}
 \label{list:lpl_example}
 \begin{minted}[escapeinside=||]{text}
 |$ds_{U1}$|=('U1','Person',|$publicKey_{U1}$|,'DataSource')

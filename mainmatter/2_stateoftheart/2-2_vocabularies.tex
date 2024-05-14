@@ -19,7 +19,7 @@ These terms will be used to compare the described privacy and data protection vo
 
 \begin{table}[htp]
 \centering
-\caption{Privacy terms to be represented and respective identifiers (I*). The GDPR articles that mention these terms are also specified.}
+\caption[Privacy terms to be represented and respective identifiers.]{Privacy terms to be represented and respective identifiers (I*). The GDPR articles that mention these terms are also specified.}
 \label{tab:GDPR_privacy_terms}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{c||l|c}
@@ -160,7 +160,7 @@ Data protection-related entities, such as data controllers, supervisory authorit
 Listing \ref{list:sparql_dpo} provides an example of a SPARQL query to retrieve duties of a data controller that do not concern the transfer of personal data using DPO.\footnote{More examples are available in a project repository at \url{https://bitbucket.org/guerret/lu.uni.eclipse.bpmn2/} (accessed on 16/July/2023).}
 
 \begin{listing}[ht]
-\caption{SPARQL query to retrieve duties of the data controller that do not concern data transfer using the Data Protection Ontology.}
+\caption[SPARQL query with DPO.]{SPARQL query to retrieve duties of the data controller that do not concern data transfer using the Data Protection Ontology.}
 \label{list:sparql_dpo}
 \begin{minted}{sparql}
 SELECT DISTINCT ?duty WHERE {
@@ -188,7 +188,7 @@ In addition to this, provenance data on the exercising and fulfilment of GDPR-re
 Listing \ref{list:sparql_gdprov} illustrates a SPARQL query that uses GDPRov's terms to retrieve the entities involved in acquiring consent.
 
 \begin{listing}
-\caption{SPARQL query retrieving entities involved in acquiring consent using GDPRov~\citep{pandit_modelling_2017}.}
+\caption[SPARQL query with GDPRov.]{SPARQL query retrieving entities involved in acquiring consent using GDPRov~\citep{pandit_modelling_2017}.}
 \label{list:sparql_gdprov}
 \begin{minted}{sparql}
 SELECT ?consent ?template ?toc WHERE {
@@ -237,7 +237,7 @@ Each processing activity is also associated with a purpose and a legal rule, whi
 Listing \ref{list:sparql_pronto} illustrates a query to retrieve information regarding personal data processing activities performed by company \textit{X} in the role of data controller from time \textit{t1} to \textit{t2}.
 
 \begin{listing}[ht]
-\caption{SPARQL query used to retrieve personal data processing activities performed by company \textit{X} in the role of data controller from \textit{t1} to \textit{t2} using PrOnto~\citep{ko_pronto_2018}.}
+\caption[SPARQL query with PrOnto.]{SPARQL query used to retrieve personal data processing activities performed by company \textit{X} in the role of data controller from \textit{t1} to \textit{t2} using PrOnto~\citep{ko_pronto_2018}.}
 \label{list:sparql_pronto}
 \begin{minted}{sparql}
 SELECT ?pdp WHERE {
@@ -266,7 +266,7 @@ GConsent also includes concepts to represent information regarding the context i
 Listing \ref{list:ttl_gconsent} provides an example of a record of provenance data regarding an activity of withdrawing consent using GConsent.
 
 \begin{listing}[ht]
-\caption{Turtle record of provenance data regarding an activity of withdrawing consent using GConsent \citep{hitzler_gconsent_2019}.}
+\caption[Withdrawing consent with GConsent.]{Turtle record of provenance data regarding an activity of withdrawing consent using GConsent \citep{hitzler_gconsent_2019}.}
 \label{list:ttl_gconsent}
 \begin{minted}{turtle}
 ex:modifyConsent a gdprov:ModifyConsentActivity ;
@@ -318,7 +318,7 @@ DPV also provides five extensions:
 Listing \ref{list:ttl_dpv} provides an example of a personal data handling related to the collection and usage of email addresses for marketing purposes using DPV.
 
 \begin{listing}[ht]
-\caption{Turtle record of a personal data handling related to the collection and usage of email addresses for marketing purposes using DPV~\citep{panetto_creating_2019}.}
+\caption[Personal data handling modelling with DPV.]{Turtle record of a personal data handling related to the collection and usage of email addresses for marketing purposes using DPV~\citep{panetto_creating_2019}.}
 \label{list:ttl_dpv}
 \begin{minted}{turtle}
 ex:PDHforMarketing a dpv:PersonalDataHandling ;
@@ -349,10 +349,10 @@ Moreover, I24 and I28 are specific terms, related to technical measures to erasu
 
 \begin{table}[ht]
 \centering
-\caption[Representation of privacy terms I1 to I22 in the DPKO, DPRO, DPO, GDPRov, Cloud, and PrOnto ontologies.]{Representation of privacy terms I1 to I22 in the DPKO, DPRO, DPO, GDPRov, Cloud, and PrOnto ontologies. The names of the classes that can be used to specify a particular item are depicted in the table, as well as their respective number of subclasses, if available. The privacy terms that can not be fully represented by the current ontology terms are illustrated with an asterisk.}
+\caption[Representation of privacy terms I1 to I22 in analysed ontologies.]{Representation of privacy terms I1 to I22 in the DPKO, DPRO, DPO, GDPRov, Cloud, and PrOnto ontologies. The names of the classes that can be used to specify a particular item are depicted in the table, as well as their respective number of subclasses, if available. The privacy terms that can not be fully represented by the current ontology terms are illustrated with an asterisk.}
 \label{tab:vocabsTerms-first}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{ c||c|c|c|c|c|c}
+\begin{tabular}{c||c|c|c|c|c|c}
  & DPKO & DPRO & DPO & GDPRov & Cloud & PrOnto \\
  \hline\hline
  I1 & & & Controller & Controller & & $\ast$ \\
@@ -387,10 +387,10 @@ Moreover, I24 and I28 are specific terms, related to technical measures to erasu
 
 \begin{table}[ht]
 \centering
-\caption[Representation of privacy terms I1 to I27 in the GConsent, IMO, DPV, and GDPRtEXT ontologies.]{Representation of privacy terms I1 to I27 in the GConsent, IMO, DPV, and GDPRtEXT ontologies. The names of the classes that can be used to specify a particular item are depicted in the table, as well as their respective number of subclasses, if available. The privacy terms that can not be fully represented by the current ontology terms are illustrated with an asterisk.}
+\caption[Representation of privacy terms I1 to I27 in analysed ontologies.]{Representation of privacy terms I1 to I27 in the GConsent, IMO, DPV, and GDPRtEXT ontologies. The names of the classes that can be used to specify a particular item are depicted in the table, as well as their respective number of subclasses, if available. The privacy terms that can not be fully represented by the current ontology terms are illustrated with an asterisk.}
 \label{tab:vocabsTerms-second}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{ c||c|c|c||c}
+\begin{tabular}{c||c|c|c||c}
  & GConsent & IMO & DPV & GDPRtEXT \\
  \hline\hline
  I1 & DataController & DataController & DataController & Controller \\
