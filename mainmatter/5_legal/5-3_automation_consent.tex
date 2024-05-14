@@ -67,7 +67,7 @@ This document also reasons that if the purpose for processing changes at some po
 At this point, it can be discussed whether any change in the purpose, however small, means that consent must be given again by the data subject.
 Perhaps in the case of a minor change, re-consent could be considered unnecessary, however, the criterion to measure such a change is not clearly defined in the law. 
 As such, it is essential to analyse the matching of offers and requests, for access to data stored in Solid Pods, to understand if the specific character of consent is respected.
-A policy matching algorithm based on OAC, \beatriz{such as the one detailed in Chapter XX}, functions on the basis of subsumption between the data requests and the user policies defined in advance.
+A policy matching algorithm based on OAC, such as the one detailed in Chapter~\ref{chap:matching}, functions on the basis of subsumption between the data requests and the user policies defined in advance.
 Thus, by hypothesis, user policies can be broader than data requests, which can be used to doubt the specificity of the consent.
 However, since OAC policies can also include the usage of prohibitions, these can be used to narrow the scope of the data subject consent, making it more specific.
 
@@ -179,7 +179,7 @@ Since dementia, like Alzheimer's, falls under the category of degenerative disea
 As such, introducing a ``compatibility matching'' algorithm to Solid would enhance the model, and in particular the automation of access to data, however, it is crucial to assess the legal implications of this addition.
 
 Firstly, it must be discussed how one can determine the compatibility of purposes and whether users desire such a model to complement the policy matching algorithm that governs access to their data.
-To facilitate this matching, particularly in the context of biomedical research, \beatriz{the example use case developed in Chapter XX on policies for health data-sharing can be leveraged}.
+To facilitate this matching, particularly in the context of biomedical research, the example use case developed in Chapter~\ref{chap:matching} on policies for health data-sharing can be leveraged.
 This development specifies a taxonomy of health-related research purposes, links to other ontologies containing disease taxonomies, and utilises OAC's matching algorithm.
 Nonetheless, for the algorithm to assess compatibility, this information must be integrated into the used taxonomies of purposes.
 This could be achieved, for example, by incorporating a triple statement in the purpose taxonomy indicating that \texttt{:purposeX :isCompatible :purposeY}.

@@ -294,7 +294,7 @@ Listing~\ref{list:oac_request} presents an example of an ODRL request that uses 
 In this example, Beatriz, identified by \url{https://solidweb.me/besteves4/profile/card#me}, and Arya, identified by \url{https://solidweb.me/arya/profile/card#me}, reach an agreement to allow read access operations over Beatriz's age data for the purpose of academic research in project X.
 This \texttt{odrl:Agreement} is the result of the matching of \url{https://solidweb.me/besteves4/policies/offer1} and \url{https://solidweb.me/arya/requests/age_academicResearch}, as indicated by the \texttt{dcterms:references} property.
 The legal basis of the agreement is consent, as is specified in the policy with the \texttt{dpv:hasLegalBasis dpv:Consent} terms, and Beatriz and Arya are registered as the data subject and data controller in question, respectively, using the \texttt{dpv:hasDataSubject} and \texttt{dpv:hasDataController} terms.
-\beatriz{Policy matching and agreement generation is discussed in Chapter XX.}
+Policy matching and agreement generation is discussed in Chapter~\ref{chap:matching}.
 
 \begin{listing}[ht]
 \caption[ODRL Request.]{ODRL request issued by \url{https://solidweb.me/arya/profile/card\#me}.}
@@ -351,7 +351,7 @@ ex:AcademicResearchProjectX a dpv:Purpose ;
 
 This Thesis focuses on \textit{Purpose, Personal Data, Processing, Recipients, Legal Bases, Technical and Organisational Measures} and \textit{Technologies} as the minimum `core concepts' for the OAC profile, and leaves out other DPV concepts such as rights or risks, which can be added at a later stage if needed.
 Furthermore, similarly to WAC and ACP, OAC policies can also be defined for particular resources identified by URIs -- in such cases when an access request for a particular data type comes in, the authorisation mechanism must have information about what type of data those particular resources contain or else they will not be returned if they match the data type of the request.
-Such information can be stored in a data registry, stored in a e.g. Solid Pod, where resources can be associated with the type of data they contain by using DPV's \texttt{hasPersonalData} property and DPV-PD's taxonomy of personal data categories, e.g., \texttt{<https://solidweb.me/besteves4/private/health/file1> dpv:hasPersonalData dpv-pd:HealthHistory .}
+Such information can be stored in a data registry, stored in a e.g. Solid Pod, where resources can be associated with the type of data they contain by using DPV's \texttt{hasPersonalData} property and DPV-PD's taxonomy of personal data categories, e.g., \texttt{ex:pod-file1 dpv:hasPersonalData dpv-pd:HealthHistory .}
 
 Ultimately, since these policies are stored in the personal datastore for purposes of accountability and transparency, apps and services, based on the stored preferences, requests, and agreements, can be built, e.g., using SPARQL queries, to inquire who is using what data and for what purposes.
 Listing~\ref{list:sparql_agreement} presents a SPARQL query to retrieve permitted data accesses by user, data, and purpose from ODRL agreements stored in a decentralised datastore.

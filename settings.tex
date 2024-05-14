@@ -25,7 +25,8 @@
 \usepackage{comment} 
 \usepackage{blindtext}
 \usepackage[acronym,nonumberlist,nomain]{glossaries}  % package for list of acronyms
-\usepackage{hyperref}
+%\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \usepackage[a4paper]{geometry}
 \usepackage{parskip}     % paragraph spacing (suppress indentation)
 \usepackage{fancyhdr}    % personalizar encabezado
@@ -65,6 +66,8 @@
 \renewcommand\thealgorithm{\thechapter.\arabic{algorithm}} 
 \@addtoreset{algorithm}{chapter} 
 \makeatother
+
+\interfootnotelinepenalty=10000
 
 \definecolor{royallavender}{RGB}{124, 77, 255}
 

@@ -240,7 +240,7 @@ Moreover, if no extra tools or modifications are needed and a different method i
 Additionally, by reusing the existing ODRL and OAC models, it is also possible to reuse the algorithms specified in Section~\ref{sec:algorithm}.
 
 The \texttt{odrl:Set} formulated to represent DUO's concept of \textit{``general research use''} and the one to represent DUO's concept of \textit{``publication moratorium''} are detailed in Listing~\ref{list:duodrl_set}.
-When instantiated, beyond additional provenance metadata such as the \texttt{dcterms:creator} and \texttt{dcterms:issued} properties to indicate the creator and date of issuance of the offer, the \texttt{duodrl:TemplateDataset} must be replaced by the dataset's identifier and, in the case of the moratorium, a date must be instantiated to express until when the distribution of the outcomes of the research study is prohibited. 
+When instantiated, beyond additional provenance metadata such as the \texttt{dcterms:creator} and \texttt{dcterms:issued} properties to indicate the creator and date of issuance of the offer, the\linebreak \texttt{duodrl:TemplateDataset} must be replaced by the dataset's identifier and, in the case of the moratorium, a date must be instantiated to express until when the distribution of the outcomes of the research study is prohibited. 
 
 \begin{listing}[htp]
 \caption[\texttt{odrl:Set}s representing DUO's GRU and MOR concepts.]{\texttt{odrl:Set}s representing \texttt{DUO\_0000042}, a data use permission for general research purposes (GRU), and \texttt{DUO\_0000024}, a data use modifier to indicate that the results of the research should be published only after a moratorium period (MOR).}
@@ -290,7 +290,7 @@ As such the following steps were taken to instantiate dataset policies as \textt
     \item Add provenance information to the \texttt{odrl:Offer}, e.g. \texttt{dcterms:issued} for when the offer was instantiated and \texttt{dcterms:creator} for the issuer of the policy.
 \end{enumerate}
 
-An example \texttt{odrl:Offer}, which merges the \texttt{DUO\_0000042}, \texttt{DUO\_0000025} and \texttt{DUO\_0000020} policies as conditions to access the \texttt{ex:EHR} dataset, is presented in Listing \ref{list:duodrl_offer}.
+An example \texttt{odrl:Offer}, which merges the \texttt{DUO\_0000042}, \texttt{DUO\_0000025} and\linebreak \texttt{DUO\_0000020} policies as conditions to access the \texttt{ex:EHR} dataset, is presented in Listing \ref{list:duodrl_offer}.
 
 \begin{listing}[ht]
 \caption[\texttt{odrl:Offer} containing DUO's GRU, TS and COL concepts.]{An example \texttt{odrl:Offer} containing a permission for general research use (GRU), from \texttt{DUO\_0000042}, a time limit on the use (TS), from \texttt{DUO\_0000025}, and a duty to collaborate with the studies' primary investigator (COL), defined from \texttt{DUO\_0000020}.}
@@ -374,7 +374,7 @@ Considering this, the following steps were taken to instantiate dataset access a
     \item Match the \texttt{odrl:Offer} with the \texttt{odrl:Request}.
     \item Record the outcome of the matching algorithm, where the \texttt{odrl:target} property specifies the dataset to be accessed, and the \texttt{odrl:assignee} and \texttt{odrl:assigner} properties identify the data requester and the provider, respectively.
     \item If the matching result is positive, i.e., the request and the offer are compatible, then access is permitted by employing a permission with constraints on the requested purpose for access, along with any additional constraints such as spatial or temporal constraints or duties on the requester. If access is denied, similar information is included in the policy as a prohibition.
-    \item Utilise the \texttt{dcterms:references} property to associate the agreement with the \texttt{odrl:Offer} and \texttt{odrl:Request} that were used to generate it.
+    \item Utilise the \texttt{dcterms:references} property to associate the agreement with the\linebreak \texttt{odrl:Offer} and \texttt{odrl:Request} that were used to generate it.
     \item Include provenance and other relevant information, such as the \texttt{dcterms:issued} property, to document the creation and acceptance of the agreement among the parties.
 \end{enumerate}
 
@@ -494,7 +494,7 @@ Access will be denied during permission checking if any of the following constra
 \begin{enumerate}
     \item offer assignee does not match ($\not\equiv$) the assignee of the request; 
     \item offer time limit on use has lapsed;
-    \item offer has a group-related research purpose, e.g., \texttt{PopulationGroupResearch}, \texttt{AgeCategoryResearch} or \texttt{GenderCategoryResearch} and the request purpose does not match ($\not\subseteq$) it or the request purpose matches it but the group does not ($\not\subseteq$), e.g. the \texttt{PopulationGroup}, \texttt{Age} or \texttt{Gender} in the request are different from the one in the offer; and
+    \item offer has a group-related research purpose, e.g., \texttt{PopulationGroupResearch},\linebreak \texttt{AgeCategoryResearch} or \texttt{GenderCategoryResearch} and the request purpose does not match ($\not\subseteq$) it or the request purpose matches it but the group does not ($\not\subseteq$), e.g. the \texttt{PopulationGroup}, \texttt{Age} or \texttt{Gender} in the request are different from the one in the offer; and
     \item offer purpose does not match ($\not\subseteq$) request purpose, e.g., DUO's general research use purpose \texttt{GRU} in a request does not match a health, medical or biomedical research purpose \texttt{HMB} in an offer as \texttt{GRU} is a superclass of \texttt{HMB}.
 \end{enumerate}
 

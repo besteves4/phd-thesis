@@ -240,7 +240,7 @@ For a Pod to be conformant with the PLASMA specification, the following conditio
     \item A Pod \textit{may} have multiple users with varying degrees of control. A record of the different users and their level of access \textit{must} be kept in the \texttt{UserRegistry}.
 \end{itemize}
 
-In addition to the ODRL and DCMI Metadata Terms vocabularies, the DPV's \texttt{hasName}, \texttt{hasContact} and \texttt{hasAddress} properties should be used to identify and provide contact details of the Pod, Solid platform and infrastructure providers and developers.
+In addition to the ODRL and DCMI Metadata Terms vocabularies, the DPV's \texttt{hasName},\linebreak \texttt{hasContact} and \texttt{hasAddress} properties should be used to identify and provide contact details of the Pod, Solid platform and infrastructure providers and developers.
 \textit{Schema.org} and the Provenance, Authoring and Versioning (PAV) vocabularies, along with the previously mentioned DCMI, are used to describe the authors, sources, version, and code repository URIs of the platform and specification installed within the Pod.
 \textit{Schema.org} provides an upper vocabulary of terms to describe \textit{``entities, relationships between entities and actions''} related to structured data on the Web~\citep{guha_schemaorg_2015} and PAV is a \textit{``lightweight ontology for tracking Provenance, Authoring and Versioning''} that \textit{``specializes the W3C provenance ontology PROV-O in order to describe authorship, curation and digital creation of online resources''}~\citep{ciccarese_pav_2013}.
 
@@ -336,7 +336,7 @@ For an app or service to be conformant with the PLASMA specification, the follow
     \item Apps, or services, \textit{may} have multiple \texttt{AppAgents}, or \texttt{ServiceAgents}, which \textit{must} be registered in the \texttt{AppRegistry}, or \texttt{ServiceRegistry}.
 \end{itemize}
 
-In addition to the PLASMA terms mentioned in the previous list, the usage of the \texttt{plasma:serviceType} property can be used to connect service providers and developers with a particular type of service, e.g., from PLASMA's service taxonomy, that is provided or developed by said entity.
+In addition to the PLASMA terms mentioned in the previous list, the usage of the \texttt{serviceType} property can be used to connect service providers and developers with a particular type of service, e.g., from PLASMA's service taxonomy, that is provided or developed by said entity.
 Moreover, it should be noted that app or service stores, such as those maintained by Apple and Google, can also act as app or service providers and the FOAF \texttt{page} property can be used to actually connect the store provider with the store itself.
 The FOAF vocabulary specification~\citep{brickley_foaf_2004} provides terms to describe people and related personal information and online accounts.
 Regardless, support for other optional properties specified in the W3C Web Application Manifest specification, such as icons, display mode, orientation, and background colour, can also be integrated into the modelled manifests, as well as `common' app store metadata, such as screenshots, user rating or app type, e.g., health, game or news app~\citep{gustafson_web_2023}.
@@ -400,10 +400,10 @@ Regardless, support for other optional properties specified in the W3C Web Appli
     plasma:hasDeveloper <https://solidweb.me/besteves4/entities/ContactsDeveloper> .
 
 <https://solidweb.me/besteves4/apps/Contacts/PersistentData> a plasma:AppPersistentData ;
-    dcterms:type dpv-pd:TelephoneNumber ; rdf:value "(+34)691485135" .
+    dcterms:type pd:TelephoneNumber ; rdf:value "(+34)691485135" .
 
 <https://solidweb.me/besteves4/apps/Contacts/TemporaryData> a plasma:AppTemporaryData ;
-    dcterms:type dpv-pd:TelephoneNumber ; rdf:value "(+34)691998745" ;
+    dcterms:type pd:TelephoneNumber ; rdf:value "(+34)691998745" ;
     dcterms:valid "2023-10-01T14:50:21"^^xsd:dateTime .
 
 <https://solidweb.me/besteves4/apps/Contacts/Agent> a plasma:AppAgent .

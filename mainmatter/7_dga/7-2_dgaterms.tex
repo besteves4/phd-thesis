@@ -46,20 +46,21 @@ Table~\ref{tab:conditions_public_data_vocabs} presents terms from DPV, DCAT, OAC
 \end{table}
 
 Expanding upon the existing \texttt{dpv:LegalEntity} term, four new classes of entities were introduced in DGAterms, as subclasses, to represent data users, public sector bodies, competent bodies, and single information point providers.
-These classes are named \texttt{DataUser}, \texttt{PublicSectorBody}, \texttt{DataReuseCompetentBody}, and \texttt{SingleInformationPointProvider}, respectively.
+These classes are named \texttt{DataUser}, \texttt{PublicSectorBody}, \texttt{DataReuseCompetentBody}, and\linebreak \texttt{SingleInformationPointProvider}, respectively.
+
 Additionally, subclasses of \texttt{SingleInformationPointProvider} were created to represent EU, national, regional, local, and sectorial-level single information point providers, as outlined in DGA's Article 8~\citeyearpar{noauthor_regulation_2022}.
-Furthermore, to classify the nature of data kept by public sector bodies, as detailed in Article 3.1~\citeyearpar{noauthor_regulation_2022}, four new subclasses of texttt{dpv:Data} -- \texttt{ConfidentialData}, \texttt{CommerciallyConfidentialData}, \texttt{StatisticallyConfidentialData} and \texttt{IntellectualPropertyData} -- were modelled in DGAterms as well.
-These subclasses represent data protected through \texttt{CommercialConfidentialityAgreement}s or \texttt{StatisticalConfidentialityAgreement}s, as well as data protected by intellectual property rights.
+Furthermore, to classify the nature of data kept by public sector bodies, as detailed in Article 3.1~\citeyearpar{noauthor_regulation_2022}, four new subclasses of texttt{dpv:Data} -- \texttt{ConfidentialData}, \texttt{CommerciallyConfidentialData}, \texttt{StatisticallyConfidentialData} and\linebreak \texttt{IntellectualPropertyData} -- were modelled in DGAterms as well.
+These subclasses represent data protected through \texttt{CommercialConfidentialityAgreement}s or\linebreak \texttt{StatisticalConfidentialityAgreement}s, as well as data protected by intellectual property rights.
 
 Beyond the aforementioned additions, the following concepts were included in the DGAterms vocabulary:
 \begin{itemize}
     \item \texttt{A5-9} for permissions to transfer, \texttt{A5-11} for model contractual clauses, and \texttt{A5-12} for adequacy decisions were added as subclasses of \texttt{dpv:DataTransferLegalBasis}.
-    \item \texttt{DataReusePolicy}, \texttt{DataTransferNotice} and \texttt{ThirdCountryDataRequestNotice} concepts were introduced as subclasses of DPV's policy and notice concepts. These represent the conditions for data reuse and the notice provided to data owners.
+    \item \texttt{DataReusePolicy} was introduced as a subclass of DPV's policy concept, and\linebreak \texttt{DataTransferNotice} and \texttt{ThirdCountryDataRequestNotice} as subclasses of DPV's notice concepts. These represent the conditions for data reuse and the notices provided to data owners.
     \item \texttt{DataAssetList} and \texttt{DataReuseRequestProcedure} were modelled as subclasses of \texttt{dpv:OrganisationalMeasure} to represent the searchable asset list maintained by \texttt{SingleInformationPointProvider}s and the procedure to request datasets, respectively.
 \end{itemize}
 
 To illustrate the application of both established and newly introduced terms, an instance of a \texttt{DataReusePolicy} concerning the dataset located at \url{http://example.com/dataset_001} is presented in Listing~\ref{list:public_sector_body}.
-This policy delineates the terms of usage for the dataset, specifying that it can be reused until the end of 2024, more specifically for the purpose of \texttt{ScientificResearch}.
+This policy delineates the terms of usage for the dataset, specifying that it can be reused until the end of 2024, more specifically for the purpose of\linebreak \texttt{ScientificResearch}.
 It is noteworthy that this policy, structured as an ODRL offer, outlines the conditions for utilising the dataset without granting any privileges to the data user.
 Single information point providers can utilise this policy to maintain an updated catalog of available assets along with their respective usage conditions.
 Furthermore, Listing~\ref{list:data_asset_list} offers an example of a \texttt{DataAssetList} produced by a \texttt{SingleInformationPointProvider}, employing both pre-existing and newly devised terms.
@@ -180,12 +181,14 @@ In addition, from the 11 identified items which are necessary for a data altruis
 \end{tabular}}
 \end{table}
 
-In addition to these terms that can be reused from existing standards and specifications, DGAterms models the \texttt{DataIntermediationServiceProvider} concept to specify a data intermediation service provider (as a subclass of \texttt{dpv:LegalEntity}), and three new classes of entities to represent distinct types of intermediaries, i.e., \texttt{DataCooperativeServiceProvider}, \texttt{DataIntermediationServiceProviderForDataHolder}, and \texttt{DataIntermediationServiceProviderForDataSubject}.
+In addition to these terms that can be reused from existing standards and specifications, DGAterms models the \texttt{DataIntermediationServiceProvider} concept to specify a data intermediation service provider (as a subclass of \texttt{dpv:LegalEntity}), and three new classes of entities to represent distinct types of intermediaries, i.e., \texttt{DataCooperativeServiceProvider}, \texttt{DataIntermediationServiceProviderForDataHolder}, and\linebreak \texttt{DataIntermediationServiceProviderForDataSubject}.
+
 The \texttt{DataAltruismOrganisation} concept is also introduced in DGAterms as a subclass of \texttt{dpv:NonProfitOrganisation}.
 % Additionally, to be able to classify the nature of the entity, as specified in Article 11.6(b)~\citeyearpar{noauthor_regulation_2022}, five new properties were added to the vocabulary, \texttt{hasLegalStatus}, \texttt{hasForm}, \texttt{hasOwnershipStructure}, \texttt{hasSubsidiary}, and \texttt{hasRegistrationNumber}, to represent information regarding the legal status, form, ownership structure, subsidiary and registration number of an entity, respectively.
 Details concerning the nature of the entity, as outlined in Article 11.6(b)~\citeyearpar{noauthor_regulation_2022} regarding its legal status, form, ownership structure, subsidiary relationships, and registration number, fall beyond the scope of DGAterms as they pertain to organisational-specific items.
 However, as future work, upper ontologies like GIST \citeyearpar{semantic_arts_gist} or Schema.org \citep{guha_schemaorg_2015} can be examined and potentially extended to encompass these concepts if deemed necessary.
-Moreover, a \texttt{PublicRegister} class was also modelled, as a new subclass of DPV's organisational measures, and its respective subclasses \texttt{PublicRegisterOfDataIntermediationServiceProviders} and \texttt{PublicRegisterOfDataAltruismOrganisations} to represent public registers of data intermediaries and altruistic organisations, respectively.
+
+Moreover, a \texttt{PublicRegister} class was also modelled, as a new subclass\linebreak of DPV's organisational measures, and its respective subclasses\linebreak \texttt{PublicRegisterOfDataIntermediationServiceProviders} and\linebreak \texttt{PublicRegisterOfDataAltruismOrganisations} to represent public registers of data intermediaries and altruistic organisations, respectively.
 
 An illustration of a register of data intermediation service providers, incorporating both existing and newly introduced terms, is available in Listing~\ref{list:intermediary_register}.
 The register \texttt{ex:publicregistry\_DI\_PT} presents a comprehensive list of intermediaries operating in Portugal.
