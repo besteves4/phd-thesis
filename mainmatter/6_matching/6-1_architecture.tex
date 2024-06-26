@@ -90,15 +90,6 @@ When it comes to the architecture of the \textit{Agreement Generator}, the follo
 
 Indeed, to understand the detailed functionality of the proposed personal datastores server, Figure~\ref{fig:c4-sequence} presents a sequence diagram to demonstrate how its containers, and more specifically its components, interact with each other when a data requester uses an app to petition a certain type of data to be used for a particular purpose.
 
-\begin{landscape}
-\begin{figure}[htp]
-    \centering
-    \includegraphics[width=1\linewidth]{figures//chapter-6/sequence.png}
-    \caption{Sequence diagram of data access request using proposed architecture.}
-    \label{fig:c4-sequence}
-\end{figure}
-\end{landscape}
-
 When data requesters want to have access to a certain resource or data type, they can either use an app to do it, as in Figure~\ref{fig:c4-sequence}, or directly do a request through the Web API.
 When using an app, the request is then transmitted to the Web API and in turn, the requester must be authenticated to get access to non-public data.
 After the authentication process goes through, or also in the cases where requesters cannot successfully log in, an identity log is recorded.
@@ -114,3 +105,12 @@ Afterwards, an access control log is recorded and the new authorisation is kept 
 Finally, the data discover mechanism is used to find the data being requested and this data is returned to the Web API and next to the app for the data requester to have access to it.
 
 In the next Section, the algorithms for offer instantiation and for policy matching are further explored, with the goal of generating data access agreements that are aligned with legal requirements.
+
+\begin{landscape}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=1\linewidth]{figures//chapter-6/sequence.png}
+    \caption{Sequence diagram of data access request using proposed architecture.}
+    \label{fig:c4-sequence}
+\end{figure}
+\end{landscape}
